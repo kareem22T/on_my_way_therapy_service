@@ -1,0 +1,208 @@
+@import "_roles.scss";
+ 
+header {
+    margin-top: 35px;
+    nav {
+        background: $white;
+        border: 1px solid $secondary-color;
+        @extend %shadow;
+        border-radius: 30px;
+        padding: 20px;
+        ul {
+            @extend %flex-center;
+            list-style: none;
+            justify-content: space-between;
+            li {
+                &:first-child a{
+                    @extend %flex-center;
+                    font-weight: 500;
+                    font-size: 30px;
+                    line-height: 38px;
+                    color: $main-color;
+                    text-decoration: none;
+                    .img {
+                        width: 40px;
+                        height: 40px;
+                        background-color: $main-color;
+                        border-radius: 50%;
+                    }
+                }
+                i {
+                    font-size: 40px;
+                    color: $main-color
+                }
+            }
+        }
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    margin: 50px 0;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .container:first-child {
+        >div {
+            gap: 25px;
+            h4 {
+                font-weight: 500;
+                font-size: 45px;
+                line-height: 62px;
+                text-align: center;
+                color: $main-color;
+                max-width: 87%;
+            }
+            a {
+                font-weight: 400;
+                font-size: 25px;
+                line-height: 32px;
+                color: $main-color;
+                text-decoration: none;
+                border-bottom: 2px solid $secondary-color;
+            }
+            &:last-child {
+                flex-direction: column;
+            }
+        }
+    }
+
+    .container:nth-child(2) {
+        @extend %flex-center;
+        >div {
+            @extend %flex-center;
+            flex-direction: column;
+            gap: 10px;
+            a {
+                display: block;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 30px;
+                line-height: 38px;
+                text-align: center;
+                color: $main-color;
+                border: 5px solid $secondary-color;
+                @extend %shadow;
+                border-radius: 30px;
+                background: $secondary-color;
+                padding: 17px 40px;
+            }
+
+            span {
+                font-weight: 400;
+                font-size: 25px;
+                line-height: 32px;
+                color: $main-color;
+            }
+
+            &:last-child {
+                a {
+                    background: $white;
+                }
+            }
+        }
+    }
+
+    .container:last-child {
+        @extend %flex-center;
+        p {
+            max-width: 90%;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 32px;
+            text-align: center;
+            color: $main-color;
+        }
+    }
+}
+
+.how {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .container:first-of-type {
+        p {
+            font-weight: 500;
+            font-size: 35px;
+            line-height: 50px;
+            text-align: center;
+            color: $main-color;
+            padding-left: 20px;
+        }
+    }
+    .container:last-child {
+        @extend %flex-center;
+        
+        >div {
+            @extend %flex-center;
+            flex-direction: column;
+            gap: 10px;
+
+            a {
+                display: block;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 30px;
+                line-height: 38px;
+                text-align: center;
+                color: $main-color;
+                border: 5px solid $secondary-color;
+                @extend %shadow;
+                border-radius: 30px;
+                background: $secondary-color;
+                padding: 17px 40px;
+            }
+
+            span {
+                font-weight: 400;
+                font-size: 25px;
+                line-height: 32px;
+                color: $main-color;
+            }
+
+            &:last-child {
+                a {
+                    background: $white;
+                }
+            }
+        }
+    }
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    .container {
+        >div {
+            flex-direction: column;
+            p {
+                font-weight: 400;
+                font-size: 25px;
+                line-height: 32px;
+                text-align: center;
+                color: $main-color;
+            }
+        }
+        form {
+            input, textarea {
+                background: $white;
+                border: 1px solid $secondary-color;
+                box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+                border-radius: 30px;
+                font-weight: 500;
+                font-size: 30px;
+                line-height: 38px;
+                color: $black;
+                padding: 20px;
+                resize: none;
+            }
+        }
+    }
+}

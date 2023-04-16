@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -42,7 +44,21 @@ class RegisterController extends Controller
     // register and validate doctor information ................................
     public function register(DoctorRequest $request)
     {
-        return $request;
+        $doctor = Doctor::create([
+            'name' => $request->input('name'),
+            'phone_key' => $request->input('countryCode'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+            'address' => $request->input('address'),
+            'password' => Hash::make($request->input('password')),
+            'about_me' => $request->input('about'),
+        ]);
+
+        if ($doctor) {
+            return 'doctor has been registered';
+        }
+
+        return 'field to login';
     }
     // .....................................
 
@@ -56,4 +72,11 @@ class RegisterController extends Controller
         return 0;
     }
     // .....................................
+
+    // logout from doctor account
+    public function logout(Request $request)
+    {
+        Auth::guard('doctor')->logout();
+        return redirect('/');
+    }
 }

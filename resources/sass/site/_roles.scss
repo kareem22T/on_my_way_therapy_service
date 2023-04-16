@@ -1,0 +1,59 @@
+// main roles
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+// ........................................................................
+
+// variables
+$main-color: #132F75;
+$secondary-color: #FFC400;
+$black: #000000;
+$white: #ffffff;
+$gray: #D7D7D7;
+//........................................................................
+
+// classes and extends
+.container {
+    width: 1100vw;
+    max-width: 1300px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+%flex-center,
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+%lg-grid,
+.lg-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+@for $i from 1 through 12 {
+    .g-#{$i} {
+        grid-column: span $i;
+    }
+}
+
+%shadow, .shadow {
+    box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.head {
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 63px;
+    text-align: center;
+    color: $main-color;
+}
+// ................................................................................

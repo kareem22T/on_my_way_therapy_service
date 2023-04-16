@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+.container {
+  width: 1100vw;
+  max-width: 1300px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.how .container:last-child > div, .how .container:last-child, .hero .container:last-child, .hero .container:nth-child(2) > div, .hero .container:nth-child(2), header nav ul li:first-child a, header nav ul,
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.lg-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.g-1 {
+  grid-column: span 1;
+}
+
+.g-2 {
+  grid-column: span 2;
+}
+
+.g-3 {
+  grid-column: span 3;
+}
+
+.g-4 {
+  grid-column: span 4;
+}
+
+.g-5 {
+  grid-column: span 5;
+}
+
+.g-6 {
+  grid-column: span 6;
+}
+
+.g-7 {
+  grid-column: span 7;
+}
+
+.g-8 {
+  grid-column: span 8;
+}
+
+.g-9 {
+  grid-column: span 9;
+}
+
+.g-10 {
+  grid-column: span 10;
+}
+
+.g-11 {
+  grid-column: span 11;
+}
+
+.g-12 {
+  grid-column: span 12;
+}
+
+.how .container:last-child > div a, .hero .container:nth-child(2) > div a, header nav, .shadow {
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.head {
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 63px;
+  text-align: center;
+  color: #132F75;
+}
+
+header {
+  margin-top: 35px;
+}
+header nav {
+  background: #ffffff;
+  border: 1px solid #FFC400;
+  border-radius: 30px;
+  padding: 20px;
+}
+header nav ul {
+  list-style: none;
+  justify-content: space-between;
+}
+header nav ul li:first-child a {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 38px;
+  color: #132F75;
+  text-decoration: none;
+}
+header nav ul li:first-child a .img {
+  width: 40px;
+  height: 40px;
+  background-color: #132F75;
+  border-radius: 50%;
+}
+header nav ul li i {
+  font-size: 40px;
+  color: #132F75;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  margin: 50px 0;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.hero .container:first-child > div {
+  gap: 25px;
+}
+.hero .container:first-child > div h4 {
+  font-weight: 500;
+  font-size: 45px;
+  line-height: 62px;
+  text-align: center;
+  color: #132F75;
+  max-width: 87%;
+}
+.hero .container:first-child > div a {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 32px;
+  color: #132F75;
+  text-decoration: none;
+  border-bottom: 2px solid #FFC400;
+}
+.hero .container:first-child > div:last-child {
+  flex-direction: column;
+}
+.hero .container:nth-child(2) > div {
+  flex-direction: column;
+  gap: 10px;
+}
+.hero .container:nth-child(2) > div a {
+  display: block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+  color: #132F75;
+  border: 5px solid #FFC400;
+  border-radius: 30px;
+  background: #FFC400;
+  padding: 17px 40px;
+}
+.hero .container:nth-child(2) > div span {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 32px;
+  color: #132F75;
+}
+.hero .container:nth-child(2) > div:last-child a {
+  background: #ffffff;
+}
+.hero .container:last-child p {
+  max-width: 90%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 32px;
+  text-align: center;
+  color: #132F75;
+}
+
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.how .container:first-of-type p {
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 50px;
+  text-align: center;
+  color: #132F75;
+  padding-left: 20px;
+}
+.how .container:last-child > div {
+  flex-direction: column;
+  gap: 10px;
+}
+.how .container:last-child > div a {
+  display: block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+  color: #132F75;
+  border: 5px solid #FFC400;
+  border-radius: 30px;
+  background: #FFC400;
+  padding: 17px 40px;
+}
+.how .container:last-child > div span {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 32px;
+  color: #132F75;
+}
+.how .container:last-child > div:last-child a {
+  background: #ffffff;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.contact .container > div {
+  flex-direction: column;
+}
+.contact .container > div p {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 32px;
+  text-align: center;
+  color: #132F75;
+}
+.contact .container form input, .contact .container form textarea {
+  background: #ffffff;
+  border: 1px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 38px;
+  color: #000000;
+  padding: 20px;
+  resize: none;
+}
+
+/*# sourceMappingURL=main.css.map */

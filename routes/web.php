@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doctor\RegisterController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,8 @@ use App\Http\Controllers\Doctor\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', [HomeController::class, "index"]);
 });
 
 ########################################## star doctor routes #################################################
@@ -34,6 +35,10 @@ Route::group(["namespace" => "Doctor", "prefix" => "doctor"], function () {
 
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:doctor'], function () {
+        Route::get('/', function () {
+            return 'test';
+        });
+        Route::get("/logout", [RegisterController::class, "logout"])->name('doctor.logout');
     });
     // ......................................
 });

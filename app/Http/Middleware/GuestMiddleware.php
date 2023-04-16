@@ -16,9 +16,11 @@ class GuestMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            return redirect('/'); // Redirect to home page if user is authenticated
-        }
+        if (Auth::guard('doctor')->check()) {
+            return redirect('/doctor'); // Redirect to home page if user is authenticated
+        } /* else if (Auth::guard('client')->check()) {
+            return redirect('/client'); // Redirect to home page if user is authenticated
+        } */
 
         return $next($request); // Allow access to the route if user is not authenticated
     }
