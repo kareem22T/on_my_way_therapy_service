@@ -17,6 +17,10 @@ use App\Http\Controllers\HomeController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [HomeController::class, "index"]);
+    Route::group(['prefix' => 'help'], function () {
+        Route::get('/client', [HomeController::class, "helpClientIndex"])->name('help.client');
+        Route::get('/therapy', [HomeController::class, "helpTherapyIndex"])->name('help.therapy');
+    });
 });
 
 ########################################## star doctor routes #################################################

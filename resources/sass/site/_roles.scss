@@ -6,6 +6,21 @@
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
+html {scroll-behavior: smooth;}
+body {
+    &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-image: url('/imgs/site/bg.jpg');
+        background-attachment: fixed;
+        z-index: -1;
+        opacity: .08;
+    }
+}
 // ........................................................................
 
 // variables
@@ -18,7 +33,7 @@ $gray: #D7D7D7;
 
 // classes and extends
 .container {
-    width: 1100vw;
+    width: 100vw;
     max-width: 1300px;
     padding: 0 20px;
     margin: 0 auto;
@@ -51,9 +66,10 @@ $gray: #D7D7D7;
 
 .head {
     font-weight: 700;
-    font-size: 50px;
-    line-height: 63px;
+    font-size: clamp(1.75rem, calc(1.1607rem + 2.4176vw), 3.125rem);
+    line-height: clamp(1.875rem, calc(0.9911rem + 3.6264vw), 3.9375rem);
     text-align: center;
     color: $main-color;
+    padding: 0 10px;
 }
 // ................................................................................

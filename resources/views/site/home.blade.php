@@ -1,5 +1,7 @@
 @extends('site.layouts.mainLayout')
 
+@section('title', 'On My Way | Therapy Services')
+
 @section('content')
     <main>
         <section class="hero">
@@ -9,7 +11,7 @@
                 </div>
                 <div class="g-6 flex-center">
                     <h4>
-                        No more Wait-List, no more Travelling. <br>Just Therapy in the comfort of your own home Anywhere - Anytime
+                        No more Wait-List, no more Travelling. Just Therapy in the comfort of your own home Anywhere - Anytime
                     </h4>
                     <a href="#how">How it works?</a>
                 </div>
@@ -31,8 +33,8 @@
             </div>
         </section>
 
-        <section class="how" id="how">
-            <h1 class="head">How it works?</h1>
+        <section class="how">
+            <h1 class="head"><div id="how"></div>How it works?</h1>
             <div class="container lg-grid">
                 <div class="g-8 flex-center">
                     <p>
@@ -45,11 +47,11 @@
             </div>
             <div class="container">
                 <div>
-                    <a href="">More details</a>
+                    <a href="{{ route('help.client') }}" target="_blanck">More details</a>
                     <span>As Client/Referrer</span>
                 </div>
                 <div>
-                    <a href="">More details</a>
+                    <a href="{{ route('help.therapy') }}" target="_blanck">More details</a>
                     <span>as a therapist</span>
                 </div>
             </div>
@@ -58,15 +60,15 @@
         <section class="contact">
             <h1 class="head">contact us or leave  a feedback</h1>
             <div class="container lg-grid">
-                <div class="g-5 flex-center">
+                <div class="g-4 flex-center">
                     <img src="{{ asset('/imgs/site/map.png') }}" alt="">
                     <p>On My Way is Australia Wide Anwhere & Anytime</p>
                 </div>
-                <form action="" class="g-6 lg-grid">
+                <form action="" class="g-8 lg-grid">
                     <input type="text" name="name" id="name" placeholder="Name" class="g-6">
                     <input type="email" name="email" id="email" placeholder="Email" class="g-6">
                     <textarea name="msg" id="msg" cols="30" rows="7" placeholder="Message" class="g-12"></textarea>
-                    <button type="submit"></button>
+                    <button type="submit"><i class='bx bxs-send'></i></button>
                 </form>
             </div>
         </section>

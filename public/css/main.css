@@ -6,14 +6,31 @@
   font-family: "Outfit", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-image: url("/imgs/site/bg.jpg");
+  background-attachment: fixed;
+  z-index: -1;
+  opacity: 0.08;
+}
+
 .container {
-  width: 1100vw;
+  width: 100vw;
   max-width: 1300px;
   padding: 0 20px;
   margin: 0 auto;
 }
 
-.how .container:last-child > div, .how .container:last-child, .hero .container:last-child, .hero .container:nth-child(2) > div, .hero .container:nth-child(2), header nav ul li:first-child a, header nav ul,
+main .how .container:last-child > div, main .how .container:last-child, main .hero .container:last-child, main .hero .container:nth-child(2) > div, main .hero .container:nth-child(2), header nav ul li:first-child a, header nav ul,
 .flex-center {
   display: flex;
   justify-content: center;
@@ -75,26 +92,38 @@
   grid-column: span 12;
 }
 
-.how .container:last-child > div a, .hero .container:nth-child(2) > div a, header nav, .shadow {
+main .how .container:last-child > div a, main .hero .container:nth-child(2) > div a, header nav, .shadow {
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
 }
 
 .head {
   font-weight: 700;
-  font-size: 50px;
-  line-height: 63px;
+  font-size: clamp(1.75rem, 1.1607rem + 2.4176vw, 3.125rem);
+  line-height: clamp(1.875rem, 0.9911rem + 3.6264vw, 3.9375rem);
   text-align: center;
   color: #132F75;
+  padding: 0 10px;
 }
 
 header {
-  margin-top: 35px;
+  margin-top: clamp(1.25rem, 0.8482rem + 1.6484vw, 2.1875rem);
+}
+header:first-child {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000000000000000000;
+}
+header:nth-child(2) {
+  opacity: 0;
 }
 header nav {
-  background: #ffffff;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(1.5px);
   border: 1px solid #FFC400;
-  border-radius: 30px;
-  padding: 20px;
+  border-radius: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
+  padding: clamp(0.9375rem, 0.8036rem + 0.5495vw, 1.25rem) clamp(0.9375rem, 0.5357rem + 1.6484vw, 1.875rem);
 }
 header nav ul {
   list-style: none;
@@ -102,158 +131,251 @@ header nav ul {
 }
 header nav ul li:first-child a {
   font-weight: 500;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1rem, 0.625rem + 1.5385vw, 1.875rem);
+  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
   color: #132F75;
   text-decoration: none;
+  gap: clamp(0.625rem, 0.3571rem + 1.0989vw, 1.25rem);
 }
 header nav ul li:first-child a .img {
-  width: 40px;
-  height: 40px;
+  width: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
+  height: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
   background-color: #132F75;
   border-radius: 50%;
 }
 header nav ul li i {
-  font-size: 40px;
+  font-size: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
   color: #132F75;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  gap: 100px;
-  margin: 50px 0;
+  gap: clamp(2.1875rem, 0.4464rem + 7.1429vw, 6.25rem);
+  margin: clamp(1.5625rem, 0.8929rem + 2.7473vw, 3.125rem) 0;
 }
-
-.hero {
+main .hero {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(1.5625rem, 1.1607rem + 1.6484vw, 2.5rem);
 }
-.hero .container:first-child > div {
-  gap: 25px;
+main .hero img {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  object-fit: contain;
 }
-.hero .container:first-child > div h4 {
+@media (max-width: 599.98px) {
+  main .hero img {
+    width: 70%;
+  }
+}
+@media (max-width: 599.98px) {
+  main .hero .container:first-child {
+    display: flex;
+    flex-direction: column;
+  }
+}
+main .hero .container:first-child > div {
+  gap: clamp(0.625rem, 0.2232rem + 1.6484vw, 1.5625rem);
+}
+main .hero .container:first-child > div h4 {
   font-weight: 500;
-  font-size: 45px;
-  line-height: 62px;
+  font-size: clamp(1.25rem, 0.5804rem + 2.7473vw, 2.8125rem);
+  line-height: clamp(2rem, 1.1964rem + 3.2967vw, 3.875rem);
   text-align: center;
   color: #132F75;
-  max-width: 87%;
 }
-.hero .container:first-child > div a {
+@media (max-width: 599.98px) {
+  main .hero .container:first-child > div h4 {
+    max-width: 100%;
+  }
+}
+main .hero .container:first-child > div a {
   font-weight: 400;
-  font-size: 25px;
+  font-size: clamp(1.25rem, 1.1161rem + 0.5495vw, 1.5625rem);
   line-height: 32px;
   color: #132F75;
   text-decoration: none;
   border-bottom: 2px solid #FFC400;
 }
-.hero .container:first-child > div:last-child {
+main .hero .container:first-child > div:last-child {
   flex-direction: column;
 }
-.hero .container:nth-child(2) > div {
+main .hero .container:nth-child(2) > div {
   flex-direction: column;
   gap: 10px;
 }
-.hero .container:nth-child(2) > div a {
+main .hero .container:nth-child(2) > div a {
   display: block;
   text-decoration: none;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1.125rem, 0.8036rem + 1.3187vw, 1.875rem);
+  line-height: clamp(1.125rem, 0.5893rem + 2.1978vw, 2.375rem);
   text-align: center;
   color: #132F75;
-  border: 5px solid #FFC400;
-  border-radius: 30px;
+  border: clamp(0.125rem, 0.0446rem + 0.3297vw, 0.3125rem) solid #FFC400;
+  border-radius: clamp(0.9375rem, 0.5357rem + 1.6484vw, 1.875rem);
   background: #FFC400;
-  padding: 17px 40px;
+  padding: clamp(0.6875rem, 0.5268rem + 0.6593vw, 1.0625rem) clamp(0.9375rem, 0.2679rem + 2.7473vw, 2.5rem);
 }
-.hero .container:nth-child(2) > div span {
+main .hero .container:nth-child(2) > div span {
   font-weight: 400;
-  font-size: 25px;
-  line-height: 32px;
+  font-size: clamp(0.875rem, 0.5804rem + 1.2088vw, 1.5625rem);
+  line-height: clamp(1.375rem, 1.1071rem + 1.0989vw, 2rem);
   color: #132F75;
 }
-.hero .container:nth-child(2) > div:last-child a {
-  background: #ffffff;
+main .hero .container:nth-child(2) > div:last-child a {
+  background-color: rgba(255, 255, 255, 0.1960784314);
+  backdrop-filter: blur(1.5px);
 }
-.hero .container:last-child p {
+main .hero .container:last-child p {
   max-width: 90%;
   font-style: normal;
   font-weight: 400;
-  font-size: 25px;
-  line-height: 32px;
+  font-size: clamp(1rem, 0.7589rem + 0.989vw, 1.5625rem);
+  line-height: clamp(1.5rem, 1.2857rem + 0.8791vw, 2rem);
   text-align: center;
   color: #132F75;
 }
-
-.how {
+@media (max-width: 599.98px) {
+  main .hero .container:last-child p {
+    max-width: 100%;
+  }
+}
+main #how {
+  height: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
+  margin-top: calc(-1 * clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem) - clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem));
+}
+main .how {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
 }
-.how .container:first-of-type p {
+@media (max-width: 599.98px) {
+  main .how .container:first-of-type {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+main .how .container:first-of-type p {
   font-weight: 500;
-  font-size: 35px;
-  line-height: 50px;
+  font-size: clamp(1rem, 0.4911rem + 2.0879vw, 2.1875rem);
+  line-height: clamp(1.625rem, 0.9821rem + 2.6374vw, 3.125rem);
   text-align: center;
   color: #132F75;
   padding-left: 20px;
 }
-.how .container:last-child > div {
+@media (max-width: 599.98px) {
+  main .how .container:first-of-type p {
+    padding-left: 0;
+  }
+}
+main .how img {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  object-fit: contain;
+}
+main .how .container:last-child > div {
   flex-direction: column;
   gap: 10px;
 }
-.how .container:last-child > div a {
+main .how .container:last-child > div a {
   display: block;
   text-decoration: none;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1.125rem, 0.8036rem + 1.3187vw, 1.875rem);
+  line-height: clamp(1.125rem, 0.5893rem + 2.1978vw, 2.375rem);
   text-align: center;
   color: #132F75;
-  border: 5px solid #FFC400;
-  border-radius: 30px;
+  border: clamp(0.125rem, 0.0446rem + 0.3297vw, 0.3125rem) solid #FFC400;
+  border-radius: clamp(0.9375rem, 0.5357rem + 1.6484vw, 1.875rem);
   background: #FFC400;
-  padding: 17px 40px;
+  padding: clamp(0.6875rem, 0.5268rem + 0.6593vw, 1.0625rem) clamp(0.9375rem, 0.2679rem + 2.7473vw, 2.5rem);
 }
-.how .container:last-child > div span {
+main .how .container:last-child > div span {
   font-weight: 400;
-  font-size: 25px;
-  line-height: 32px;
+  font-size: clamp(0.875rem, 0.5804rem + 1.2088vw, 1.5625rem);
+  line-height: clamp(1.375rem, 1.1071rem + 1.0989vw, 2rem);
   color: #132F75;
 }
-.how .container:last-child > div:last-child a {
-  background: #ffffff;
+main .how .container:last-child > div:last-child a {
+  background-color: rgba(255, 255, 255, 0.1960784314);
+  backdrop-filter: blur(1.5px);
 }
-
-.contact {
+main .contact {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: clamp(1.875rem, 1.3393rem + 2.1978vw, 3.125rem);
 }
-.contact .container > div {
+@media (max-width: 599.98px) {
+  main .contact .container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+main .contact .container > div {
   flex-direction: column;
 }
-.contact .container > div p {
+main .contact .container > div img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@media (max-width: 599.98px) {
+  main .contact .container > div img {
+    width: 60%;
+  }
+}
+main .contact .container > div p {
   font-weight: 400;
-  font-size: 25px;
-  line-height: 32px;
+  font-size: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem);
+  line-height: clamp(1.6875rem, 1.5536rem + 0.5495vw, 2rem);
   text-align: center;
   color: #132F75;
 }
-.contact .container form input, .contact .container form textarea {
+main .contact .container form {
+  position: relative;
+  gap: clamp(0.875rem, 0.7143rem + 0.6593vw, 1.25rem);
+}
+main .contact .container form input, main .contact .container form textarea {
   background: #ffffff;
   border: 1px solid #FFC400;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
+  border-radius: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
   font-weight: 500;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1.125rem, 0.8036rem + 1.3187vw, 1.875rem);
+  line-height: clamp(1.375rem, 0.9464rem + 1.7582vw, 2.375rem);
   color: #000000;
-  padding: 20px;
+  padding: clamp(0.9375rem, 0.8036rem + 0.5495vw, 1.25rem);
   resize: none;
+  background-color: rgba(255, 255, 255, 0.1960784314);
+  backdrop-filter: blur(1.5px);
+}
+main .contact .container form input:focus, main .contact .container form textarea:focus {
+  border: 2px solid #FFC400;
+  outline: none;
+}
+@media (max-width: 599.98px) {
+  main .contact .container form input, main .contact .container form textarea {
+    grid-column: span 12;
+  }
+}
+main .contact .container form button {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  font-size: 38px;
+  color: #132F75;
+}
+
+footer {
+  width: 100%;
+  height: 70px;
+  background-color: #1d1d1d;
 }
 
 /*# sourceMappingURL=main.css.map */
