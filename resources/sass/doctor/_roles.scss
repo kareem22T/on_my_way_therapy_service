@@ -1,0 +1,40 @@
+// main roles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+// ........................................................................
+
+// variables
+$msin-color: #fff;
+$secondary-color: #000;
+//........................................................................
+
+// classes and extends
+.container {
+    width: 1100vw;
+    max-width: 1300px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+%flex-center, .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+%lg-grid, .lg-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+@for $i from 1 through 12 {
+    .g-#{$i} {
+        grid-column: span $i;
+    }
+}
+// ................................................................................
