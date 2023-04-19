@@ -12,7 +12,7 @@
     <form action="{{ route('doctor.check.login') }}" method="POST" class="lg-grid mt-5 mb-5" autocomplete="off">
         @csrf
         <div class="form-group g-5">
-            <input type="text" name="emailorphone" id="emailorphone" class="form-control" placeholder="email or phone number">
+            <input type="text" name="emailorphone" id="emailorphone" class="form-control" placeholder="Email or phone number">
         </div>
 
         <div class="form-group g-5">

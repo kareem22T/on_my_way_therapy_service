@@ -8,6 +8,7 @@
 }
 html {scroll-behavior: smooth;}
 body {
+    overflow: hidden auto;
     &::after {
         content: '';
         width: 100%;

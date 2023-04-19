@@ -20,7 +20,7 @@
             <section>
                 <div>
                     <div class="img">
-                        <img src="{{ asset('/imgs/site/client-help-2.png') }}" style="width: 80%;" alt="">
+                        <img src="{{ asset('/imgs/site/client-help-2.png') }}" alt="">
                     </div>
                     <div class="text">
                         Or perhaps you live in a remote location and cant get the therapy you need. Simply get medical attention in the comfort of your own home or through Telehealth?
@@ -56,4 +56,44 @@
             </section>
         </main>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $(window).on('scroll', function () {
+                enterAnimation()
+            })
+
+            setTimeout(() => {
+                enterAnimation()
+            }, 400);
+
+            function enterAnimation() {
+                if ($(window).scrollTop() >= ($('section:first-child').offset().top - $(window).height() / 2)) {
+                    $('section:first-child').find('.img').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    setTimeout(() => {
+                        $('section:first-child').find('.text').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 250);
+                }
+                if ($(window).scrollTop() >= ($('section:nth-child(2)').offset().top - $(window).height() / 1.2)) {
+                    $('section:nth-child(2)').find('.img').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    setTimeout(() => {
+                    $('section:nth-child(2)').find('.text').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 250);
+                }
+                if ($(window).scrollTop() >= ($('section:nth-child(4)').offset().top - $(window).height() / 1.2)) {
+                    $('section:nth-child(4)').find('.img').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    setTimeout(() => {
+                    $('section:nth-child(4)').find('.text').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 250);
+                }
+                if ($(window).scrollTop() >= ($('section:nth-child(3)').offset().top - $(window).height() / 1.2)) {
+                    $('section:nth-child(3)').find('.img').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    setTimeout(() => {
+                    $('section:nth-child(3)').find('.text').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 250);
+                }
+            }
+        })
+    </script>
 @endsection

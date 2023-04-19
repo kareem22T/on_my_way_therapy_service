@@ -42,22 +42,22 @@ header {
                 }
                 i {
                     font-size: clamp(1.875rem, calc(1.6071rem + 1.0989vw), 2.5rem);
-                    color: $main-color
+                    color: $main-color;
                 }
             }
         }
     }
 }
 
-
 footer {
     width: 100%;
     height: 70px;
-    background-color: #1d1d1d;
+    background-color: $main-color;
 }
 
 // start home ...
 main {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: clamp(2.1875rem, calc(0.4464rem + 7.1429vw), 6.25rem);
@@ -73,6 +73,8 @@ main {
             height: 100%;
             max-width: 500px;
             object-fit: contain;
+            visibility: hidden;
+            animation-duration: .6s;
             @media (max-width: 599.98px) {
                 width: 70%;
             }
@@ -91,6 +93,8 @@ main {
                     line-height: clamp(2rem, calc(1.1964rem + 3.2967vw), 3.875rem);
                     text-align: center;
                     color: $main-color;
+                    visibility: hidden;
+                    animation-duration: .5s;
                     // max-width: 87%;
                     @media (max-width: 599.98px) {
                         max-width: 100%;
@@ -103,6 +107,8 @@ main {
                     color: $main-color;
                     text-decoration: none;
                     border-bottom: 2px solid $secondary-color;
+                    visibility: hidden;
+                    animation-duration: .6s;
                 }
                 &:last-child {
                     flex-direction: column;
@@ -129,12 +135,14 @@ main {
                     border-radius: clamp(0.9375rem, calc(0.5357rem + 1.6484vw), 1.875rem);
                     background: $secondary-color;
                     padding: clamp(0.6875rem, calc(0.5268rem + 0.6593vw), 1.0625rem) clamp(0.9375rem, calc(0.2679rem + 2.7473vw), 2.5rem);
+                    visibility: hidden;
                 }
 
                 span {
                     font-weight: 400;
                     font-size: clamp(0.875rem, calc(0.5804rem + 1.2088vw), 1.5625rem);
                     line-height: clamp(1.375rem, calc(1.1071rem + 1.0989vw), 2rem);
+                    visibility: hidden;
                     color: $main-color;
                 }
 
@@ -157,6 +165,7 @@ main {
                 line-height: clamp(1.5rem, calc(1.2857rem + 0.8791vw), 2rem);
                 text-align: center;
                 color: $main-color;
+                visibility: hidden;
                 @media (max-width: 599.98px) {
                     max-width: 100%;
                 }
@@ -173,6 +182,9 @@ main {
         display: flex;
         flex-direction: column;
         gap: clamp(1.25rem, calc(0.9821rem + 1.0989vw), 1.875rem);
+        .head {
+            visibility: hidden;
+        }
         .container:first-of-type {
             @media (max-width: 599.98px) {
                 display: flex;
@@ -188,6 +200,7 @@ main {
                 @media (max-width: 599.98px) {
                     padding-left: 0;
                 }
+                visibility: hidden;
             }
         }
         img {
@@ -195,6 +208,7 @@ main {
             height: 100%;
             max-width: 500px;
             object-fit: contain;
+            visibility: hidden;
         }    
         .container:last-child {
             @extend %flex-center;
@@ -217,6 +231,7 @@ main {
                     border-radius: clamp(0.9375rem, calc(0.5357rem + 1.6484vw), 1.875rem);
                     background: $secondary-color;
                     padding: clamp(0.6875rem, calc(0.5268rem + 0.6593vw), 1.0625rem) clamp(0.9375rem, calc(0.2679rem + 2.7473vw), 2.5rem);
+                    visibility: hidden;
                 }
 
                 span {
@@ -224,6 +239,7 @@ main {
                     font-size: clamp(0.875rem, calc(0.5804rem + 1.2088vw), 1.5625rem);
                     line-height: clamp(1.375rem, calc(1.1071rem + 1.0989vw), 2rem);
                     color: $main-color;
+                    visibility: hidden;
                 }
 
                 &:last-child {
@@ -240,6 +256,7 @@ main {
         display: flex;
         flex-direction: column;
         gap: clamp(1.875rem, calc(1.3393rem + 2.1978vw), 3.125rem);
+        .head {visibility: hidden;}
         .container {
             @media (max-width: 599.98px) {
                 display: flex;
@@ -251,6 +268,7 @@ main {
                     width: 100%;
                     height: 100%;
                     object-fit: contain;
+                    visibility: hidden;
                     @media (max-width: 599.98px) {
                         width: 60%;
                     }
@@ -261,6 +279,7 @@ main {
                     line-height: clamp(1.6875rem, calc(1.5536rem + 0.5495vw), 2rem);
                     text-align: center;
                     color: $main-color;
+                    visibility: hidden;
                 }
             }
             form {
@@ -279,6 +298,7 @@ main {
                     resize: none;
                     background-color: #ffffff32;
                     backdrop-filter: blur(1.5px);
+                    visibility: hidden;
                     &:focus {
                         border: 2px solid $secondary-color;
                         outline: none;
@@ -324,6 +344,7 @@ main {
                 @extend %flex-center;
                 width: 100%;
                 &.img {
+                    visibility: hidden;
                     img {
                         width: 100%;
                         height: 100%;
@@ -335,6 +356,7 @@ main {
                 }
 
                 &.text {
+                    visibility: hidden;
                     font-weight: 500;
                     font-size: clamp(1.1875rem, calc(0.625rem + 2.3077vw), 2.5rem);
                     line-height: clamp(1.875rem, calc(1.3393rem + 2.1978vw), 3.125rem);
@@ -385,5 +407,91 @@ main {
             }
         }
     }
+
+    .extra_section .part-time, .extra_section .full-time, .extra_section{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+        &.part-time {display: none;}
+        .value {
+            font-weight: 700;
+            font-size: 35px;
+            line-height: 44px;
+            text-align: center;
+            color: $main-color;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 !important;
+        }
+        .btns {
+            button {
+                font-weight: 700;
+                font-size: 28px;
+                line-height: 44px;
+                text-align: center;
+                color: #132F75;
+                background: transparent;
+                padding: 5px 15px;
+                border-radius: 20px;
+                border: none;
+                cursor: pointer;
+                &.active {
+                    border: 2px solid $secondary-color;
+                }
+            }
+        }
+        a {
+            font-weight: 800;
+            font-size: 40px;
+            line-height: 63px;
+            text-align: center;
+            color: $main-color;
+            text-decoration: none;
+            display: block;
+            border: 5px solid $main-color;
+            border-radius: 30px;
+            width: fit-content;
+            padding: 10px 50px;
+        }
+    }
+
+    .extra_section {width: fit-content}
 }
 // end ...
+
+
+.custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    background: $secondary-color;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 50px;
+}
+
+.custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $main-color;
+    cursor: pointer;
+}
+
+.custom-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $main-color;
+    cursor: pointer;
+}
+
+

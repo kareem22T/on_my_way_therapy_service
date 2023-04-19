@@ -4,7 +4,7 @@
 
 @section('content')
     <main>
-        <section class="hero">
+        <section class="hero" >
             <div class="container lg-grid">
                 <div class="g-6 flex-center">
                     <img src="{{ asset('/imgs/site/hero.png') }}" alt="hero-img">
@@ -73,4 +73,94 @@
             </div>
         </section>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+
+            $(window).on('scroll', function () {
+                enterAnimation()
+            })
+
+            setTimeout(() => {
+                enterAnimation()
+            }, 550);
+
+            function enterAnimation() {
+                if ($(window).scrollTop() >= ($('.hero').offset().top - $(window).height())
+                ) {
+                    $('.hero >div h4').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+
+                    setTimeout(() => {
+                        $('.hero .container:first-child >div a').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 100);
+
+                    setTimeout(() => {
+                        $('.hero img').addClass('animate__animated animate__slideInLeft').css('visibility', 'visible');
+                    }, 300);
+
+                    setTimeout(() => {
+                        $('.hero .container:nth-child(2) div:first-child a').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                        $('.hero .container:nth-child(2) div:last-child a').addClass('animate__animated animate__bounceInRight').css('visibility', 'visible');
+                    }, 500);
+
+                    setTimeout(() => {
+                        $('.hero .container:nth-child(2) div:first-child span').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                        $('.hero .container:nth-child(2) div:last-child span').addClass('animate__animated animate__bounceInRight').css('visibility', 'visible');
+                    }, 700);
+                    setTimeout(() => {
+                        $('.hero .container:last-child p').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 900);
+
+                    // if ($(window).scrollTop() <= ($('.how').offset().top - $(window).height())) {
+                    //     $('.hero').next().find("*").removeClass('animate__animated animate__fadeInUp animate__bounceInLeft animate__bounceInRight').css('visibility', 'hidden');
+                    // }
+                } 
+                if ($(window).scrollTop() >= ($('.how').offset().top - $(window).height() / 2)) {
+                   $('.how .head').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                   setTimeout(() => {
+                        $('.how p').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                        $('.how img').addClass('animate__animated animate__bounceInRight').css('visibility', 'visible');
+                   }, 250);
+                    setTimeout(() => {
+                        $('.how .container div:first-child a').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                        $('.how .container div:last-child a').addClass('animate__animated animate__bounceInRight').css('visibility', 'visible');
+                    }, 500);
+
+                    setTimeout(() => {
+                        $('.how .container div:first-child span').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                        $('.how .container div:last-child span').addClass('animate__animated animate__bounceInRight').css('visibility', 'visible');
+                    }, 800);
+
+                    // if ($(window).scrollTop() <= ($('.contact').offset().top - $(window).height())) {
+                    //     $('.contact').find("*:not(button)").removeClass('animate__animated animate__fadeInUp animate__bounceInLeft animate__bounceInUp animate__bounceInDown animate__bounceInRight').css('visibility', 'hidden');
+                    // }
+
+                }
+                if ($(window).scrollTop() >= ($('.contact').offset().top - $(window).height()/ 2))  {
+                   $('.contact .head').addClass('animate__animated animate__fadeInUp').css('visibility', 'visible');
+                   setTimeout(() => {
+                        $('.contact input:first-child').addClass('animate__animated animate__bounceInUp').css('visibility', 'visible');
+                   }, 250);
+                   setTimeout(() => {
+                        $('.contact input').addClass('animate__animated animate__bounceInDown').css('visibility', 'visible');
+                        $('.contact button').addClass('animate__animated animate__bounceInDown').css('visibility', 'visible');
+                   }, 500);
+                   setTimeout(() => {
+                        $('.contact textarea').addClass('animate__animated animate__bounceInRight').css('visibility', 'visible');
+                   }, 700);
+                   setTimeout(() => {
+                        $('.contact img').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                   }, 700);
+                   setTimeout(() => {
+                        $('.contact p').addClass('animate__animated animate__bounceInLeft').css('visibility', 'visible');
+                   }, 900);
+
+                    // $('.hero').find("*").removeClass('animate__animated animate__fadeInUp animate__bounceInLeft animate__bounceInUp animate__bounceInDown animate__bounceInRight').css('visibility', 'hidden');
+
+                }
+            }
+        })
+    </script>
+
 @endsection

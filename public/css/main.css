@@ -10,6 +10,9 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow: hidden auto;
+}
 body::after {
   content: "";
   width: 100%;
@@ -151,10 +154,11 @@ header nav ul li i {
 footer {
   width: 100%;
   height: 70px;
-  background-color: #1d1d1d;
+  background-color: #132F75;
 }
 
 main {
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: clamp(2.1875rem, 0.4464rem + 7.1429vw, 6.25rem);
@@ -170,6 +174,8 @@ main .hero img {
   height: 100%;
   max-width: 500px;
   object-fit: contain;
+  visibility: hidden;
+  animation-duration: 0.6s;
 }
 @media (max-width: 599.98px) {
   main .hero img {
@@ -191,6 +197,8 @@ main .hero .container:first-child > div h4 {
   line-height: clamp(2rem, 1.1964rem + 3.2967vw, 3.875rem);
   text-align: center;
   color: #132F75;
+  visibility: hidden;
+  animation-duration: 0.5s;
 }
 @media (max-width: 599.98px) {
   main .hero .container:first-child > div h4 {
@@ -204,6 +212,8 @@ main .hero .container:first-child > div a {
   color: #132F75;
   text-decoration: none;
   border-bottom: 2px solid #FFC400;
+  visibility: hidden;
+  animation-duration: 0.6s;
 }
 main .hero .container:first-child > div:last-child {
   flex-direction: column;
@@ -224,11 +234,13 @@ main .hero .container:nth-child(2) > div a {
   border-radius: clamp(0.9375rem, 0.5357rem + 1.6484vw, 1.875rem);
   background: #FFC400;
   padding: clamp(0.6875rem, 0.5268rem + 0.6593vw, 1.0625rem) clamp(0.9375rem, 0.2679rem + 2.7473vw, 2.5rem);
+  visibility: hidden;
 }
 main .hero .container:nth-child(2) > div span {
   font-weight: 400;
   font-size: clamp(0.875rem, 0.5804rem + 1.2088vw, 1.5625rem);
   line-height: clamp(1.375rem, 1.1071rem + 1.0989vw, 2rem);
+  visibility: hidden;
   color: #132F75;
 }
 main .hero .container:nth-child(2) > div:last-child a {
@@ -243,6 +255,7 @@ main .hero .container:last-child p {
   line-height: clamp(1.5rem, 1.2857rem + 0.8791vw, 2rem);
   text-align: center;
   color: #132F75;
+  visibility: hidden;
 }
 @media (max-width: 599.98px) {
   main .hero .container:last-child p {
@@ -258,6 +271,9 @@ main .how {
   flex-direction: column;
   gap: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
 }
+main .how .head {
+  visibility: hidden;
+}
 @media (max-width: 599.98px) {
   main .how .container:first-of-type {
     display: flex;
@@ -271,6 +287,7 @@ main .how .container:first-of-type p {
   text-align: center;
   color: #132F75;
   padding-left: 20px;
+  visibility: hidden;
 }
 @media (max-width: 599.98px) {
   main .how .container:first-of-type p {
@@ -282,6 +299,7 @@ main .how img {
   height: 100%;
   max-width: 500px;
   object-fit: contain;
+  visibility: hidden;
 }
 main .how .container:last-child > div {
   flex-direction: column;
@@ -299,12 +317,14 @@ main .how .container:last-child > div a {
   border-radius: clamp(0.9375rem, 0.5357rem + 1.6484vw, 1.875rem);
   background: #FFC400;
   padding: clamp(0.6875rem, 0.5268rem + 0.6593vw, 1.0625rem) clamp(0.9375rem, 0.2679rem + 2.7473vw, 2.5rem);
+  visibility: hidden;
 }
 main .how .container:last-child > div span {
   font-weight: 400;
   font-size: clamp(0.875rem, 0.5804rem + 1.2088vw, 1.5625rem);
   line-height: clamp(1.375rem, 1.1071rem + 1.0989vw, 2rem);
   color: #132F75;
+  visibility: hidden;
 }
 main .how .container:last-child > div:last-child a {
   background-color: rgba(255, 255, 255, 0.1960784314);
@@ -314,6 +334,9 @@ main .contact {
   display: flex;
   flex-direction: column;
   gap: clamp(1.875rem, 1.3393rem + 2.1978vw, 3.125rem);
+}
+main .contact .head {
+  visibility: hidden;
 }
 @media (max-width: 599.98px) {
   main .contact .container {
@@ -328,6 +351,7 @@ main .contact .container > div img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  visibility: hidden;
 }
 @media (max-width: 599.98px) {
   main .contact .container > div img {
@@ -340,6 +364,7 @@ main .contact .container > div p {
   line-height: clamp(1.6875rem, 1.5536rem + 0.5495vw, 2rem);
   text-align: center;
   color: #132F75;
+  visibility: hidden;
 }
 main .contact .container form {
   position: relative;
@@ -358,6 +383,7 @@ main .contact .container form input, main .contact .container form textarea {
   resize: none;
   background-color: rgba(255, 255, 255, 0.1960784314);
   backdrop-filter: blur(1.5px);
+  visibility: hidden;
 }
 main .contact .container form input:focus, main .contact .container form textarea:focus {
   border: 2px solid #FFC400;
@@ -397,6 +423,9 @@ main .contact .container form button {
 .help-wrapper section > div > div {
   width: 100%;
 }
+.help-wrapper section > div > div.img {
+  visibility: hidden;
+}
 .help-wrapper section > div > div.img img {
   width: 100%;
   height: 100%;
@@ -408,6 +437,7 @@ main .contact .container form button {
   }
 }
 .help-wrapper section > div > div.text {
+  visibility: hidden;
   font-weight: 500;
   font-size: clamp(1.1875rem, 0.625rem + 2.3077vw, 2.5rem);
   line-height: clamp(1.875rem, 1.3393rem + 2.1978vw, 3.125rem);
@@ -450,6 +480,89 @@ main .contact .container form button {
   line-height: clamp(1.5rem, 0.9643rem + 2.1978vw, 2.75rem);
   text-align: center;
   color: #132F75;
+}
+.help-wrapper .extra_section .part-time, .help-wrapper .extra_section .full-time, .help-wrapper .extra_section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+}
+.help-wrapper .extra_section .part-time.part-time, .help-wrapper .extra_section .full-time.part-time, .help-wrapper .extra_section.part-time {
+  display: none;
+}
+.help-wrapper .extra_section .part-time .value, .help-wrapper .extra_section .full-time .value, .help-wrapper .extra_section .value {
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 !important;
+}
+.help-wrapper .extra_section .part-time .btns button, .help-wrapper .extra_section .full-time .btns button, .help-wrapper .extra_section .btns button {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+  background: transparent;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+.help-wrapper .extra_section .part-time .btns button.active, .help-wrapper .extra_section .full-time .btns button.active, .help-wrapper .extra_section .btns button.active {
+  border: 2px solid #FFC400;
+}
+.help-wrapper .extra_section .part-time a, .help-wrapper .extra_section .full-time a, .help-wrapper .extra_section a {
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 63px;
+  text-align: center;
+  color: #132F75;
+  text-decoration: none;
+  display: block;
+  border: 5px solid #132F75;
+  border-radius: 30px;
+  width: fit-content;
+  padding: 10px 50px;
+}
+.help-wrapper .extra_section {
+  width: fit-content;
+}
+
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #FFC400;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 50px;
+}
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #132F75;
+  cursor: pointer;
+}
+
+.custom-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #132F75;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */
