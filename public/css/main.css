@@ -20,7 +20,6 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  background-image: url("/imgs/site/bg.jpg");
   background-attachment: fixed;
   z-index: -1;
   opacity: 0.08;
@@ -106,6 +105,23 @@ main .how .container:last-child > div a, main .hero .container:nth-child(2) > di
   text-align: center;
   color: #132F75;
   padding: 0 10px;
+}
+
+.alert-danger {
+  --bs-alert-color: #842029;
+  --bs-alert-bg: #f8d7da;
+  --bs-alert-border-color: #f5c2c7;
+  border-radius: 20px;
+  max-width: 320px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#errors {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 5555555555555;
+  display: none;
 }
 
 header {

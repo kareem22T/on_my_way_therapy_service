@@ -23,18 +23,24 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 
-########################################## star doctor routes #################################################
+######################################## star therapist routes ###############################################
 
-Route::group(["namespace" => "Doctor", "prefix" => "doctor"], function () {
+Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
     // routes can be visit as both 
     Route::get('/there-doctor', [RegisterController::class, "thereDoctor"]);
 
     // just not authenticated doctor can visit
+    Route::get("/register", [RegisterController::class, "indexRegister"])
+        ->middleware('register_therapist_visitor');
+    Route::post("/register", [RegisterController::class, "register"])
+        ->middleware('register_therapist_visitor');
+    Route::get("/verify", [RegisterController::class, "indexVerify"])->middleware('verfiy');
+
     Route::group(['middleware' => 'guest'], function () {
-        Route::get("/register", [RegisterController::class, "indexRegister"]);
-        Route::post("/register", [RegisterController::class, "register"]);
         Route::get("/login", [RegisterController::class, "indexLogin"])->name('doctor.login');
         Route::post("/login", [RegisterController::class, "checkLogin"])->name('doctor.check.login');
+        Route::get("/information", [RegisterController::class, "indexInformation"]);
+        Route::get("/payment", [RegisterController::class, "indexPayment"]);
     });
 
     // just authenticated doctor can visit
@@ -43,6 +49,7 @@ Route::group(["namespace" => "Doctor", "prefix" => "doctor"], function () {
             return 'test';
         });
         Route::get("/logout", [RegisterController::class, "logout"])->name('doctor.logout');
+        Route::get("/sendSms", [RegisterController::class, "phoneVerify"]);
     });
     // ......................................
 });

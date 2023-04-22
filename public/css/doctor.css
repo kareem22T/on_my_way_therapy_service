@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
 }
 
 body {
@@ -14,20 +16,19 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  background-image: url("/imgs/site/bg.jpg");
   background-attachment: fixed;
   z-index: -1;
   opacity: 0.08;
 }
 
 .container {
-  width: 1100vw;
+  width: 100vw;
   max-width: 1300px;
   padding: 0 20px;
   margin: 0 auto;
 }
 
-.flex-center {
+#register_root form .choice > div, #register_root form .photo_group label::after, #register_root form .file, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,6 +87,287 @@ body::after {
 
 .g-12 {
   grid-column: span 12;
+}
+
+.login_wrapper {
+  width: 100%;
+  min-height: 100%;
+}
+.login_wrapper .doctor_login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  max-width: 550px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3411764706);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  backdrop-filter: blur(4px);
+}
+.login_wrapper .doctor_login_form .form-group {
+  width: 100%;
+}
+.login_wrapper .doctor_login_form input, .login_wrapper .doctor_login_form button {
+  background: #ffffff;
+  border: 1px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 20px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 38px;
+}
+.login_wrapper .doctor_login_form button {
+  background-color: #FFC400;
+  color: #132F75;
+  border: 3px solid #FFC400;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+.login_wrapper .doctor_login_form button:hover {
+  background-color: transparent;
+}
+.login_wrapper .doctor_login_form .img {
+  width: 100%;
+  max-width: 300px;
+}
+.login_wrapper .doctor_login_form .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#register_root {
+  width: 100%;
+  max-width: 1000px;
+  flex-direction: column;
+  gap: clamp(1.25rem, 0.8482rem + 1.6484vw, 2.1875rem);
+}
+#register_root > p {
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 0.7143rem + 2.1978vw, 2.5rem);
+  line-height: clamp(1.375rem, 0.625rem + 3.0769vw, 3.125rem);
+  text-align: center;
+  color: #132F75;
+  margin: 0;
+}
+#register_root .steps {
+  list-style: none;
+}
+#register_root .steps li {
+  width: clamp(2.5rem, 1.9643rem + 2.1978vw, 3.75rem);
+  height: clamp(2.5rem, 1.9643rem + 2.1978vw, 3.75rem);
+  background: #D7D7D7;
+  font-weight: 700;
+  font-size: clamp(1.3125rem, 0.8036rem + 2.0879vw, 2.5rem);
+  line-height: 50px;
+  text-align: center;
+  color: #132F75;
+  border-radius: 50%;
+  border: 1px solid #D7D7D7;
+}
+#register_root .steps li.active {
+  background-color: #FFC400;
+  border: 1px solid #132F75;
+}
+#register_root .steps li.finished {
+  background-color: #FFC400;
+  border: 1px solid #FFC400;
+}
+#register_root h6 {
+  font-weight: 500;
+  font-size: clamp(1.125rem, 0.8036rem + 1.3187vw, 1.875rem);
+  line-height: clamp(1.4375rem, 1.0357rem + 1.6484vw, 2.375rem);
+  text-align: center;
+  color: #132F75;
+}
+#register_root h1 {
+  font-weight: 700;
+  color: #132F75;
+  font-size: clamp(1.5rem, 1.0714rem + 1.7582vw, 2.5rem);
+  line-height: clamp(1.25rem, 0.4464rem + 3.2967vw, 3.125rem);
+}
+#register_root form hr {
+  width: 100%;
+  max-width: 300px;
+  height: 4px;
+  background-color: #FFC400;
+  border: none;
+  opacity: 1;
+}
+@media (max-width: 699.98px) {
+  #register_root form.register_form > .form-group {
+    grid-column: span 12;
+  }
+}
+#register_root form.verfy_form, #register_root form.payment_form {
+  flex-direction: column;
+  width: 100%;
+}
+#register_root form.verfy_form .form-group, #register_root form.payment_form .form-group {
+  width: 100% !important;
+}
+#register_root form.verfy_form input, #register_root form.verfy_form select, #register_root form.payment_form input, #register_root form.payment_form select {
+  width: 100%;
+  max-width: 500px;
+}
+#register_root form.payment_form input {
+  max-width: 800px;
+}
+#register_root form input:not([type=checkbox], [type=radio]), #register_root form select,
+#register_root form button, #register_root form textarea, #register_root form .file label {
+  background: #ffffff;
+  border: 1px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem);
+  padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem);
+  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
+  resize: none;
+  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#register_root form .file {
+  flex-direction: column;
+  gap: 10px;
+}
+#register_root form .file label {
+  font-size: 19px;
+}
+#register_root form .file a {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 32px;
+  color: #132F75;
+  text-decoration: none;
+}
+#register_root form .file i {
+  font-size: 30px;
+  color: #132F75;
+}
+#register_root form input[type=file] {
+  display: none;
+}
+#register_root form button {
+  background-color: #FFC400;
+  color: #132F75;
+  border: 3px solid #FFC400;
+  font-size: clamp(1.3125rem, 1.0446rem + 1.0989vw, 1.9375rem);
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+#register_root form button:hover {
+  background-color: transparent;
+}
+#register_root form option {
+  font-size: 18px;
+}
+#register_root form .photo_group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#register_root form .photo_group input {
+  opacity: 0;
+  display: none;
+}
+#register_root form .photo_group label {
+  font-size: clamp(2.5rem, 1.6964rem + 3.2967vw, 4.375rem);
+  width: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
+  height: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #D7D7D7;
+  color: #132F75;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+#register_root form .photo_group label::after {
+  content: "+";
+  position: absolute;
+  bottom: clamp(0.3125rem, 0.4464rem - 0.5495vw, 0rem);
+  right: clamp(0.3125rem, 0.4464rem - 0.5495vw, 0rem);
+  background-color: #FFC400;
+  color: #132F75;
+  font-size: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
+  font-weight: 600;
+  border-radius: 50%;
+  width: clamp(1.6875rem, 1.2054rem + 1.978vw, 2.8125rem);
+  height: clamp(1.6875rem, 1.2054rem + 1.978vw, 2.8125rem);
+  z-index: 2255;
+}
+#register_root form > .form-group:last-child {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+#register_root form > .form-group:last-child button {
+  width: fit-content;
+  padding: clamp(0.625rem, 0.3571rem + 1.0989vw, 1.25rem) clamp(1.875rem, 1.3393rem + 2.1978vw, 3.125rem);
+}
+#register_root form > .form-group:last-child.not-step-1 {
+  justify-content: space-between;
+  margin-top: clamp(0.625rem, 0.0893rem + 2.1978vw, 1.875rem);
+}
+#register_root form > .form-group:last-child.not-step-1 button:first-child {
+  background-color: transparent;
+}
+#register_root form .choice .agree {
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 0.7143rem + 2.1978vw, 2.5rem);
+  line-height: 50px;
+  color: #132F75;
+  cursor: auto;
+}
+#register_root form .choice .agree a {
+  color: #132F75;
+  text-decoration: none;
+  border-bottom: 2px solid #FFC400;
+}
+#register_root form .choice h1 {
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+  margin-bottom: 20px;
+}
+#register_root form .choice > div {
+  gap: 20px;
+  font-weight: 500;
+  font-size: 31px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+}
+#register_root form .choice > div > .form-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#register_root form .choice label {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=doctor.css.map */

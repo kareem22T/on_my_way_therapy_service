@@ -8,6 +8,7 @@ use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Pnlinh\InfobipSms\Facades\InfobipSms;
 
 class RegisterController extends Controller
 {
@@ -25,6 +26,27 @@ class RegisterController extends Controller
     }
     // ....................................
 
+    // get doctor verify view .....................................
+    public function indexVerify()
+    {
+        return view('doctor.verify');
+    }
+    // ....................................
+
+    // get doctor information view .....................................
+    public function indexInformation()
+    {
+        return view('doctor.information');
+    }
+    // ....................................
+
+    // get doctor information view .....................................
+    public function indexPayment()
+    {
+        return view('doctor.payment');
+    }
+    // ....................................
+
     // login as a doctor .........................................
     public function checkLogin(Request $request)
     {
@@ -35,7 +57,7 @@ class RegisterController extends Controller
         }
 
         if (Auth::guard('doctor')->attempt($credentials)) {
-            return redirect()->intended('/doctor/test');
+            return redirect()->intended('/');
         }
         return back()->with(['errorLogin' => 'The username or password are incorrect']);
     }
@@ -45,17 +67,20 @@ class RegisterController extends Controller
     public function register(DoctorRequest $request)
     {
         $doctor = Doctor::create([
-            'name' => $request->input('name'),
+            'first_name' => ucwords($request->input('first_name')),
+            'last_name' => ucwords($request->input('last_name')),
             'phone_key' => $request->input('countryCode'),
             'phone' => $request->input('phone'),
+            'gender' => $request->gender,
+            'dob' => $request->input('dob'),
+            'gender' => $request->input('gender'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
-            'password' => Hash::make($request->input('password')),
-            'about_me' => $request->input('about'),
+            'password' => Hash::make('123456789'),
         ]);
 
         if ($doctor) {
-            return 'doctor has been registered';
+            return 'your account has been registered please complete the registration process';
         }
 
         return 'field to login';
@@ -72,6 +97,13 @@ class RegisterController extends Controller
         return 0;
     }
     // .....................................
+
+    // verify phone number ..........................................
+    public function phoneVerify()
+    {
+        $response = InfobipSms::send('+201550552371', 'Hello Infobip');
+        return $response;
+    }
 
     // logout from doctor account
     public function logout(Request $request)

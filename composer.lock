@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "121ea3a2fffe49b3ef9aa4d064b28c19",
+    "content-hash": "dbe490b9e34e64561bc4ff84ab4d6993",
     "packages": [
         {
             "name": "brick/math",
@@ -980,6 +980,64 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "infobip/infobip-api-php-client",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infobip/infobip-api-php-client.git",
+                "reference": "e37bb618e3813d473179c1cddec04c56fd96e23c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infobip/infobip-api-php-client/zipball/e37bb618e3813d473179c1cddec04c56fd96e23c",
+                "reference": "e37bb618e3813d473179c1cddec04c56fd96e23c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "^7.3",
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Infobip\\": "Infobip/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Infobip Support",
+                    "email": "support@infobip.com",
+                    "homepage": "https://www.infobip.com"
+                }
+            ],
+            "description": "PHP library for consuming Infobip's API",
+            "homepage": "https://www.infobip.com",
+            "keywords": [
+                "2fa",
+                "Infobip",
+                "api",
+                "msisdn",
+                "openapi",
+                "php",
+                "rest",
+                "sdk",
+                "sms",
+                "tfa"
+            ],
+            "support": {
+                "issues": "https://github.com/infobip/infobip-api-php-client/issues",
+                "source": "https://github.com/infobip/infobip-api-php-client/tree/4.0.0"
+            },
+            "time": "2022-10-21T12:44:29+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2273,6 +2331,68 @@
                 }
             ],
             "time": "2023-02-25T19:38:58+00:00"
+        },
+        {
+            "name": "pnlinh/laravel-infobip-sms",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pnlinh/laravel-infobip-sms.git",
+                "reference": "716d55bb3a5e0ebe17580703e136c7533a08a40b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pnlinh/laravel-infobip-sms/zipball/716d55bb3a5e0ebe17580703e136c7533a08a40b",
+                "reference": "716d55bb3a5e0ebe17580703e136c7533a08a40b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^7.3|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.8",
+                "phpunit/phpunit": "^8.4@dev|^9.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pnlinh\\InfobipSms\\Providers\\InfobipSmsServiceProvider"
+                    ],
+                    "aliases": {
+                        "InfobipSms": "Pnlinh\\InfobipSms\\Facades\\InfobipSms"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Pnlinh\\InfobipSms\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pham Ngoc Linh",
+                    "email": "pnlinh1207@gmail.com"
+                }
+            ],
+            "description": "Infobip Sms Service in Laravel",
+            "keywords": [
+                "infobip sms",
+                "laravel infobip"
+            ],
+            "support": {
+                "issues": "https://github.com/pnlinh/laravel-infobip-sms/issues",
+                "source": "https://github.com/pnlinh/laravel-infobip-sms/tree/v1.0.4"
+            },
+            "time": "2021-09-27T07:25:19+00:00"
         },
         {
             "name": "psr/container",

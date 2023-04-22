@@ -1,8 +1,10 @@
 // main roles
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
 }
 body {
     overflow: hidden auto;
@@ -14,22 +16,24 @@ body {
         position: fixed;
         top: 0;
         left: 0;
-        background-image: url('/imgs/site/bg.jpg');
+        // background-image: url('/imgs/site/bg.jpg');
         background-attachment: fixed;
         z-index: -1;
         opacity: .08;
     }
 }
 // ........................................................................
-
 // variables
-$msin-color: #fff;
-$secondary-color: #000;
+$main-color: #132F75;
+$secondary-color: #FFC400;
+$black: #000000;
+$white: #ffffff;
+$gray: #D7D7D7;
 //........................................................................
 
 // classes and extends
 .container {
-    width: 1100vw;
+    width: 100vw;
     max-width: 1300px;
     padding: 0 20px;
     margin: 0 auto;

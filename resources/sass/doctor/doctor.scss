@@ -1,1 +1,305 @@
 @import '_roles.scss';
+
+.login_wrapper {
+    width: 100%;
+    @extend %flex-center;
+    min-height: 100%;
+    .doctor_login_form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        max-width: 550px;
+        width: 100%;
+        background: #ffffff57;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        backdrop-filter: blur(4px);
+        .form-group {
+            width: 100%;
+        }
+        input, button {
+            background: $white;
+            border: 1px solid $secondary-color;
+            box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+            border-radius: 25px;
+            padding: 20px;
+            width: 100%;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 23px;
+            line-height: 38px;
+        }
+        button {
+            background-color: $secondary-color;
+            color: $main-color;
+            border: 3px solid $secondary-color;
+            font-size: 31px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all .2s ease-out;
+            cursor: pointer;
+            &:hover {
+                background-color: transparent;
+            }
+        }
+        .img {
+            width: 100%;
+            max-width: 300px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}
+
+#register_root {
+    width: 100%;
+    max-width: 1000px;
+    @extend %flex-center;
+    flex-direction: column;
+    gap: clamp(1.25rem, calc(0.8482rem + 1.6484vw), 2.1875rem);
+    >p {
+        font-style: normal;
+        font-weight: 700;
+        font-size: clamp(1.25rem, calc(0.7143rem + 2.1978vw), 2.5rem);
+        line-height: clamp(1.375rem, calc(0.625rem + 3.0769vw), 3.125rem);
+        text-align: center;
+        color: $main-color;
+        margin: 0;
+    }
+    .steps {
+        list-style: none;
+        @extend %flex-center;
+        li {
+            width: clamp(2.5rem, calc(1.9643rem + 2.1978vw), 3.75rem);
+            height: clamp(2.5rem, calc(1.9643rem + 2.1978vw), 3.75rem);
+            @extend %flex-center;
+            background: $gray;
+            font-weight: 700;
+            font-size: clamp(1.3125rem, calc(0.8036rem + 2.0879vw), 2.5rem);
+            line-height: 50px;
+            text-align: center;
+            color: $main-color;
+            border-radius: 50%;
+            border: 1px solid $gray;
+            &.active {
+                background-color: $secondary-color;
+                border: 1px solid $main-color;
+            }
+            &.finished {
+                background-color: $secondary-color;
+                border: 1px solid $secondary-color;
+            }
+        }
+    }
+    h6 {
+        font-weight: 500;
+        font-size: clamp(1.125rem, calc(0.8036rem + 1.3187vw), 1.875rem);
+        line-height: clamp(1.4375rem, calc(1.0357rem + 1.6484vw), 2.375rem);
+        text-align: center;
+        color: $main-color
+    }
+    h1 {
+        font-weight: 700;
+        color: $main-color;
+        font-size: clamp(1.5rem, calc(1.0714rem + 1.7582vw), 2.5rem);
+        line-height: clamp(1.25rem, calc(0.4464rem + 3.2967vw), 3.125rem);
+    }
+    form {
+        hr {
+            width: 100%;
+            max-width: 300px;
+            height: 4px;
+            background-color: $secondary-color;
+            border: none;
+            opacity: 1;
+        }
+        &.register_form {
+            >.form-group {
+                @media (max-width: 699.98px) {
+                    grid-column: span 12;
+                }
+            }
+        }
+        &.verfy_form, &.payment_form {
+            @extend %flex-center;
+            flex-direction: column;
+            width: 100%;
+            .form-group {width: 100% !important; @extend %flex-center;}
+            input, select {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        &.payment_form {
+            input {
+                max-width: 800px;
+            }
+        }
+        input:not([type=checkbox], [type=radio]), select,
+        button, textarea, .file label {
+            background: $white;
+            border: 1px solid $secondary-color;
+            box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+            border-radius: clamp(1.125rem, calc(0.9375rem + 0.7692vw), 1.5625rem);
+            padding: clamp(0.75rem, calc(0.5357rem + 0.8791vw), 1.25rem) 20px;
+            width: 100%;
+            font-style: normal;
+            font-weight: 500;
+            font-size: clamp(1.25rem, calc(1.1696rem + 0.3297vw), 1.4375rem);
+            line-height: clamp(1.75rem, calc(1.4821rem + 1.0989vw), 2.375rem);
+            resize: none;
+            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file {
+            @extend %flex-center;
+            flex-direction: column;
+            gap: 10px;
+            label {
+                font-size: 19px;
+            }
+            a {
+                font-weight: 500;
+                font-size: 25px;
+                line-height: 32px;
+                color: $main-color;
+                text-decoration: none;
+            }
+            i {
+                font-size: 30px;
+                color: $main-color
+            }
+        }
+
+        input[type=file] {
+            display: none;
+        }
+    
+        button {
+            background-color: $secondary-color;
+            color: $main-color;
+            border: 3px solid $secondary-color;
+            font-size: clamp(1.3125rem, calc(1.0446rem + 1.0989vw), 1.9375rem);
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all .2s ease-out;
+            cursor: pointer;
+    
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        option {
+            font-size: 18px;
+        }
+
+        .photo_group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            input {
+                opacity: 0;
+                display: none;
+            }
+            label {
+                font-size: clamp(2.5rem, calc(1.6964rem + 3.2967vw), 4.375rem);
+                width: clamp(6.25rem, calc(4.9107rem + 5.4945vw), 9.375rem);
+                height: clamp(6.25rem, calc(4.9107rem + 5.4945vw), 9.375rem);
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+                background: $gray;
+                color: $main-color;
+                border-radius: 50%;
+                position: relative;
+                cursor: pointer;
+                &::after {
+                    content: '+';
+                    position: absolute;
+                    bottom: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
+                    right: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
+                    background-color: $secondary-color;
+                    color: $main-color;
+                    font-size: clamp(1.25rem, calc(0.9821rem + 1.0989vw), 1.875rem);
+                    font-weight: 600;
+                    border-radius: 50%;
+                    width: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);
+                    height: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);
+                    z-index: 2255;
+                    @extend %flex-center;
+                }
+            }
+        }
+
+        >.form-group:last-child {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+            button {
+                width: fit-content;
+                padding: clamp(0.625rem, calc(0.3571rem + 1.0989vw), 1.25rem) clamp(1.875rem, calc(1.3393rem + 2.1978vw), 3.125rem);
+            }
+            &.not-step-1 {
+                justify-content: space-between;
+                margin-top: clamp(0.625rem, calc(0.0893rem + 2.1978vw), 1.875rem);
+                button:first-child {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .choice {
+            .agree {
+                font-style: normal;
+                font-weight: 500;
+                font-size: clamp(1.25rem, calc(0.7143rem + 2.1978vw), 2.5rem);
+                line-height: 50px;
+                color: $main-color;
+                cursor: auto;
+                a {
+                    color: $main-color;
+                    text-decoration: none;
+                    border-bottom: 2px solid $secondary-color;
+                }
+            }
+            h1 {
+                font-weight: 700;
+                font-size: 35px;
+                line-height: 44px;
+                text-align: center;
+                color: $main-color;
+                margin-bottom: 20px;
+            }
+            >div {
+                @extend %flex-center;
+                gap: 20px;
+                font-weight: 500;
+                font-size: 31px;
+                line-height: 44px;
+                text-align: center;
+                color: $main-color;
+                >.form-group {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                }
+            }
+            label {
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -12,9 +12,11 @@ class Doctor extends Authenticatable
     protected $fillable = [
         'id',
         'photo',
-        'name',
+        'first_name',
+        'last_name',
         'phone_key',
         'phone',
+        'gender',
         'email',
         'address',
         'password',

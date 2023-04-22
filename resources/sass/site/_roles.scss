@@ -16,7 +16,7 @@ body {
         position: fixed;
         top: 0;
         left: 0;
-        background-image: url('/imgs/site/bg.jpg');
+        // background-image: url('/imgs/site/bg.jpg');
         background-attachment: fixed;
         z-index: -1;
         opacity: .08;
@@ -74,3 +74,20 @@ $gray: #D7D7D7;
     padding: 0 10px;
 }
 // ................................................................................
+
+.alert-danger {
+    --bs-alert-color: #842029;
+    --bs-alert-bg: #f8d7da;
+    --bs-alert-border-color: #f5c2c7;
+    border-radius: 20px;
+    max-width: 320px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#errors {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 5555555555555;
+    display: none;
+}

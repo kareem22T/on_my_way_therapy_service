@@ -9,16 +9,23 @@
         @endif
     </div>
 
-    <form action="{{ route('doctor.check.login') }}" method="POST" class="lg-grid mt-5 mb-5" autocomplete="off">
-        @csrf
-        <div class="form-group g-5">
-            <input type="text" name="emailorphone" id="emailorphone" class="form-control" placeholder="Email or phone number">
-        </div>
+    <div class="login_wrapper">
+        <form action="{{ route('doctor.check.login') }}" method="POST" class="doctor_login_form" autocomplete="off">
+            @csrf
+            <h1>Login | Therapist</h1>
+            <div class="img">
+                <img src="{{ asset("/imgs/doctor/login.png") }}" alt="doctors">
+            </div>
+            <div class="form-group">
+                <input type="text" name="emailorphone" id="emailorphone" class="form-control" placeholder="Email or phone number">
+            </div>
 
-        <div class="form-group g-5">
-            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-        </div>
+            <div class="form-group">
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+            </div>
 
-        <button type="submit" class="g-2 btn btn-primary form-control">Login</button>
-    </form>
+            <button type="submit" class="g-2 btn btn-primary form-control">Login</button>
+        </form>
+    </div>
+
 @endsection
