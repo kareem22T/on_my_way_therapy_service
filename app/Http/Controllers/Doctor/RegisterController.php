@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
+use App\Http\Requests\TherapistInforamtionRequest;
 use App\Http\Requests\TherapistVerficationRequest;
+use App\Http\Traits\InsertDoctorCertificatesTrait;
+use App\Models\Client_age_range;
+use App\Models\Diagnosi;
 use App\Models\Doctor;
+use App\Models\Profession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +22,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class RegisterController extends Controller
 {
+    use InsertDoctorCertificatesTrait;
     // get doctor registeration view .............................
     public function indexRegister()
     {
@@ -41,7 +47,9 @@ class RegisterController extends Controller
     // get doctor information view .....................................
     public function indexInformation()
     {
-        return view('doctor.information');
+        $professions = Profession::all();
+        $Client_age_range = Client_age_range::all();
+        return view('doctor.information')->with(compact('professions', 'Client_age_range'));
     }
     // ....................................
 
@@ -173,8 +181,51 @@ class RegisterController extends Controller
     }
 
     // insert therapist information
-    public function insertInformation()
+    public function insertInformation(TherapistInforamtionRequest $request)
     {
+        $insert = Auth::guard('doctor')->user();
+        $insert->profession_id = $request->input('profession');
+        $insert->client_gender = $request->input('client_gender');
+        $insert->experience = $request->input('experience');
+
+        foreach ($request->diagnosis as $dia) {
+            Diagnosi::create([
+                'name' => $dia,
+            ]);
+        }
+        foreach ($request->diagnosis as $dia) {
+            $insert->diagnosis()->syncWithoutDetaching(Diagnosi::where('name', $dia)->first()->id);
+        }
+
+        $WWCC_name = $this->saveImg($request->WWCC, 'imgs/doctor/uploads/therapist_certificates', 'WWCC');
+        $insert->WWCC_path = $WWCC_name;
+
+        $AHPRA_name = $this->saveImg($request->AHPRA, 'imgs/doctor/uploads/therapist_certificates', 'AHPRA');
+        $insert->AHPRA_path = $AHPRA_name;
+
+        $NDIS_name = $this->saveImg($request->NDIS, 'imgs/doctor/uploads/therapist_certificates', 'NDIS');
+        $insert->NDIS_path = $NDIS_name;
+
+        $insert->about_me = $request->input('about_me');
+
+        foreach ($request->client_age_range as $range) {
+            $insert->ClientAgeRange()->syncWithoutDetaching($range);
+        }
+
+        $insert->travel_range = $request->input('travel_rang');
+        $insert->visits = count($request->input('visits_type')) > 1 ? 2 : $request->input('visits_type')[0];
+
+        $insert->save();
+
+        if ($insert) {
+            $insert->information_registerd = true;
+            $insert->save();
+
+            return response()->json([
+                'status' => 200,
+                'msg' => 'your information has been registed successfully'
+            ]);
+        }
     }
 
     // logout from doctor account

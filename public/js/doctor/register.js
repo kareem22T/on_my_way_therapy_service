@@ -8,6 +8,13 @@ headers: {
 });
 // end ...
 
+// onsubmit callback
+document.getElementById("step1_submit").addEventListener("click", function(event) {
+    event.preventDefault();
+    step1Registeration()
+});
+// end ...
+
 // step 1 of registration
 function step1Registeration () {
     let formData = new FormData(document.getElementById('step-1'))
@@ -63,9 +70,4 @@ function step1Registeration () {
 		},
 	})
 }
-
-document.getElementById("step1_submit").addEventListener("click", function(event) {
-    event.preventDefault();
-    step1Registeration()
-});
 // end ...

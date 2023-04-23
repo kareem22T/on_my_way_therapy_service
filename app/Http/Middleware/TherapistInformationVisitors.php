@@ -18,12 +18,15 @@ class TherapistInformationVisitors
     {
         if (Auth::guard('doctor')->check()) {
             $user = Auth::guard('doctor')->user();
-            if (!$user->verified) {
+            if ($user->information_registerd == 1) {
+                return redirect('/therapist/payment');
+            } else if (!$user->verified) {
                 return redirect('/therapist/verify');
             }
         } else {
             return redirect('/therapist/register');
         }
+
         return $next($request);
     }
 }

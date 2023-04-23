@@ -43,4 +43,20 @@ class Doctor extends Authenticatable
     ];
 
     protected  $guard  = "doctor";
+
+    // relationships ....
+    public function profession()
+    {
+        return $this->belongsTo('App\Models\Profession', 'profession_id');
+    }
+
+    public function diagnosis()
+    {
+        return $this->belongsToMany('App\Models\Diagnosi', 'doctor_diagnosis', 'doctor_id', 'diagnosis_id', 'id', 'id');
+    }
+
+    public function ClientAgeRange()
+    {
+        return $this->belongsToMany('App\Models\Client_age_range', 'doctor_client_age_range', 'doctor_id', 'client_age_range_id', 'id', 'id');
+    }
 }

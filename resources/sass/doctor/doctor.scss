@@ -17,6 +17,7 @@
         border-radius: 20px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         backdrop-filter: blur(4px);
+        margin: 50px 0;
         .form-group {
             width: 100%;
         }
@@ -160,7 +161,11 @@
             justify-content: space-between;
             align-items: center;
         }
+        .file label {cursor: pointer;}
 
+        select {
+            cursor: pointer;
+        }
         .file {
             @extend %flex-center;
             flex-direction: column;
@@ -299,6 +304,59 @@
             }
             label {
                 cursor: pointer;
+            }
+        }
+
+        .diagnosis_wrapper {
+            @extend %flex-center;
+            justify-content: space-between;
+            position: relative;
+            flex-direction: column;
+            align-items: start;
+            ul {
+                z-index: 233365;
+                display: block;
+                position: relative;
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+                padding: 0 20px;
+                li {
+                    @extend %flex-center;
+                    gap: 10px;
+                    background-color: $main-color;
+                    padding: 12px 15px;
+                    color: white;
+                    border-radius: 15px;
+                    i {
+                        cursor: pointer ;
+                        transform: translateY(1px);
+                    }
+                }
+            }
+            a {
+                position: absolute;
+                top: 16px;
+                right: 15px;
+                z-index: 9;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+                text-decoration: none;
+                color: $main-color;
+                padding: 12px 15px;
+                border-radius: 15px;
+                background-color: $secondary-color;
+                transition: background-color 0.2s ease-out;
+                &:hover {
+                    background-color: #ffc400d6;
+                }
             }
         }
     }

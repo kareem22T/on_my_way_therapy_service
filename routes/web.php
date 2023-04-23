@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', [HomeController::class, "index"]);
+    Route::get('/', [HomeController::class, "index"])->name('site.home');
     Route::group(['prefix' => 'help'], function () {
         Route::get('/client', [HomeController::class, "helpClientIndex"])->name('help.client');
         Route::get('/therapy', [HomeController::class, "helpTherapyIndex"])->name('help.therapy');
@@ -35,16 +35,6 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
     Route::post("/register", [RegisterController::class, "register"])
         ->middleware('register_therapist_visitor');
 
-    Route::get("/verify", [RegisterController::class, "indexVerify"])->middleware('verfiy');
-    Route::post("/verify", [RegisterController::class, "verify"])->middleware('verfiy');
-
-    Route::get("/information", [RegisterController::class, "indexInformation"])
-        ->middleware('therapist_information_visitors');
-    Route::post("/information", [RegisterController::class, "insertInformation"])
-        ->middleware('therapist_information_visitors');
-
-    Route::get("/payment", [RegisterController::class, "indexPayment"]);
-
     Route::group(['middleware' => 'guest'], function () {
         Route::get("/login", [RegisterController::class, "indexLogin"])->name('doctor.login');
         Route::post("/login", [RegisterController::class, "checkLogin"])->name('doctor.check.login');
@@ -52,11 +42,18 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
 
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:doctor'], function () {
-        Route::get('/', function () {
-            return 'test';
-        });
         Route::get("/logout", [RegisterController::class, "logout"])->name('doctor.logout');
         Route::post("/send-code", [RegisterController::class, "sendVerfication"]);
+
+        Route::get("/verify", [RegisterController::class, "indexVerify"])->middleware('verfiy');
+        Route::post("/verify", [RegisterController::class, "verify"])->middleware('verfiy');
+
+        Route::get("/payment", [RegisterController::class, "indexPayment"]);
+
+        Route::get("/information", [RegisterController::class, "indexInformation"])
+            ->middleware('therapist_information_visitors');
+        Route::post("/information", [RegisterController::class, "insertInformation"])
+            ->middleware('therapist_information_visitors');
     });
     // ......................................
 });

@@ -28,7 +28,7 @@ body::after {
   margin: 0 auto;
 }
 
-#register_root form .choice > div, #register_root form .photo_group label::after, #register_root form .file, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
+#register_root form .diagnosis_wrapper ul li, #register_root form .diagnosis_wrapper, #register_root form .choice > div, #register_root form .photo_group label::after, #register_root form .file, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,6 +106,7 @@ body::after {
   border-radius: 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   backdrop-filter: blur(4px);
+  margin: 50px 0;
 }
 .login_wrapper .doctor_login_form .form-group {
   width: 100%;
@@ -241,6 +242,12 @@ body::after {
   justify-content: space-between;
   align-items: center;
 }
+#register_root form .file label {
+  cursor: pointer;
+}
+#register_root form select {
+  cursor: pointer;
+}
 #register_root form .file {
   flex-direction: column;
   gap: 10px;
@@ -368,6 +375,56 @@ body::after {
 }
 #register_root form .choice label {
   cursor: pointer;
+}
+#register_root form .diagnosis_wrapper {
+  justify-content: space-between;
+  position: relative;
+  flex-direction: column;
+  align-items: start;
+}
+#register_root form .diagnosis_wrapper ul {
+  z-index: 233365;
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  padding: 0 20px;
+}
+#register_root form .diagnosis_wrapper ul li {
+  gap: 10px;
+  background-color: #132F75;
+  padding: 12px 15px;
+  color: white;
+  border-radius: 15px;
+}
+#register_root form .diagnosis_wrapper ul li i {
+  cursor: pointer;
+  transform: translateY(1px);
+}
+#register_root form .diagnosis_wrapper a {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  z-index: 9;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-decoration: none;
+  color: #132F75;
+  padding: 12px 15px;
+  border-radius: 15px;
+  background-color: #FFC400;
+  transition: background-color 0.2s ease-out;
+}
+#register_root form .diagnosis_wrapper a:hover {
+  background-color: rgba(255, 196, 0, 0.8392156863);
 }
 
 /*# sourceMappingURL=doctor.css.map */
