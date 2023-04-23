@@ -30,13 +30,6 @@ class DoctorRequest extends FormRequest
             'address' => 'required',
             'gender' => 'required',
             'dob' => 'required|date_format:Y-m-d',
-            // 'password_confirmation' => 'required',
-            // 'password' => [
-            //     'required',
-            //     'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@]).*$/',
-            //     'confirmed',
-            // ],
-            // 'about' => 'required|min:100|max:255',
         ];
     }
 
@@ -57,13 +50,8 @@ class DoctorRequest extends FormRequest
             'phone.required' => 'please enter a valid phone number',
             'phone.regex' => 'Please enter a valid phone number without the country code',
             'phone.unique' => 'This number is already registered',
-            // 'password.required' => 'please enter a password containing upper and lower case characters mixed with number and special characters (ex: Abcd123@@@)',
-            // 'password.regex' => 'please enter a password containing upper and lower case characters mixed with number and special characters (ex: Abcd123@@@)',
-            // 'password.confirmed' => 'the password you entered and its confirmation are not matching',
             'address.required' => 'please enter your address or enable location access',
             'about.required' => 'Please enter short description about you',
-            // 'about.min' => 'Please enter a description at least 100 characters',
-            // 'about.max' => 'Please enter a description not more than 255 characters',
         ];
     }
 }

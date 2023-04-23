@@ -11,6 +11,7 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "phpmailer/phpmailer": "^6.8",
         "pnlinh/laravel-infobip-sms": "^1.0"
     },
     "require-dev": {

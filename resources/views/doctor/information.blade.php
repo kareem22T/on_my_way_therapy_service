@@ -16,12 +16,10 @@
             <form action="POST" class="lg-grid" id="step-1-v2" autocomplete="off">
                 @csrf
                 <div class="form-group g-4">
-                    <select name="Profession" id="Profession"  class="form-control">
-                        <option value="">Profession</option>
-                    </select>
+                    <input type="text" name="profession" id="profession" placeholder="profession">
                 </div>
                 <div class="form-group g-4">
-                    <select name="p_c_gender" id="p_c_gender"  class="form-control">
+                    <select name="client_gender" id="client_gender"  class="form-control">
                         <option value="">Preferred client gender</option>
                     </select>
                 </div>
@@ -113,4 +111,8 @@
             </form>
         </div>
     </main>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('/js/doctor/get-information.js') }}"></script>
 @endsection

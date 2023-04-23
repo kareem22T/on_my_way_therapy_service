@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
+use App\Http\Requests\TherapistVerficationRequest;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Pnlinh\InfobipSms\Facades\InfobipSms;
+use Illuminate\Support\Str;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class RegisterController extends Controller
 {
@@ -88,7 +93,7 @@ class RegisterController extends Controller
     // .....................................
 
     // check if there doctor logined ................................
-    public function thereDoctor()
+    public function thereTherapist()
     {
         if (Auth::guard('doctor')->check()) {
             return 1;
@@ -99,14 +104,81 @@ class RegisterController extends Controller
     // .....................................
 
     // verify phone number ..........................................
-    public function phoneVerify()
+    public function sendVerfication()
     {
-        $response = InfobipSms::send('+201550552371', 'Hello Infobip');
-        return $response;
+        $phone_code = rand(100000, 999999);
+        $email_code = rand(100000, 999999);
+        $response =
+            InfobipSms::send(
+                "+" . Auth::guard('doctor')->user()->phone_key . Auth::guard('doctor')->user()->phone,
+                'Your phone verification code is: ' . $phone_code
+            );
+
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'kotbekareem74@gmail.com';                     //SMTP username
+            $mail->Password   = 'sggusadbiiimeqih';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;
+            //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('kotbekareem74@gmail.com', 'YK-web');
+            $mail->addAddress(Auth::guard('doctor')->user()->email);     //Add a recipient
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Verfication code';
+            $mail->Body    = 'Your email verfication code is: <b>' . $email_code . '</b>';
+            $mail->SMTPDebug = 2;
+            ob_start();
+            $mail->send();
+            $responsePayload = ob_get_clean();
+            $mail->SMTPDebug = 0;
+        } catch (Exception $e) {
+            return [
+                'status' => 500
+            ];
+        }
+        return response()->json([
+            'status' => 200,
+            'phone_code' => Hash::make($phone_code),
+            'email_code' => Hash::make($email_code)
+        ]);
+    }
+    // .....................................
+
+    // verify email, phone and adding new password
+    public function verify(TherapistVerficationRequest $request)
+    {
+        $therapist = Auth::guard('doctor')->user();
+        $therapist->password = Hash::make($request->password);
+        $therapist->verified = true;
+        $therapist->save();
+
+        if ($therapist) {
+            return response()->json(
+                [
+                    'status' => 200,
+                    'msg' => 'your account has been verified successfully'
+                ]
+            );
+        }
+    }
+
+    // insert therapist information
+    public function insertInformation()
+    {
     }
 
     // logout from doctor account
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::guard('doctor')->logout();
         return redirect('/');

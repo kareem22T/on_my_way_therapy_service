@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\GuestMiddleware::class,
         'verfiy' => \App\Http\Middleware\VerifyVistors::class,
         'register_therapist_visitor' => \App\Http\Middleware\RegisterdoctorVistors::class,
+        'therapist_information_visitors' => \App\Http\Middleware\TherapistInformationVisitors::class,
     ];
 }

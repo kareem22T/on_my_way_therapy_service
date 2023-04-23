@@ -76,7 +76,7 @@
             </section>
 
             <section>
-                <a href="">Let’s start!</a>
+                <a href="/therapist/register">Let’s start!</a>
                 <p>Sign up today and start making a difference in your clients’ lives.</p>
             </section>
         </main>

@@ -18,11 +18,11 @@
             </div>
             <div class="container">
                 <div>
-                    <a href="">Find Therapist</a>
+                    <a href="/client/register">Find Therapist</a>
                     <span>NDIS & Medicare</span>
                 </div>
                 <div>
-                    <a href="">Join the team</a>
+                    <a href="/therapist/register">Join the team</a>
                     <span>as a therapist</span>
                 </div>
             </div>
