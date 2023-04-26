@@ -67,5 +67,8 @@ class Kernel extends HttpKernel
         'verfiy' => \App\Http\Middleware\VerifyVistors::class,
         'register_therapist_visitor' => \App\Http\Middleware\RegisterdoctorVistors::class,
         'therapist_information_visitors' => \App\Http\Middleware\TherapistInformationVisitors::class,
+        'therapist_payment_visitors' => \App\Http\Middleware\TherapistPaymentVistors::class,
+        'therapist_dashboard_vistors' => \App\Http\Middleware\TherapistDashboardVisitors::class,
+        'therapist_pending_vistors' => \App\Http\Middleware\TherapistPendingVisitors::class,
     ];
 }

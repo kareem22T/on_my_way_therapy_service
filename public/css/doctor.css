@@ -22,13 +22,13 @@ body::after {
 }
 
 .container {
-  width: 100vw;
+  width: 100%;
   max-width: 1300px;
   padding: 0 20px;
   margin: 0 auto;
 }
 
-#register_root form .diagnosis_wrapper ul li, #register_root form .diagnosis_wrapper, #register_root form .choice > div, #register_root form .photo_group label::after, #register_root form .file, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
+#register_root form .diagnosis_wrapper ul li, #register_root form .diagnosis_wrapper, #register_root form .choice > div, #register_root form .photo_group label .after, #register_root form .file, #register_root form .have_one, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -248,21 +248,21 @@ body::after {
 #register_root form select {
   cursor: pointer;
 }
-#register_root form .file {
+#register_root form .file, #register_root form .have_one {
   flex-direction: column;
   gap: 10px;
 }
-#register_root form .file label {
+#register_root form .file label, #register_root form .have_one label {
   font-size: 19px;
 }
-#register_root form .file a {
+#register_root form .file a, #register_root form .have_one a {
   font-weight: 500;
   font-size: 25px;
   line-height: 32px;
   color: #132F75;
   text-decoration: none;
 }
-#register_root form .file i {
+#register_root form .file i, #register_root form .have_one i {
   font-size: 30px;
   color: #132F75;
 }
@@ -309,14 +309,28 @@ body::after {
   position: relative;
   cursor: pointer;
 }
-#register_root form .photo_group label::after {
-  content: "+";
+#register_root form .photo_group label img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  border: none;
+  border-radius: 50%;
+}
+#register_root form .photo_group label i {
+  position: relative;
+  z-index: 99999;
+}
+#register_root form .photo_group label .after {
   position: absolute;
   bottom: clamp(0.3125rem, 0.4464rem - 0.5495vw, 0rem);
   right: clamp(0.3125rem, 0.4464rem - 0.5495vw, 0rem);
   background-color: #FFC400;
   color: #132F75;
-  font-size: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
+  font-size: clamp(0.9375rem, 0.8036rem + 0.5495vw, 1.25rem);
+  border: 2px solid #ffffff;
   font-weight: 600;
   border-radius: 50%;
   width: clamp(1.6875rem, 1.2054rem + 1.978vw, 2.8125rem);

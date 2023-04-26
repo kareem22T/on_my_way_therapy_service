@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doctor\RegisterController;
+use App\Http\Controllers\Doctor\TherapistController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -42,20 +43,37 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
 
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:doctor'], function () {
-        Route::get("/logout", [RegisterController::class, "logout"])->name('doctor.logout');
         Route::post("/send-code", [RegisterController::class, "sendVerfication"]);
 
         Route::get("/verify", [RegisterController::class, "indexVerify"])->middleware('verfiy');
         Route::post("/verify", [RegisterController::class, "verify"])->middleware('verfiy');
 
-        Route::get("/payment", [RegisterController::class, "indexPayment"]);
-
         Route::get("/information", [RegisterController::class, "indexInformation"])
             ->middleware('therapist_information_visitors');
         Route::post("/information", [RegisterController::class, "insertInformation"])
             ->middleware('therapist_information_visitors');
+
+        Route::get("/payment", [RegisterController::class, "indexPayment"])
+            ->middleware('therapist_payment_visitors');
+        Route::post("/payment", [RegisterController::class, "insertPayment"])
+            ->middleware('therapist_payment_visitors');
+
+        Route::group(['middleware' => 'therapist_dashboard_vistors'], function () {
+            Route::get('/', [TherapistController::class, 'index']);
+            Route::get('/my-account', [TherapistController::class, 'indexMyAccount']);
+        });
+
+        Route::get('/pending', [TherapistController::class, 'indexPending'])
+            ->middleware('therapist_pending_vistors');
+
+        Route::get("/logout", [RegisterController::class, "logout"])->name('doctor.logout');
     });
     // ......................................
 });
 
+Route::get('/senfirebase', [TherapistController::class, 'sendTest']);
 ########################################### end doctor routes #################################################
+
+Route::get('/testNotifications',  function () {
+    return view('getnotification');
+});

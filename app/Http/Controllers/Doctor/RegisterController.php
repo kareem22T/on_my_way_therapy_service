@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
 use App\Http\Requests\TherapistInforamtionRequest;
+use App\Http\Requests\TherapistPaymentRequest;
 use App\Http\Requests\TherapistVerficationRequest;
 use App\Http\Traits\InsertDoctorCertificatesTrait;
+use App\Http\Traits\UploadTherapistPhoto;
 use App\Models\Client_age_range;
 use App\Models\Diagnosi;
 use App\Models\Doctor;
@@ -15,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Pnlinh\InfobipSms\Facades\InfobipSms;
-use Illuminate\Support\Str;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -23,6 +24,8 @@ use PHPMailer\PHPMailer\Exception;
 class RegisterController extends Controller
 {
     use InsertDoctorCertificatesTrait;
+    use UploadTherapistPhoto;
+
     // get doctor registeration view .............................
     public function indexRegister()
     {
@@ -79,7 +82,11 @@ class RegisterController extends Controller
     // register and validate doctor information ................................
     public function register(DoctorRequest $request)
     {
+        $profile_picture_name =
+            $this->saveTherapistImg($request->photo, 'imgs/doctor/uploads/therapist_profile');
+
         $doctor = Doctor::create([
+            'photo' => $profile_picture_name,
             'first_name' => ucwords($request->input('first_name')),
             'last_name' => ucwords($request->input('last_name')),
             'phone_key' => $request->input('countryCode'),
@@ -179,6 +186,7 @@ class RegisterController extends Controller
             );
         }
     }
+    // .....................................
 
     // insert therapist information
     public function insertInformation(TherapistInforamtionRequest $request)
@@ -197,13 +205,13 @@ class RegisterController extends Controller
             $insert->diagnosis()->syncWithoutDetaching(Diagnosi::where('name', $dia)->first()->id);
         }
 
-        $WWCC_name = $this->saveImg($request->WWCC, 'imgs/doctor/uploads/therapist_certificates', 'WWCC');
+        $WWCC_name = $this->saveCertificate($request->WWCC, 'imgs/doctor/uploads/therapist_certificates', 'WWCC');
         $insert->WWCC_path = $WWCC_name;
 
-        $AHPRA_name = $this->saveImg($request->AHPRA, 'imgs/doctor/uploads/therapist_certificates', 'AHPRA');
+        $AHPRA_name = $this->saveCertificate($request->AHPRA, 'imgs/doctor/uploads/therapist_certificates', 'AHPRA');
         $insert->AHPRA_path = $AHPRA_name;
 
-        $NDIS_name = $this->saveImg($request->NDIS, 'imgs/doctor/uploads/therapist_certificates', 'NDIS');
+        $NDIS_name = $this->saveCertificate($request->NDIS, 'imgs/doctor/uploads/therapist_certificates', 'NDIS');
         $insert->NDIS_path = $NDIS_name;
 
         $insert->about_me = $request->input('about_me');
@@ -227,6 +235,30 @@ class RegisterController extends Controller
             ]);
         }
     }
+    // .....................................
+
+    // insert therapist payment information
+    public function insertPayment(TherapistPaymentRequest $request)
+    {
+        $insert = Auth::guard('doctor')->user();
+        $insert->name_payment = $request->input('name');
+        $insert->BSB_payment = $request->input('BSB');
+        $insert->account_payment = $request->input('bank_account');
+        $insert->ABN_payment = $request->input('ABN');
+        $insert->agreed_on_policy = $request->input('agree');
+        $insert->save();
+
+        if ($insert) {
+            $insert->payment_registered = true;
+            $insert->save();
+
+            return response()->json([
+                'status' => 200,
+                'msg' => 'your payment information has been registed successfully'
+            ]);
+        }
+    }
+    // .....................................
 
     // logout from doctor account
     public function logout()

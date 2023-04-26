@@ -3,6 +3,9 @@
 @section("title", "Recive payment")
 
 @section("content")
+    <div id="errors">
+        {{-- validation errors will appear here. --}}
+    </div>
     <main class="login_wrapper">
         <div id="register_root">
             <p class="h2 text-center">
@@ -16,22 +19,23 @@
             <h1>
                 Receive payment
             </h1>
-            <form action="POST" class="payment_form" id="step-1-v2" autocomplete="off">
+            <form action="POST" class="payment_form" id="step-3" >
                 @csrf
                 <div class="form-group">
                     <input type="text" name="name" id="name" placeholder="Name" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="BSB " id="BSB " placeholder="BSB" class="form-control">
+                    <input type="text" name="BSB" id="BSB " placeholder="BSB" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="Account" id="Account" placeholder="Account" class="form-control">
+                    <input type="text" name="bank_account" id="Account" placeholder="Account" class="form-control">
                 </div>
-                <div class="form-group">
-                    <input type="text" name="ABN number" id="ABN number" placeholder="ABN number" class="form-control">
+                <div class="form-group have_one">
+                    <input type="text" name="ABN" id="ABN" placeholder="ABN number" class="form-control">
+                    <a href="">don’t have one?</a>
                 </div>
                 <div class="form-group choice">
-                    <input type="checkbox" name="agree" id="agree" style="width: auto;">
+                    <input type="checkbox" name="agree" id="agree" style="width: auto;" value="1">
                     <label class="agree" for="agree">agree on our <a href="">terms and policy</a></label>
                 </div>
 
@@ -42,4 +46,8 @@
             </form>
         </div>
     </main>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('/js/doctor/get-payment.js') }}"></script>
 @endsection

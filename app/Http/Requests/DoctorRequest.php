@@ -23,6 +23,7 @@ class DoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'photo' => ['required', 'mimes:jpeg,png,gif,jpg'],
             'first_name' => ['required', 'alpha', 'regex:/^[^\s\d]+$/'],
             'last_name' => ['required', 'alpha', 'regex:/^[^\s\d]+$/'],
             'phone' => 'required|regex:/^[0-9]{7,}$/|unique:doctors',
@@ -36,6 +37,8 @@ class DoctorRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'photo.required' => 'Please upload your photo.',
+            'photo.mimes' => 'Invalid file type. Please choose a GIF, JPEG, jpg, or PNG image.',
             'frist_name.required' => 'Please enter your first name.',
             'first_name.alpha' => 'Your first name must contain letters only and have no spaces.',
             'last_name.alpha' => 'Your last name must contain letters only and have no spaces.',

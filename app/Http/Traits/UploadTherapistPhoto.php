@@ -2,15 +2,16 @@
 
 namespace App\Http\Traits;
 
+use App\Models\Doctor;
 use Illuminate\Support\Facades\Auth;
 
-trait InsertDoctorCertificatesTrait
+trait UploadTherapistPhoto
 {
-    function saveCertificate($photo, $folder, $certificate_name)
+    function saveTherapistImg($photo, $folder)
     {
         $file_extension =
             $photo->getClientOriginalExtension();
-        $file_name = Auth::guard('doctor')->user()->id . '_' . $certificate_name . '.' . $file_extension;
+        $file_name = Doctor::all()->count() + 1 . '_profile_picture' . '.' . $file_extension;
         $path = $folder;
         $photo->move($path, $file_name);
         return $file_name;

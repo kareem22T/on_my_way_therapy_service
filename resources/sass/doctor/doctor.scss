@@ -166,7 +166,7 @@
         select {
             cursor: pointer;
         }
-        .file {
+        .file, .have_one {
             @extend %flex-center;
             flex-direction: column;
             gap: 10px;
@@ -231,14 +231,28 @@
                 border-radius: 50%;
                 position: relative;
                 cursor: pointer;
-                &::after {
-                    content: '+';
+                img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    object-fit: cover;
+                    top: 0;
+                    left: 0;
+                    border: none;
+                    border-radius: 50%;
+                }
+                i {
+                    position: relative;
+                    z-index: 99999;
+                }
+                .after {
                     position: absolute;
                     bottom: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
                     right: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
                     background-color: $secondary-color;
                     color: $main-color;
-                    font-size: clamp(1.25rem, calc(0.9821rem + 1.0989vw), 1.875rem);
+                    font-size: clamp(0.9375rem, calc(0.8036rem + 0.5495vw), 1.25rem);
+                    border: 2px solid $white;
                     font-weight: 600;
                     border-radius: 50%;
                     width: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);

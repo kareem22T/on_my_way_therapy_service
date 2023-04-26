@@ -34,6 +34,13 @@ class Doctor extends Authenticatable
         'travel_range',
         'visits',
         'information_registered',
+        'name_payment',
+        'BSB_payment',
+        'account_payment',
+        'ABN_payment',
+        'agreed_on_policy',
+        'payment_registered',
+        'approved',
         'created_at',
         'updated_at'
     ];
