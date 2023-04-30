@@ -3,9 +3,9 @@
         <nav>
             <div class="logo"></div>
             <ul class="links">
-                <li><a href="" class="@yield('calender_link')">Calender</a></li>
+                <li><a href="/client" class="@yield('home_link')">Home</a></li>
                 <li>
-                    <a href="/therapist/chats" class="@yield('chats_link')">Chats</a>
+                    <a href="/client/chats" class="@yield('chats_link')">Chats</a>
                     @php
                         $guard_type = Auth::guard('client')->check() ? 2 : 1;
                         $unSeen = 0;

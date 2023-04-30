@@ -31,7 +31,7 @@ class TherapistInforamtionRequest extends FormRequest
             'NDIS'              => ['required', 'mimes:jpeg,png,pdf,jpg'],
             'about_me'             => ['required', 'min:100', 'max:255'],
             'client_age_range'  => ['required', 'array', 'min:1'],
-
+            'visits_type' => ['required', 'array', 'min:1'],
         ];
     }
 
@@ -53,6 +53,7 @@ class TherapistInforamtionRequest extends FormRequest
             'about_me.min' => 'Please enter a description at least 100 characters',
             'about_me.min' => 'Please enter a description at least 100 characters',
             'about_me.max' => 'Please enter a description not more than 255 characters',
+            'visits_type.required' => 'Please select a session type',
         ];
     }
 }

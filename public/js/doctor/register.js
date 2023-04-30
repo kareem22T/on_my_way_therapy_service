@@ -57,34 +57,35 @@ function step1Registeration () {
     	contentType: false,
 		data: formData,
 		success: function (data) {
-			document.getElementById('errors').innerHTML = ''
-			let error = document.createElement('div')
-			error.classList = 'alert alert-success'
-			error.innerHTML = data
-			document.getElementById('errors').append(error)
-			$('#errors').fadeIn('slow')
+			if (data.status == 200) {
+				document.getElementById('errors').innerHTML = ''
+				let error = document.createElement('div')
+				error.classList = 'alert alert-success'
+				error.innerHTML = data.msg
+				document.getElementById('errors').append(error)
+				$('#errors').fadeIn('slow')
 
-			// login after registration
-			let loginData = new FormData();
-			loginData.append('emailorphone', $('#email').val());
-			loginData.append('password', '123456789');
+				// login after registration
+				let loginData = new FormData();
+				loginData.append('emailorphone', $('#email').val());
+				loginData.append('password', '123456789');
 
-			setTimeout(() => {
-				$.ajax({
-					url: '/therapist/login',
-					method: 'POST',
-					processData: false,
-					contentType: false,
-					data: loginData,
-					success: function (data) {
-						location.reload();
-					},
-					error: function () {
-						location.reload();
-					}
-				})
-			}, 2300);
-
+				setTimeout(() => {
+					$.ajax({
+						url: '/therapist/login',
+						method: 'POST',
+						processData: false,
+						contentType: false,
+						data: loginData,
+						success: function (data) {
+							location.reload();
+						},
+						error: function () {
+							location.reload();
+						}
+					})
+				}, 2300);
+			}
 		},
 		error: function (err) {
 			document.getElementById('errors').innerHTML = ''

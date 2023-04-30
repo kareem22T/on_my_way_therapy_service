@@ -1,0 +1,93 @@
+// main roles
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+html {scroll-behavior: smooth;}
+body {
+    overflow: hidden auto;
+    &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        // background-image: url('/imgs/site/bg.jpg');
+        background-attachment: fixed;
+        z-index: -1;
+        opacity: .08;
+    }
+}
+// ........................................................................
+
+// variables
+$main-color: #132F75;
+$secondary-color: #FFC400;
+$black: #000000;
+$white: #ffffff;
+$gray: #D7D7D7;
+//........................................................................
+
+// classes and extends
+.container {
+    width: 100vw;
+    max-width: 1300px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+%flex-center,
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+%lg-grid,
+.lg-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+@for $i from 1 through 12 {
+    .g-#{$i} {
+        grid-column: span $i;
+    }
+}
+
+%shadow, .shadow {
+    box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.head {
+    font-weight: 700;
+    font-size: clamp(1.75rem, calc(1.1607rem + 2.4176vw), 3.125rem);
+    line-height: clamp(1.875rem, calc(0.9911rem + 3.6264vw), 3.9375rem);
+    text-align: center;
+    color: $main-color;
+    padding: 0 10px;
+}
+// ................................................................................
+
+.alert-danger {
+    --bs-alert-color: #842029;
+    --bs-alert-bg: #f8d7da;
+    --bs-alert-border-color: #f5c2c7;
+    border-radius: 20px;
+    max-width: 320px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#errors {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 5555555555555;
+    display: none;
+}

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class TherapistDashboardVisitors
+class ClientDashboardVisitors
 {
     /**
      * Handle an incoming request.
@@ -16,16 +16,13 @@ class TherapistDashboardVisitors
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $therapist = Auth::guard('doctor')->user();
+        $client = Auth::guard('client')->user();
         if (
-            $therapist->verified &&
-            $therapist->information_registerd &&
-            $therapist->payment_registered &&
-            $therapist->approved
+            $client->verified
         ) {
             return $next($request);
         } else {
-            return redirect('/therapist/login');
+            return redirect('/client/verify');
         }
     }
 }

@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow: hidden auto;
+}
+body::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-attachment: fixed;
+  z-index: -1;
+  opacity: 0.08;
+}
+
+.container {
+  width: 100vw;
+  max-width: 1300px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.lg-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.g-1 {
+  grid-column: span 1;
+}
+
+.g-2 {
+  grid-column: span 2;
+}
+
+.g-3 {
+  grid-column: span 3;
+}
+
+.g-4 {
+  grid-column: span 4;
+}
+
+.g-5 {
+  grid-column: span 5;
+}
+
+.g-6 {
+  grid-column: span 6;
+}
+
+.g-7 {
+  grid-column: span 7;
+}
+
+.g-8 {
+  grid-column: span 8;
+}
+
+.g-9 {
+  grid-column: span 9;
+}
+
+.g-10 {
+  grid-column: span 10;
+}
+
+.g-11 {
+  grid-column: span 11;
+}
+
+.g-12 {
+  grid-column: span 12;
+}
+
+.shadow {
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.head {
+  font-weight: 700;
+  font-size: clamp(1.75rem, 1.1607rem + 2.4176vw, 3.125rem);
+  line-height: clamp(1.875rem, 0.9911rem + 3.6264vw, 3.9375rem);
+  text-align: center;
+  color: #132F75;
+  padding: 0 10px;
+}
+
+.alert-danger {
+  --bs-alert-color: #842029;
+  --bs-alert-bg: #f8d7da;
+  --bs-alert-border-color: #f5c2c7;
+  border-radius: 20px;
+  max-width: 320px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#errors {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 5555555555555;
+  display: none;
+}
+
+.client_register .radio input {
+  display: none;
+}
+.client_register .radio label {
+  padding: 16px 35px;
+  border: 3px solid #D7D7D7;
+  border-radius: 20px;
+  transition: border-color 0.2s ease-out;
+}
+.client_register .radio label.active {
+  border: 3px solid #FFC400;
+  border-radius: 20px;
+}
+.client_register .ndis-form {
+  display: none;
+}
+.client_register .choice ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*# sourceMappingURL=client.css.map */

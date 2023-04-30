@@ -12,15 +12,17 @@ class ChatEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $user_id;
 
-    public function __construct($message)
+    public function __construct($message, $user_id)
     {
         $this->message = $message;
+        $this->user_id = $user_id;
     }
 
     public function broadcastOn()
     {
-        return ['chat-channel'];
+        return ['chat-channel_' . $this->user_id];
     }
 
     public function broadcastAs()

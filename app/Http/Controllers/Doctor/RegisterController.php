@@ -8,6 +8,7 @@ use App\Http\Requests\TherapistInforamtionRequest;
 use App\Http\Requests\TherapistPaymentRequest;
 use App\Http\Requests\TherapistVerficationRequest;
 use App\Http\Traits\InsertDoctorCertificatesTrait;
+use App\Http\Traits\SendEmail;
 use App\Http\Traits\UploadTherapistPhoto;
 use App\Models\Client_age_range;
 use App\Models\Diagnosi;
@@ -25,6 +26,7 @@ class RegisterController extends Controller
 {
     use InsertDoctorCertificatesTrait;
     use UploadTherapistPhoto;
+    use SendEmail;
 
     // get doctor registeration view .............................
     public function indexRegister()
@@ -75,7 +77,7 @@ class RegisterController extends Controller
         if (Auth::guard('doctor')->attempt($credentials)) {
             return redirect()->intended('/');
         }
-        return back()->with(['errorLogin' => 'The username or password are incorrect']);
+        return back()->with(['errorLogin' => 'Your email/phone number or password are incorrect']);
     }
     // .....................................
 
@@ -100,10 +102,13 @@ class RegisterController extends Controller
         ]);
 
         if ($doctor) {
-            return 'your account has been registered please complete the registration process';
+            return response()->json([
+                'status' => 200,
+                'msg' => 'your account has been registered please complete the registration process'
+            ]);
         }
 
-        return 'field to login';
+        return 'field to register';
     }
     // .....................................
 
@@ -129,38 +134,12 @@ class RegisterController extends Controller
                 'Your phone verification code is: ' . $phone_code
             );
 
-        $mail = new PHPMailer(true);
+        $email = Auth::guard('doctor')->user()->email;
+        $msg_title = 'Verfication code';
+        $msg_body = 'Your email verfication code is: <b>' . $email_code . '</b>';
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'kotbekareem74@gmail.com';                     //SMTP username
-            $mail->Password   = 'sggusadbiiimeqih';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;
-            //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $this->sendEmail($email, $msg_title, $msg_body);
 
-            //Recipients
-            $mail->setFrom('kotbekareem74@gmail.com', 'YK-web');
-            $mail->addAddress(Auth::guard('doctor')->user()->email);     //Add a recipient
-
-            //Content
-            $mail->isHTML(true);
-            $mail->Subject = 'Verfication code';
-            $mail->Body    = 'Your email verfication code is: <b>' . $email_code . '</b>';
-            $mail->SMTPDebug = 2;
-            ob_start();
-            $mail->send();
-            $responsePayload = ob_get_clean();
-            $mail->SMTPDebug = 0;
-        } catch (Exception $e) {
-            return [
-                'status' => 500
-            ];
-        }
         return response()->json([
             'status' => 200,
             'phone_code' => Hash::make($phone_code),

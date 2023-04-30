@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group g-6 lg-grid">
                     @include('doctor.includes.phonekeys')
-                    <input type="text" name="phone" id="phone" class="form-control g-8" placeholder="Phone number">
+                    <input type="text" name="phone" id="phone" class="form-control g-7" placeholder="Phone number">
                 </div>
                 <div class="form-group g-6">
                     <input type="date" name="dob" id="dob" class="form-control">

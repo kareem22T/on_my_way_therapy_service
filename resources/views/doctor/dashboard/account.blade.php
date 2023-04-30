@@ -8,16 +8,16 @@
 <main class="account">
     <div class="container">
         @if ($therapist)
-            <div class="head">
-                <div>
-
-                    <div class="photo">
-                        <img src="{{asset('/imgs/doctor/uploads/therapist_profile/' . $therapist['photo'])}}" alt="">
-                    </div>
-                    <h1>{{ $therapist['first_name'] . ' ' . $therapist['last_name'] }}, <span>{{ $therapist['profession']['title'] }}</span></h1>
+        <div class="head">
+            <div>
+                <div class="photo">
+                    <img src="{{asset('/imgs/doctor/uploads/therapist_profile/' . $therapist['photo'])}}" alt="">
                 </div>
-                <a href=""><i class="fa fa-gear"></i></a>
+                <h1>{{ $therapist['first_name'] . ' ' . $therapist['last_name'] }},
+                    <span>{{ $therapist['profession']['title'] }}</span></h1>
             </div>
+            <a href=""><i class="fa fa-gear"></i></a>
+        </div>
         @endif
         <div class="total lg-grid">
             <div class="g-4">

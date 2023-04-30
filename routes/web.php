@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Client\RegisterController as ClientRegisterController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Doctor\RegisterController;
+use App\Http\Controllers\Doctor\RegisterController as TherapisRegisterController;
 use App\Http\Controllers\Doctor\TherapistController;
 use App\Http\Controllers\HomeController;
 
@@ -28,52 +31,82 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
     // routes can be visit as both 
-    Route::get('/there-therapist', [RegisterController::class, "thereTherapist"]);
+    Route::get('/there-therapist', [TherapisRegisterController::class, "thereTherapist"]);
 
     // just not authenticated doctor can visit
-    Route::get("/register", [RegisterController::class, "indexRegister"])
+    Route::get("/register", [TherapisRegisterController::class, "indexRegister"])
         ->middleware('register_therapist_visitor');
-    Route::post("/register", [RegisterController::class, "register"])
+    Route::post("/register", [TherapisRegisterController::class, "register"])
         ->middleware('register_therapist_visitor');
 
     Route::group(['middleware' => 'guest'], function () {
-        Route::get("/login", [RegisterController::class, "indexLogin"])->name('doctor.login');
-        Route::post("/login", [RegisterController::class, "checkLogin"])->name('doctor.check.login');
+        Route::get("/login", [TherapisRegisterController::class, "indexLogin"])->name('doctor.login');
+        Route::post("/login", [TherapisRegisterController::class, "checkLogin"])->name('doctor.check.login');
     });
 
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:doctor'], function () {
-        Route::post("/send-code", [RegisterController::class, "sendVerfication"]);
+        Route::post("/send-code", [TherapisRegisterController::class, "sendVerfication"]);
 
-        Route::get("/verify", [RegisterController::class, "indexVerify"])->middleware('verfiy');
-        Route::post("/verify", [RegisterController::class, "verify"])->middleware('verfiy');
+        Route::get("/verify", [TherapisRegisterController::class, "indexVerify"])->middleware('verfiy');
+        Route::post("/verify", [TherapisRegisterController::class, "verify"])->middleware('verfiy');
 
-        Route::get("/information", [RegisterController::class, "indexInformation"])
+        Route::get("/information", [TherapisRegisterController::class, "indexInformation"])
             ->middleware('therapist_information_visitors');
-        Route::post("/information", [RegisterController::class, "insertInformation"])
+        Route::post("/information", [TherapisRegisterController::class, "insertInformation"])
             ->middleware('therapist_information_visitors');
 
-        Route::get("/payment", [RegisterController::class, "indexPayment"])
+        Route::get("/payment", [TherapisRegisterController::class, "indexPayment"])
             ->middleware('therapist_payment_visitors');
-        Route::post("/payment", [RegisterController::class, "insertPayment"])
+        Route::post("/payment", [TherapisRegisterController::class, "insertPayment"])
             ->middleware('therapist_payment_visitors');
 
         Route::group(['middleware' => 'therapist_dashboard_vistors'], function () {
             Route::get('/', [TherapistController::class, 'index']);
             Route::get('/my-account', [TherapistController::class, 'indexMyAccount']);
+            Route::get('/chats/{id?}', [TherapistController::class, 'indexChats']);
         });
 
         Route::get('/pending', [TherapistController::class, 'indexPending'])
             ->middleware('therapist_pending_vistors');
 
-        Route::get("/logout", [RegisterController::class, "logout"])->name('doctor.logout');
+        Route::get("/logout", [TherapisRegisterController::class, "logout"])->name('doctor.logout');
     });
     // ......................................
 });
 
 Route::get('/senfirebase', [TherapistController::class, 'sendTest']);
-########################################### end doctor routes #################################################
 
 Route::get('/testNotifications',  function () {
     return view('getnotification');
 });
+########################################### end doctor routes #################################################
+
+Route::post('/send-msg', [ChatController::class, 'send']);
+Route::post('/seen', [ChatController::class, 'msgSeen']);
+Route::get('/get-unseen', [ChatController::class, 'getUnseenAll']);
+Route::post('/get-unseen-per-chat', [ChatController::class, 'getUseenPerChat']);
+
+######################################## star client routes ###############################################
+Route::group(["namespace" => "client", "prefix" => "client"], function () {
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get("/login", [ClientRegisterController::class, "indexLogin"])->name('client.login');
+        Route::post("/login", [ClientRegisterController::class, "checkLogin"])->name('client.check.login');
+
+        // just not authenticated cleint can visit
+        Route::get("/register", [ClientRegisterController::class, "indexRegister"]);
+        Route::post("/register", [ClientRegisterController::class, "register"]);
+    });
+
+    // just authenticated doctor can visit
+    Route::group(['middleware' => 'auth:client'], function () {
+        Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');
+
+        Route::group(['middleware' => 'client_dashboard_visitors'], function () {
+            Route::get('/', [ClientController::class, 'index']);
+            Route::get('/chats/{id?}', [ClientController::class, 'indexChats']);
+        });
+    });
+    // ......................................
+});
+########################################### end client routes #################################################

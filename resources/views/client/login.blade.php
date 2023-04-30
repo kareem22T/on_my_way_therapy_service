@@ -1,4 +1,4 @@
-@extends('doctor.layouts.register-layout')
+@extends('client.layouts.register-layout')
 
 @section("title", "Login")
 
@@ -10,11 +10,11 @@
     </div>
 
     <div class="login_wrapper">
-        <form action="{{ route('doctor.check.login') }}" method="POST" class="doctor_login_form" autocomplete="off">
+        <form action="{{ route('client.check.login') }}" method="POST" class="doctor_login_form" autocomplete="off">
             @csrf
-            <h1>Login | Therapist</h1>
+            <h1>Login | Client</h1>
             <div class="img">
-                <img src="{{ asset("/imgs/doctor/login.png") }}" alt="doctors">
+                <img src="{{ asset("/imgs/client/login.png") }}" alt="client_check">
             </div>
             <div class="form-group">
                 <input type="text" name="emailorphone" id="emailorphone" class="form-control" placeholder="Email or phone number" required>
