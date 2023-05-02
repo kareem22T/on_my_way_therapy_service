@@ -62,7 +62,8 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
             ->middleware('therapist_payment_visitors');
 
         Route::group(['middleware' => 'therapist_dashboard_vistors'], function () {
-            Route::get('/', [TherapistController::class, 'index']);
+            Route::get('/', [TherapistController::class, 'indexCalendar']);
+            Route::post('/save-times', [TherapistController::class, 'saveWorkingTimes']);
             Route::get('/my-account', [TherapistController::class, 'indexMyAccount']);
             Route::get('/chats/{id?}', [TherapistController::class, 'indexChats']);
         });
@@ -75,11 +76,6 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
     // ......................................
 });
 
-Route::get('/senfirebase', [TherapistController::class, 'sendTest']);
-
-Route::get('/testNotifications',  function () {
-    return view('getnotification');
-});
 ########################################### end doctor routes #################################################
 
 Route::post('/send-msg', [ChatController::class, 'send']);
@@ -103,7 +99,9 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');
 
         Route::group(['middleware' => 'client_dashboard_visitors'], function () {
-            Route::get('/', [ClientController::class, 'index']);
+            Route::get('/{username?}', [ClientController::class, 'index']);
+            Route::post('/appointment', [ClientController::class, 'insertAppointment']);
+            Route::post('/slots_approved', [ClientController::class, 'getSlotsApproved']);
             Route::get('/chats/{id?}', [ClientController::class, 'indexChats']);
         });
     });

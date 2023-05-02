@@ -51,7 +51,7 @@
             </section>
 
             <section>
-                <a href="">Let’s start!</a>
+                <a href="/client/register">Let’s start!</a>
                 <p>Join us today and get the care you deserve.</p>
             </section>
         </main>

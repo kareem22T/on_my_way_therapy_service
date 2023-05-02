@@ -33,6 +33,9 @@ class Doctor extends Authenticatable
         'client_age_range',
         'travel_range',
         'visits',
+        'working_hours_from',
+        'working_hours_to',
+        'holidays',
         'information_registered',
         'name_payment',
         'BSB_payment',
@@ -70,5 +73,10 @@ class Doctor extends Authenticatable
     public function chats()
     {
         return $this->hasMany('App\Models\Chat', 'doctor_id');
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany('App\Models\Appointment', 'doctor_id');
     }
 }
