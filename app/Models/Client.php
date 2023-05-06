@@ -55,4 +55,20 @@ class Client extends Authenticatable
     {
         return $this->hasMany(Chat::class);
     }
+
+    public function appointments()
+    {
+        return $this->hasMany('App\Models\Appointment', 'client_id');
+    }
+
+    // getters and setters
+    public function getGenderAttribute($value)
+    {
+        if ($value == 0) {
+            return 'male';
+        } else if ($value == 1) {
+            return 'female';
+        }
+        return null;
+    }
 }

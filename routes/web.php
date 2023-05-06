@@ -82,6 +82,10 @@ Route::post('/send-msg', [ChatController::class, 'send']);
 Route::post('/seen', [ChatController::class, 'msgSeen']);
 Route::get('/get-unseen', [ChatController::class, 'getUnseenAll']);
 Route::post('/get-unseen-per-chat', [ChatController::class, 'getUseenPerChat']);
+Route::post('/get-appointment', [ChatController::class, 'getAppointmentData']);
+Route::post('/approve-appointment', [ChatController::class, 'approveAppointment']);
+Route::post('/accept-appointment', [ChatController::class, 'acceptAppointment']);
+Route::post('/edit-appointment', [ChatController::class, 'editAppointmentTime']);
 
 ######################################## star client routes ###############################################
 Route::group(["namespace" => "client", "prefix" => "client"], function () {
@@ -99,10 +103,10 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');
 
         Route::group(['middleware' => 'client_dashboard_visitors'], function () {
-            Route::get('/{username?}', [ClientController::class, 'index']);
             Route::post('/appointment', [ClientController::class, 'insertAppointment']);
             Route::post('/slots_approved', [ClientController::class, 'getSlotsApproved']);
             Route::get('/chats/{id?}', [ClientController::class, 'indexChats']);
+            Route::get('/{username?}', [ClientController::class, 'index']);
         });
     });
     // ......................................

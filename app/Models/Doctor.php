@@ -70,6 +70,11 @@ class Doctor extends Authenticatable
         return $this->belongsToMany('App\Models\Client_age_range', 'doctor_client_age_range', 'doctor_id', 'client_age_range_id', 'id', 'id');
     }
 
+    public function holidays()
+    {
+        return $this->belongsToMany('App\Models\Day', 'holidays_doctor', 'doctor_id', 'day_id', 'id', 'id');
+    }
+
     public function chats()
     {
         return $this->hasMany('App\Models\Chat', 'doctor_id');

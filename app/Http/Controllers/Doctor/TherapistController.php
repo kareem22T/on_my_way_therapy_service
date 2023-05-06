@@ -6,6 +6,7 @@ use App\Events\ChatEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InsertTherapistTimes;
 use App\Models\Client;
+use App\Models\Day;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,16 @@ class TherapistController extends Controller
 
     public function indexCalendar()
     {
+        $therapist_times = Auth::guard('doctor')->user()->only(['working_hours_from', 'working_hours_to', 'holidays', 'travel_range']);
+        foreach ($therapist_times as $key => $value) {
+            if ($value !== null) {
+                if (is_array($value) && $value->count() == 0) {
+                    return view('doctor.dashboard.calendar');
+                } else {
+                    return view('doctor.dashboard.calendar')->with(compact('therapist_times'));
+                }
+            }
+        }
         return view('doctor.dashboard.calendar');
     }
 
@@ -49,10 +60,13 @@ class TherapistController extends Controller
     {
         $therapist = Auth::guard('doctor')->user();
 
-        $therapist->visits = $request->input('distance');
-        $therapist->working_hours_from = $request->input('from');
-        $therapist->working_hours_to = $request->input('to');
-        $therapist->holidays = $request->input('holidays_arr');
+        $therapist->travel_range = $request->distance;
+        $therapist->working_hours_from = $request->from;
+        $therapist->working_hours_to = $request->to;
+
+        foreach ($request->holidays_arr as $day) {
+            $therapist->holidays()->syncWithoutDetaching(Day::find($day)->id);
+        }
 
         $therapist->save();
 

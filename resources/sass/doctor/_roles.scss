@@ -6,6 +6,13 @@
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
+// variables
+$main-color: #132F75;
+$secondary-color: #FFC400;
+$black: #000000;
+$white: #ffffff;
+$gray: #D7D7D7;
+//........................................................................
 body {
     overflow: hidden auto;
 
@@ -22,14 +29,21 @@ body {
         opacity: .08;
     }
 }
+/* nice scroll bar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $main-color;
+    border-radius: 50px;
+}
 // ........................................................................
-// variables
-$main-color: #132F75;
-$secondary-color: #FFC400;
-$black: #000000;
-$white: #ffffff;
-$gray: #D7D7D7;
-//........................................................................
 
 // classes and extends
 .container {

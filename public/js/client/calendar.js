@@ -8,44 +8,11 @@ headers: {
 });
 // end ...
 
-// // fetch the slots if there is not appoiments
-// let start_attr = parseInt($('.slots >div').attr('start'))
-// let to_attr = parseInt($('.slots >div').attr('to'))
 
-// const start = new Date();
-// start.setHours(start_attr);
-// start.setMinutes(0);
-
-// const end = new Date();
-// end.setHours(to_attr)
-// end.setMinutes(0);
-
-// const interval = 90; // interval in minutes
-
-// for (let time = start.getTime(); time < end.getTime(); time += interval * 60 * 1000) {
-//     const currentTime = new Date(time);
-//     const intervalEnd = new Date(time + interval * 60 * 1000);
-//     $('.slots ul').append(`<li>${currentTime.getHours() <= 12 ? currentTime.getHours() : currentTime.getHours() - 12}:${currentTime.getMinutes() == 0 ? '00' : currentTime.getMinutes()} ${currentTime.getHours() >= 12 ? 'pm' : 'am'}</li>`);
-// }
-
-
+// calllbacks and submit actions
 $(document).on('click', '.slots ul li', function() {
     $(this).addClass('selected').siblings().removeClass('selected')
 })
-
-// send the request 
-
-function getDateInTimestapsFormat(dateString) {
-    let date = new Date(dateString);
-    let month = String(date.getMonth() + 1).padStart(2, '0');
-    let day = String(date.getDate()).padStart(2, '0');
-    let year = date.getFullYear();
-    let hours = String(date.getHours()).padStart(2, '0');
-    let minutes = String(date.getMinutes()).padStart(2, '0');
-    let seconds = String(date.getSeconds()).padStart(2, '0');
-    let convertedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    return convertedDate;
-}
 
 // on submit appointment
 $('#confirm_appointment').on('click', function (e) {
@@ -55,7 +22,11 @@ $('#confirm_appointment').on('click', function (e) {
         $.ajax({
             url: '/client/appointment',
             method: 'POST',
-            data: {doctor_id: $(this).attr('doctor_id'), date: selected_slot},
+            data: {
+                doctor_id: $(this).attr('doctor_id'), 
+                date: selected_slot, 
+                visit_type: $('input[name=visit_type]').val()
+            },
             success: function (data) {
                 if (data.status == 200) {
                     document.getElementById('errors').innerHTML = ''
@@ -65,7 +36,7 @@ $('#confirm_appointment').on('click', function (e) {
                     document.getElementById('errors').append(error)
                     $('#errors').fadeIn('slow')
                     setTimeout(() => {
-                        location.reload()
+                        location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
                     }, 1200);
                 }
             }, error: function (err) {
@@ -85,10 +56,33 @@ $('#confirm_appointment').on('click', function (e) {
     }
 })
 
+getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
+
+$('.day').on('click', function () {
+    $('.right').css('opacity', 0)
+    getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
+    setTimeout(() => {
+        $('.right').css('opacity', 1)
+    }, 1000);
+})
+// end ...
+
 
 // methods ----------------------------------------------------------------
 let start_work = parseInt($('.slots >div').attr('start'))
 let end_work = parseInt($('.slots >div').attr('to'))
+
+function getDateInTimestapsFormat(dateString) {
+    let date = new Date(dateString);
+    let month = String(date.getMonth() + 1).padStart(2, '0');
+    let day = String(date.getDate()).padStart(2, '0');
+    let year = date.getFullYear();
+    let hours = String(date.getHours()).padStart(2, '0');
+    let minutes = String(date.getMinutes()).padStart(2, '0');
+    let seconds = String(date.getSeconds()).padStart(2, '0');
+    let convertedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return convertedDate;
+}
 
 function returnSlotTimeInNum(date) {
     const slot_to_date = new Date(date);
@@ -145,17 +139,18 @@ function getAvilableSlots(Hosted_slots_in_num) {
     }
 }
 
-function getAvilableSlotsByAjax() {
+function getAvilableSlotsByAjax(date) {
     $.ajax({
     url: '/client/slots_approved',
     method: 'POST',
-    data: {doctor_id: 1, date: getDateInTimestapsFormat($('.event-date').text())},
+    data: {doctor_id: $('#confirm_appointment').attr('doctor_id'), date: date},
     success: function (data) {
             let hosted_slots = [];
             for (let index = 0; index < data.length; index++) {
                 const slot_date = data[index];
                 hosted_slots.push(returnSlotTimeInNum(slot_date.date))
             }
+            $('.slots ul').html(' ')
             getAvilableSlots(hosted_slots)
         }
     })

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Events\ChatEvent;
 use App\Http\Traits\SendEmail;
+use App\Models\Appointment;
 use App\Models\Chat;
 use App\Models\Doctor;
 use App\Models\Msg;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -105,5 +108,95 @@ class ChatController extends Controller
         // return $request;
         $unseen = Chat::find($request->chat_id)->msgs->where('sender_guard', '=', (int) $request->sender_guard)->where('seen', 0)->count();
         return $unseen;
+    }
+
+    public function getAppointmentData(Request $request)
+    {
+        $appointment = Appointment::with(['client' => function ($q) {
+            $q->select('id', 'photo', 'first_name', 'last_name', 'gender', 'dob', 'address');
+        }])->find($request->appointmetn_id);
+
+        return $appointment;
+    }
+
+    public function approveAppointment(Request $request)
+    {
+        $appointment = Appointment::find($request->id);
+
+        $appointment->status = true;
+
+        $appointment->save();
+
+        if ($appointment)
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Your session at ' .
+                    Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date)->format('F j, g:i A')
+                    . ' has been approved by: Dr.' . $appointment->doctor->first_name
+            ]);
+    }
+
+
+    public function acceptAppointment(Request $request)
+    {
+        $appointment = Appointment::find($request->id);
+
+        $appointment->status = true;
+
+        $appointment->save();
+
+        $msg = Msg::find($request->msg_id);
+        $msg->msg_data = '<p>' . $request->msg_content . '</p><span class=accepted> Accepted !</span>';
+        $msg->save();
+
+        if ($appointment && $msg)
+            return response()->json([
+                'status' => 200,
+                'msg' => $appointment->client->first_name . ' ' . $appointment->client->last_name . ' has accepted the new session date.'
+            ]);
+    }
+
+    public function editAppointmentTime(Request $request)
+    {
+        // return $request;
+        $chat = Chat::where([
+            ['doctor_id', '=', $request->doctor_id],
+            ['client_id', '=', $request->client_id],
+        ])->first();
+
+        $appointment = Appointment::find($request->id);
+        $appointment->date = $request->new_date;
+        $appointment->status = 2;
+        $appointment->save();
+
+        if ($appointment) :
+
+            $insertMsg = Msg::create([
+                'chat_id' => $chat->id,
+                'sender_guard' => 1,
+                'msg_data' => 'send',
+            ]);
+
+            $msg =
+                '<p>Your appointment time has been changed to ' .
+                Carbon::parse($request->new_date)->format('F j, g:i a') . '</p>' .
+                '<button appointment_id="' . $appointment->id . '" msg_id="' . $insertMsg->id . '" class="accept_change">Accept Date</button>' .
+                '<button appointment_id="' . $appointment->id . '"  msg_id="' . $insertMsg->id . '" class="cancel_change">Cancel</button>';
+
+            $insertMsg->msg_data = $msg;
+            $insertMsg->save();
+
+            if ($insertMsg)
+                event(new ChatEvent(
+                    $insertMsg->msg_data,
+                    $request->client_id . '_' . 2
+                ));
+
+            return response()->json([
+                'status' => 200,
+                'msg' => $msg,
+                'notification' => 'Wait for client confirmation on the new date!'
+            ]);
+        endif;
     }
 }

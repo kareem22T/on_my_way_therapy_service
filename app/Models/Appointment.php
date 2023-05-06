@@ -11,14 +11,36 @@ class Appointment extends Model
     protected $fillable = [
         'id',
         'doctor_id',
+        'client_id',
         'date',
+        'visit_type',
         'status',
     ];
 
     public $timestamps = false;
 
+
+    // relationship --
     public function doctor()
     {
         return $this->belongsTo('App\Models\Doctor', 'doctor_id');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo('App\Models\Client', 'client_id');
+    }
+
+    // getters and setters
+    public function getStatusAttribute($value)
+    {
+        if ($value == 0) {
+            return 'pending';
+        } else if ($value == 1) {
+            return 'approved';
+        } else if ($value == 2) {
+            return 'edited';
+        }
+        return null;
     }
 }

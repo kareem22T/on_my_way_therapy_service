@@ -19,8 +19,11 @@
     @yield("content")
     @include('site.includes.footer')
 
+    <input type="hidden" name="pusher_channel_data" id="{{Auth::guard('client')->user()->id}}" guard_type="2">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="{{ asset('/js/chat.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

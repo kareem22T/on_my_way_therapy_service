@@ -21,6 +21,21 @@ body::after {
   opacity: 0.08;
 }
 
+/* nice scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #132F75;
+  border-radius: 50px;
+}
+
 .container {
   width: 100%;
   max-width: 1300px;
@@ -117,6 +132,8 @@ header .container nav ul li a {
   text-decoration: none;
   padding: clamp(0.375rem, 0.1339rem + 0.989vw, 0.9375rem) clamp(0.625rem, -0.0446rem + 2.7473vw, 2.1875rem);
   transition: color 0.2s ease-out;
+  border: 2px solid rgba(34, 75, 180, 0.137254902);
+  border-radius: clamp(1rem, 0.625rem + 1.5385vw, 1.875rem);
 }
 header .container nav ul li a:hover {
   color: #224cb4;
@@ -198,6 +215,127 @@ header .container nav .fa-bell {
   font-size: clamp(1.25rem, 0.7143rem + 2.1978vw, 2.5rem);
   line-height: clamp(1.5rem, 0.8036rem + 2.8571vw, 3.125rem);
   text-align: center;
+  color: #132F75;
+}
+
+.calendar_wrapper .container .appointments {
+  margin-bottom: 110px;
+  border: 2px solid #FFC400;
+  border-radius: 30px;
+  margin-bottom: 90px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-top: 30px;
+  padding: 10px;
+}
+.calendar_wrapper .container .appointments h3 {
+  font-size: 40px;
+  line-height: 50px;
+  text-align: left;
+  color: #132F75;
+  font-weight: 600;
+  margin: 20px;
+}
+.calendar_wrapper .container .appointments table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.calendar_wrapper .container .appointments table tr:nth-child(even) {
+  background-color: #D7D7D7;
+}
+.calendar_wrapper .container .appointments table td {
+  padding: 15px 25px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+  color: #132F75;
+}
+.calendar_wrapper .container .work-time {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.calendar_wrapper .container .work-time h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+  color: #132F75;
+}
+.calendar_wrapper .container .work-time h1:last-child {
+  grid-column: span 2;
+}
+.calendar_wrapper .container .work-time h1:last-child span {
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-left: 5px;
+  background-color: #132F75;
+  color: #ffffff;
+}
+.calendar_wrapper .container .work-time button {
+  padding: 5px 10px;
+  font-size: 25px;
+  border-radius: 15px;
+  color: #037803;
+  border: 2px solid;
+  background: transparent;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-left: 10px;
+}
+.calendar_wrapper .container .this_week_wrapper {
+  margin-top: 35px;
+}
+.calendar_wrapper .container .this_week_wrapper > h1 {
+  padding-left: 30px;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 38px;
+  color: #132F75;
+  margin-bottom: 15px;
+}
+.calendar_wrapper .container .this-week {
+  width: 100%;
+  min-height: 100%;
+  padding: 20px 0;
+  border: 2px solid #FFC400;
+  border-radius: 30px;
+  padding: 28px 35px;
+  margin-bottom: 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.calendar_wrapper .container .this-week table {
+  width: 100%;
+}
+.calendar_wrapper .container .this-week table thead {
+  font-size: 23px;
+}
+.calendar_wrapper .container .this-week table th {
+  padding: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1882352941);
+}
+.calendar_wrapper .container .this-week table td {
+  color: #132F75;
+  padding: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1882352941);
+}
+.calendar_wrapper .container .this-week table td p {
+  padding: 10px 0px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: 10px 0;
+  justify-content: space-around;
+  border-radius: 60px;
+}
+.calendar_wrapper .container .this-week table td:first-child {
+  font-size: 18px;
+  font-weight: 600;
   color: #132F75;
 }
 

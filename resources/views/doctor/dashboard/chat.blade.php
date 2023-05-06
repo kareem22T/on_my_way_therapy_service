@@ -6,6 +6,9 @@
 @section('chats_link', 'active')
 
 @section('content')
+<div id="errors">
+    {{-- validation errors will appear here. --}}
+</div>
 <main class="chat_wapper">
     <div class="container lg-grid">
         <div class="side-chats g-4">
@@ -63,8 +66,58 @@
                             @if ($chat->client_id == $client_data['id'])
                                 <ul>
                                     @foreach ($chat->msgs as $msg)
-                                        <li class="{{ $msg['sender_guard'] == 1 ? 'your-msg' : 'their-msg' }}">
-                                            {{ $msg['msg_data'] }} 
+                                    @if (strpos($msg['msg_data'], 'appointment') === 0)
+                                        @php
+                                            $appointment_id_str = substr($msg['msg_data'], strpos($msg['msg_data'], ':') + 1);
+                                            $appointment_id = intval($appointment_id_str);
+                                            $appointment = App\Models\Appointment::find($appointment_id);
+                                        @endphp
+                                        <li class="their-msg appointment">
+                                            <h4>Appointment</h4>
+                                            <div class="profile">
+                                                <div class="img">
+                                                    <img src="{{asset('/imgs/client/uploads/client_profile/default_client_profile.jpg')}}" alt="">
+                                                </div>
+                                                <div class="name">
+                                                    <h6>{{$appointment->client->first_name}}</h6>
+                                                    <h6>{{$appointment->client->last_name}}</h6>
+                                                </div>
+                                                <div class="genderYage">
+                                                    <span>{{$appointment->client->gender}}</span>
+                                                    <span>
+                                                        {{Carbon\Carbon::parse($appointment->client->dob)->age}} 
+                                                        yo
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="date">
+                                                <span>{{\Carbon\Carbon::parse($appointment->date)->format('M d');}}</span>
+                                                <span>{{\Carbon\Carbon::parse($appointment->date)->format('h:i a');}}</span>
+                                            </div>
+                                            <div class="address">
+                                                <span>{{$appointment->client->address}}</span>
+                                                <span>15 km in 5 min</span>
+                                            </div>
+                                            @if ($appointment->status  == 'pending' && $appointment->status != 'edited')
+                                            <div class="controls">
+                                                <button 
+                                                class="edit-date" 
+                                                appointment_date="{{$appointment->date}}" 
+                                                client_id="{{$appointment->client->id}}"
+                                                doctor_id="{{$appointment->doctor->id}}">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </button>
+                                                <button class="approve-appointment" appointment_id="{{$appointment->id}}"><i class="fa fa-check"></i></button>
+                                                <div class="set-date">
+                                                    <input type="datetime-local" name="new_date" id="new_date">
+                                                    <input type="submit" name="submit_new_date" appointment_id="{{$appointment->id}}" value="Set date">
+                                                </div>
+                                            </div>
+                                            @endif
+                                            <div class="status">
+                                                <div class="approve" style="display: {{$appointment->status == 'approved' ? 'block' : 'none'}}">Session Approved !</div>
+                                                <div class="pending" style="color: gray; display: {{$appointment->status == 'edited' ? 'block' : 'none'}}">Session pending !</div>
+                                            </div>
                                             <span>
                                                 {{ $msg['created_at']->format('n/j, g:i A')}}
                                                 @if ($msg['sender_guard'] == 1)
@@ -72,6 +125,17 @@
                                                 @endif
                                             </span>
                                         </li>
+                                    @else
+                                        <li class="{{ $msg['sender_guard'] == 1 ? 'your-msg' : 'their-msg' }}">
+                                            {!! $msg['msg_data'] !!} 
+                                            <span>
+                                                {{ $msg['created_at']->format('n/j, g:i A')}}
+                                                @if ($msg['sender_guard'] == 1)
+                                                    <i class="fa-solid {{ $msg['seen']  ? 'fa-check-double' : 'fa-check'}}"></i>
+                                                @endif
+                                            </span>
+                                        </li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             @else 
@@ -103,8 +167,3 @@
     </div>
 </main>
 @endSection
-
-@section('scripts')
-<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-<script src="{{ asset('/js/chat.js') }}"></script>
-@endsection

@@ -61,6 +61,7 @@
                     </div>
 
                     <div class="right">
+                        <h1>Avilable slots</h1>
                         <div class="today-date">
                             <div class="event-day">wed</div>
                             <div class="event-date">12th december 2022</div>
@@ -71,6 +72,18 @@
                                 <ul>
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="visit_type_wraper">
+                        <h1>visits type</h1>
+                        <div class="form-group">
+                            <input type="radio" name="visit_type" id="visit_type_1" value="0">
+                            <label for="visit_type_1">Mobile therapy includes</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" name="visit_type" id="visit_type_2" value="1">
+                            <label for="visit_type_2">telehealth online sessions</label>
                         </div>
                     </div>
                 </div>
@@ -100,11 +113,11 @@
                 <a href="">find another one</a>
             </div>
         </div>
+        @section('scripts')
+            <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
+            <script src="{{ asset('/js/client/calendar.js') }}"></script>
+        @endsection
     @endif
 </main>
 @endSection
 
-@section('scripts')
-<script src="{{ asset('/js/doctor/calendar.js') }}"></script>
-<script src="{{ asset('/js/client/calendar.js') }}"></script>
-@endsection

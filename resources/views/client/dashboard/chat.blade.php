@@ -13,6 +13,7 @@
 @section('title', 'Chats (' . $unSeen . ')')
 
 @section('content')
+<style>footer {display: none !important} body{padding: 0 !important}</style>
 <main class="chat_wapper">
     <div class="container lg-grid">
         <div class="side-chats g-4">
@@ -52,9 +53,9 @@
                 <div class="head">
                     <div>
                         @if ($therapist_data)
-                            <div class="profile">
+                            <a href="/client/therapist{{'@' . $therapist_data['first_name'] . '_' . $therapist_data['id']}}" class="profile">
                                 <img src="{{ asset('imgs/doctor/uploads/therapist_profile/'. $therapist_data['photo']) }}" alt="therapist img">
-                            </div> {{ $therapist_data['first_name'] . ' ' . $therapist_data['last_name'] }}
+                            </a> {{ $therapist_data['first_name'] . ' ' . $therapist_data['last_name'] }}
                         @else
                             
                         @endif
@@ -69,8 +70,55 @@
                             @if ($chat->doctor_id == $therapist_data['id'])
                                 <ul>
                                     @foreach ($chat->msgs as $msg)
+                                        @if (strpos($msg['msg_data'], 'appointment') === 0)
+                                            @php
+                                                $appointment_id_str = substr($msg['msg_data'], strpos($msg['msg_data'], ':') + 1);
+                                                $appointment_id = intval($appointment_id_str);
+                                                $appointment = App\Models\Appointment::find($appointment_id);
+                                            @endphp
+                                            <li class="your-msg appointment">
+                                                <h4>Appointment</h4>
+                                                <div class="profile">
+                                                    <div class="img">
+                                                        <img src="{{asset('/imgs/client/uploads/client_profile/default_client_profile.jpg')}}" alt="">
+                                                    </div>
+                                                    <div class="name">
+                                                        <h6>{{$appointment->client->first_name}}</h6>
+                                                        <h6>{{$appointment->client->last_name}}</h6>
+                                                    </div>
+                                                    <div class="genderYage">
+                                                        <span>{{$appointment->client->gender}}</span>
+                                                        <span>
+                                                            {{Carbon\Carbon::parse($appointment->client->dob)->age}} 
+                                                            yo
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="date">
+                                                    <span>{{\Carbon\Carbon::parse($appointment->date)->format('M d');}}</span>
+                                                    <span>{{\Carbon\Carbon::parse($appointment->date)->format('h:i a');}}</span>
+                                                </div>
+                                                <div class="address">
+                                                    <span>{{$appointment->client->address}}</span>
+                                                    <span>15 km in 5 min</span>
+                                                </div>
+                                                <div class="status">
+                                                    Status: {{$appointment->status}}
+                                                </div>
+                                                <div class="controls">
+                                                    <button>Cancel</button>
+                                                </div>
+                                                <span>
+                                                    {{ $msg['created_at']->format('n/j, g:i A')}} 
+                                                    @if ($msg['sender_guard'] == 2)
+                                                        <i class="fa-solid {{ $msg['seen']  ? 'fa-check-double' : 'fa-check'}}"></i>
+                                                    @endif
+                                                </span>
+                                            </li>
+                                        @else
+
                                         <li class="{{ $msg['sender_guard'] == 2 ? 'your-msg' : 'their-msg' }}">
-                                            {{ $msg['msg_data'] }} 
+                                            {!! $msg['msg_data'] !!} 
                                             <span>
                                                 {{ $msg['created_at']->format('n/j, g:i A')}} 
                                                 @if ($msg['sender_guard'] == 2)
@@ -78,16 +126,14 @@
                                                 @endif
                                             </span>
                                         </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             @else 
-                                no messages yet did you say hi!
-                                <ul></ul>
                             @endif
                         @endforeach
                     @else
                         no messages yet did you say hi!
-                        <ul></ul>
                     @endif
                 @endif
                 {{-- <ul>
@@ -118,6 +164,4 @@
 @endSection
 
 @section('scripts')
-<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-<script src="{{ asset('/js/chat.js') }}"></script>
 @endsection

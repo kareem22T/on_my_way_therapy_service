@@ -152,6 +152,74 @@ header .container nav ul li {
                         flex-direction: column;
                         padding: 10px 15px;
                         gap: 5px;
+                        h4 {
+                            font-size: 20px
+                        }
+                        .profile {
+                            display: flex;
+                            gap: 15px;
+                            align-items: center;
+                            .img {
+                                width: 50px;
+                                height: 50px;
+                                overflow: hidden;
+                                border-radius: 50%;
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+                            .name {
+                                h6 {margin: 0;}
+                            }
+                        }
+                        .date {
+                            display: flex;
+                            gap: 15px;
+                            font-size: 17px;
+                            margin: 5px 5px 0;
+                            border: none !important;
+                            span {
+                                font-size: 16px !important;
+                                color: #3e3e3e !important;
+                            }
+                        }
+                        .address {
+                            display: flex;
+                            gap: 15px;
+                            margin-left: 5px;
+                            span {
+                                font-size: 14px !important;
+                                color: black !important;
+                            }
+                        }
+                        .controls {
+                            display: flex;
+                            justify-content: center;
+                            gap: 10px;
+                            margin: 15px 5px 5px;
+                            button {
+                                background: transparent;
+                                font-size: 22px;
+                                padding: 5px;
+                                border: 2px solid;
+                                width: 40px;
+                                height: 40px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 10px;
+                                &:first-child {
+                                    color: #3e3e3e;
+                                    background: #8080801f;
+                                }
+                                &:nth-child(2) {
+                                    color: #026602;
+                                    background: #00800014;
+                                }
+                            }
+                        }
                         span {
                             font-size: 12px;
                             color: #646464;
@@ -171,6 +239,27 @@ header .container nav ul li {
                         color: $white;
                         max-width: 80%;
                         padding: 10px 15px;
+                        .date span {
+                            color: #ffffffc2 !important;
+                        }
+                        .address span {
+                            color: white !important;
+                        }
+                        .status {
+                            text-align: center;
+                        }
+                        .controls {
+                            margin: 5px 5px 5px;
+                            input {display: none;}
+                            button {
+                                color: #FFC400 !important;
+                                width: fit-content;
+                                background: rgb(255 255 255 / 0%);
+                            }
+                        }
+                        .accept_change, .cancel_change {
+                            display: none;
+                        }
                         span {
                             color: #cbcbcb;
                             text-align: right;
@@ -187,6 +276,51 @@ header .container nav ul li {
                         color: $black;
                         box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
                         padding: 10px 15px;
+                        .controls {
+                            position: relative;
+                            .set-date {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 15px;
+                                position: absolute;
+                                background: #919191c2;
+                                padding: 10px;
+                                bottom: 125%;
+                                border-radius: 15px;
+                                backdrop-filter: blur(1px);
+                                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                                display: none;
+                                input {
+                                    padding: 10px;
+                                    border-radius: 20px;
+                                    border: none;
+                                    max-width: 200px;
+                                }
+                                input[type=submit] {
+                                    background-color: $main-color;
+                                    color: $secondary-color;
+                                    transition: background-color 0.2s ease-in-out;
+                                    &:hover {
+                                        background-color: #1d429f;
+                                    }
+                                }
+                            }
+                        }
+                        p {margin: 0;}
+                        .accepted {
+                            text-align: center;
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            font-size: 17px;
+                            color: #026602;
+                        }
+                        .status {
+                            text-align: center;
+                            text-align: center !important;
+                            color: #026602 !important;
+                            * {display: none;}
+                        }
                     }
                 }
             }
@@ -314,6 +448,13 @@ body {
                             background-color: $secondary-color;
                         }
                     }
+                }
+
+                .visit_type_wrapper {
+                    border: 1px solid #FFC400;
+                    border-radius: 30px;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                    padding: 28px 35px;
                 }
             }
         }

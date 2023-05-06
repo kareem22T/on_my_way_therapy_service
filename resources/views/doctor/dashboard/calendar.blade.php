@@ -15,6 +15,7 @@
 <main class="calendar_wrapper">
     <div class="container">
         <div class="work-time">
+            @if (!isset($therapist_times))
             <form action="" id="working_hours">
                 <div class="row-1">
                     <div>
@@ -115,6 +116,35 @@
                     </div>
                 </div>
             </form>
+            @else
+                <h1>Your working hours 
+                    <span>
+                        {{$therapist_times['working_hours_from'] <= 12 ? $therapist_times['working_hours_from'] . ' am' : $therapist_times['working_hours_from'] - 12 . ' pm'}}
+                    </span> - 
+                    <span>
+                        {{$therapist_times['working_hours_to'] <= 12 ? $therapist_times['working_hours_to'] . ' am' : $therapist_times['working_hours_to'] - 12 . ' pm'}}
+                    </span>
+                    <button><i class="fa fa-edit"></i></button>
+                </h1>
+                <h1>Your max traviling distance
+                    <span>
+                        {{$therapist_times['travel_range'] * 10 . ' km'}}
+                    </span> 
+                    <button><i class="fa fa-edit"></i></button>
+                </h1>
+                <h1>Your holidays
+                    @php
+                        $daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    @endphp
+                    @foreach ($therapist_times['holidays'] as $holiday)
+                        <span>
+                            {{ $holiday->name}}
+                        </span>
+                    @endforeach
+                    <button><i class="fa fa-edit"></i></button>
+                </h1>
+                
+            @endif
         </div>
         <div class="preview">
             <div class="left">
@@ -150,6 +180,63 @@
                     <div class="event-date">12th december 2022</div>
                 </div>
             </div>
+        </div>
+
+        <div class="this_week_wrapper">
+            <h1>
+                This week
+            </h1>
+            <div class="this-week">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Appointments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (range(0, 6) as $i)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::today()->addDays($i)->format('M j, D') }}</td>
+                            <td>
+
+                                @if (\App\Models\Appointment::whereDate('date', '=', \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->get()->count() == 0)
+                                    <p>There is no appointment yet!</p>
+                                @endif
+
+                                @foreach (\App\Models\Appointment::whereDate('date', '=', \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->where('status', 1)->get() as $appointment)
+                                    <p>
+                                        <span>{{date("F j", strtotime($appointment->date))}}</span>
+                                        <span>{{date('h:i A', strtotime($appointment->date))}}</span>
+                                        <span>{{$appointment->client->address}}</span>
+                                        <span>15 km in 10 min</span>
+                                        <span>{{ $appointment->client->gender }}</span>
+                                        <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
+                                    </p>
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="appointments">
+            <h3>Up coming sessions</h3>
+            <table>
+                <tbody>
+                    @foreach (App\Models\Appointment::where('status', 1)->where('doctor_id', Auth::guard('doctor')->user()->id)->paginate(4) as $appointment)
+                        <tr>
+                            <td>{{date("F j", strtotime($appointment->date))}}</td>
+                            <td>{{date('h:i A', strtotime($appointment->date))}}</td>
+                            <td>{{$appointment->client->address}}</td>
+                            <td>15 km in 10 min</td>
+                            <td>{{ $appointment->client->gender }}</td>
+                            <td>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </main>

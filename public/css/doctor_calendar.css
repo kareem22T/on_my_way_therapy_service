@@ -266,6 +266,7 @@
 }
 
 .right .today-date {
+    transition: opacity .3s ease-out;
     width: 100%;
     height: 50px;
     display: flex;
@@ -352,7 +353,7 @@ form >div:not(.row-1) {
 }
 .holidays li i {cursor: pointer;}
 
-form button {
+form .btn-info {
     font-weight: 700;
     font-size: 30px;
     line-height: 38px;

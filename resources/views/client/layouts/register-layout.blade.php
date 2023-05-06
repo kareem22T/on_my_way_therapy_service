@@ -17,7 +17,7 @@
             padding: 0;
         }
     </style>
-    <title>Therapist | @yield("title")</title>
+    <title>Client | @yield("title")</title>
 </head>
 <body>
     

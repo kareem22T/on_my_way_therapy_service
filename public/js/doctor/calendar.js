@@ -277,14 +277,10 @@ headers: {
 
 $('#working_hours').on('submit', function (e) {
   e.preventDefault();
-  let formData = new FormData(document.getElementById('working_hours'));
-  formData.append('holidays_arr[]', holidays)
   $.ajax({
     url: '/therapist/save-times',
     method: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
+    data: {holidays_arr: holidays, from: $('select[name="from"]').val(), to: $('select[name="to"]').val(), distance: $('select[name="distance"]').val()},
     success: function (data) {
       if (data.status == 200) {
           document.getElementById('errors').innerHTML = ''

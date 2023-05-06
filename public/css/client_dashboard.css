@@ -25,6 +25,21 @@ body::after {
   opacity: 0.08;
 }
 
+/* nice scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #132F75;
+  border-radius: 50px;
+}
+
 .container {
   width: 100vw;
   max-width: 1300px;
@@ -278,6 +293,74 @@ header .container nav ul li span {
   padding: 10px 15px;
   gap: 5px;
 }
+.chat_wapper .container .chat .msgs ul li h4 {
+  font-size: 20px;
+}
+.chat_wapper .container .chat .msgs ul li .profile {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.chat_wapper .container .chat .msgs ul li .profile .img {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.chat_wapper .container .chat .msgs ul li .profile .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.chat_wapper .container .chat .msgs ul li .profile .name h6 {
+  margin: 0;
+}
+.chat_wapper .container .chat .msgs ul li .date {
+  display: flex;
+  gap: 15px;
+  font-size: 17px;
+  margin: 5px 5px 0;
+  border: none !important;
+}
+.chat_wapper .container .chat .msgs ul li .date span {
+  font-size: 16px !important;
+  color: #3e3e3e !important;
+}
+.chat_wapper .container .chat .msgs ul li .address {
+  display: flex;
+  gap: 15px;
+  margin-left: 5px;
+}
+.chat_wapper .container .chat .msgs ul li .address span {
+  font-size: 14px !important;
+  color: black !important;
+}
+.chat_wapper .container .chat .msgs ul li .controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 5px 5px;
+}
+.chat_wapper .container .chat .msgs ul li .controls button {
+  background: transparent;
+  font-size: 22px;
+  padding: 5px;
+  border: 2px solid;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.chat_wapper .container .chat .msgs ul li .controls button:first-child {
+  color: #3e3e3e;
+  background: rgba(128, 128, 128, 0.1215686275);
+}
+.chat_wapper .container .chat .msgs ul li .controls button:nth-child(2) {
+  color: #026602;
+  background: rgba(0, 128, 0, 0.0784313725);
+}
 .chat_wapper .container .chat .msgs ul li span {
   font-size: 12px;
   color: #646464;
@@ -297,6 +380,29 @@ header .container nav ul li span {
   max-width: 80%;
   padding: 10px 15px;
 }
+.chat_wapper .container .chat .msgs ul .your-msg .date span {
+  color: rgba(255, 255, 255, 0.7607843137) !important;
+}
+.chat_wapper .container .chat .msgs ul .your-msg .address span {
+  color: white !important;
+}
+.chat_wapper .container .chat .msgs ul .your-msg .status {
+  text-align: center;
+}
+.chat_wapper .container .chat .msgs ul .your-msg .controls {
+  margin: 5px 5px 5px;
+}
+.chat_wapper .container .chat .msgs ul .your-msg .controls input {
+  display: none;
+}
+.chat_wapper .container .chat .msgs ul .your-msg .controls button {
+  color: #FFC400 !important;
+  width: fit-content;
+  background: rgba(255, 255, 255, 0);
+}
+.chat_wapper .container .chat .msgs ul .your-msg .accept_change, .chat_wapper .container .chat .msgs ul .your-msg .cancel_change {
+  display: none;
+}
 .chat_wapper .container .chat .msgs ul .your-msg span {
   color: #cbcbcb;
   text-align: right;
@@ -312,6 +418,55 @@ header .container nav ul li span {
   color: #000000;
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .controls {
+  position: relative;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .controls .set-date {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  background: rgba(145, 145, 145, 0.7607843137);
+  padding: 10px;
+  bottom: 125%;
+  border-radius: 15px;
+  backdrop-filter: blur(1px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: none;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .controls .set-date input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  max-width: 200px;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .controls .set-date input[type=submit] {
+  background-color: #132F75;
+  color: #FFC400;
+  transition: background-color 0.2s ease-in-out;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .controls .set-date input[type=submit]:hover {
+  background-color: #1d429f;
+}
+.chat_wapper .container .chat .msgs ul .their-msg p {
+  margin: 0;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .accepted {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+  color: #026602;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .status {
+  text-align: center;
+  text-align: center !important;
+  color: #026602 !important;
+}
+.chat_wapper .container .chat .msgs ul .their-msg .status * {
+  display: none;
 }
 .chat_wapper .container .chat form {
   position: relative;
@@ -429,6 +584,12 @@ body {
 }
 .home .container .booking .preview .slots ul li:hover, .home .container .booking .preview .slots ul li.selected {
   background-color: #FFC400;
+}
+.home .container .booking .preview .visit_type_wrapper {
+  border: 1px solid #FFC400;
+  border-radius: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 28px 35px;
 }
 .home .container .booking button, .home .container .profile_wrapper > a {
   text-decoration: none;
