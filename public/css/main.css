@@ -25,6 +25,21 @@ body::after {
   opacity: 0.08;
 }
 
+/* nice scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #132F75;
+  border-radius: 50px;
+}
+
 .container {
   width: 100vw;
   max-width: 1300px;
@@ -32,7 +47,7 @@ body::after {
   margin: 0 auto;
 }
 
-.help-wrapper section:last-child, .help-wrapper section > div > div, .help-wrapper section > div, main .how .container:last-child > div, main .how .container:last-child, main .hero .container:last-child, main .hero .container:nth-child(2) > div, main .hero .container:nth-child(2), header nav ul li:first-child a, header nav ul,
+.help-wrapper section:last-child, .help-wrapper section > div > div, .help-wrapper section > div, main .how .container:last-child > div, main .how .container:last-child, main .hero .container:last-child, main .hero .container:nth-child(2) > div, main .hero .container:nth-child(2), header nav ul .more > ul > li > ul, header nav ul li:first-child a, header nav ul,
 .flex-center {
   display: flex;
   justify-content: center;
@@ -165,6 +180,91 @@ header nav ul li:first-child a .img {
 header nav ul li i {
   font-size: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
   color: #132F75;
+}
+header nav ul .more {
+  position: relative;
+}
+header nav ul .more #menu-icon {
+  display: inline-block;
+}
+header nav ul .more #menu-icon .bar {
+  border-radius: 50px;
+  margin: 6px;
+  width: 35px;
+  height: 4px;
+  background: #132F75;
+  border-radius: 1.5px;
+  transition: margin 0.2s, transform 0.2s;
+  /* same as above but with prefixes added */
+  -webkit-transition: margin 0.2s, -webkit-transform 0.2s;
+  transition: margin 0.2s, -webkit-transform 0.2s;
+  -o-transition: margin 0.2s, transform 0.2s;
+  transition: margin 0.2s, transform 0.2s;
+  transition: margin 0.2s, transform 0.2s, -webkit-transform 0.2s;
+  display: block;
+}
+header nav ul .more #menu-icon.close .bar:first-child {
+  -webkit-transform: translateY(9px) rotate(45deg);
+  -ms-transform: translateY(9px) rotate(45deg);
+  transform: translateY(9px) rotate(45deg);
+}
+header nav ul .more #menu-icon.close .bar:nth-child(2) {
+  opacity: 0;
+}
+header nav ul .more #menu-icon.close .bar:last-child {
+  -webkit-transform: translateY(-9px) rotate(-45deg);
+  -ms-transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-9px) rotate(-45deg);
+}
+header nav ul .more #menu-icon.close .bar:first-child {
+  -webkit-transform: translateY(9px) rotate(45deg);
+  -ms-transform: translateY(9px) rotate(45deg);
+  transform: translateY(9px) rotate(45deg);
+}
+header nav ul .more #menu-icon.close .bar:nth-child(2) {
+  opacity: 0;
+}
+header nav ul .more #menu-icon.close .bar:last-child {
+  -webkit-transform: translateY(-9px) rotate(-45deg);
+  -ms-transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-9px) rotate(-45deg);
+}
+header nav ul .more > ul {
+  position: absolute;
+  top: calc(100% + 40px);
+  right: 0;
+  display: flex;
+  display: none;
+  flex-direction: column;
+  white-space: nowrap;
+  background: #ffffff;
+  border: 3px solid #FFC400;
+  padding: 25px 20px;
+  border-radius: 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+header nav ul .more > ul > li {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 50px;
+  color: #132F75;
+}
+header nav ul .more > ul > li > ul {
+  gap: 10px;
+  flex-direction: column;
+  align-items: start;
+}
+header nav ul .more > ul > li > ul li {
+  line-height: 1;
+}
+header nav ul .more > ul > li > ul a {
+  font-size: 32px !important;
+  line-height: 25px;
+  font-weight: 500 !important;
+  color: black;
+  padding-left: 10px;
+  margin-top: 8px;
+  text-decoration: none;
 }
 
 footer {

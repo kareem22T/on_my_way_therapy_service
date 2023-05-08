@@ -51,7 +51,7 @@ $(document).on('click', '.accept_change', function () {
       $(this).parents('li').find('p').text(),
       $(this).attr('msg_id')
     )
-    $(this).parents('li').find('p').nextAll('button').remove()
+    $(this).parents('li').find('p').nextAll('.btns').remove()
     $(this).parents('li').find('p').append('<span class=accepted> Accepted !</span>')
 })
 
@@ -363,8 +363,11 @@ function editAppointmentDate(new_date, appointment_id, client_id, doctor_id) {
 
         const formattedDate = formatter.format(now);
         $('.msgs ul')
-        .append('<li class="your-msg">' + data.msg + '<span>' + formattedDate + '</span>' + 
+        .append('<li class="your-msg">' + data.msg + '<span>' + formattedDate  + 
         ' <i class="fa-solid fa-spinner"></i></span>' + '</li>');
+        setTimeout(() => {
+          $('.msgs ul li:last-child span i').removeClass('fa-spinner').addClass('fa-check')
+        }, 200);
         scrollBottom ()
         document.getElementById('errors').innerHTML = ''
         let error = document.createElement('div')

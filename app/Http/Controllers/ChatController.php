@@ -180,8 +180,8 @@ class ChatController extends Controller
             $msg =
                 '<p>Your appointment time has been changed to ' .
                 Carbon::parse($request->new_date)->format('F j, g:i a') . '</p>' .
-                '<button appointment_id="' . $appointment->id . '" msg_id="' . $insertMsg->id . '" class="accept_change">Accept Date</button>' .
-                '<button appointment_id="' . $appointment->id . '"  msg_id="' . $insertMsg->id . '" class="cancel_change">Cancel</button>';
+                '<div class="btns"><button appointment_id="' . $appointment->id . '" msg_id="' . $insertMsg->id . '" class="accept_change">Accept Date</button>' .
+                '<button appointment_id="' . $appointment->id . '"  msg_id="' . $insertMsg->id . '" class="cancel_change">Cancel</button></div>';
 
             $insertMsg->msg_data = $msg;
             $insertMsg->save();

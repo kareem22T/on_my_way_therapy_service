@@ -335,6 +335,29 @@ header .container nav ul li span {
   font-size: 14px !important;
   color: black !important;
 }
+.chat_wapper .container .chat .msgs ul li .btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 7px;
+}
+.chat_wapper .container .chat .msgs ul li .btns button {
+  width: 33%;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+.chat_wapper .container .chat .msgs ul li .btns button.accept_change {
+  color: #026602;
+  background: rgba(0, 128, 0, 0.0784313725);
+  border: 2px solid;
+}
+.chat_wapper .container .chat .msgs ul li .btns button.cancel_change {
+  color: #660202;
+  background: rgba(128, 0, 0, 0.0784313725);
+  border: 2px solid;
+}
 .chat_wapper .container .chat .msgs ul li .controls {
   display: flex;
   justify-content: center;
@@ -379,6 +402,17 @@ header .container nav ul li span {
   color: #ffffff;
   max-width: 80%;
   padding: 10px 15px;
+}
+.chat_wapper .container .chat .msgs ul .your-msg p {
+  margin: 0;
+}
+.chat_wapper .container .chat .msgs ul .your-msg .accepted {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+  color: #FFC400;
 }
 .chat_wapper .container .chat .msgs ul .your-msg .date span {
   color: rgba(255, 255, 255, 0.7607843137) !important;
@@ -513,17 +547,56 @@ body {
   margin-top: 40px;
 }
 .home .container > .form-group {
-  max-width: 460px;
+  max-width: 647px;
   margin: 35px auto 0;
   position: relative;
+  width: 100%;
 }
-.home .container > .form-group i {
+.home .container > .form-group > i {
   position: absolute;
   top: 50%;
   left: 20px;
   transform: translateY(-38%);
   font-size: 35px;
   color: #132F75;
+}
+.home .container > .form-group .results {
+  position: absolute;
+  top: calc(100% + 20px) !important;
+  list-style: none;
+  display: flex;
+  display: none;
+  flex-direction: column;
+  align-items: start;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.9490196078);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  width: 100%;
+  font-size: 22px;
+  padding: 20px;
+  border-radius: 15px;
+  color: #213F75;
+  backdrop-filter: blur(10px);
+  z-index: 9999999;
+  border: 1px solid #f5f5f5;
+  margin: 0;
+}
+.home .container > .form-group .results a {
+  display: block;
+  text-decoration: none;
+  color: #213F75;
+  display: flex !important;
+  justify-content: start !important;
+  align-items: center;
+  gap: 15px;
+  padding: 7px 13px;
+  border-radius: 5px;
+  background-color: transparent;
+  width: 100%;
+  transition: background-color 0.3s ease-out;
+}
+.home .container > .form-group .results a:hover {
+  background: rgba(128, 128, 128, 0.1490196078);
 }
 .home .container #search {
   background: #ffffff;
@@ -680,6 +753,135 @@ body {
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   z-index: -1;
+}
+.home .professions_wrapper h1 {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  color: #132F75;
+  margin-top: 55px;
+  margin-bottom: 35px;
+}
+.home .professions_wrapper .professions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.home .professions_wrapper .professions .profession {
+  width: 200px;
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  color: #132F75;
+  position: relative;
+  padding: 0 20px 20px;
+  text-decoration: none;
+}
+.home .professions_wrapper .professions .profession .img {
+  width: 150px;
+  height: 150px;
+  background: #FFC400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.home .professions_wrapper .professions .profession .img img {
+  width: 65px;
+  height: 75px;
+  object-fit: contain;
+}
+.home .professions_wrapper .professions .profession .bg {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 75px);
+  bottom: 0;
+  background: #FFFFFF;
+  border: 1px solid #132F75;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  z-index: -1;
+}
+.home .search_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+.home .search_wrapper > h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 50px;
+  color: #132F75;
+}
+.home .search_wrapper .therapist_overview {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 20px;
+  background: #FFFFFF;
+  flex-direction: column;
+  position: relative;
+  text-decoration: none;
+}
+.home .search_wrapper .therapist_overview .img {
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: 3px solid #FFC400;
+  margin-bottom: 15px;
+}
+.home .search_wrapper .therapist_overview .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home .search_wrapper .therapist_overview h3 {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+  color: #132F75;
+}
+.home .search_wrapper .therapist_overview .rate {
+  color: #FFC400;
+  margin-bottom: 10px;
+  font-size: 23px;
+}
+.home .search_wrapper .therapist_overview .distance, .home .search_wrapper .therapist_overview h4 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  color: #132F75;
+  margin: 0;
+}
+.home .search_wrapper .therapist_overview > *:not(.bg) {
+  z-index: 2;
+}
+.home .search_wrapper .therapist_overview .bg {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 105px);
+  background: #FFFFFF;
+  border: 3px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  bottom: 0;
 }
 
 footer {

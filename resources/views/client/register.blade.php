@@ -39,10 +39,10 @@
                     </label>
                 </div>
                 <div class="form-group g-6">
-                    <input type="text" name="first_name" id="name" class="form-control" placeholder="First name *">
+                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First name *">
                 </div>
                 <div class="form-group g-6">
-                    <input type="text" name="last_name" id="name" class="form-control" placeholder="Last name *">
+                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last name *">
                 </div>
                 <div class="form-group g-6">
                     <input type="email" name="email" id="email" class="form-control" placeholder="Email *">
@@ -52,7 +52,7 @@
                     <input type="text" name="phone" id="phone" class="form-control g-7" placeholder="Phone number *">
                 </div>
                 <div class="form-group g-12">
-                    <input type="text" name="address" id="address" class="form-control" placeholder="Address *">
+                    <input type="text" name="address" id="address" disabled class="form-control" placeholder="Address *">
                 </div>
                 <div class="form-group g-6">
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password *">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="form-group g-12 diagnosis_wrapper">
-                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Basic diagnosis *" class="form-control">
+                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Basic diagnosis" class="form-control">
                     <ul class="diagnosis">
                         {{-- <li>example <i class="fa-regular fa-circle-xmark"></i></li> --}}
                         {{-- selecte diagnosis will appear here --}}

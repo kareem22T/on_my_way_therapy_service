@@ -10,7 +10,7 @@
     {{-- validation errors will appear here. --}}
 </div>
 <main class="home">
-    @if (!$therapist)
+    @if (!isset($therapist) && !isset($search_results))
         <div class="container">
             <h1>
                 Hello, {{ Auth::guard('client')->user()->first_name}}
@@ -19,17 +19,33 @@
                 <br>
                 what specialist you need?
             </h1>
-            <div class="form-group">
+            <form class="form-group">
                 <input type="text" name="search" id="search" placeholder="specialist you need" class="form-control">
                 <i class="fa-solid fa-stethoscope"></i>
-            </div>
+                <div class="results">
+                </div>
+            </form>
             <p>
                 Feel tired and do not know which medical specialty you need?
                 <br>
                 <a href="">ask us!</a> Customer service is at your command
             </p>
+            <div class="professions_wrapper">
+                <h1>Please select your service</h1>
+                <div class="professions">
+                    @foreach (App\Models\Profession::all() as $profession)
+                        <a href="/client/search:{{$profession->title}}" class="profession">
+                            <div class="img">
+                                <img src="{{ asset('/imgs/professions/' . $profession->id . '.png') }}" alt="">
+                            </div>
+                            <h4>{{ $profession->title }}</h4>
+                            <div class="bg"></div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
         </div>
-    @else 
+    @elseif (isset($therapist))
         <div class="container lg-grid">
             <div class="booking g-7">
                 <div class="preview">
@@ -117,7 +133,67 @@
             <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
             <script src="{{ asset('/js/client/calendar.js') }}"></script>
         @endsection
+    @elseif (isset($search_results))
+        @if (count($search_results) > 0)
+        <div class="container search_wrapper">
+        <div class="form-group g-3 mt-0 mb-2">
+            <input type="text" name="search" id="search" placeholder="specialist you need" class="form-control">
+            <i class="fa-solid fa-stethoscope"></i>
+            <div class="results">
+            </div>
+        </div>
+        <h2 class="g-3 text-center mb-2">
+            {{ $search }} therapists
+        </h2>
+
+        @foreach ($search_results as $therapist)
+            <a href="/client/therapist{{'@' . $therapist->first_name . '_' . $therapist->id}}" class="therapist_overview" target="_blanck">
+                <div class="img">
+                    <img 
+                    src="{{asset('imgs/doctor/uploads/therapist_profile/' . $therapist->photo)}}" 
+                    alt="{{$therapist->first_name}}">
+                </div>
+                <h3>{{ $therapist->first_name . ' ' . $therapist->last_name }}</h3>
+                <span class="rate">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </span>
+                <p class="distance">10Km away from you</p>
+                <h4>
+                    {{$therapist->experience}} years of experience
+                </h4>
+                <div class="bg"></div>
+            </a>
+        @endforeach
+        @else
+            <div class="container" 
+                style="
+                display: flex;
+                flex-direction: column;
+                gap: 0;">
+                <h1 class="mb-3">Try again</h1>
+                <div class="form-group g-2 mt-0 mb-5">
+                    <input type="text" name="search" id="search" placeholder="specialist you need" class="form-control">
+                    <i class="fa-solid fa-stethoscope"></i>
+                    <div class="results">
+                    </div>
+                </div>
+                <img src="{{ asset('/imgs/search_not_found.png') }}" alt="" style="margin: auto;width: 400px;">
+                <h1>No results found !</h1>
+                <h3 class="text-center">Records doesn't match, there is no therapists unfortunately</h3>
+            </div>
+        @endif
+        </div>
+    @else
+    sajdj
     @endif
 </main>
 @endSection
+
+@section('scripts')
+    <script src="{{ asset('/js/client/search.js') }}"></script>
+@endsection
 

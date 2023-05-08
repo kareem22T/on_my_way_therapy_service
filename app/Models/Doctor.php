@@ -84,4 +84,14 @@ class Doctor extends Authenticatable
     {
         return $this->hasMany('App\Models\Appointment', 'doctor_id');
     }
+    // getters and setters
+    public function getGenderAttribute($value)
+    {
+        if ($value == 0) {
+            return 'male';
+        } else if ($value == 1) {
+            return 'female';
+        }
+        return null;
+    }
 }

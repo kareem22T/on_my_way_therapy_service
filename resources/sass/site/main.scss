@@ -45,6 +45,102 @@ header {
                     color: $main-color;
                 }
             }
+            .more {
+                position: relative;
+                #menu-icon {
+                    display: inline-block;
+                    
+                    .bar {
+                        border-radius: 50px;
+                        margin: 6px;
+                        width: 35px;
+                        height: 4px;
+                        background: $main-color;
+                        border-radius: 1.5px;
+                        transition: margin 0.2s, transform 0.2s;
+                    
+                        /* same as above but with prefixes added */
+                        -webkit-transition: margin 0.2s, -webkit-transform 0.2s;
+                        transition: margin 0.2s, -webkit-transform 0.2s;
+                        -o-transition: margin 0.2s, transform 0.2s;
+                        transition: margin 0.2s, transform 0.2s;
+                        transition: margin 0.2s, transform 0.2s, -webkit-transform 0.2s;
+                        display: block;
+                    }
+
+                    &:not(.close):hover .bar {
+                        // margin: 7px 5px;
+                    }
+                    &.close .bar:first-child {
+                        -webkit-transform: translateY(9px) rotate(45deg);
+                        -ms-transform: translateY(9px) rotate(45deg);
+                        transform: translateY(9px) rotate(45deg);
+                    }
+
+                    &.close .bar:nth-child(2) {
+                        opacity: 0;
+                    }
+
+                    &.close .bar:last-child {
+                        -webkit-transform: translateY(-9px) rotate(-45deg);
+                        -ms-transform: translateY(-9px) rotate(-45deg);
+                        transform: translateY(-9px) rotate(-45deg);
+                    }
+                    &.close .bar:first-child {
+                        -webkit-transform: translateY(9px) rotate(45deg);
+                        -ms-transform: translateY(9px) rotate(45deg);
+                        transform: translateY(9px) rotate(45deg);
+                    }
+                    
+                    &.close .bar:nth-child(2) {
+                        opacity: 0;
+                    }
+                    
+                    &.close .bar:last-child {
+                        -webkit-transform: translateY(-9px) rotate(-45deg);
+                        -ms-transform: translateY(-9px) rotate(-45deg);
+                        transform: translateY(-9px) rotate(-45deg);
+                    }
+                }
+
+            
+                >ul {
+                    position: absolute;
+                    top: calc(100% + 40px);
+                    right: 0;
+                    display: flex;
+                    display: none;
+                    flex-direction: column;
+                    white-space: nowrap;
+                    background: $white;
+                    border: 3px solid $secondary-color;
+                    padding: 25px 20px;
+                    border-radius: 30px;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                    >li {
+                        font-weight: 700;
+                        font-size: 40px;
+                        line-height: 50px;
+                        color: $main-color;
+                        >ul {
+                            @extend %flex-center;
+                            gap: 10px;
+                            flex-direction: column;
+                            align-items: start;
+                            li {line-height: 1;}
+                            a {
+                                font-size: 32px !important;
+                                line-height: 25px;
+                                font-weight: 500 !important;
+                                color: black;
+                                padding-left: 10px;
+                                margin-top: 8px;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

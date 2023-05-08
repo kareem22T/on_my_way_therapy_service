@@ -21,6 +21,21 @@ body::after {
   opacity: 0.08;
 }
 
+/* nice scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #132F75;
+  border-radius: 50px;
+}
+
 .container {
   width: 100%;
   max-width: 1300px;
