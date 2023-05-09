@@ -48,6 +48,8 @@ class RegisterController extends Controller
             'gender' => $request->input('gender'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
+            'address_lat' => $request->input('address_lat'),
+            'address_lng' => $request->input('address_lng'),
             'password' => Hash::make($request->input('password')),
             'company_name' => $request->input('company_name') ? $request->input('company_name') : null,
             'company_email' => $request->input('company_email') ? $request->input('company_email') : null,
@@ -57,18 +59,22 @@ class RegisterController extends Controller
             'session_type' =>
             count($request->input('session_type')) > 1 ? 2 : $request->input('session_type')[0],
             'client_type' => $request->input('client_type'),
+            'card_number' => $request->input('card_number'),
             'therapist_gender' => $request->input('therapist_gender'),
-            'managment_type' => $request->input('plan_managment'),
+            'managment_type' => $request->input('client_type') == 1 ? $request->input('plan_managment') : null,
+            'manager_email' => $request->input('client_type') == 1 ? $request->input('manager_email') : null,
         ]);
 
-        foreach ($request->diagnosis as $dia) {
-            Diagnosi::create([
-                'name' => $dia,
-            ]);
-        }
-        foreach ($request->diagnosis as $dia) {
-            $client->diagnosis()->syncWithoutDetaching(Diagnosi::where('name', $dia)->first()->id);
-        }
+        if ($request->diagnosis)
+            foreach ($request->diagnosis as $dia) {
+                Diagnosi::create([
+                    'name' => $dia,
+                ]);
+            }
+        if ($request->diagnosis)
+            foreach ($request->diagnosis as $dia) {
+                $client->diagnosis()->syncWithoutDetaching(Diagnosi::where('name', $dia)->first()->id);
+            }
 
         if ($client) {
             return response()->json([

@@ -19,6 +19,9 @@
     .ndis-form {
         display: none;
     }
+    .plan-managed-btns, .plan-managed-form .Plan_manager_email_parent {
+        display: none;
+    }
     .choice {
         ul {
             list-style: none;

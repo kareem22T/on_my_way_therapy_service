@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\ChatEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HostAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Chat;
 use App\Models\Diagnosi;
@@ -71,7 +72,7 @@ class ClientController extends Controller
         return view('client.dashboard.chat')->with(compact('therapist_data', 'chats'));
     }
 
-    public function insertAppointment(Request $request)
+    public function insertAppointment(HostAppointmentRequest $request)
     {
         $appointment = Appointment::create([
             'doctor_id' => $request->doctor_id,

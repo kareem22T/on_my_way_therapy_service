@@ -16,7 +16,7 @@
     <div class="container">
         <div class="work-time">
             @if (!isset($therapist_times))
-            <form action="" id="working_hours">
+            <form action="" id="working_hours" class="g-2">
                 <div class="row-1">
                     <div>
                         Working hours

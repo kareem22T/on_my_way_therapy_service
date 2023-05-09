@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="{{ asset('/css/client_dashboard.css') }}">
     @yield('extra-style')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="{{ asset("/css/maps.css") }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <title>Dashboard | @yield("title")</title>
 </head>
 <body>

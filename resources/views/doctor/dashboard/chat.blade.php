@@ -17,7 +17,7 @@
                     <li>
                         <a href="/therapist/chats/{{ $client_data['id'] }}" class="selected">
                             <div class="profile">
-                                <img src="{{ asset('imgs/client/uploads/client_profile/default_client_profile.jpg') }}" alt="client img">
+                                <img src="/imgs/client/uploads/client_profile/{{ $client_data['photo'] ? $client_data['photo'] : 'default_client_profile.jpg' }}" alt="client img">
                             </div> {{ $client_data['first_name'] . ' ' . $client_data['last_name'] }}
                         </a>
                     </li>
@@ -28,7 +28,8 @@
                             <li>
                                 <a href="/therapist/chats/{{ $chat->client_id }}" class="chat_link" sender_guard="2" chat_id="{{$chat->id}}">
                                     <div class="profile">
-                                        <img src="{{ asset('imgs/client/uploads/client_profile/default_client_profile.jpg') }}" alt="client img">
+                                    <img 
+                                    src="/imgs/client/uploads/client_profile/{{$chat->client->photo ? $chat->client->photo : 'default_client_profile.jpg'}}" alt="client img">
                                     </div> {{ $chat->client->first_name . ' ' . $chat->client->last_name }}
                                     <span style="display: {{$chat->msgs->where('seen', false)->where('sender_guard', 2)->count() > 0 ? 'flex' : 'none'}}">
                                         {{$chat->msgs->where('seen', false)->count() > 0 ? 
@@ -49,7 +50,7 @@
                     <div>
                         @if ($client_data)
                             <div class="profile">
-                                <img src="{{ asset('imgs/client/uploads/client_profile/default_client_profile.jpg') }}" alt="client img">
+                                <img src="/imgs/client/uploads/client_profile/{{ $client_data['photo'] ? $client_data['photo'] : 'default_client_profile.jpg' }}" alt="client img">
                             </div> {{ $client_data['first_name'] . ' ' . $client_data['last_name'] }}
                         @else
                             
@@ -76,7 +77,7 @@
                                             <h4>Appointment</h4>
                                             <div class="profile">
                                                 <div class="img">
-                                                    <img src="{{asset('/imgs/client/uploads/client_profile/default_client_profile.jpg')}}" alt="">
+                                                    <img src="/imgs/client/uploads/client_profile/{{ $appointment->client->photo ? $appointment->client->photo : 'default_client_profile.jpg' }}" alt="client img">
                                                 </div>
                                                 <div class="name">
                                                     <h6>{{$appointment->client->first_name}}</h6>

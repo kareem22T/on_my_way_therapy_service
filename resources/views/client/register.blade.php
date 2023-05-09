@@ -52,7 +52,10 @@
                     <input type="text" name="phone" id="phone" class="form-control g-7" placeholder="Phone number *">
                 </div>
                 <div class="form-group g-12">
-                    <input type="text" name="address" id="address" disabled class="form-control" placeholder="Address *">
+                    <input type="hidden" name="address_lat" id="address_lat">
+                    <input type="hidden" name="address_lng" id="address_lng">
+                    <input type="hidden" name="address" id="address">
+                    <a href="" id="address-a">Address *</a>
                 </div>
                 <div class="form-group g-6">
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password *">
@@ -73,13 +76,13 @@
                     </select>
                 </div>
 
-                <div class="form-group g-6">
+                {{-- <div class="form-group g-6">
                     <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Company name">
                 </div>
 
                 <div class="form-group g-6">
                     <input type="email" name="company_email" id="company_email" class="form-control" placeholder="Company email">
-                </div>
+                </div> --}}
 
                 <div class="form-group g-12 diagnosis_wrapper">
                     <input type="text" name="diagnosis" id="diagnosis" placeholder="Basic diagnosis" class="form-control">
@@ -147,11 +150,12 @@
                             <label for="client_type_2">NDIS</label>
                         </div>
                         <div class="form-group">
-                            <input type="radio" name="client_type" id="client_type_3" value="2">
-                            <label for="client_type_3">Medicare</label>
+                            <label style="opacity: .5;cursor: not-allowed;">Medicare</label>
                         </div>
+                        
                     </div>
                 </div>
+
                 <div class="g-12 flex-center">
                     <hr>
                 </div>
@@ -165,7 +169,7 @@
                             onblur="(this.type='text')" class="form-control">
                     </div>
                 </div>
-                <div class="form-group g-12 choice radio lg-grid">
+                <div class="form-group g-12 choice radio lg-grid plan-managed-btns">
                     <div class="lg-grid g-12">
                         <div class="form-group g-6 lg-grid plan_managment_1">
                             <input type="radio" name="plan_managment" id="plan_managment_1" value="0" checked>
@@ -178,15 +182,15 @@
                     </div>
                 </div>
                 <div class="g-12 plan-managed-form lg-grid">
-                    <div class="form-group g-12">
-                        <input type="email" name="Plan_manager_email" id="Plan_manager_email" placeholder="Plan manager email" class="form-control">
+                    <div class="form-group g-12 Plan_manager_email_parent">
+                        <input type="email" name="manager_email" id="Plan_manager_email" placeholder="Manager email" class="form-control">
                     </div>
-                    <div class="form-group g-12">
+                    <div class="form-group g-12 card_number">
                         <input type="text" name="card_number" id="card_number" placeholder="Credit card number " class="form-control">
                     </div>
                 </div>
 
-                <div class="g-12 flex-center">
+                <div class="g-12 flex-center plan-managed-hr">
                     <hr>
                 </div>
                 <div class="form-group g-12">
@@ -195,8 +199,54 @@
             </form>
         </div>
     </main>
+
+    <div class="pop-up address-pop-up">
+        <div class="ways">
+            Enter your address
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Enable location access</p>
+            </div>
+            <div id="choose_location">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <p>Choose location on map</p>
+            </div>
+            <button class="btn btn-danger cancel">Cancel</button>
+        </div>
+
+        <div class="autocomplete-map">
+            <p>Write down and pick your address</p>
+            <div class="pac-card" id="pac-card">
+                <div>
+                    <div id="strict-bounds-selector" class="pac-controls">
+                        <input type="checkbox" id="use-location-bias" value="" checked />
+                        <label for="use-location-bias">Bias to map viewport</label>
+                    </div>
+                </div>
+                <div id="pac-container">
+                    <input id="pac-input" type="text" placeholder="Enter a location" />
+                </div>
+            </div>
+            <div id="map"></div>
+            <div id="infowindow-content">
+                <span id="place-name" class="title"></span><br />
+                <span id="place-address"></span>
+            </div>
+
+            <div class="btns">
+                <button class="btn btn-danger cancel">Cancel</button>
+                <button class="btn btn-success confirm">Confirm</button>
+            </div>
+
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
+<script src="{{ asset('/js/maps.js') }}"></script>
 <script src="{{ asset('/js/client/register.js') }}"></script>
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
+defer
+></script>
 @endsection

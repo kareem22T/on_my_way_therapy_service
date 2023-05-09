@@ -44,15 +44,15 @@ class TherapistController extends Controller
     public function indexCalendar()
     {
         $therapist_times = Auth::guard('doctor')->user()->only(['working_hours_from', 'working_hours_to', 'holidays', 'travel_range']);
-        foreach ($therapist_times as $key => $value) {
-            if ($value !== null) {
-                if (is_array($value) && $value->count() == 0) {
-                    return view('doctor.dashboard.calendar');
-                } else {
-                    return view('doctor.dashboard.calendar')->with(compact('therapist_times'));
-                }
-            }
-        }
+
+        if (
+            $therapist_times['working_hours_from'] !== null &&
+            $therapist_times['working_hours_to'] !== null &&
+            count($therapist_times['holidays']) > 0 &&
+            $therapist_times['travel_range'] !== null
+        )
+            return view('doctor.dashboard.calendar')->with(compact('therapist_times'));
+
         return view('doctor.dashboard.calendar');
     }
 

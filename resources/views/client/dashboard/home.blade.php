@@ -46,6 +46,7 @@
             </div>
         </div>
     @elseif (isset($therapist))
+        @include('site.includes.loader')
         <div class="container lg-grid">
             <div class="booking g-7">
                 <div class="preview">
@@ -94,7 +95,7 @@
                     <div class="visit_type_wraper">
                         <h1>visits type</h1>
                         <div class="form-group">
-                            <input type="radio" name="visit_type" id="visit_type_1" value="0">
+                            <input type="radio" name="visit_type" id="visit_type_1" value="0" checked>
                             <label for="visit_type_1">Mobile therapy includes</label>
                         </div>
                         <div class="form-group">
@@ -129,7 +130,60 @@
                 <a href="">find another one</a>
             </div>
         </div>
+        <div class="pop-up address-pop-up">
+            <div class="ways">
+                Confirm your address
+                <input type="text" name="old_address" id="old_address" placeholder="Your address" 
+                value="{{Auth::guard('client')->user()->address}}">
+                <input type="hidden" name="address_lat" id="address_lat" placeholder="Your address" 
+                value="{{Auth::guard('client')->user()->address_lat}}">
+                <input type="hidden" name="address_lng" id="address_lng" placeholder="Your address" 
+                value="{{Auth::guard('client')->user()->address_lng}}">
+                <input type="hidden" name="address" id="address" placeholder="Your address" 
+                value="{{Auth::guard('client')->user()->address}}">
+                <div id="choose_location" class="change-location">
+                    <h1>change location</h1> <i class="fa fa-edit"></i>
+                </div>
+                <div class="btns m-0">
+                    <button class="btn btn-danger cancel">Cancel</button>
+                    <button class="btn btn-success confirm-appointment-address-old">Confirm</button>
+                </div>
+            </div>
+
+            <div class="autocomplete-map">
+                <p>Write down and pick your address</p>
+                <div class="pac-card" id="pac-card">
+                    <div>
+                        <div id="strict-bounds-selector" class="pac-controls">
+                            <input type="checkbox" id="use-location-bias" value="" checked />
+                            <label for="use-location-bias">Bias to map viewport</label>
+                        </div>
+                    </div>
+                    <div id="pac-container">
+                        <input id="pac-input" type="text" placeholder="Enter a location" />
+                    </div>
+                </div>
+                <div id="map"></div>
+                <div id="infowindow-content">
+                    <span id="place-name" class="title"></span><br />
+                    <span id="place-address"></span>
+                </div>
+
+                <div class="btns">
+                    <button class="btn btn-danger cancel">Cancel</button>
+                    <button class="btn btn-success confirm-appointment-address">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="hide-content"></div>
         @section('scripts')
+            <script src="{{ asset('/js/maps.js') }}"></script>
+            <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
+            defer
+            ></script>
             <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
             <script src="{{ asset('/js/client/calendar.js') }}"></script>
         @endsection

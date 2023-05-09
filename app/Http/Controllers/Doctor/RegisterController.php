@@ -98,6 +98,8 @@ class RegisterController extends Controller
             'gender' => $request->input('gender'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
+            'address_lat' => $request->input('address_lat'),
+            'address_lng' => $request->input('address_lng'),
             'password' => Hash::make('123456789'),
         ]);
 

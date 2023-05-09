@@ -18,6 +18,8 @@ class Doctor extends Authenticatable
         'phone',
         'email',
         'address',
+        'address_lat',
+        'address_lng',
         'password',
         'dob',
         'gender',

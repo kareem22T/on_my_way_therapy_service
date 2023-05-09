@@ -147,7 +147,7 @@ header:first-child {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10000000000000000000;
+  z-index: 999999;
 }
 header:nth-child(2) {
   opacity: 0;

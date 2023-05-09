@@ -21,16 +21,20 @@ $(function () {
 
     $('.client_type_2').on('click', function () {
         $('.ndis-form').fadeIn().css('display', 'grid')
+        $('.plan-managed-btns, .plan-managed-form .Plan_manager_email_parent').fadeIn()
     })
-    $('.client_type_2').siblings().on('click', function () {
+    $('.client_type_2').siblings().not(':last-child').on('click', function () {
         $('.ndis-form').fadeOut()
+        $('.plan-managed-btns, .plan-managed-form .Plan_manager_email_parent').fadeOut()
+        $('#card_number').fadeIn()
     })
 
     $('.plan_managment_1').on('click', function () {
         $('.plan-managed-form').fadeIn().css('display', 'grid')
+        $('.card_number').fadeIn()
     })
     $('.plan_managment_1').siblings().on('click', function () {
-        $('.plan-managed-form').fadeOut()
+        $('.card_number').fadeOut()
     })
 })
 

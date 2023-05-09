@@ -28,6 +28,8 @@ class ClientRequest extends FormRequest
             'phone' => 'required|regex:/^[0-9]{7,}$/|unique:clients',
             'email' => 'required|email|unique:clients',
             'address' => 'required',
+            'address_lat' => 'required',
+            'address_lng' => 'required',
             'gender' => 'required',
             'dob' => 'required|date_format:Y-m-d',
             'password_confirmation' => 'required',
@@ -44,8 +46,8 @@ class ClientRequest extends FormRequest
             'NDIS_number' => 'required_if:client_type,1',
             'NDIS_end_date' => 'required_if:client_type,1',
             'plan_managment' => 'required',
-            'Plan_manager_email' => 'required_if:managment_type,0',
-            'card_number' => 'required_if:managment_type,0',
+            'manager_email' => 'required_if:client_type,1',
+            'card_number' => 'required_if:plan_managment,0',
         ];
     }
 
@@ -76,8 +78,8 @@ class ClientRequest extends FormRequest
             'client_type.required' => 'Please choose a client type',
             'NDIS_number.required_if' => 'Please enter the NDIS number',
             'NDIS_end_date.required_if' => 'Please select the NDIS end date',
-            'Plan_manager_email.required_if' => 'Please enter the Plan manager email',
-            'card_number.required_if' => 'Please select the card number',
+            'manager_email.required_if' => 'Please enter the manager email',
+            'card_number.required_if' => 'Please enter the card number',
         ];
     }
 }

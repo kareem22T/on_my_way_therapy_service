@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: white;
+    background: #0c0c0cab;
     z-index: 999999999999;
     }
     .lds-ring div {

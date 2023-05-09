@@ -25,7 +25,7 @@ class TherapistDashboardVisitors
         ) {
             return $next($request);
         } else {
-            return redirect('/therapist/login');
+            return redirect('/therapist/pending');
         }
     }
 }
