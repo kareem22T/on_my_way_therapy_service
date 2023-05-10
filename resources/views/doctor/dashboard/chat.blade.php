@@ -95,10 +95,16 @@
                                                 <span>{{\Carbon\Carbon::parse($appointment->date)->format('M d');}}</span>
                                                 <span>{{\Carbon\Carbon::parse($appointment->date)->format('h:i a');}}</span>
                                             </div>
+                                            @if($appointment->visit_type == 0)
                                             <div class="address">
                                                 <span>{{$appointment->client->address}}</span>
                                                 <span>15 km in 5 min</span>
                                             </div>
+                                            @else
+                                            <div class="online_session">
+                                                Online session
+                                            </div>
+                                            @endif
                                             @if ($appointment->status  == 'pending' && $appointment->status != 'edited')
                                             <div class="controls">
                                                 <button 

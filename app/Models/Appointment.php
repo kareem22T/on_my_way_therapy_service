@@ -15,6 +15,9 @@ class Appointment extends Model
         'date',
         'visit_type',
         'status',
+        'address',
+        'address_lat',
+        'address_lng',
     ];
 
     public $timestamps = false;

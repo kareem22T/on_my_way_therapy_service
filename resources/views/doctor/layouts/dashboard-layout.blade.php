@@ -10,6 +10,7 @@
     @yield('extra-stylesheets')
     <link rel="stylesheet" href="{{ asset('/css/therapist_dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/client_dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset("/css/maps.css") }}">
     <style>body { padding: 0; }</style>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Dashboard | @yield("title")</title>

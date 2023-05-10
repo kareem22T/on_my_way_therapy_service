@@ -66,6 +66,7 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
             Route::post('/save-times', [TherapistController::class, 'saveWorkingTimes']);
             Route::get('/my-account', [TherapistController::class, 'indexMyAccount']);
             Route::get('/chats/{id?}', [TherapistController::class, 'indexChats']);
+            Route::get('/appointment/{id?}', [TherapistController::class, 'appointmentDetails']);
         });
 
         Route::get('/pending', [TherapistController::class, 'indexPending'])

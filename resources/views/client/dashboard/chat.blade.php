@@ -80,7 +80,7 @@
                                                 <h4>Appointment</h4>
                                                 <div class="profile">
                                                     <div class="img">
-                                                        <img src="{{asset('/imgs/client/uploads/client_profile/default_client_profile.jpg')}}" alt="">
+                                                        <img src="/imgs/client/uploads/client_profile/{{$appointment->client->photo ? $appointment->client->photo : 'default_client_profile.jpg'}}" alt="">
                                                     </div>
                                                     <div class="name">
                                                         <h6>{{$appointment->client->first_name}}</h6>
@@ -98,10 +98,16 @@
                                                     <span>{{\Carbon\Carbon::parse($appointment->date)->format('M d');}}</span>
                                                     <span>{{\Carbon\Carbon::parse($appointment->date)->format('h:i a');}}</span>
                                                 </div>
+                                                @if($appointment->visit_type == 0)
                                                 <div class="address">
                                                     <span>{{$appointment->client->address}}</span>
                                                     <span>15 km in 5 min</span>
                                                 </div>
+                                                @else
+                                                <div class="online_session">
+                                                    Online session
+                                                </div>
+                                                @endif
                                                 <div class="status">
                                                     Status: {{$appointment->status}}
                                                 </div>

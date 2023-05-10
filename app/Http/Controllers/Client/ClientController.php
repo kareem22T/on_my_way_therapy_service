@@ -78,7 +78,10 @@ class ClientController extends Controller
             'doctor_id' => $request->doctor_id,
             'client_id' => Auth::guard('client')->user()->id,
             'visit_type' => $request->visit_type,
-            'date' => $request->date
+            'date' => $request->date,
+            'address' => $request->address,
+            'address_lat' => $request->address_lat,
+            'address_lng' => $request->address_lng,
         ]);
 
         if ($appointment) {

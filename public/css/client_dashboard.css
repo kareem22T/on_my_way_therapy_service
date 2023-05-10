@@ -146,7 +146,7 @@ body::after {
 header .container nav ul li {
   position: relative;
 }
-header .container nav ul li span {
+header .container nav ul li > span {
   position: absolute;
   top: calc(100% - 20px);
   width: 30px;
@@ -161,6 +161,81 @@ header .container nav ul li span {
   border-radius: 50%;
   left: calc(100% - 35px);
   border: 2px solid #fff;
+}
+
+header .notification-wrapper {
+  position: relative;
+}
+header .notification-wrapper ul {
+  position: absolute;
+  top: calc(100% + 20px);
+  right: 0;
+  width: max-content;
+  background: white;
+  padding: 20px 0;
+  border-radius: 20px;
+  z-index: 99999;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+header .notification-wrapper ul li {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px 20px;
+  background: #ebebeb;
+  margin: 10px 0;
+}
+header .notification-wrapper ul li .img {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #FFC400;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+header .notification-wrapper ul li .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+header .notification-wrapper ul li h1 {
+  font-size: 25px;
+  display: flex;
+  align-items: end;
+  font-weight: 600;
+  gap: 10px;
+}
+header .notification-wrapper ul li h1 .rate {
+  font-size: 14px;
+  color: #132F75;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+header .notification-wrapper ul li > div > span {
+  margin: 5px 20px 10px;
+  display: block;
+}
+header .notification-wrapper ul li .steps {
+  display: flex;
+  gap: 14px;
+}
+header .notification-wrapper ul li .steps > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+header .notification-wrapper ul li .steps > div span {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFC400;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .chat_wapper {
@@ -226,6 +301,7 @@ header .container nav ul li span {
 .chat_wapper .container .side-chats ul li a .profile img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .chat_wapper .container .side-chats ul li a:hover, .chat_wapper .container .side-chats ul li a.selected {
   border: 2px solid #FFC400 !important;
@@ -269,6 +345,7 @@ header .container nav ul li span {
 .chat_wapper .container .chat .head div .profile img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .chat_wapper .container .chat .msgs {
   height: 100%;
@@ -292,6 +369,9 @@ header .container nav ul li span {
   flex-direction: column;
   padding: 10px 15px;
   gap: 5px;
+}
+.chat_wapper .container .chat .msgs ul li.appointment {
+  min-width: 280px;
 }
 .chat_wapper .container .chat .msgs ul li h4 {
   font-size: 20px;
@@ -328,12 +408,22 @@ header .container nav ul li span {
 }
 .chat_wapper .container .chat .msgs ul li .address {
   display: flex;
-  gap: 15px;
+  gap: 5px;
   margin-left: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  text-align: center;
 }
 .chat_wapper .container .chat .msgs ul li .address span {
   font-size: 14px !important;
   color: black !important;
+  text-align: center;
+}
+.chat_wapper .container .chat .msgs ul li .online_session {
+  text-align: center;
+  font-weight: 700;
 }
 .chat_wapper .container .chat .msgs ul li .btns {
   width: 100%;
@@ -540,15 +630,15 @@ body {
 .home .container > h1 {
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
-  line-height: 50px;
+  font-size: clamp(1.6875rem, 1.3519rem + 1.413vw, 2.5rem);
+  line-height: clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem);
   text-align: center;
   color: #132F75;
-  margin-top: 40px;
+  margin-top: clamp(0.625rem, -0.1495rem + 3.2609vw, 2.5rem);
 }
 .home .container > .form-group {
   max-width: 647px;
-  margin: 35px auto 0;
+  margin: clamp(1.25rem, 0.8628rem + 1.6304vw, 2.1875rem) auto 0;
   position: relative;
   width: 100%;
 }
@@ -557,7 +647,7 @@ body {
   top: 50%;
   left: 20px;
   transform: translateY(-38%);
-  font-size: 35px;
+  font-size: clamp(1.375rem, 1.0394rem + 1.413vw, 2.1875rem);
   color: #132F75;
 }
 .home .container > .form-group .results {
@@ -572,8 +662,8 @@ body {
   background: rgba(255, 255, 255, 0.9490196078);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   width: 100%;
-  font-size: 22px;
-  padding: 20px;
+  font-size: clamp(1.1875rem, 1.1101rem + 0.3261vw, 1.375rem);
+  padding: clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
   border-radius: 15px;
   color: #213F75;
   backdrop-filter: blur(10px);
@@ -589,7 +679,7 @@ body {
   justify-content: start !important;
   align-items: center;
   gap: 15px;
-  padding: 7px 13px;
+  padding: clamp(0.3125rem, 0.2609rem + 0.2174vw, 0.4375rem) 13px;
   border-radius: 5px;
   background-color: transparent;
   width: 100%;
@@ -607,22 +697,22 @@ body {
   width: 100%;
   font-style: normal;
   font-weight: 500;
-  font-size: 29px;
+  font-size: clamp(1.25rem, 1.0177rem + 0.9783vw, 1.8125rem);
   line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
   resize: none;
   display: block;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 75px;
+  padding-left: clamp(3.4375rem, 2.9212rem + 2.1739vw, 4.6875rem);
 }
 .home .container > p {
   font-weight: 400;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1.1875rem, 0.9035rem + 1.1957vw, 1.875rem);
+  line-height: clamp(1.75rem, 1.4918rem + 1.087vw, 2.375rem);
   text-align: center;
   color: #132F75;
-  margin-top: 35px;
+  margin-top: clamp(1.25rem, 0.8628rem + 1.6304vw, 2.1875rem);
 }
 .home .container > p a {
   text-decoration: none;
@@ -756,22 +846,23 @@ body {
 }
 .home .professions_wrapper h1 {
   font-weight: 500;
-  font-size: 40px;
-  line-height: 50px;
+  font-size: clamp(1.625rem, 1.2636rem + 1.5217vw, 2.5rem);
+  line-height: clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem);
   text-align: center;
   color: #132F75;
-  margin-top: 55px;
-  margin-bottom: 35px;
+  margin-top: clamp(1.5625rem, 0.788rem + 3.2609vw, 3.4375rem);
+  margin-bottom: clamp(0.9375rem, 0.4212rem + 2.1739vw, 2.1875rem);
 }
 .home .professions_wrapper .professions {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 25px;
+  align-items: stretch;
+  gap: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
 }
 .home .professions_wrapper .professions .profession {
-  width: 200px;
+  width: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
   min-width: 30%;
   display: flex;
   flex-direction: column;
@@ -785,12 +876,15 @@ body {
   text-align: center;
   color: #132F75;
   position: relative;
-  padding: 0 20px 20px;
+  padding: 0 20px clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
   text-decoration: none;
 }
+.home .professions_wrapper .professions .profession h4 {
+  font-size: clamp(1.0625rem, 0.4688rem + 2.5vw, 2.5rem);
+}
 .home .professions_wrapper .professions .profession .img {
-  width: 150px;
-  height: 150px;
+  width: clamp(6.25rem, 4.9592rem + 5.4348vw, 9.375rem);
+  height: clamp(6.25rem, 4.9592rem + 5.4348vw, 9.375rem);
   background: #FFC400;
   display: flex;
   justify-content: center;
@@ -798,14 +892,14 @@ body {
   border-radius: 50%;
 }
 .home .professions_wrapper .professions .profession .img img {
-  width: 65px;
-  height: 75px;
+  width: clamp(2.5rem, 1.8546rem + 2.7174vw, 4.0625rem);
+  height: clamp(2.8125rem, 2.038rem + 3.2609vw, 4.6875rem);
   object-fit: contain;
 }
 .home .professions_wrapper .professions .profession .bg {
   position: absolute;
   width: 100%;
-  height: calc(100% - 75px);
+  height: calc(100% - clamp(3.4375rem, 2.9212rem + 2.1739vw, 4.6875rem));
   bottom: 0;
   background: #FFFFFF;
   border: 1px solid #132F75;
@@ -882,6 +976,119 @@ body {
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   bottom: 0;
+}
+.home .appointment_wrapper {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 50px;
+}
+.home .appointment_wrapper .appointment > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.home .appointment_wrapper .appointment > div:first-child .img {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+.home .appointment_wrapper .appointment > div:first-child .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid #565656;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .information {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .information h1 {
+  font-size: 58px;
+  font-weight: 600;
+  color: #132F75;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .information p {
+  display: flex;
+  font-size: 30px;
+  margin: 0;
+  font-weight: 500;
+  gap: 13px;
+  color: #3e3e3e;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .address {
+  font-size: 25px;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .time {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 21px;
+  font-weight: 500;
+  color: #707070;
+  margin-top: 10px;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .btns {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .btns button {
+  width: 210px;
+  padding: 8px;
+  border-radius: 30px;
+  border: 2px solid;
+  font-size: 23px;
+  font-weight: 500;
+}
+.home .appointment_wrapper .appointment > div:first-child .details .btns button:first-child {
+  color: #015801;
+  background: rgba(1, 88, 1, 0.031372549);
+}
+.home .appointment_wrapper .appointment > div:first-child .details .btns button:last-child {
+  color: #012458;
+  background: rgba(1, 32, 88, 0.031372549);
+}
+.home .appointment_wrapper .dirction h1 {
+  font-size: 45px;
+  font-weight: 400;
+  color: #626262;
+}
+.home .appointment_wrapper .dirction #client_location {
+  height: 500px;
+  margin: 30px 20px;
+  border-radius: 20px;
+  border: 2px solid #132F75;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.home .appointment_wrapper .dirction .next-step {
+  display: flex;
+  justify-content: space-between;
+}
+.home .appointment_wrapper .dirction .next-step button {
+  text-decoration: none;
+  background: #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+  padding: 11px;
+  width: 100%;
+  margin-top: 13px;
+  border: 3px solid #FFC400;
+  display: block;
+  max-width: 220px;
+  transition: all 0.3s ease-out;
+}
+.home .appointment_wrapper .dirction .next-step button:hover {
+  background-color: transparent;
 }
 
 footer {

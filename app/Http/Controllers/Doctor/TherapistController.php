@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Doctor;
 use App\Events\ChatEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InsertTherapistTimes;
+use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Day;
 use App\Models\Doctor;
@@ -54,6 +55,16 @@ class TherapistController extends Controller
             return view('doctor.dashboard.calendar')->with(compact('therapist_times'));
 
         return view('doctor.dashboard.calendar');
+    }
+
+    public function appointmentDetails($appointment_id = null)
+    {
+        $appointment = Appointment::find($appointment_id)->where('doctor_id', Auth::guard('doctor')->user()->id)->first();
+
+        if ($appointment_id)
+            return view('doctor.dashboard.appointment')->with(compact('appointment'));
+
+        return view('doctor.dashboard.appointment')->with(compact('appointment'));
     }
 
     public function saveWorkingTimes(InsertTherapistTimes $request)

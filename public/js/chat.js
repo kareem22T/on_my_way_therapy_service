@@ -177,16 +177,18 @@ function getMsg() {
               method: "POST",
               data: {appointmetn_id: appointmetn_id},
               success: function (appointment) {
-                const date = new Date(appointment.date);
-                const options = { day: 'numeric', month: 'short' };
-                const formattedDate = date.toLocaleDateString('en-US', options);
-
-                const dateTime = new Date(date);
-                const formattedTime = dateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+              const now = new Date();
+              const formatter = new Intl.DateTimeFormat('en-US', {
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+              });
 
                 $('.msgs ul')
                 .append('\
-                    <li class="their-msg">\
+                    <li class="their-msg appointment">\
                       <h4>Appointment</h4>\
                       <div class="profile">\
                           <div class="img">\
@@ -204,12 +206,16 @@ function getMsg() {
                       <div class="date">\
                           <span>' + formattedDate + '</span>\
                           <span>' + formattedTime + '</span>\
-                      </div>\
-                      <div class="address">\
-                          <span>' + appointment.client.address + '</span>\
+                      </div>'
+                      + (appointment.visit_type == 0 ?
+                      '<div class="address">\
+                          <span>' + appointment.address + '</span>\
                           <span>15 km in 5 min</span>\
-                      </div>\
-                      <div class="controls">\
+                      </div>'
+                      : '<div class="online_session">\
+                        Online session\
+                        </div>') + 
+                      '<div class="controls">\
                         <button \
                         class="edit-date" \
                         appointment_date="' + appointment.date + '" \

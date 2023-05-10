@@ -22,18 +22,19 @@ $(document).on('click', '.slots ul li', function () {
 $('#confirm_appointment').on('click', function (e) {
     e.preventDefault();
     if ($('.slots ul li.selected').length > 0) {
-        if ($('input[name=visit_type]').val() == 0) {
+        if ($('input[name=visit_type]:checked').val() == 0) {
             $('.address-pop-up').fadeIn().css('display', 'flex');
             $('.hide-content').fadeIn()
         } else {
             let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
+            $('.lds-ring').fadeIn()
             $.ajax({
                 url: '/client/appointment',
                 method: 'POST',
                 data: {
                     doctor_id: $(this).attr('doctor_id'),
                     date: selected_slot,
-                    visit_type: $('input[name=visit_type]').val()
+                    visit_type: $('input[name=visit_type]:checked').val()
                 },
                 success: function (data) {
                     if (data.status == 200) {
@@ -65,58 +66,124 @@ $('#confirm_appointment').on('click', function (e) {
     }
 })
 $('.confirm-appointment-address').on('click', function (e) {
-  e.preventDefault()
-  if (addressLat && addressLng) {
-    $('.address-pop-up').fadeOut();
-    $('.hide-content').fadeOut()
-    $('#address_lat').val(addressLat)
-    $('#address_lng').val(addressLng)
-    $('#address').val($('#place-address').text())
-    $('#address-a').text($('#place-address').text())
-    $('.lds-ring').fadeIn()
-    let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
-    $.ajax({
-        url: '/client/appointment',
-        method: 'POST',
-        data: {
-            doctor_id: $(this).attr('doctor_id'),
-            date: selected_slot,
-            visit_type: $('input[name=visit_type]').val(),
-            address: $('#address').val(),
-            address_lat: $('#address_lat').val(),
-            address_lng: $('#address_lng').val(),
-        },
-        success: function (data) {
-            if (data.status == 200) {
+    e.preventDefault()
+    if (addressLat && addressLng) {
+        $('.address-pop-up').fadeOut();
+        $('.hide-content').fadeOut()
+        $('#address_lat').val(addressLat)
+        $('#address_lng').val(addressLng)
+        $('#address').val($('#place-address').text())
+        $('#address-a').text($('#place-address').text())
+        $('.lds-ring').fadeIn()
+        let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
+        $.ajax({
+            url: '/client/appointment',
+            method: 'POST',
+            data: {
+                doctor_id: $('#confirm_appointment').attr('doctor_id'),
+                date: selected_slot,
+                visit_type: $('input[name=visit_type]').val(),
+                address: $('#address').val(),
+                address_lat: $('#address_lat').val(),
+                address_lng: $('#address_lng').val(),
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    document.getElementById('errors').innerHTML = ''
+                    let error = document.createElement('div')
+                    error.classList = 'alert alert-success'
+                    error.innerHTML = data.msg
+                    document.getElementById('errors').append(error)
+                    $('#errors').fadeIn('slow')
+                    setTimeout(() => {
+                        location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+                    }, 1200);
+                }
+            }, error: function (err) {
                 document.getElementById('errors').innerHTML = ''
-                let error = document.createElement('div')
-                error.classList = 'alert alert-success'
-                error.innerHTML = data.msg
-                document.getElementById('errors').append(error)
+                $.each(err.responseJSON.errors, function (key, value) {
+                    let error = document.createElement('div')
+                    error.classList = 'alert alert-danger'
+                    error.innerHTML = value[0]
+                    document.getElementById('errors').append(error)
+                });
                 $('#errors').fadeIn('slow')
                 setTimeout(() => {
-                    location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
-                }, 1200);
+                    $('#errors').fadeOut('slow')
+                    $('.lds-ring').fadeOut()
+                }, 2000);
             }
-        }, error: function (err) {
-            document.getElementById('errors').innerHTML = ''
-            $.each(err.responseJSON.errors, function (key, value) {
-                let error = document.createElement('div')
-                error.classList = 'alert alert-danger'
-                error.innerHTML = value[0]
-                document.getElementById('errors').append(error)
-            });
-            $('#errors').fadeIn('slow')
-            setTimeout(() => {
-                $('#errors').fadeOut('slow')
-                $('.lds-ring').fadeOut()
-            }, 2000);
-        }
-    })
+        })
 
-  } else {
+    } else {
+        document.getElementById('errors').innerHTML = ''
+        let error = document.createElement('div')
+        error.classList = 'alert alert-danger'
+        error.innerHTML = 'Please pick your address !'
+        document.getElementById('errors').append(error)
+        $('#errors').fadeIn('slow')
+        setTimeout(() => {
+            $('#errors').fadeOut('slow')
+        }, 2500);
+    }
+})
+$('.confirm-appointment-address-old').on('click', function (e) {
+    e.preventDefault()
+    if ($('.slots ul li.selected').length > 0) {
+        $('.address-pop-up').fadeOut();
+        $('.hide-content').fadeOut()
+        $('.lds-ring').fadeIn()
+        let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
+        $.ajax({
+            url: '/client/appointment',
+            method: 'POST',
+            data: {
+                doctor_id: $('#confirm_appointment').attr('doctor_id'),
+                date: selected_slot,
+                visit_type: $('input[name=visit_type]').val(),
+                address: $('#address').val(),
+                address_lat: $('#address_lat').val(),
+                address_lng: $('#address_lng').val(),
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    document.getElementById('errors').innerHTML = ''
+                    let error = document.createElement('div')
+                    error.classList = 'alert alert-success'
+                    error.innerHTML = data.msg
+                    document.getElementById('errors').append(error)
+                    $('#errors').fadeIn('slow')
+                    setTimeout(() => {
+                        location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+                    }, 1200);
+                }
+            }, error: function (err) {
+                document.getElementById('errors').innerHTML = ''
+                $.each(err.responseJSON.errors, function (key, value) {
+                    let error = document.createElement('div')
+                    error.classList = 'alert alert-danger'
+                    error.innerHTML = value[0]
+                    document.getElementById('errors').append(error)
+                });
+                $('#errors').fadeIn('slow')
+                setTimeout(() => {
+                    $('#errors').fadeOut('slow')
+                    $('.lds-ring').fadeOut()
+                }, 2000);
+            }
+        })
 
-  }
+    } else {
+        document.getElementById('errors').innerHTML = ''
+        let error = document.createElement('div')
+        error.classList = 'alert alert-danger'
+        error.innerHTML = 'Please choose your sutiable slot !'
+        document.getElementById('errors').append(error)
+        $('#errors').fadeIn('slow')
+        setTimeout(() => {
+            $('#errors').fadeOut('slow')
+        }, 2500);
+    }
 })
 
 getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))

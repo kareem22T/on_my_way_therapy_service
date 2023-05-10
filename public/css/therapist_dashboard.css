@@ -245,8 +245,8 @@ header .container nav .fa-bell {
 .calendar_wrapper .container .appointments table td {
   padding: 15px 25px;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: 24px;
+  line-height: 34px;
   text-align: center;
   color: #132F75;
 }
@@ -323,7 +323,7 @@ header .container nav .fa-bell {
   border-bottom: 1px solid rgba(128, 128, 128, 0.1882352941);
 }
 .calendar_wrapper .container .this-week table td p {
-  padding: 10px 0px;
+  padding: 10px;
   margin: 0;
   display: flex;
   align-items: center;

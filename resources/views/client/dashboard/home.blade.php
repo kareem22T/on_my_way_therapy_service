@@ -92,17 +92,19 @@
                         </div>
                     </div>
 
-                    <div class="visit_type_wraper">
-                        <h1>visits type</h1>
-                        <div class="form-group">
-                            <input type="radio" name="visit_type" id="visit_type_1" value="0" checked>
-                            <label for="visit_type_1">Mobile therapy includes</label>
+                    <form action="">
+                        <div class="visit_type_wraper">
+                            <h1>visits type</h1>
+                            <div class="form-group visit_type">
+                                <input type="radio" name="visit_type" id="visit_type_1" value="0" checked>
+                                <label for="visit_type_1">Mobile therapy includes</label>
+                            </div>
+                            <div class="form-group visit_type">
+                                <input type="radio" name="visit_type" id="visit_type_2" value="1">
+                                <label for="visit_type_2">telehealth online sessions</label>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="radio" name="visit_type" id="visit_type_2" value="1">
-                            <label for="visit_type_2">telehealth online sessions</label>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <button id="confirm_appointment" doctor_id="{{$therapist->id}}">Confirm</button>
             </div>
@@ -133,7 +135,7 @@
         <div class="pop-up address-pop-up">
             <div class="ways">
                 Confirm your address
-                <input type="text" name="old_address" id="old_address" placeholder="Your address" 
+                <input type="text" name="old_address" id="old_address" disabled placeholder="Your address" 
                 value="{{Auth::guard('client')->user()->address}}">
                 <input type="hidden" name="address_lat" id="address_lat" placeholder="Your address" 
                 value="{{Auth::guard('client')->user()->address_lat}}">
