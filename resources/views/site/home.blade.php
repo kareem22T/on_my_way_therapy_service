@@ -7,11 +7,13 @@
         <section class="hero" >
             <div class="container lg-grid">
                 <div class="g-6 flex-center">
-                    <img src="{{ asset('/imgs/site/hero.png') }}" alt="hero-img">
+                    <img src="{{ asset('/imgs/site/hero-1.png') }}" alt="hero-img">
                 </div>
                 <div class="g-6 flex-center">
                     <h4>
-                        No more Wait-List, no more Travelling. Just Therapy in the comfort of your own home Anywhere - Anytime
+                        No more Wait-List, no more Travelling.
+                        Just therapy in the comfort of your own home.
+                        Anywhere - Anytime
                     </h4>
                     <a href="#how">How it works?</a>
                 </div>
@@ -59,7 +61,7 @@
 
         <section class="contact">
             <h1 class="head">contact us or leave  a feedback</h1>
-            <div class="container lg-grid">
+            <div class="container lg-grid" style="padding-bottom: 10px">
                 <div class="g-4 flex-center">
                     <img src="{{ asset('/imgs/site/map.png') }}" alt="" style="padding: 10px;">
                     <p>On My Way is Australia Wide Anwhere & Anytime</p>
@@ -70,6 +72,10 @@
                     <textarea name="msg" id="msg" cols="30" rows="7" placeholder="Message" class="g-12"></textarea>
                     <button type="submit"><i class='bx bxs-send'></i></button>
                 </form>
+                <section>
+                    <a href="mailto:Info@onmywaytherapy.com.au"><i class="fa-solid fa-envelope"></i> Info@onmywaytherapy.com.au</a>
+                    <a href="tel:1800666992"><i class="fa fa-phone"></i> 1800 ON MY WAY</a>
+                </section>
             </div>
         </section>
     </main>

@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'card_number' => $request->input('card_number'),
             'therapist_gender' => $request->input('therapist_gender'),
             'managment_type' => $request->input('client_type') == 1 ? $request->input('plan_managment') : null,
-            'manager_email' => $request->input('client_type') == 1 ? $request->input('manager_email') : null,
+            'manager_email' => $request->input('client_type') == 0 ? $request->input('manager_email') : null,
         ]);
 
         if ($request->diagnosis)

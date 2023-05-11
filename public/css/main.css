@@ -520,6 +520,28 @@ main .contact .container form button {
   font-size: 38px;
   color: #132F75;
 }
+main .contact section {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-direction: column;
+  grid-column: span 12;
+  margin-top: 15px;
+}
+main .contact section a {
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 32px;
+  text-align: center;
+  color: #132F75;
+  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+main .contact section a i {
+  font-size: 30px;
+}
 
 .help-wrapper .head {
   margin-bottom: clamp(1.25rem, 0.7143rem + 2.1978vw, 2.5rem);

@@ -796,10 +796,11 @@ body {
   font-style: normal;
   font-weight: 600;
   font-size: clamp(1.6875rem, 1.3519rem + 1.413vw, 2.5rem);
-  line-height: clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem);
   text-align: center;
   color: #132F75;
-  margin-top: clamp(0.625rem, -0.1495rem + 3.2609vw, 2.5rem);
+  max-width: 630px;
+  margin: clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem) auto;
+  line-height: clamp(2.1875rem, 1.697rem + 2.0652vw, 3.375rem);
 }
 .home .container > .form-group {
   max-width: 647px;

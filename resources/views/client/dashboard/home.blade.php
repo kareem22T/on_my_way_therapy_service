@@ -13,11 +13,7 @@
     @if (!isset($therapist) && !isset($search_results))
         <div class="container">
             <h1>
-                Hello, {{ Auth::guard('client')->user()->first_name}}
-                <br>
-                hope you get better soon
-                <br>
-                what specialist you need?
+                Hello {{ Auth::guard('client')->user()->first_name}}, we’re here to help you find the right therapist, search by name or by therapy type
             </h1>
             <form class="form-group">
                 <input type="text" name="search" id="search" placeholder="specialist you need" class="form-control">
@@ -26,9 +22,7 @@
                 </div>
             </form>
             <p>
-                Feel tired and do not know which medical specialty you need?
-                <br>
-                <a href="">ask us!</a> Customer service is at your command
+                Please search by, name or service
             </p>
             <div class="professions_wrapper">
                 <h1>Please select your service</h1>

@@ -47,8 +47,8 @@ class ClientRequest extends FormRequest
             'NDIS_number' => 'required_if:client_type,1',
             'NDIS_end_date' => 'required_if:client_type,1',
             'plan_managment' => 'required',
-            'manager_email' => 'required_if:client_type,1',
-            'card_number' => 'required_if:plan_managment,0',
+            'manager_email' => 'required_if:client_type,0',
+            'card_number' => 'required',
         ];
     }
 
@@ -80,7 +80,7 @@ class ClientRequest extends FormRequest
             'NDIS_number.required_if' => 'Please enter the NDIS number',
             'NDIS_end_date.required_if' => 'Please select the NDIS end date',
             'manager_email.required_if' => 'Please enter the manager email',
-            'card_number.required_if' => 'Please enter the card number',
+            'card_number.required' => 'Please enter the card number',
         ];
     }
 }

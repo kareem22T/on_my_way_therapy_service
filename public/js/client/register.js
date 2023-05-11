@@ -38,10 +38,10 @@ $(function () {
 
     $('.plan_managment_1').on('click', function () {
         $('.plan-managed-form').fadeIn().css('display', 'grid')
-        $('.card_number').fadeIn()
+        $('.Plan_manager_email_parent').fadeIn()
     })
     $('.plan_managment_1').siblings().on('click', function () {
-        $('.card_number').fadeOut()
+        $('.Plan_manager_email_parent').fadeOut()
     })
 })
 

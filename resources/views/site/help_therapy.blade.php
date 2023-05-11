@@ -55,23 +55,23 @@
                 <h1 class="head">The expected earnings from your work with us</h1>
                 <div class="btns">
                     <button class="active">Full-time</button>
-                    <button>Part time</button>
+                    <button>Part-time</button>
                 </div>
                 <div class="full-time">
-                    <input class="custom-range" type="range" value="50" min="50" max="100" v-model="fullval">
+                    <input class="custom-range" type="range" value="38" min="0" max="50" v-model="fullval">
                     <div class="value">
                         <output>@{{ fullval }} hours per week</output>
-                        <span class="max">100</span>
-                    </div>
-                    <a href="">= @{{ fullval * 50 }}$</a>
-                </div>
-                <div class="part-time">
-                    <input class="custom-range" type="range" value="35" min="35" max="50" v-model="partval">
-                    <div class="value">
-                        <output>@{{ partval }} hours per week</output>
                         <span class="max">50</span>
                     </div>
-                    <a href="">= @{{ partval * 50 }}$</a>
+                    <a href="" @click.prevent>= $@{{ fullval * 139 }}</a>
+                </div>
+                <div class="part-time">
+                    <input class="custom-range" type="range" value="35" min="0" max="38" v-model="partval">
+                    <div class="value">
+                        <output>$@{{ partval }} hours per week</output>
+                        <span class="max">38</span>
+                    </div>
+                    <a href="" @click.prevent>= @{{ partval * 139 }}$</a>
                 </div>
             </section>
 

@@ -97,12 +97,12 @@
 </script>
 
 <style>
-    .img, .logo {
+    header .img, header .logo {
         overflow: visible;
         background-color: #fff !important;
         border-radius: 0 !important;
     }
-    .img img, .logo img {
+    header .img img, header .logo img {
         width: 100%;
         height: 100%;
         object-fit: contain;

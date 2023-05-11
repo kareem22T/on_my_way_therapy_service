@@ -414,6 +414,28 @@ main {
                 }
             }
         }
+        section {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-direction: column;
+            grid-column: span 12;
+            margin-top: 15px;
+            a {
+                font-weight: 600;
+                font-size: 25px;
+                line-height: 32px;
+                text-align: center;
+                color: #132F75;
+                text-decoration: none;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                i {
+                    font-size: 30px;
+                }
+            }
+        }
     }
 }
 // end ...

@@ -16,7 +16,10 @@
         gap: clamp(0.625rem, calc(0.3668rem + 1.087vw), 1.25rem);
         padding: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
         height: auto;
+        margin-top: 15px;
     }
+
+    footer p {margin: 0}
 
     @media (max-width: 599.98px) {
         footer {
