@@ -1,14 +1,13 @@
+<span></span>
 <header>
-    
     <div class="container">
         <nav>
             <ul>
-                <li>
-                    <a href="/">
-                        <div class="img">
-                            <img src="{{asset('/imgs/site/logo.png')}}" alt="">
-                        </div> On My Way Therapy Services
-                    </a>
+                <li><a href="/">
+                    <div class="img">
+                        <img src="{{asset('/imgs/site/logo.png')}}" alt="">
+
+                    </div> On My Way Therapy Services</a>
                 </li>
                 <li class="more">
                     <a href="" id="menu-icon">
