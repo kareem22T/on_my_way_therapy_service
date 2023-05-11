@@ -707,6 +707,85 @@ header .notification-wrapper ul li .steps > div.done span {
   right: 20px;
 }
 
+@media (max-width: 599.98px) {
+  .account_wrapper .container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.account_wrapper .container .profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: clamp(1.25rem, 0.4688rem + 2.5vw, 1.875rem) 0;
+}
+.account_wrapper .container .profile .img {
+  width: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
+  height: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
+  overflow: hidden;
+  border-radius: 50%;
+}
+.account_wrapper .container .profile .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.account_wrapper .container .profile h1 {
+  font-size: 29px;
+  font-weight: 600;
+  color: #132F75;
+  margin: 10px 0;
+}
+.account_wrapper .container .profile a {
+  font-size: 23px;
+  border-radius: 20px;
+}
+.account_wrapper .container input {
+  background: #ffffff;
+  border: 1px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem);
+  padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem);
+  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
+  resize: none;
+  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.account_wrapper .container .form-group {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+.account_wrapper .container .form-group button {
+  width: clamp(4.375rem, 3.6005rem + 3.2609vw, 6.25rem);
+  border-radius: 16px;
+  background-color: #FFC400;
+  color: #132F75;
+  border: 3px solid #FFC400;
+  font-size: clamp(1.5625rem, 1.0462rem + 2.1739vw, 2.8125rem);
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+.account_wrapper .container .form-group span {
+  margin: 10px 20px 0;
+  display: block;
+  font-size: clamp(1.0625rem, 0.8818rem + 0.7609vw, 1.5rem);
+  color: #132F75;
+  cursor: pointer;
+  position: absolute;
+  top: calc(100% + 0px);
+}
+
 body {
   min-height: 100vh;
   position: relative;

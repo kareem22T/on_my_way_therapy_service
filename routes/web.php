@@ -116,6 +116,7 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
             Route::post('/appointment', [ClientController::class, 'insertAppointment']);
             Route::post('/slots_approved', [ClientController::class, 'getSlotsApproved']);
             Route::get('/chats/{id?}', [ClientController::class, 'indexChats']);
+            Route::get('/account', [ClientController::class, 'indexAccount']);
             Route::get('/{username?}', [ClientController::class, 'index']);
             Route::post('/get-search-hints', [ClientController::class, 'getSearchHints']);
         });

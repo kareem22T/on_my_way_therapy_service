@@ -61,7 +61,7 @@
             <h1 class="head">contact us or leave  a feedback</h1>
             <div class="container lg-grid">
                 <div class="g-4 flex-center">
-                    <img src="{{ asset('/imgs/site/map.png') }}" alt="">
+                    <img src="{{ asset('/imgs/site/map.png') }}" alt="" style="padding: 10px;">
                     <p>On My Way is Australia Wide Anwhere & Anytime</p>
                 </div>
                 <form action="" class="g-8 lg-grid">

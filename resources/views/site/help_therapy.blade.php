@@ -76,6 +76,7 @@
             </section>
 
             <section>
+                <p>+ 80 cent for each travailed kilometer</p>
                 <a href="/therapist/register">Let’s start!</a>
                 <p>Sign up today and start making a difference in your clients’ lives.</p>
             </section>

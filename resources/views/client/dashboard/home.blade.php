@@ -134,7 +134,7 @@
                     </p>
                     <div class="bg-border"></div>
                 </div>
-                <a href="">find another one</a>
+                <a href="/client">select another therapist</a>
             </div>
         </div>
         <div class="pop-up address-pop-up">

@@ -29,6 +29,13 @@ $(function () {
         $('#card_number').fadeIn()
     })
 
+    $('label[for="account_type_2"]').on('click', function () {
+        $('.for_some_one').fadeIn()
+    })
+    $('label[for="account_type_1"]').on('click', function () {
+        $('.for_some_one').fadeOut()
+    })
+
     $('.plan_managment_1').on('click', function () {
         $('.plan-managed-form').fadeIn().css('display', 'grid')
         $('.card_number').fadeIn()

@@ -62,6 +62,11 @@ class ClientController extends Controller
         }
     }
 
+    public function indexAccount()
+    {
+        return view('client.dashboard.account');
+    }
+
     public function indexChats($therapist_id = null)
     {
         $therapist_data = null;

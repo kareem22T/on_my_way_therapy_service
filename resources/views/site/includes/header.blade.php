@@ -1,8 +1,15 @@
 <header>
+    
     <div class="container">
         <nav>
             <ul>
-                <li><a href="/"><div class="img"></div> On My Way Therapy Services</a></li>
+                <li>
+                    <a href="/">
+                        <div class="img">
+                            <img src="{{asset('/imgs/site/logo.png')}}" alt="">
+                        </div> On My Way Therapy Services
+                    </a>
+                </li>
                 <li class="more">
                     <a href="" id="menu-icon">
                         <span class="bar"></span>
@@ -89,3 +96,16 @@
     });
 
 </script>
+
+<style>
+    .img, .logo {
+        overflow: visible;
+        background-color: #fff !important;
+        border-radius: 0 !important;
+    }
+    .img img, .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+</style>

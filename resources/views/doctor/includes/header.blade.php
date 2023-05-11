@@ -1,7 +1,10 @@
+
 <header>
     <div class="container">
         <nav>
-            <div class="logo"></div>
+            <div class="logo">
+                <img src="{{asset('/imgs/site/logo.png')}}" alt="">
+            </div>
             <ul class="links">
                 <li><a href="/therapist" class="@yield('calendar_link')"><span>Calendar </span><i class="fa-solid fa-calendar-days"></i></a></li>
                 <li>
@@ -23,3 +26,16 @@
         </nav>
     </div>
 </header>
+
+<style>
+    .img, .logo {
+        overflow: visible;
+        background-color: #fff !important;
+        border-radius: 0 !important;
+    }
+    .img img, .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+</style>

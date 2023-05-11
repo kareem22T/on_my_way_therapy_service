@@ -1,7 +1,9 @@
 <header>
     <div class="container">
         <nav>
-            <div class="logo"></div>
+            <div class="logo">
+                <img src="{{asset('/imgs/site/logo.png')}}" alt="">
+            </div>
             <ul class="links">
                 <li><a href="/client" class="@yield('home_link')"><span>Home</span> <i class="fa-solid fa-house"></i></a></li>
                 <li>
@@ -15,7 +17,7 @@
                     @endphp
                     <span style="display: {{$unSeen > 0 ? 'flex' : 'none'}}">{{$unSeen > 0 ? $unSeen : ''}}</span>
                 </li>
-                <li><a href="" class="@yield('account_link')"><span>Account </span><i class="fa-solid fa-user"></i></a></a></li>
+                <li><a href="/client/account" class="@yield('account_link')"><span>Account </span><i class="fa-solid fa-user"></i></a></a></li>
             </ul>
             <div class="notification-wrapper">
                 <a href="" class="notification">
@@ -64,3 +66,16 @@
         </nav>
     </div>
 </header>
+
+<style>
+    .img, .logo {
+        overflow: visible;
+        background-color: #fff !important;
+        border-radius: 0 !important;
+    }
+    .img img, .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+</style>

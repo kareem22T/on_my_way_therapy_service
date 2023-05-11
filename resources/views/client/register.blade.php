@@ -76,13 +76,19 @@
                     </select>
                 </div>
 
-                {{-- <div class="form-group g-6">
-                    <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Company name">
-                </div>
+                <div class="lg-grid g-12 for_some_one" style="display: none">
+                    <div class="form-group g-6">
+                        <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Company name">
+                    </div>
 
-                <div class="form-group g-6">
-                    <input type="email" name="company_email" id="company_email" class="form-control" placeholder="Company email">
-                </div> --}}
+                    <div class="form-group g-6">
+                        <input type="email" name="company_email" id="company_email" class="form-control" placeholder="Company email">
+                    </div>
+
+                    <div class="form-group g-12">
+                        <input type="text" name="relation_to_patient" id="relation_to_patient" placeholder="relationship to client" class="form-control">
+                    </div>
+                </div>
 
                 <div class="form-group g-12 diagnosis_wrapper">
                     <input type="text" name="diagnosis" id="diagnosis" placeholder="Basic diagnosis" class="form-control">
