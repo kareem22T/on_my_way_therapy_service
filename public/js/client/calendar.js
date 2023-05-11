@@ -13,6 +13,11 @@ $.ajaxSetup({
 $(function () {
     $('.lds-ring').fadeOut()
 })
+$('.visit_type input:checked').next().addClass('selected');
+$('.visit_type label').on('click', function () {
+    $(this).addClass('selected')
+    $(this).parents('.visit_type').siblings().find('label').removeClass('selected')
+})
 
 $(document).on('click', '.slots ul li', function () {
     $(this).addClass('selected').siblings().removeClass('selected')
@@ -213,6 +218,7 @@ $('.today').on('click', function () {
     }, 1000);
 
 })
+
 // end ...
 
 

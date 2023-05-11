@@ -3,9 +3,9 @@
         <nav>
             <div class="logo"></div>
             <ul class="links">
-                <li><a href="/client" class="@yield('home_link')">Home</a></li>
+                <li><a href="/client" class="@yield('home_link')"><span>Home</span> <i class="fa-solid fa-house"></i></a></li>
                 <li>
-                    <a href="/client/chats" class="@yield('chats_link')">Chats</a>
+                    <a href="/client/chats" class="@yield('chats_link')"><span>Chats </span><i class="fa-solid fa-comment-dots"></i></a>
                     @php
                         $guard_type = Auth::guard('client')->check() ? 2 : 1;
                         $unSeen = 0;
@@ -15,14 +15,15 @@
                     @endphp
                     <span style="display: {{$unSeen > 0 ? 'flex' : 'none'}}">{{$unSeen > 0 ? $unSeen : ''}}</span>
                 </li>
-                <li><a href="" class="@yield('account_link')">Account</a></li>
+                <li><a href="" class="@yield('account_link')"><span>Account </span><i class="fa-solid fa-user"></i></a></a></li>
             </ul>
             <div class="notification-wrapper">
-                <a href="" class="nutification">
+                <a href="" class="notification">
                     <i class="fa fa-bell"></i>
+                    <span class="no num-noti"></span>
                 </a>
-                <ul>
-                    <li>
+                <ul style="display: none">
+                    {{-- <li>
                         <div class="img">
                             <img src="{{asset('/imgs/doctor/uploads/therapist_profile/1_profile_picture.png')}}" alt="client img">
                         </div>
@@ -57,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </nav>

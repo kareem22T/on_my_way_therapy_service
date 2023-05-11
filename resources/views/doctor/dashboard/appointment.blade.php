@@ -8,7 +8,7 @@
 </div>
 @if ($appointment !== null) 
     <div class="container home">
-        <div class="appointment_wrapper mt-5">
+        <div class="appointment_wrapper">
             <input type="hidden" name="appointment_lat" id="appointment_lat" value="{{$appointment->address_lat}}">
             <input type="hidden" name="appointment_lng" id="appointment_lng" value="{{$appointment->address_lng}}">
 
@@ -37,8 +37,8 @@
                             <span>Start in: {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date, 'UTC')->format('g:i a') }}</span>
                         </div>
                         <div class="btns">
-                            <button><i></i> Call</button>
-                            <button><i></i> Message</button>
+                            <a href=""><i></i> Call</a>
+                            <a href="/therapist/chats/{{ $appointment->id }}"><i></i> Message</a>
                         </div>
                     </div>
                 </div>
@@ -47,10 +47,34 @@
             <div class="dirction">
                 <h1>Appointment location</h1>
                 <div id="client_location"></div>
-                <div class="next-step">
-                    <button class="go_to_direction"><i></i> Direction</button>
-                    <button class="Arrived"><i></i> Arrived</button>
+                @if ($appointment->journey == 1)
+                <div class="next-step" id="{{$appointment->id}}">
+                    <span></span>
+                    <button class="start"><i></i> Start</button>
+                    <div class="pop-up start-popup">
+                        We going to let the client know you will start
+                        <div class="btns">
+                            <button class="btn btn-success confirm-start" id="{{$appointment->id}}">Confirm</button>
+                            <button class="btn btn-danger cancel">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="hide-content"></div>
                 </div>
+                @elseif (($appointment->journey == 2))
+                <div class="next-step">
+                    <button class="Arrived" id="{{$appointment->id}}"><i></i> Arrived</button>
+                    <button class="go_to_direction"><i></i> Direction</button>
+                </div>
+                @elseif (($appointment->journey == 3))
+                    <div class="next-step">
+                        <h5>Please press complete after session end</h5>
+                        <button class="complete" id="{{$appointment->id}}"><i></i> Complete</button>
+                    </div>
+                @else
+                    <div class="next-step">
+                        <h1 class="arrived">Completed !</h1>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

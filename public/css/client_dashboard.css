@@ -163,6 +163,28 @@ header .container nav ul li > span {
   border: 2px solid #fff;
 }
 
+.notification {
+  position: relative;
+}
+.notification span {
+  position: absolute;
+  top: calc(100% - 20px);
+  color: #fff;
+  background: #b52020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  right: calc(100% - 10px);
+  border: 2px solid #fff;
+  font-size: 13px;
+  line-height: 10px;
+  padding: 7px;
+}
+.notification span.no {
+  display: none;
+}
+
 header .notification-wrapper {
   position: relative;
 }
@@ -176,6 +198,10 @@ header .notification-wrapper ul {
   border-radius: 20px;
   z-index: 99999;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 header .notification-wrapper ul li {
   display: flex;
@@ -184,6 +210,10 @@ header .notification-wrapper ul li {
   padding: 10px 20px;
   background: #ebebeb;
   margin: 10px 0;
+}
+header .notification-wrapper ul li.no {
+  font-size: 19px;
+  min-width: 210px;
 }
 header .notification-wrapper ul li .img {
   width: 100px;
@@ -233,9 +263,12 @@ header .notification-wrapper ul li .steps > div span {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #FFC400;
+  border: 2px solid #FFC400;
   font-size: 20px;
   font-weight: 600;
+}
+header .notification-wrapper ul li .steps > div.done span {
+  background: #FFC400;
 }
 
 .chat_wapper {
@@ -246,12 +279,29 @@ header .notification-wrapper ul li .steps > div span {
   padding: 30px 20px;
   grid-template-rows: 100%;
 }
+@media (max-width: 899.98px) {
+  .chat_wapper .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
 .chat_wapper .container .side-chats {
   padding: 20px;
   border: 1px solid #ffffff;
   height: 100%;
   border-radius: 20px 0 0 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+@media (max-width: 899.98px) {
+  .chat_wapper .container .side-chats {
+    border-radius: 20px 20px 0 0px;
+    width: 100%;
+    max-height: 320px;
+    height: max-content;
+    overflow: auto;
+  }
 }
 .chat_wapper .container .side-chats ul {
   list-style: none;
@@ -263,6 +313,12 @@ header .notification-wrapper ul li .steps > div span {
   gap: 8px;
   overflow: auto;
   padding-right: 10px;
+}
+@media (max-width: 899.98px) {
+  .chat_wapper .container .side-chats ul {
+    margin: 0;
+    padding: 0;
+  }
 }
 .chat_wapper .container .side-chats ul li a {
   text-decoration: none;
@@ -279,6 +335,12 @@ header .notification-wrapper ul li .steps > div span {
   border: 2px solid transparent;
   transition: all 0.1s ease-out;
   cursor: pointer;
+}
+@media (max-width: 899.98px) {
+  .chat_wapper .container .side-chats ul li a {
+    padding: 10px;
+    border-radius: 10px;
+  }
 }
 .chat_wapper .container .side-chats ul li a span {
   color: #fff;
@@ -318,10 +380,22 @@ header .notification-wrapper ul li .steps > div span {
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 899.98px) {
+  .chat_wapper .container .chat {
+    width: 100%;
+    height: 500px;
+    border-radius: 0 0 20px 20px;
+  }
+}
 .chat_wapper .container .chat .head {
   justify-content: space-between;
   border-bottom: 1px solid #132F75;
   padding-bottom: 15px;
+}
+@media (max-width: 899.98px) {
+  .chat_wapper .container .chat .head {
+    display: none;
+  }
 }
 .chat_wapper .container .chat .head div {
   text-decoration: none;
@@ -357,6 +431,18 @@ header .notification-wrapper ul li .steps > div span {
   flex-shrink: 2;
   overflow-y: auto;
   box-shadow: inset 0 2rem 2rem -2rem rgba(0, 0, 0, 0.05), inset 0 -2rem 2rem -2rem rgba(0, 0, 0, 0.05);
+}
+.chat_wapper .container .chat .msgs > p {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 210px;
+  color: #a9a8a8;
+  font-size: clamp(6.875rem, 4.2935rem + 10.8696vw, 13.125rem);
 }
 .chat_wapper .container .chat .msgs ul {
   list-style: none;
@@ -720,11 +806,34 @@ body {
   border-bottom: 2px solid #FFC400;
   color: #132F75;
 }
-.home .container .booking {
-  padding: 140px 0 0;
+.home .container .booking .preview_warapper {
+  padding-top: clamp(0.625rem, -0.1495rem + 3.2609vw, 2.5rem);
+}
+.home .container .booking .preview_warapper > h1 {
+  height: clamp(3.125rem, 1.8342rem + 5.4348vw, 6.25rem);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  padding-bottom: 19px;
+  font-weight: 600;
+  font-size: clamp(1.5625rem, 1.3043rem + 1.087vw, 2.1875rem);
+  color: #132F75;
 }
 .home .container .booking .preview {
   grid-template-columns: 1fr;
+}
+.home .container .booking .preview .slot_head {
+  margin: clamp(1.5625rem, 1.4334rem + 0.5435vw, 1.875rem) clamp(0rem, -0.7745rem + 3.2609vw, 1.875rem) clamp(0.625rem, 0.4959rem + 0.5435vw, 0.9375rem);
+  font-size: clamp(1.5625rem, 1.3818rem + 0.7609vw, 2rem);
+  font-weight: 600;
+  color: #132F75;
+}
+@media (max-width: 599.98px) {
+  .home .container .booking .preview .slot_head {
+    width: 100%;
+    text-align: center;
+  }
 }
 .home .container .booking .preview .slots ul {
   list-style: none;
@@ -734,6 +843,15 @@ body {
   grid-template-columns: repeat(5, 1fr);
   text-align: center;
   gap: 10px;
+  padding: 0 12px;
+}
+@media (max-width: 599.98px) {
+  .home .container .booking .preview .slots ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }
 .home .container .booking .preview .slots ul li {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -748,12 +866,6 @@ body {
 .home .container .booking .preview .slots ul li:hover, .home .container .booking .preview .slots ul li.selected {
   background-color: #FFC400;
 }
-.home .container .booking .preview .visit_type_wrapper {
-  border: 1px solid #FFC400;
-  border-radius: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  padding: 28px 35px;
-}
 .home .container .booking button, .home .container .profile_wrapper > a {
   text-decoration: none;
   background: #FFC400;
@@ -761,8 +873,8 @@ body {
   border-radius: 20px;
   border: none;
   font-weight: 600;
-  font-size: 35px;
-  line-height: 44px;
+  font-size: clamp(1.375rem, 1.0394rem + 1.413vw, 2.1875rem);
+  line-height: clamp(1.625rem, 1.1603rem + 1.9565vw, 2.75rem);
   text-align: center;
   color: #132F75;
   padding: 11px;
@@ -778,14 +890,14 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: clamp(0.9375rem, 0.2921rem + 2.7174vw, 2.5rem);
   justify-content: center;
   align-items: center;
   position: relative;
 }
 .home .container .profile .img {
-  width: 200px;
-  height: 200px;
+  width: clamp(9.375rem, 8.0842rem + 5.4348vw, 12.5rem);
+  height: clamp(9.375rem, 8.0842rem + 5.4348vw, 12.5rem);
   overflow: hidden;
   border-radius: 50%;
   border: 3px solid #FFC400;
@@ -797,38 +909,38 @@ body {
 }
 .home .container .profile .name {
   font-weight: 700;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1.375rem, 1.1685rem + 0.8696vw, 1.875rem);
+  line-height: clamp(0.625rem, -0.0978rem + 3.0435vw, 2.375rem);
   text-align: center;
   color: #132F75;
   margin-top: 20px;
 }
 .home .container .profile .rate {
   margin-top: 5px;
-  font-size: 26px;
+  font-size: clamp(1rem, 0.7418rem + 1.087vw, 1.625rem);
   color: #FFC400;
 }
 .home .container .profile .profession {
   margin-top: 14px;
   font-weight: 700;
-  font-size: 25px;
+  font-size: clamp(1.1875rem, 1.0584rem + 0.5435vw, 1.5rem);
   line-height: 32px;
   text-align: center;
   color: #132F75;
 }
 .home .container .profile .distance {
-  margin-top: 7px;
+  margin-top: clamp(0rem, -0.1807rem + 0.7609vw, 0.4375rem);
   font-weight: 600;
-  font-size: 20px;
-  line-height: 25px;
+  font-size: clamp(1.125rem, 1.0734rem + 0.2174vw, 1.25rem);
+  line-height: clamp(0.875rem, 0.591rem + 1.1957vw, 1.5625rem);
   text-align: center;
   color: #132F75;
 }
 .home .container .profile .about {
-  margin-top: 20px;
+  margin-top: clamp(0rem, -0.5163rem + 2.1739vw, 1.25rem);
   font-weight: 400;
-  font-size: 22px;
-  line-height: 32px;
+  font-size: clamp(0.9375rem, 0.7568rem + 0.7609vw, 1.375rem);
+  line-height: clamp(1.5rem, 1.2935rem + 0.8696vw, 2rem);
   text-align: center;
   color: #132F75;
 }
@@ -911,14 +1023,26 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
-  margin-top: 30px;
+  margin-top: clamp(0.625rem, 0.1087rem + 2.1739vw, 1.875rem);
+}
+@media (max-width: 899.98px) {
+  .home .search_wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 599.98px) {
+  .home .search_wrapper {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
 }
 .home .search_wrapper > h2 {
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
+  font-size: clamp(1.75rem, 1.4402rem + 1.3043vw, 2.5rem);
   line-height: 50px;
   color: #132F75;
+  margin-top: 10px;
 }
 .home .search_wrapper .therapist_overview {
   display: flex;
@@ -980,20 +1104,31 @@ body {
 .home .appointment_wrapper {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 20px;
-  padding: 25px;
+  padding: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
   margin-bottom: 50px;
+  margin-top: clamp(0.625rem, -0.4076rem + 4.3478vw, 3.125rem);
 }
 .home .appointment_wrapper .appointment > div:first-child {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: clamp(1.25rem, 0.4755rem + 3.2609vw, 3.125rem);
+}
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .appointment > div:first-child {
+    flex-direction: column;
+  }
 }
 .home .appointment_wrapper .appointment > div:first-child .img {
-  width: 250px;
-  height: 250px;
+  width: clamp(11.25rem, 9.4429rem + 7.6087vw, 15.625rem);
+  height: clamp(11.25rem, 9.4429rem + 7.6087vw, 15.625rem);
   overflow: hidden;
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .appointment > div:first-child .img {
+    border-radius: 50%;
+  }
 }
 .home .appointment_wrapper .appointment > div:first-child .img img {
   width: 100%;
@@ -1004,62 +1139,94 @@ body {
 .home .appointment_wrapper .appointment > div:first-child .details .information {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: clamp(0.3125rem, -0.2038rem + 2.1739vw, 1.5625rem);
+}
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .appointment > div:first-child .details .information {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 }
 .home .appointment_wrapper .appointment > div:first-child .details .information h1 {
-  font-size: 58px;
+  font-size: clamp(1.625rem, 0.7989rem + 3.4783vw, 3.625rem);
   font-weight: 600;
   color: #132F75;
 }
 .home .appointment_wrapper .appointment > div:first-child .details .information p {
   display: flex;
-  font-size: 30px;
+  font-size: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem);
   margin: 0;
   font-weight: 500;
   gap: 13px;
   color: #3e3e3e;
 }
 .home .appointment_wrapper .appointment > div:first-child .details .address {
-  font-size: 25px;
+  font-size: clamp(1rem, 0.7677rem + 0.9783vw, 1.5625rem);
+}
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .appointment > div:first-child .details .address {
+    text-align: center;
+  }
 }
 .home .appointment_wrapper .appointment > div:first-child .details .time {
   display: flex;
   align-items: center;
   gap: 20px;
-  font-size: 21px;
+  font-size: clamp(0.875rem, 0.6943rem + 0.7609vw, 1.3125rem);
   font-weight: 500;
   color: #707070;
   margin-top: 10px;
 }
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .appointment > div:first-child .details .time {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .home .appointment_wrapper .appointment > div:first-child .details .btns {
-  margin-top: 20px;
+  margin-top: clamp(1rem, 0.8967rem + 0.4348vw, 1.25rem);
   display: flex;
   gap: 20px;
 }
-.home .appointment_wrapper .appointment > div:first-child .details .btns button {
-  width: 210px;
-  padding: 8px;
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .appointment > div:first-child .details .btns {
+    justify-content: space-around !important;
+  }
+}
+.home .appointment_wrapper .appointment > div:first-child .details .btns a {
+  width: clamp(8.125rem, 6.0598rem + 8.6957vw, 13.125rem);
+  padding: clamp(0.3125rem, 0.2351rem + 0.3261vw, 0.5rem);
   border-radius: 30px;
   border: 2px solid;
-  font-size: 23px;
+  font-size: clamp(1.1875rem, 1.0842rem + 0.4348vw, 1.4375rem);
   font-weight: 500;
+  text-align: center;
+  text-decoration: none;
 }
-.home .appointment_wrapper .appointment > div:first-child .details .btns button:first-child {
+.home .appointment_wrapper .appointment > div:first-child .details .btns a:first-child {
   color: #015801;
   background: rgba(1, 88, 1, 0.031372549);
 }
-.home .appointment_wrapper .appointment > div:first-child .details .btns button:last-child {
+.home .appointment_wrapper .appointment > div:first-child .details .btns a:last-child {
   color: #012458;
   background: rgba(1, 32, 88, 0.031372549);
 }
 .home .appointment_wrapper .dirction h1 {
-  font-size: 45px;
+  font-size: clamp(1.625rem, 1.1345rem + 2.0652vw, 2.8125rem);
   font-weight: 400;
   color: #626262;
 }
+@media (max-width: 599.98px) {
+  .home .appointment_wrapper .dirction h1 {
+    font-size: clamp(1.625rem, 1.1345rem + 2.0652vw, 2.8125rem);
+    text-align: center;
+  }
+}
 .home .appointment_wrapper .dirction #client_location {
-  height: 500px;
-  margin: 30px 20px;
+  height: clamp(18.75rem, 13.587rem + 21.7391vw, 31.25rem);
+  margin: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem) clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
   border-radius: 20px;
   border: 2px solid #132F75;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -1068,7 +1235,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.home .appointment_wrapper .dirction .next-step button {
+.home .appointment_wrapper .dirction .next-step > button {
   text-decoration: none;
   background: #FFC400;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -1087,8 +1254,55 @@ body {
   max-width: 220px;
   transition: all 0.3s ease-out;
 }
-.home .appointment_wrapper .dirction .next-step button:hover {
+.home .appointment_wrapper .dirction .next-step > button:hover {
   background-color: transparent;
+}
+.home .appointment_wrapper .dirction .next-step h5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 30px;
+  font-size: 28px;
+  color: #404040;
+}
+.home .appointment_wrapper .dirction .next-step .arrived {
+  font-size: 40px;
+  margin: 0 30px;
+  font-weight: 600;
+  color: #008f00;
+  text-align: center;
+  width: 100%;
+}
+
+.visit_type_wrapper {
+  flex-direction: column;
+}
+.visit_type_wrapper h1 {
+  margin: 0;
+}
+.visit_type_wrapper .btns-wrapper {
+  gap: 30px;
+}
+.visit_type_wrapper .btns-wrapper input {
+  display: none;
+}
+.visit_type_wrapper .btns-wrapper label {
+  padding: 12px clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
+  border-radius: 10px;
+  font-size: clamp(1.0625rem, 0.856rem + 0.8696vw, 1.5625rem);
+  border: 2px solid;
+  border: 3px solid #fff;
+  line-height: clamp(1.375rem, 1.0652rem + 1.3043vw, 2.125rem);
+}
+.visit_type_wrapper .btns-wrapper label.selected {
+  border: 3px solid #FFC400;
+}
+
+@media (max-width: 599.98px) {
+  .client_calendar_wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 footer {

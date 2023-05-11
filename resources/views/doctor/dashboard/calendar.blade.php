@@ -124,13 +124,13 @@
                     <span>
                         {{$therapist_times['working_hours_to'] <= 12 ? $therapist_times['working_hours_to'] . ' am' : $therapist_times['working_hours_to'] - 12 . ' pm'}}
                     </span>
-                    <button><i class="fa fa-edit"></i></button>
+                    <button id="edit-hours"><i class="fa fa-edit"></i></button>
                 </h1>
                 <h1>Your max traviling distance
                     <span>
                         {{$therapist_times['travel_range'] * 10 . ' km'}}
                     </span> 
-                    <button><i class="fa fa-edit"></i></button>
+                    <button id="edit-distance"><i class="fa fa-edit"></i></button>
                 </h1>
                 <h1>Your holidays
                     @php
@@ -141,12 +141,113 @@
                             {{ $holiday->name}}
                         </span>
                     @endforeach
-                    <button><i class="fa fa-edit"></i></button>
+                    <button id="edit-holidays"><i class="fa fa-edit"></i></button>
                 </h1>
-                
+
+                <div class="pop-up edit_hours_pop_up">
+                    Set working hours
+                    <div class="form-group">
+                        <label for="form_new">From: </label>
+                        <select name="from_new" id="from_new" class="form-control">
+                            <option value="">From ---</option>
+                            @for ($i = 0; $i < 25; $i++)
+                                @php
+                                    $hour = null;
+                                    if ($i > 12)
+                                        $hour = ($i - 12) . ' pm';
+                                    elseif ($i == 12)
+                                        $hour = $i  . ' pm';
+                                    elseif ($i == 0)
+                                        $hour = '12 am';
+                                    else
+                                        $hour = $i . ' am';
+                                @endphp
+                                <option value="{{$i}}" {{ $therapist_times['working_hours_from'] == $i ? 'selected' : '' }}>{{ $hour }}</option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="to_new">To: </label>
+                        <select name="to_new" id="to_new" class="form-control">
+                            <option value="">To ---</option>
+                            @for ($i = 0; $i < 25; $i++)
+                                @php
+                                    $hour = null;
+                                    if ($i > 12)
+                                        $hour = ($i - 12) . ' pm';
+                                    elseif ($i == 12)
+                                        $hour = $i  . ' pm';
+                                    elseif ($i == 0)
+                                        $hour = '12 am';
+                                    else
+                                        $hour = $i . ' am';
+                                @endphp
+                                <option value="{{$i}}" {{ $therapist_times['working_hours_to'] == $i ? 'selected' : '' }}>{{ $hour }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="btns">
+                        <button class="btn btn-danger cancel">Cancel</button>
+                        <button class="btn btn-success set-hours">Set</button>
+                    </div>
+                </div>
+                <div class="pop-up edit_distance_pop_up">
+                    Set your traviling distance
+                    <div class="form-group">
+                        <label for="form_new">Distance in KM: </label>
+                        <div class="form-group">
+                            <select name="distance" id="distance" class="form-control">
+                                <option value="1" {{ $therapist_times['travel_range'] = 1 ? 'selected' : ''}}>10</option>
+                                <option value="2" {{ $therapist_times['travel_range'] = 2 ? 'selected' : ''}}>20</option>
+                                <option value="3" {{ $therapist_times['travel_range'] = 3 ? 'selected' : ''}}>30 +</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="btns">
+                        <button class="btn btn-danger cancel">Cancel</button>
+                        <button class="btn btn-success set-hours">Set</button>
+                    </div>
+                </div>
+                <div class="pop-up edit_holidays_pop_up">
+                    Set your holidays
+                    <div class="form-group">
+                        <label for="form_new">Select holidays: </label>
+                        <div>
+                        <div class="form-group">
+                            <select name="holidays[]" id="holidays" class="form-control">
+                                <option value="">Day ---</option>
+                                <option value="1">Sun</option>
+                                <option value="2">Mon</option>
+                                <option value="3">Tue</option>
+                                <option value="4">Wed</option>
+                                <option value="5">Thu</option>
+                                <option value="6">Fri</option>
+                                <option value="7">Sat</option>
+                            </select>
+                        </div>
+                        <ul class="holidays mt-3">
+                            @foreach ($therapist_times['holidays'] as $holiday)
+                                <li val="{{$holiday->id}}">
+                                    {{ $holiday->name}}
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    </div>
+
+                    <div class="btns">
+                        <button class="btn btn-danger cancel">Cancel</button>
+                        <button class="btn btn-success set-hours">Set</button>
+                    </div>
+                </div>
+                <div class="hide-content"></div>
             @endif
         </div>
-        <div class="preview">
+        
+        <div class="preview" style="display: none;">
             <div class="left">
                 <div class="calendar">
                 <div class="month">
@@ -182,6 +283,31 @@
             </div>
         </div>
 
+        @php
+            $appoinments_sessions = App\Models\Appointment::where('status', 1)->where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->paginate(10)
+        @endphp
+        <div class="appointments">
+            <h3>Up coming sessions</h3>
+            @if ($appoinments_sessions->count() > 0)
+            @foreach ($appoinments_sessions as $appointment)
+                <tr>
+                    <a href="/therapist/appointment/{{ $appointment->id }}" target="_blank">
+                        <span>{{date("F j", strtotime($appointment->date))}}</span>
+                        <span>{{date('h:i A', strtotime($appointment->date))}}</span>
+                        <span>{{$appointment->client->address}}</span>
+                        <span>15 km in 10 min</span>
+                        <span>{{ $appointment->client->gender }}</span>
+                        <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
+                    </a>
+                </tr>
+            @endforeach
+            @else 
+                <tr>
+                    <p>There are no sessions yet!</p>
+                </tr>
+            @endif
+        </div>
+
         <div class="this_week_wrapper">
             <h1>
                 This week
@@ -200,11 +326,11 @@
                             <td>{{ \Carbon\Carbon::today()->addDays($i)->format('M j, D') }}</td>
                             <td>
 
-                                @if (\App\Models\Appointment::whereDate('date', '=', \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->get()->count() == 0)
+                                @if (\App\Models\Appointment::where('status', 1)->where('journey', '!', 1)->whereDate('date', '=', \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->get()->count() == 0)
                                     <p>There is no appointment yet!</p>
                                 @endif
 
-                                @foreach (\App\Models\Appointment::whereDate('date', '=', \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->where('status', 1)->get() as $appointment)
+                                @foreach (\App\Models\Appointment::where('journey', 1)->whereDate('date', '=', \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->where('status', 1)->get() as $appointment)
                                     <p>
                                         <span>{{date("F j", strtotime($appointment->date))}}</span>
                                         <span>{{date('h:i A', strtotime($appointment->date))}}</span>
@@ -221,23 +347,7 @@
                 </table>
             </div>
         </div>
-        <div class="appointments">
-            <h3>Up coming sessions</h3>
-            <table>
-                <tbody>
-                    @foreach (App\Models\Appointment::where('status', 1)->where('doctor_id', Auth::guard('doctor')->user()->id)->paginate(4) as $appointment)
-                        <tr>
-                            <td>{{date("F j", strtotime($appointment->date))}}</td>
-                            <td>{{date('h:i A', strtotime($appointment->date))}}</td>
-                            <td>{{$appointment->client->address}}</td>
-                            <td>15 km in 10 min</td>
-                            <td>{{ $appointment->client->gender }}</td>
-                            <td>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+
     </div>
 </main>
 @endSection

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\ChatEvent;
+use App\Events\NotificationEvent;
 use App\Http\Traits\SendEmail;
 use App\Models\Appointment;
 use App\Models\Chat;
 use App\Models\Doctor;
 use App\Models\Msg;
+use App\Models\Notification;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -124,8 +126,20 @@ class ChatController extends Controller
         $appointment = Appointment::find($request->id);
 
         $appointment->status = true;
+        $appointment->journey = true;
 
         $appointment->save();
+
+        $notification = Notification::create([
+            'receiver_id' => $appointment->client_id,
+            'receiver_guard_type' => 2,
+            'content' => 'appointment-id:' . $appointment->id
+        ]);
+        if ($notification)
+            event(new ChatEvent(
+                'new-notification',
+                $appointment->client_id . '_' . 2
+            ));
 
         if ($appointment)
             return response()->json([
@@ -136,6 +150,37 @@ class ChatController extends Controller
             ]);
     }
 
+    public function startMove(Request $request)
+    {
+        $appointment = Appointment::find($request->id);
+        $appointment->journey = 2;
+        $appointment->save();
+
+        if ($appointment)
+            event(new ChatEvent(
+                'new-notification',
+                $appointment->client_id . '_' . 2
+            ));
+    }
+
+    public function arrived(Request $request)
+    {
+        $appointment = Appointment::find($request->id);
+        $appointment->journey = 3;
+        $appointment->save();
+
+        if ($appointment)
+            event(new ChatEvent(
+                'new-notification',
+                $appointment->client_id . '_' . 2
+            ));
+    }
+    public function complete(Request $request)
+    {
+        $appointment = Appointment::find($request->id);
+        $appointment->journey = 4;
+        $appointment->save();
+    }
 
     public function acceptAppointment(Request $request)
     {

@@ -15,23 +15,23 @@ class NotificationEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $user_id;
-    public $guard_type;
+    // public $user_id;
+    // public $guard_type;
 
-    public function __construct($message, $user_id, $guard_type)
+    public function __construct($message)
     {
         $this->message = $message;
-        $this->user_id = $user_id;
-        $this->guard_type = $guard_type;
+        // $this->user_id = $user_id;
+        // $this->guard_type = $guard_type;
     }
 
     public function broadcastOn()
     {
-        return ['chat-channel_' . $this->user_id . '_' . $this->guard_type];
+        return ['notification-channel'];
     }
 
     public function broadcastAs()
     {
-        return 'chat-event';
+        return 'notification-event';
     }
 }

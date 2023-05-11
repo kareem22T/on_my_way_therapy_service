@@ -47,64 +47,69 @@
         </div>
     @elseif (isset($therapist))
         @include('site.includes.loader')
-        <div class="container lg-grid">
+        <div class="container lg-grid client_calendar_wrapper">
             <div class="booking g-7">
-                <div class="preview">
-                    <div class="left">
-                        <div class="calendar">
-                        <div class="month">
-                            <i class="fas fa-angle-left prev"></i>
-                            <div class="date">december 2015</div>
-                            <i class="fas fa-angle-right next"></i>
+                <div class="preview_warapper">
+                    <h1>Chose best time for you</h1> 
+                    <div class="preview">
+                        <div class="left">
+                            <div class="calendar">
+                            <div class="month">
+                                <i class="fas fa-angle-left prev"></i>
+                                <div class="date">december 2015</div>
+                                <i class="fas fa-angle-right next"></i>
+                            </div>
+
+                            <div class="weekdays">
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                            </div>
+
+                            <div class="days"></div>
+
+                            {{-- <div class="goto-today">
+                                <button class="today-btn">Today</button>
+                            </div> --}}
+                            </div>
+
                         </div>
 
-                        <div class="weekdays">
-                            <div>Sun</div>
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
+                        <h1 class="slot_head">Avilable slots</h1>
+                        <div class="right">
+                            <div class="today-date">
+                                <div class="event-day">wed</div>
+                                <div class="event-date">12th december 2022</div>
+                            </div>
+
+                            <div class="slots">
+                                <div start="{{$therapist->working_hours_from}}" to="{{$therapist->working_hours_to}}">
+                                    <ul>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="days"></div>
-
-                        {{-- <div class="goto-today">
-                            <button class="today-btn">Today</button>
-                        </div> --}}
-                        </div>
-
+                        <form action="">
+                            <div class="visit_type_wrapper">
+                                <h1>visits type</h1>
+                                <div class="btns-wrapper">
+                                    <div class="form-group visit_type">
+                                        <input type="radio" name="visit_type" id="visit_type_1" value="0" checked>
+                                        <label for="visit_type_1">Mobile therapy includes</label>
+                                    </div>
+                                    <div class="form-group visit_type">
+                                        <input type="radio" name="visit_type" id="visit_type_2" value="1">
+                                        <label for="visit_type_2">telehealth online sessions</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                    <div class="right">
-                        <h1>Avilable slots</h1>
-                        <div class="today-date">
-                            <div class="event-day">wed</div>
-                            <div class="event-date">12th december 2022</div>
-                        </div>
-
-                        <div class="slots">
-                            <div start="{{$therapist->working_hours_from}}" to="{{$therapist->working_hours_to}}">
-                                <ul>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <form action="">
-                        <div class="visit_type_wraper">
-                            <h1>visits type</h1>
-                            <div class="form-group visit_type">
-                                <input type="radio" name="visit_type" id="visit_type_1" value="0" checked>
-                                <label for="visit_type_1">Mobile therapy includes</label>
-                            </div>
-                            <div class="form-group visit_type">
-                                <input type="radio" name="visit_type" id="visit_type_2" value="1">
-                                <label for="visit_type_2">telehealth online sessions</label>
-                            </div>
-                        </div>
-                    </form>
                 </div>
                 <button id="confirm_appointment" doctor_id="{{$therapist->id}}">Confirm</button>
             </div>

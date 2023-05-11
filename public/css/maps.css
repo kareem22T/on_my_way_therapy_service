@@ -64,7 +64,7 @@
     display: none;
 }
 
-.pop-up .ways >div:not(.btns), .pop-up .ways input {
+.pop-up .ways >div:not(.btns), .pop-up .ways input, .pop-up select {
     color: #484848;
     padding: 20px;
     border-radius: 15px;
@@ -75,7 +75,9 @@
     cursor: pointer;
     font-weight: 500;
 }
-
+.pop-up label {
+    color: #484848;
+}
 .change-location {
     display: flex;
     justify-content: center;

@@ -3,9 +3,9 @@
         <nav>
             <div class="logo"></div>
             <ul class="links">
-                <li><a href="/therapist" class="@yield('calendar_link')">Calendar</a></li>
+                <li><a href="/therapist" class="@yield('calendar_link')"><span>Calendar </span><i class="fa-solid fa-calendar-days"></i></a></li>
                 <li>
-                    <a href="/therapist/chats" class="@yield('chats_link')">Chats</a>
+                    <a href="/therapist/chats" class="@yield('chats_link')"><span>Chats </span><i class="fa-solid fa-comment-dots"></i></a>
                     @php
                         $guard_type = Auth::guard('client')->check() ? 2 : 1;
                         $unSeen = 0;
@@ -15,7 +15,7 @@
                     @endphp
                     <span style="display: {{$unSeen > 0 ? 'flex' : 'none'}}">{{$unSeen > 0 ? $unSeen : ''}}</span>
                 </li>
-                <li><a href="/therapist/my-account" class="@yield('account_link')">Account</a></li>
+                <li><a href="/therapist/my-account" class="@yield('account_link')"><span>Account </span><i class="fa-solid fa-user"></i></a></li>
             </ul>
             <a href="" class="nutification">
                 <i class="fa fa-bell"></i>

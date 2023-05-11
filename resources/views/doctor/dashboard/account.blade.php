@@ -43,6 +43,33 @@
                 </span>
             </div>
         </div>
+        <div>
+            <h1>Invoices</h1>
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>client name</th>
+                            <th>address</th>
+                            <th>date</th>
+                            <th>time</th>
+                            <th>rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
     </div>
 </main>
 @endSection

@@ -154,6 +154,10 @@
                         no messages yet did you say hi!
                         <ul></ul>
                     @endif
+                @else
+                    <p>
+                        <i class="fa-regular fa-comments"></i>
+                    </p>
                 @endif
             </div>
 

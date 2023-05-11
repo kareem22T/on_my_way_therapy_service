@@ -163,7 +163,7 @@ function getMsg() {
         });
 
         const formattedDate = formatter.format(now);
-        if (data.message != 'seen' && !data.message.startsWith("appointment")) {
+        if (data.message != 'seen' && !data.message.startsWith("appointment") && data.message != 'new-notification') {
             notifyMe(data.message)
             setUnseenNum()
             setUnseenNumPerChat()
@@ -205,7 +205,6 @@ function getMsg() {
                       </div>\
                       <div class="date">\
                           <span>' + formattedDate + '</span>\
-                          <span>' + formattedTime + '</span>\
                       </div>'
                       + (appointment.visit_type == 0 ?
                       '<div class="address">\
@@ -242,8 +241,10 @@ function getMsg() {
                 scrollBottom ()
               }
             })
-
-        } else {
+          }else if (data.message == 'new-notification') {
+            getUnseenNotifications()
+            notifyMe('You have new notifications')
+          } else {
           $('.msgs ul li span i').removeClass('fa-check').addClass('fa-check-double')
         }
     });

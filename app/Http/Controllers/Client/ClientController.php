@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Events\ChatEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HostAppointmentRequest;
+use App\Http\Traits\SendEmail;
 use App\Models\Appointment;
 use App\Models\Chat;
 use App\Models\Diagnosi;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+    use SendEmail;
     public function index($usernameOrSearch = null)
     {
         if (strpos($usernameOrSearch, 'therapist@') !== false && strpos($usernameOrSearch, '_') !== false) {
@@ -109,6 +111,12 @@ class ClientController extends Controller
                     'appointment-id:' . $appointment->id,
                     $request->doctor_id . '_' . 1
                 ));
+
+            $this->sendEmail(
+                $appointment->doctor->email,
+                'New Appointment',
+                'You have new appointment by: ' . $appointment->client->first_name . '<a href="/therapist/chats/' . $appointment->id . '"> View appointmet</a>'
+            );
 
             return response()->json(
                 [

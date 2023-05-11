@@ -308,3 +308,31 @@ $('#working_hours').on('submit', function (e) {
     }
   })
 })
+
+$('#edit-hours').on('click', function (e) {
+  e.preventDefault();
+  $('.edit_hours_pop_up').fadeIn()
+  $('.hide-content').fadeIn()
+})
+
+$('#edit-distance').on('click', function (e) {
+  e.preventDefault();
+  $('.edit_distance_pop_up').fadeIn()
+  $('.hide-content').fadeIn()
+})
+
+$('#edit-holidays').on('click', function (e) {
+  e.preventDefault();
+  $('.edit_holidays_pop_up').fadeIn()
+  $('.hide-content').fadeIn()
+})
+
+$('.cancel').on('click', function (e) {
+  e.preventDefault();
+  $('.pop-up').fadeOut()
+  $('.hide-content').fadeOut()
+})
+
+$('.appointments tr').on('click', function (e) {
+  woindow.open('/therapist/appointment/'.$(this).attr('id'), '_blank')
+})

@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Client\RegisterController as ClientRegisterController;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doctor\RegisterController as TherapisRegisterController;
 use App\Http\Controllers\Doctor\TherapistController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +89,13 @@ Route::post('/get-appointment', [ChatController::class, 'getAppointmentData']);
 Route::post('/approve-appointment', [ChatController::class, 'approveAppointment']);
 Route::post('/accept-appointment', [ChatController::class, 'acceptAppointment']);
 Route::post('/edit-appointment', [ChatController::class, 'editAppointmentTime']);
+Route::get('/get-notifications', [NotificationController::class, 'getNotifications']);
+Route::post('/get-notifications-appointment', [NotificationController::class, 'getAppointmentData']);
+Route::get('/get-unseen-notification', [NotificationController::class, 'getUnseenNotification']);
+Route::get('/seen-notification', [NotificationController::class, 'seenNotifiction']);
+Route::post('/startMove', [ChatController::class, 'startMove']);
+Route::post('/arrived', [ChatController::class, 'arrived']);
+Route::post('/complete', [ChatController::class, 'complete']);
 
 ######################################## star client routes ###############################################
 Route::group(["namespace" => "client", "prefix" => "client"], function () {
@@ -112,9 +121,5 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         });
     });
     // ......................................
-});
-
-Route::get('/testMap', function () {
-    return view('test');
 });
 ########################################### end client routes #################################################

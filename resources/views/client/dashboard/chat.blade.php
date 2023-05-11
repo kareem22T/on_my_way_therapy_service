@@ -132,6 +132,7 @@
                                                 @endif
                                             </span>
                                         </li>
+                                        
                                         @endif
                                     @endforeach
                                 </ul>
@@ -141,6 +142,10 @@
                     @else
                         no messages yet did you say hi!
                     @endif
+                @else
+                    <p>
+                        <i class="fa-regular fa-comments"></i>
+                    </p>
                 @endif
                 {{-- <ul>
                     <li class="your-msg">

@@ -98,6 +98,61 @@ function showError(error) {
   }
 }
 
-$('.go_to_direction').on('click', function() {
+$('.start').on('click', function () {
+  $('.start-popup').fadeIn()
+  $('.hide-content').fadeIn();
+})
+
+$('.cancel').on('click', function () {
+  $('.start-popup').fadeOut()
+  $('.hide-content').fadeOut();
+})
+
+let appointmentId = $('.next-step').attr('id')
+
+$('.confirm-start').on('click', function () {
+  $.ajax({
+    url: '/startMove',
+    method: 'POST',
+    data: {id: id,
+    success: function () {
+        $('.next-step').html('\
+                      <button class="Arrived"><i></i> Arrived</button>\
+                      <button class="go_to_direction"><i></i> Direction</button>')
+    }
+  }
+  })
+  $('.start-popup').fadeOut()
+  $('.hide-content').fadeOut();
+})
+
+$('.Arrived').on('click', function () {
+  $.ajax({
+    url: '/arrived',
+    method: 'POST',
+    data: {id: id,
+    success: function () {
+        $('.next-step').html('\
+          <h5>Please press complete after session end</h5>\
+          <button class="complete"><i></i> Complete</button>\
+        ')
+    }
+  }
+  })
+})
+
+$('.complete').on('click', function () {
+  $.ajax({
+    url: '/complete',
+    method: 'POST',
+    data: {id: id,
+    success: function () {
+        $('.next-step').html('<h1 class="arrived">Completed !</h1>')
+    }
+  }
+  })
+})
+
+$(document).on('click', '.go_to_direction', function() {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${parseFloat($('#appointment_lat').val())},${parseFloat($('#appointment_lng').val())}`, '_blank')
 })
