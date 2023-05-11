@@ -139,15 +139,16 @@ main .how .container:last-child > div a, main .hero .container:nth-child(2) > di
   display: none;
 }
 
-header {
-  margin-top: clamp(1.25rem, 0.8482rem + 1.6484vw, 2.1875rem);
-}
 header:first-of-type {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 9999999;
+}
+
+header {
+  margin-top: clamp(1.25rem, 0.8482rem + 1.6484vw, 2.1875rem);
 }
 header:nth-of-type(2) {
   opacity: 0;
