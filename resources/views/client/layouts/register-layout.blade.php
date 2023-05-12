@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset("/css/client.css") }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset("/css/main.css") }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset("/css/maps.css") }}?v={{time()}}">
+    <link rel="shortcut icon" href="{{asset('/imgs/site/logo.png')}}" type="image/x-icon">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <style>
         ul {

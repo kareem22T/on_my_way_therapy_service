@@ -71,7 +71,7 @@
                         <output>$@{{ partval }} hours per week</output>
                         <span class="max">38</span>
                     </div>
-                    <a href="" @click.prevent>= @{{ partval * 139 }}$</a>
+                    <a href="" @click.prevent>= $@{{ partval * 139 }}</a>
                 </div>
             </section>
 

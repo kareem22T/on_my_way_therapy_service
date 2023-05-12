@@ -522,16 +522,16 @@ main .contact .container form button {
 }
 main .contact section {
   display: flex;
-  gap: 20px;
+  gap: clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
   align-items: center;
   flex-direction: column;
   grid-column: span 12;
-  margin-top: 15px;
+  margin-top: clamp(0rem, -0.3872rem + 1.6304vw, 0.9375rem);
 }
 main .contact section a {
   font-weight: 600;
-  font-size: 25px;
-  line-height: 32px;
+  font-size: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
+  line-height: clamp(1.1875rem, 0.8519rem + 1.413vw, 2rem);
   text-align: center;
   color: #132F75;
   text-decoration: none;
@@ -540,7 +540,7 @@ main .contact section a {
   align-items: center;
 }
 main .contact section a i {
-  font-size: 30px;
+  font-size: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem);
 }
 
 .help-wrapper .head {

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('/css/therapist_dashboard.css') }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset('/css/doctor_calendar.css') }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset('/css/client_dashboard.css') }}?v={{time()}}">
+    <link rel="shortcut icon" href="{{asset('/imgs/site/logo.png')}}" type="image/x-icon">
     @yield('extra-style')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link

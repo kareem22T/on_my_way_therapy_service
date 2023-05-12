@@ -8,6 +8,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link rel="shortcut icon" href="{{asset('/imgs/site/logo.png')}}" type="image/x-icon">
     <title>Therapist | @yield('title')</title>
 </head>
 <body>

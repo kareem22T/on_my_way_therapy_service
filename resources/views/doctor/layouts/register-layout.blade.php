@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset("/css/doctor.css") }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset("/css/main.css") }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset("/css/maps.css") }}?v={{time()}}">
+    <link rel="shortcut icon" href="{{asset('/imgs/site/logo.png')}}" type="image/x-icon">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
