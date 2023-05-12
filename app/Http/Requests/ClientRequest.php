@@ -47,7 +47,7 @@ class ClientRequest extends FormRequest
             'NDIS_number' => 'required_if:client_type,1',
             'NDIS_end_date' => 'required_if:client_type,1',
             'plan_managment' => 'required',
-            'manager_email' => 'required_if:client_type,0',
+            'manager_email' => 'required_if:plan_managment,0',
             'card_number' => 'required',
         ];
     }
