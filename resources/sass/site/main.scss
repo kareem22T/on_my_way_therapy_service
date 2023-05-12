@@ -28,7 +28,7 @@ header {
                 &:first-child a{
                     @extend %flex-center;
                     font-weight: 500;
-                    font-size: clamp(1rem, calc(0.625rem + 1.5385vw), 1.875rem);
+                    font-size: clamp(0.875rem, calc(0.462rem + 1.7391vw), 1.875rem);
                     line-height: clamp(1.75rem, calc(1.4821rem + 1.0989vw), 2.375rem);
                     color: $main-color;
                     text-decoration: none;

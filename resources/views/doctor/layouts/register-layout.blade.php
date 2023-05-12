@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="{{ asset("/css/doctor.css") }}">
-    <link rel="stylesheet" href="{{ asset("/css/main.css") }}">
-    <link rel="stylesheet" href="{{ asset("/css/maps.css") }}">
+    <link rel="stylesheet" href="{{ asset("/css/doctor.css") }}?v={{time()}}">
+    <link rel="stylesheet" href="{{ asset("/css/main.css") }}?v={{time()}}">
+    <link rel="stylesheet" href="{{ asset("/css/maps.css") }}?v={{time()}}">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"

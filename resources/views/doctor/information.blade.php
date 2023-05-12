@@ -124,5 +124,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/get-information.js') }}"></script>
+<script src="{{ asset('/js/doctor/get-information.js') }}?v={{time()}}"></script>
 @endsection

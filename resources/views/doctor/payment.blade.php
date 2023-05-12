@@ -49,5 +49,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/get-payment.js') }}"></script>
+<script src="{{ asset('/js/doctor/get-payment.js') }}?v={{time()}}"></script>
 @endsection

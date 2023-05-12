@@ -180,13 +180,13 @@
 
         <div class="hide-content"></div>
         @section('scripts')
-            <script src="{{ asset('/js/maps.js') }}"></script>
+            <script src="{{ asset('/js/maps.js') }}?v={{time()}}"></script>
             <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
             defer
             ></script>
-            <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
-            <script src="{{ asset('/js/client/calendar.js') }}"></script>
+            <script src="{{ asset('/js/doctor/calendar.js') }}?v={{time()}}"></script>
+            <script src="{{ asset('/js/client/calendar.js') }}?v={{time()}}"></script>
         @endsection
     @elseif (isset($search_results))
         @if (count($search_results) > 0)
@@ -249,6 +249,6 @@
 @endSection
 
 @section('scripts')
-    <script src="{{ asset('/js/client/search.js') }}"></script>
+    <script src="{{ asset('/js/client/search.js') }}?v={{time()}}"></script>
 @endsection
 

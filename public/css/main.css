@@ -166,7 +166,7 @@ header nav ul {
 }
 header nav ul li:first-child a {
   font-weight: 500;
-  font-size: clamp(1rem, 0.625rem + 1.5385vw, 1.875rem);
+  font-size: clamp(0.875rem, 0.462rem + 1.7391vw, 1.875rem);
   line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
   color: #132F75;
   text-decoration: none;

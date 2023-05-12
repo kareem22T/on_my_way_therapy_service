@@ -249,8 +249,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/maps.js') }}"></script>
-<script src="{{ asset('/js/client/register.js') }}"></script>
+<script src="{{ asset('/js/maps.js') }}?v={{time()}}"></script>
+<script src="{{ asset('/js/client/register.js') }}?v={{time()}}"></script>
 <script
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
 defer

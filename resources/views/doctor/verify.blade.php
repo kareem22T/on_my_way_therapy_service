@@ -47,5 +47,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/verify.js') }}"></script>
+<script src="{{ asset('/js/doctor/verify.js') }}?v={{time()}}"></script>
 @endsection
