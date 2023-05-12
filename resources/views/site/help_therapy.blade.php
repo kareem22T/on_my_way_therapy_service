@@ -68,7 +68,7 @@
                 <div class="part-time">
                     <input class="custom-range" type="range" value="35" min="0" max="38" v-model="partval">
                     <div class="value">
-                        <output>$@{{ partval }} hours per week</output>
+                        <output>@{{ partval }} hours per week</output>
                         <span class="max">38</span>
                     </div>
                     <a href="" @click.prevent>= $@{{ partval * 139 }}</a>
