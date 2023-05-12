@@ -31,7 +31,9 @@ class RegisterController extends Controller
     // register and validate client information ................................
     public function register(ClientRequest $request)
     {
-
+        $request->validate([
+            'manager_email' => (($request->input('plan_managment') == 0) && ($request->input('client_type') == 1)) ? 'required' : ''
+        ]);
         $profile_picture_name = null;
         if ($request->photo)
             $profile_picture_name =
