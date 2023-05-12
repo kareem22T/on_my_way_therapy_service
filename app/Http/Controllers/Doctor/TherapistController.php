@@ -59,7 +59,7 @@ class TherapistController extends Controller
 
     public function appointmentDetails($appointment_id = null)
     {
-        $appointment = Appointment::find($appointment_id)->where('doctor_id', Auth::guard('doctor')->user()->id)->first();
+        $appointment = Appointment::where('id', $appointment_id)->where('doctor_id', Auth::guard('doctor')->user()->id)->first();
 
         if ($appointment_id)
             return view('doctor.dashboard.appointment')->with(compact('appointment'));

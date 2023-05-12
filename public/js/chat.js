@@ -278,8 +278,8 @@ function setUnseenNum() {
     url: '/get-unseen',
     method: 'GET',
     success: function(data) {
-      $('header .container nav ul li span').text(data)
-      $('header .container nav ul li span').css('display', data > 0 ? 'flex' : 'none')
+      $('header .container nav ul li >span').text(data)
+      $('header .container nav ul li >span').css('display', data > 0 ? 'flex' : 'none')
       $('title').text($('title').text().replace(/[0-9]/g, ""))
       $('title').text($('title').text().replace('()', '(' + data + ')'))
     },

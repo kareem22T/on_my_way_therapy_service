@@ -33,7 +33,7 @@ class ClientController extends Controller
             $search_profession = [];
             if ($profession)
                 $search_profession = Doctor::select('id', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
-                    ->where('profession_id', $profession->id)->paginate(5);
+                    ->where('profession_id', $profession->id)->where('approved', 1)->paginate(5);
 
             $diagnosis_name = str_replace("%20", " ", $search);
             $search_diagnosis = Doctor::whereHas('diagnosis', function ($query) use ($diagnosis_name) {

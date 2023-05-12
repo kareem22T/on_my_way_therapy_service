@@ -284,7 +284,7 @@
         </div>
 
         @php
-            $appoinments_sessions = App\Models\Appointment::where('status', 1)->where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->paginate(10)
+            $appoinments_sessions = App\Models\Appointment::where('status', 1)->where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', '!=', 4)->paginate(10)
         @endphp
         <div class="appointments">
             <h3>Up coming sessions</h3>

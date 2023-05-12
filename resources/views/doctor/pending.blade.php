@@ -40,7 +40,6 @@
             <h1>
                 thank you for submitting one of our staff will verify your documents and contact you soon
             </h1>
-            <a href="">Take a a look !</a>
         </div>
     </main>
 @endsection

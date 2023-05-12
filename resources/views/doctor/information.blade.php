@@ -50,17 +50,17 @@
                 <div class="form-group g-4 file">
                     <input type="file" name="WWCC" id="WWCC" placeholder="WWCC check" class="form-control">
                     <label for="WWCC">WWCC check <i class="fa-solid fa-camera"></i></label>
-                    <a href="">don’t have one?</a>
+                    <a href="https://wwccheck.ocg.nsw.gov.au/FindMyNumber">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file">
                     <input type="file" name="AHPRA" id="AHPRA" placeholder="AHPRA No.\ SPA" class="form-control">
                     <label for="AHPRA">AHPRA No.\ SPA <i class="fa-solid fa-camera"></i></label>
-                    <a href="">don’t have one?</a>
+                    <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file">
                     <input type="file" name="NDIS" id="NDIS" placeholder="NDIS worker screening" class="form-control">
                     <label for="NDIS">NDIS worker screening <i class="fa-solid fa-camera"></i></label>
-                    <a href="">don’t have one?</a>
+                    <a href="https://www.service.nsw.gov.au/transaction/ndiswc-apply">don’t have one?</a>
                 </div>
                 <div class="form-group g-12">
                     <textarea name="about_me" id="about" cols="30" rows="3" placeholder="About you" class="form-control"></textarea>

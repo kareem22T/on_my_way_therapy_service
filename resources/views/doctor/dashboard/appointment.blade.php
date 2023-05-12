@@ -44,11 +44,11 @@
                 </div>
             </div>
             <hr>
-            <div class="dirction">
+            <div class="dirction" id="{{$appointment->id}}">
                 <h1>Appointment location</h1>
                 <div id="client_location"></div>
                 @if ($appointment->journey == 1)
-                <div class="next-step" id="{{$appointment->id}}">
+                <div class="next-step">
                     <span></span>
                     <button class="start"><i></i> Start</button>
                     <div class="pop-up start-popup">

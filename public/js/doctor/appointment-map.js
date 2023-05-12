@@ -108,13 +108,13 @@ $('.cancel').on('click', function () {
   $('.hide-content').fadeOut();
 })
 
-let appointmentId = $('.next-step').attr('id')
+let appointmentId = $('.dirction').attr('id')
 
 $('.confirm-start').on('click', function () {
   $.ajax({
     url: '/startMove',
     method: 'POST',
-    data: {id: id,
+    data: {id: $('.dirction').attr('id'),
     success: function () {
         $('.next-step').html('\
                       <button class="Arrived"><i></i> Arrived</button>\
@@ -130,7 +130,7 @@ $('.Arrived').on('click', function () {
   $.ajax({
     url: '/arrived',
     method: 'POST',
-    data: {id: id,
+    data: {id: $('.dirction').attr('id'),
     success: function () {
         $('.next-step').html('\
           <h5>Please press complete after session end</h5>\
@@ -145,7 +145,7 @@ $('.complete').on('click', function () {
   $.ajax({
     url: '/complete',
     method: 'POST',
-    data: {id: id,
+    data: {id: $('.dirction').attr('id'),
     success: function () {
         $('.next-step').html('<h1 class="arrived">Completed !</h1>')
     }
