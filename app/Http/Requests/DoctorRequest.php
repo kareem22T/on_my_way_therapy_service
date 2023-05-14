@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class DoctorRequest extends FormRequest
@@ -31,6 +32,8 @@ class DoctorRequest extends FormRequest
             'address' => 'required',
             'gender' => 'required',
             'dob' => 'required|date_format:Y-m-d',
+            'phone_code' => 'required_if:phone_code,',
+            'email_code' => 'required_if:email_code,',
         ];
     }
 
@@ -55,6 +58,25 @@ class DoctorRequest extends FormRequest
             'phone.unique' => 'This number is already registered',
             'address.required' => 'please enter your address or enable location access',
             'about.required' => 'Please enter short description about you',
+            'phone_code.required_if' => 'Please enter the phone verfication code.',
+            'email_code.required_if' => 'Please enter the email verfication code.',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($this->input('phone_code') && $this->input('email_code')) :
+                if (!Hash::check($this->input('phone_code'), $this->input('correct_phone_code'))) {
+                    $validator->errors()->add('phone_code', 'The phone verfication code is not corect');
+                }
+                if (!Hash::check($this->input('email_code'), $this->input('correct_email_code'))) {
+                    $validator->errors()->add('email_code', 'The email verfication code is not corect');
+                }
+                if ($this->input('remainingTime') >= 360000) {
+                    $validator->errors()->add('email_code', 'your verfication code has expired click resend to send new codes');
+                }
+            endif;
+        });
     }
 }

@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
+use App\Http\Traits\SendEmail;
 use App\Http\Traits\UploadClientPhoto;
 use App\Models\Client;
 use App\Models\Diagnosi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Pnlinh\InfobipSms\Facades\InfobipSms;
 
 class RegisterController extends Controller
 {
     use UploadClientPhoto;
+    use SendEmail;
     // get client registeration view .............................
     public function indexRegister()
     {
@@ -25,6 +28,16 @@ class RegisterController extends Controller
     public function indexLogin()
     {
         return view('client.login');
+    }
+    // ....................................
+
+    // function to check information before sending verification codes
+    public function checkInfo(ClientRequest $request)
+    {
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Info are correct!',
+        ]);
     }
     // ....................................
 
@@ -79,6 +92,8 @@ class RegisterController extends Controller
             }
 
         if ($client) {
+            $client->verified = true;
+            $client->save();
             return response()->json([
                 'status' => 200,
                 'msg' => 'your account has been registered successfully.',
@@ -86,6 +101,31 @@ class RegisterController extends Controller
         }
 
         return 'field to register';
+    }
+    // .....................................
+
+    // verify phone number ..........................................
+    public function sendVerfication(Request $request)
+    {
+        $phone_code = rand(100000, 999999);
+        $email_code = rand(100000, 999999);
+        $response =
+            InfobipSms::send(
+                "+" . $request->phone_key . $request->phone,
+                'Your phone verification code is: ' . $phone_code
+            );
+
+        $email = $request->email;
+        $msg_title = 'Verfication code';
+        $msg_body = 'Your email verfication code is: <b>' . $email_code . '</b>';
+
+        $this->sendEmail($email, $msg_title, $msg_body);
+
+        return response()->json([
+            'status' => 200,
+            'phone_code' => Hash::make($phone_code),
+            'email_code' => Hash::make($email_code)
+        ]);
     }
     // .....................................
 

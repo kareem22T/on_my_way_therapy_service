@@ -594,7 +594,9 @@ header {
             }
         }
 
-        input {
+        #old_address {cursor: pointer !important;}
+
+        input, #old_address {
             background: #ffffff;
             border: 1px solid #FFC400;
             box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -636,7 +638,12 @@ header {
                 color: $main-color;
                 cursor: pointer;
                 position: absolute;
-                top: calc(100% + 0px);
+                top: calc(100% + 5px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                a {border-radius: 50px;}
             }
         }
     }

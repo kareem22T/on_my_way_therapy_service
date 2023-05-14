@@ -104,6 +104,14 @@ body::after {
   grid-column: span 12;
 }
 
+#errors {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 222222222222222200000000000000;
+  display: none;
+}
+
 .login_wrapper {
   width: 100%;
   min-height: 100%;

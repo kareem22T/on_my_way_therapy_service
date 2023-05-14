@@ -44,14 +44,16 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
     Route::group(['middleware' => 'guest'], function () {
         Route::get("/login", [TherapisRegisterController::class, "indexLogin"])->name('doctor.login');
         Route::post("/login", [TherapisRegisterController::class, "checkLogin"])->name('doctor.check.login');
+
+        Route::post('/check-registration-info', [TherapisRegisterController::class, "checkRegistrationInfo"]);
+        Route::post("/send-code", [TherapisRegisterController::class, "sendVerfication"]);
     });
 
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:doctor'], function () {
-        Route::post("/send-code", [TherapisRegisterController::class, "sendVerfication"]);
 
-        Route::get("/verify", [TherapisRegisterController::class, "indexVerify"])->middleware('verfiy');
-        Route::post("/verify", [TherapisRegisterController::class, "verify"])->middleware('verfiy');
+        Route::get("/set-password", [TherapisRegisterController::class, "indexPasswordSet"])->middleware('password_set');
+        Route::post("/set-password", [TherapisRegisterController::class, "setPassword"])->middleware('password_set');
 
         Route::get("/information", [TherapisRegisterController::class, "indexInformation"])
             ->middleware('therapist_information_visitors');
@@ -106,8 +108,9 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         // just not authenticated cleint can visit
         Route::get("/register", [ClientRegisterController::class, "indexRegister"]);
         Route::post("/register", [ClientRegisterController::class, "register"]);
+        Route::post("/check-info", [ClientRegisterController::class, "checkInfo"]);
     });
-
+    Route::post('/send-code', [ClientRegisterController::class, 'sendVerfication']);
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:client'], function () {
         Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');

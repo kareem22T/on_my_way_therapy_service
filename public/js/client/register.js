@@ -88,11 +88,53 @@ $(document).on('click', '.diagnosis li i',  function(e) {
         $(this).parent().remove()
     }, 150);
 })
+$(document).on('click', '#verfiy_client',  function(e) {
+    e.preventDefault()
+    $('.loader').fadeIn()
+    clientRegisteration()
+})
 
 document.getElementById("client_submit").addEventListener("click", function(event) {
     event.preventDefault();
-    clientRegisteration()
+        let formData = new FormData(document.getElementById('client_register'))
+        $('.diagnosis li').each(function () {
+            formData.append('diagnosis[]', $(this).text());
+        });
+	$.ajax({
+		url: '/client/check-info',
+		method: 'POST',
+		processData: false,
+    	contentType: false,
+		data: formData,
+		success: function (data) {
+            if (data.status == 200) {
+                $('.loader').fadeIn().css('display', 'flex');
+                sendCodes(formData.get('countryCode'), formData.get('phone'), formData.get('email'))
+            }
+		},
+		error: function (err) {
+			document.getElementById('errors').innerHTML = ''
+			$.each(err.responseJSON.errors, function(key, value) {
+				let error = document.createElement('div')
+				error.classList = 'alert alert-danger'
+				error.innerHTML = value[0]
+				document.getElementById('errors').append(error)
+			});
+			$('#errors').fadeIn('slow')
+			setTimeout(() => {
+				$('#errors').fadeOut('slow')
+			}, 3500);
+		},
+	})
 });
+
+
+
+$('.verify-pop-up #cancel').on('click', function (e) {
+    e.preventDefault()
+    $('.verify-pop-up').fadeOut()
+    $('.hide-content').fadeOut()
+})
 // end ...
 
 // step 1 of registration
@@ -101,6 +143,16 @@ function clientRegisteration () {
         $('.diagnosis li').each(function () {
         formData.append('diagnosis[]', $(this).text());
     });
+
+    formData.append('phone_code', $('#phone_code').val());
+    formData.append('email_code', $('#email_code').val());
+
+    formData.append('correct_phone_code', sessionStorage.getItem('phoneCode'));
+    formData.append('correct_email_code', sessionStorage.getItem('emailCode'));
+    let now = new Date();
+    let created_at = new Date(sessionStorage.getItem('code_expiration'));
+    let remainingTime = (now.getTime() - created_at.getTime())
+    formData.append('remainingTime', remainingTime)
 
 	$.ajax({
 		url: '/client/register',
@@ -148,6 +200,7 @@ function clientRegisteration () {
 				error.innerHTML = value[0]
 				document.getElementById('errors').append(error)
 			});
+            $('.loader').fadeOut()
 			$('#errors').fadeIn('slow')
 			setTimeout(() => {
 				$('#errors').fadeOut('slow')
@@ -171,5 +224,35 @@ function addDiagnosis() {
         $('.diagnosis').append('<li>' + $('#diagnosis').val() + '<i class="fa-regular fa-circle-xmark"></i>' + '</li>')
         $('#diagnosis').val('')
     }
+}
+
+function sendCodes(phone_key, phone, email) {
+    $.ajax({
+        url: '/client/send-code',
+        method: "POST",
+        data: {phone_key: phone_key, phone: phone, email: email},
+        success: function(data) {
+            if (data.status == 200) {
+                console.log('asdfsfsdf')
+                sessionStorage.setItem('phoneCode', data.phone_code);
+                sessionStorage.setItem('emailCode', data.email_code);
+                sessionStorage.setItem('code_expiration', new Date());
+                $('.loader').fadeOut('slow');
+                $('.verify-pop-up').fadeIn().css('display', 'flex')
+                $('.hide-content').fadeIn()
+            } else {
+                document.getElementById('errors').innerHTML = ''
+                let error = document.createElement('div')
+                error.classList = 'alert alert-danger'
+                error.innerHTML = 'failed to send codes'
+                document.getElementById('errors').append(error)
+                $('#errors').fadeIn('slow')
+                setTimeout(() => {
+                    $('#errors').fadeOut('slow')
+                    $('.loader').fadeOut('slow');
+                }, 3500);
+            }
+        },
+    })
 }
 // end ...

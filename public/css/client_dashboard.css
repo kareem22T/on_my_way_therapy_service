@@ -135,7 +135,7 @@ body::after {
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 5555555555555;
+  z-index: 222222222222222200000000000000;
   display: none;
 }
 
@@ -741,7 +741,10 @@ header .notification-wrapper ul li .steps > div.done span {
   font-size: 23px;
   border-radius: 20px;
 }
-.account_wrapper .container input {
+.account_wrapper .container #old_address {
+  cursor: pointer !important;
+}
+.account_wrapper .container input, .account_wrapper .container #old_address {
   background: #ffffff;
   border: 1px solid #FFC400;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -783,7 +786,14 @@ header .notification-wrapper ul li .steps > div.done span {
   color: #132F75;
   cursor: pointer;
   position: absolute;
-  top: calc(100% + 0px);
+  top: calc(100% + 5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.account_wrapper .container .form-group span a {
+  border-radius: 50px;
 }
 
 body {

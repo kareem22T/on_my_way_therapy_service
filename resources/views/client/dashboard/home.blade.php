@@ -142,6 +142,9 @@
                 value="{{Auth::guard('client')->user()->address_lng}}">
                 <input type="hidden" name="address" id="address" placeholder="Your address" 
                 value="{{Auth::guard('client')->user()->address}}">
+                <div id="enable-location-access" class="change-location">
+                    <h1>Enable location access</h1> <i class="fa fa-location-dot"></i>
+                </div>
                 <div id="choose_location" class="change-location">
                     <h1>change location</h1> <i class="fa fa-edit"></i>
                 </div>

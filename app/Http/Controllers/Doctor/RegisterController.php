@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
 use App\Http\Requests\TherapistInforamtionRequest;
+use App\Http\Requests\TherapistPasswordRequest;
 use App\Http\Requests\TherapistPaymentRequest;
-use App\Http\Requests\TherapistVerficationRequest;
 use App\Http\Traits\InsertDoctorCertificatesTrait;
 use App\Http\Traits\SendEmail;
 use App\Http\Traits\UploadTherapistPhoto;
@@ -43,9 +43,9 @@ class RegisterController extends Controller
     // ....................................
 
     // get doctor verify view .....................................
-    public function indexVerify()
+    public function indexPasswordSet()
     {
-        return view('doctor.verify');
+        return view('doctor.password');
     }
     // ....................................
 
@@ -81,6 +81,16 @@ class RegisterController extends Controller
     }
     // .....................................
 
+    // function to check information before sending verification codes
+    public function checkRegistrationInfo(DoctorRequest $request)
+    {
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Info are correct!',
+        ]);
+    }
+    // ....................................
+
     // register and validate doctor information ................................
     public function register(DoctorRequest $request)
     {
@@ -104,6 +114,8 @@ class RegisterController extends Controller
         ]);
 
         if ($doctor) {
+            $doctor->verified = true;
+            $doctor->save();
             return response()->json([
                 'status' => 200,
                 'msg' => 'your account has been registered please complete the registration process'
@@ -126,17 +138,17 @@ class RegisterController extends Controller
     // .....................................
 
     // verify phone number ..........................................
-    public function sendVerfication()
+    public function sendVerfication(Request $request)
     {
         $phone_code = rand(100000, 999999);
         $email_code = rand(100000, 999999);
         $response =
             InfobipSms::send(
-                "+" . Auth::guard('doctor')->user()->phone_key . Auth::guard('doctor')->user()->phone,
+                "+" . $request->phone_key . $request->phone,
                 'Your phone verification code is: ' . $phone_code
             );
 
-        $email = Auth::guard('doctor')->user()->email;
+        $email = $request->email;
         $msg_title = 'Verfication code';
         $msg_body = 'Your email verfication code is: <b>' . $email_code . '</b>';
 
@@ -151,18 +163,18 @@ class RegisterController extends Controller
     // .....................................
 
     // verify email, phone and adding new password
-    public function verify(TherapistVerficationRequest $request)
+    public function setPassword(TherapistPasswordRequest $request)
     {
         $therapist = Auth::guard('doctor')->user();
         $therapist->password = Hash::make($request->password);
-        $therapist->verified = true;
+        $therapist->password_set = true;
         $therapist->save();
 
         if ($therapist) {
             return response()->json(
                 [
                     'status' => 200,
-                    'msg' => 'your account has been verified successfully'
+                    'msg' => 'your password has been set successfully'
                 ]
             );
         }

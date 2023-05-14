@@ -24,6 +24,7 @@ class Doctor extends Authenticatable
         'dob',
         'gender',
         'verified',
+        'password_set',
         'profession_id',
         'client_gender',
         'experience',

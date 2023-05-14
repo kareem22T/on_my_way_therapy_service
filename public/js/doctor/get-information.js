@@ -87,3 +87,24 @@ function addDiagnosis() {
     }
 }
 
+$(".certificte-input").prev().change(function() {
+    // check if file is valid image
+    var file = this.files[0];
+    var fileType = file.type;
+    var validImageTypes = ["image/gif", "image/jpeg", "image/jpg", "image/png", "application/pdf"];
+	if ($.inArray(fileType, validImageTypes) < 0) {
+		document.getElementById('errors').innerHTML = ''
+			let error = document.createElement('div')
+			error.classList = 'alert alert-danger'
+			error.innerHTML = "Invalid file type. Please choose a pdf, GIF, JPEG, or PNG image."
+			document.getElementById('errors').append(error)
+		$('#errors').fadeIn('slow')
+		setTimeout(() => {
+			$('#errors').fadeOut('slow')
+		}, 2000);
+		
+        $(this).next().find('i').removeClass('fa-edit').addClass('fa-camera');
+	} else {
+        $(this).next().find('i').removeClass('fa-camera').addClass('fa-edit');
+	}
+});

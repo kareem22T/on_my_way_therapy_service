@@ -20,8 +20,8 @@ class TherapistInformationVisitors
             $user = Auth::guard('doctor')->user();
             if ($user->information_registerd == 1) {
                 return redirect('/therapist/payment');
-            } else if (!$user->verified) {
-                return redirect('/therapist/verify');
+            } else if (!$user->password_set) {
+                return redirect('/therapist/set-password');
             }
         } else {
             return redirect('/therapist/register');

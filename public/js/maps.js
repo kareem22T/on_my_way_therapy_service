@@ -1,4 +1,4 @@
-$('#address-a').on('click', function (e) {
+$('#address-a, #old_address, #edit-address').on('click', function (e) {
     e.preventDefault();
     $('.address-pop-up').fadeIn().css('display', 'flex');
     $('.hide-content').fadeIn()
@@ -16,20 +16,22 @@ $('.address-pop-up .cancel').on('click', function () {
 
 })
 
-$('#choose_location').on('click', function () {
+$('#choose_location, #enable-location-access').on('click', function () {
   $('.ways').addClass('animate__animated  animate__backOutUp').fadeOut()
   setTimeout(() => {
     $('.autocomplete-map').addClass('animate__animated  animate__zoomInUp').fadeIn()    
   }, 200);
 })
 
-// autocomplete
-let addressLat;
-let addressLng;
+// // autocomplete
+// let addressLat;
+// let addressLng;
+// let currentLat = null;
+// let currentLng = null;
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.8882727, lng: 151.1921473 },
-    zoom: 13,
+    center: { lat: -33.8882727 , lng: 151.1921473 },
+    zoom: 15,
     mapTypeControl: false,
   });
   const card = document.getElementById("pac-card");
@@ -57,9 +59,21 @@ function initMap() {
   infowindow.setContent(infowindowContent);
 
   const marker = new google.maps.Marker({
+    draggable: true,
+    animation: google.maps.Animation.DROP, 
     map,
     anchorPoint: new google.maps.Point(0, -29),
   });
+
+  geocodePosition(marker.getPosition())
+
+  google.maps.event.addListener(marker, 'dragend', function () {
+    map.setCenter(marker.getPosition())
+    geocodePosition(marker.getPosition())
+    addressLat = marker.getPosition().lat()
+    addressLng = marker.getPosition().lng()
+  })
+
 
   autocomplete.addListener("place_changed", () => {
     infowindow.close();
@@ -100,35 +114,50 @@ function initMap() {
         autocomplete.setTypes(["address"]);
     };
 
-  biasInputElement.addEventListener("change", () => {
-    if (biasInputElement.checked) {
-      autocomplete.bindTo("bounds", map);
-    } else {
-      // User wants to turn off location bias, so three things need to happen:
-      // 1. Unbind from map
-      // 2. Reset the bounds to whole world
-      // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
-      autocomplete.unbind("bounds");
-      autocomplete.setBounds({ east: 180, west: -180, north: 90, south: -90 });
-      strictBoundsInputElement.checked = biasInputElement.checked;
-    }
+    $('#enable-location-access').on('click', function() {
+        $('#pac-input').val('')
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function showPosition(position) {
+                let currentLatitude = position.coords.latitude;
+                let currentLongitude = position.coords.longitude;
+                addressLat = currentLatitude;
+                addressLng = currentLongitude;
+                let current = new google.maps.LatLng(currentLatitude, currentLongitude)
+                map.setCenter(current);
+                map.setZoom(18);
+                marker.setPosition(current);
+                marker.setVisible(true);
+                infowindow.open(map, marker);
+                geocodePosition(marker.getPosition())
+            }
+            ,showError
+          );
+          // navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          console.log("Geolocation is not supported by this browser.");
+        }
+        geocodePosition(marker.getPosition())
+    })
 
-    input.value = "";
-  });
-  // strictBoundsInputElement.addEventListener("change", () => {
-  //   autocomplete.setOptions({
-  //     strictBounds: strictBoundsInputElement.checked,
-  //   });
-  //   if (strictBoundsInputElement.checked) {
-  //     biasInputElement.checked = strictBoundsInputElement.checked;
-  //     autocomplete.bindTo("bounds", map);
-  //   }
-
-  //   input.value = "";
-  // });
 }
-window.initMap = initMap;
+// window.initMap = initMap;
 // end ...
+function geocodePosition(pos) {
+  geocoder = new google.maps.Geocoder()
+  geocoder.geocode({
+    latLng: pos
+  },
+  function (results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      $('#place-address').text(results[0].formatted_address)
+      $('#place-name').text(results[0].formatted_address.split(',')[0])
+    }else {
+      
+    }
+  }
+  )
+}
 
 $('.confirm').on('click', function (e) {
   e.preventDefault()
@@ -151,3 +180,25 @@ $('.confirm').on('click', function (e) {
     }, 2500);
   }
 })
+
+
+function getLocation() {
+}
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      console.log("User denied the request for Geolocation.")
+      break;
+    case error.POSITION_UNAVAILABLE:
+      console.log("Location information is unavailable.")
+      break;
+    case error.TIMEOUT:
+      console.log("The request to get user location timed out.")
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("An unknown error occurred.")
+      break;
+  }
+}
+

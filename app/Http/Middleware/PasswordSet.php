@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class VerifyVistors
+class PasswordSet
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class VerifyVistors
     {
         if (Auth::guard('doctor')->check()) {
             $user = Auth::guard('doctor')->user();
-            if ($user->verified) {
+            if ($user->password_set) {
                 return redirect('/therapist/information');
             }
         } else {

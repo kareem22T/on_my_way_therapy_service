@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ClientRequest extends FormRequest
 {
@@ -35,8 +36,9 @@ class ClientRequest extends FormRequest
             'password_confirmation' => 'required',
             'password' => [
                 'required',
-                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@]).*$/',
+                'regex:/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!$#%@_.,?*+=\-:;~]).{8,}$/',
                 'confirmed',
+                'min:8'
             ],
             'company_name' => 'required_if:account_type,1|max:100',
             'company_email' => 'required_if:account_type,1|nullable|email',
@@ -48,6 +50,8 @@ class ClientRequest extends FormRequest
             'NDIS_end_date' => 'required_if:client_type,1',
             'plan_managment' => 'required',
             'card_number' => 'required',
+            'phone_code' => 'required_if:phone_code,',
+            'email_code' => 'required_if:email_code,',
         ];
     }
 
@@ -70,7 +74,7 @@ class ClientRequest extends FormRequest
             'phone.regex' => 'Please enter a valid phone number without the country code',
             'phone.unique' => 'This number is already registered',
             'address.required' => 'please enter your address or enable location access',
-            'password.regex' => 'please enter a password containing upper and lower case characters mixed with number and special characters (ex: Abcd123@@@)',
+            'password.regex' => 'please enter a password from at least 8 char containing upper and lower case characters mixed with number and special characters (ex: Abcd123@@@)',
             'password.confirmed' => 'the password you entered and its confirmation are not matching',
             'company_email.email' => 'Please enter a valid company email address',
             'therapist_gender.required' => 'Please choose your preferred therapist gender.',
@@ -80,6 +84,25 @@ class ClientRequest extends FormRequest
             'NDIS_end_date.required_if' => 'Please select the NDIS end date',
             'manager_email.required' => 'Please enter the manager email',
             'card_number.required' => 'Please enter the card number',
+            'phone_code.required_if' => 'Please enter the phone verfication code.',
+            'email_code.required_if' => 'Please enter the email verfication code.',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($this->input('phone_code') && $this->input('email_code')) :
+                if (!Hash::check($this->input('phone_code'), $this->input('correct_phone_code'))) {
+                    $validator->errors()->add('phone_code', 'The phone verfication code is not corect');
+                }
+                if (!Hash::check($this->input('email_code'), $this->input('correct_email_code'))) {
+                    $validator->errors()->add('email_code', 'The email verfication code is not corect');
+                }
+                if ($this->input('remainingTime') >= 360000) {
+                    $validator->errors()->add('email_code', 'your verfication code has expired click resend to send new codes');
+                }
+            endif;
+        });
     }
 }

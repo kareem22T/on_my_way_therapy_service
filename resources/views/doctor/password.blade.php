@@ -4,6 +4,15 @@
 
 @section("content")
     @include('site.includes.loader')
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+        }
+    </style>
     <div id="errors">
         {{-- validation errors will appear here. --}}
     </div>
@@ -18,20 +27,10 @@
                 <li>3</li>
             </ul>
             <h6 id="send_msg">
-                We have sent you verification code to your provided number
-                and another one to your email if it still not sent please wait it may take some moments
-                <br>
-                Please provide verification codes before they expire
+                Now your account has been registered, Set your password now!
             </h6>
             <form action="POST" class="verfy_form" id="step-1-v2">
                 @csrf
-                <div class="form-group">
-                    <input type="text" name="email_code" id="email_code" class="form-control" placeholder="Eamil code">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="phone_code" id="phone_code" class="form-control" placeholder="Phone code">
-                </div>
-                <hr>
                 <div class="form-group">
                     <input type="password" name="password" id="password" placeholder="Password">
                 </div>
@@ -47,5 +46,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/verify.js') }}?v={{time()}}"></script>
+<script src="{{ asset('/js/doctor/set_pass.js') }}?v={{time()}}"></script>
 @endsection

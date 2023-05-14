@@ -209,7 +209,7 @@
     <div class="pop-up address-pop-up">
         <div class="ways">
             Enter your address
-            <div>
+            <div id="enable-location-access">
                 <i class="fa-solid fa-location-dot"></i>
                 <p>Enable location access</p>
             </div>
@@ -222,6 +222,7 @@
 
         <div class="autocomplete-map">
             <p>Write down and pick your address</p>
+            <p>drag the marker to pick your accurate location</p>
             <div class="pac-card" id="pac-card">
                 <div>
                     <div id="strict-bounds-selector" class="pac-controls">
@@ -246,6 +247,18 @@
 
         </div>
     </div>
+
+    <form action="" class="pop-up verify-pop-up">
+        We have sent you verification codes on your enterd phone and email
+        <input type="text" name="phone_code" id="phone_code" placeholder="Enter phone code">
+        <input type="text" name="email_code" id="email_code" placeholder="Enter email code">
+        <div class="btns">
+            <button type="submit" class="btn btn-success" id="verfiy_client">Verify</button>
+            <button type="submit" class="btn btn-danger" id="cancel">Cancel</button>
+        </div>
+    </form>
+
+    @include('site.includes.loader')
 @endsection
 
 @section('scripts')
