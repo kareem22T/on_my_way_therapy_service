@@ -20,6 +20,8 @@ class GuestMiddleware
             return redirect('/therapist'); // Redirect to home page if user is authenticated
         } else if (Auth::guard('client')->check()) {
             return redirect('/client'); // Redirect to home page if user is authenticated
+        } else if (Auth::guard('admin')->check()) {
+            return redirect('/admin'); // Redirect to home page if user is authenticated
         }
 
         return $next($request); // Allow access to the route if user is not authenticated

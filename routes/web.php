@@ -6,6 +6,8 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Client\RegisterController as ClientRegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doctor\RegisterController as TherapisRegisterController;
+use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\Admin\RegisterController as AdminRegisterController;
 use App\Http\Controllers\Doctor\TherapistController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
@@ -127,3 +129,15 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
     // ......................................
 });
 ########################################### end client routes #################################################
+
+########################################### start admin routes ################################################
+Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
+    Route::get("/login", [AdminRegisterController::class, "indexLogin"])->name('admin.login')->middleware('guest');
+    Route::post("/login", [AdminRegisterController::class, "checkLogin"])->name('admin.check.login');
+    Route::get("/logout", [AdminRegisterController::class, "logout"]);
+    Route::group(['middleware' => 'auth:admin'], function () {
+        Route::get('/', [AdminMainController::class, 'usersClientIndex']);
+        Route::get('/therapists', [AdminMainController::class, 'usersTherapistsIndex']);
+        Route::post('/therapists-approve', [AdminMainController::class, 'approveTherapist']);
+    });
+});

@@ -1,0 +1,145 @@
+@import "../site/roles";
+
+nav {
+    height: 100vh;
+    padding: 10px;
+    background: $main-color;
+    width: min-content;
+    &:first-of-type {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        height: 100%;
+        gap: 20px;
+        a {
+            text-decoration: none;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            border-radius: 20px;
+            color: $white;
+            border: 3px solid $main-color;
+            transition: all 0.2s ease-in-out;
+            &.active, &:hover {
+                border: 3px solid $white;
+                color: $white;
+            }
+        }
+    }
+}
+
+body {
+    display: flex;
+    gap: 30px;
+}
+
+main {
+    width: 100%;
+    padding-right: 30px;
+    header {
+        @extend %flex-center;
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 30px;
+            padding: 20px 0;
+            a {
+                font-weight: 700;
+                font-size: 30px;
+                line-height: 38px;
+                text-align: center;
+                color: $main-color;
+                text-decoration: none;
+                padding: 10px 25px;
+                transition: all 0.2s ease-in-out;
+                border: 3px solid $white;
+                border-radius: 30px;
+                &:hover, &.active {
+                    background: $white;
+                    border: 3px solid $secondary-color;
+                    box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+                    border-radius: 30px;
+                }
+            }
+        }
+    }
+    .head {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0 50px;
+        gap: 30px;
+        a {
+            font-weight: 500;
+            font-size: 35px;
+            line-height: 44px;
+            text-align: center;
+            color: #132F75;
+            text-decoration: none;
+            padding: 12px 40px;
+            display: block;
+            border-radius: 30px;
+            border: 3px solid $white;
+            transition: all 0.2s ease-in-out;
+            &.active, &:hover {
+                background: #FFFFFF;
+                border: 3px solid #FFC400;
+                box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+            }
+        }
+    }
+    .table {
+        .request {
+            background: #FFFFFF;
+            border: 3px solid #FFC400;
+            box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+            border-radius: 30px;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 37px;
+            color: #132F75;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 20px;
+    
+            .data {
+                @extend %flex-center;
+            }
+    
+            .btns {
+                a {
+                    color: white;
+                    padding: 10px;
+                    width: 30px;
+                    border-radius: 10px;
+    
+                    &:first-child {
+                        background: $secondary-color;
+                    }
+    
+                    &:nth-child(2) {
+                        background: $main-color;
+                    }
+    
+                    &:last-child {
+                        background: rgb(117, 18, 18);
+                    }
+                }
+            }
+        }
+    }
+}
