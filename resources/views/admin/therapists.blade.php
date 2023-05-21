@@ -17,8 +17,8 @@
         <div id="errors"></div>
 
         <div class="head">
-            <a href="" class="active">account requests</a>
-            <a href="">current therapists</a>
+            <a href="/admin/therapists" class="active">account requests</a>
+            <a href="/admin/therapists-preview">current therapists</a>
         </div>
 
         <div class="table">
@@ -32,10 +32,11 @@
                             <span>{{ $doctor->gender }}</span>
                         </div>
                         <div class="btns">
-                            <a href="" class="tn btn-secondary"><i class="fa fa-eye"></i></a>
-                            <a href="" class=" approve-btn" id="{{ $doctor->id }}"><i
+                            <a href="/admin/therapists/request/{{ $doctor->id }}" class="tn btn-secondary"><i
+                                    class="fa fa-eye"></i></a>
+                            <a href="" class="approve-btn" id="{{ $doctor->id }}"><i
                                     class="fa-solid fa-check"></i></a>
-                            <a href="" class=""><i class="fa fa-trash"></i></a>
+                            <a href="" class="delete-btn" id="{{ $doctor->id }}"><i class="fa fa-trash"></i></a>
                         </div>
                     </div>
                 @endforeach
@@ -52,6 +53,15 @@
             <div class="btns">
                 <button class="approve btn btn-success">Approve</button>
                 <button class="cancel btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <div class="pop-up delete-pop-up">
+            Are you sure you want to delete this therapist account?
+            <input type="hidden" name="therapist_id">
+            <div class="btns">
+                <button class="cancel btn btn-secondary">Cancel</button>
+                <button class="delete btn btn-danger">delete</button>
             </div>
         </div>
 

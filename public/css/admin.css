@@ -47,7 +47,7 @@ body::after {
   margin: 0 auto;
 }
 
-main .table .request .data, main header,
+main .preview_wrapper .profile, main .table .request .data, main header,
 .flex-center {
   display: flex;
   justify-content: center;
@@ -145,6 +145,13 @@ nav {
   background: #132F75;
   width: min-content;
 }
+@media (max-width: 599.98px) {
+  nav {
+    height: min-content;
+    padding: 8px 5px;
+    width: 100vw;
+  }
+}
 nav:first-of-type {
   position: fixed;
   top: 0;
@@ -160,13 +167,19 @@ nav ul {
   height: 100%;
   gap: 20px;
 }
+@media (max-width: 599.98px) {
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 nav ul a {
   text-decoration: none;
-  padding: 10px;
+  padding: clamp(0.1875rem, 0.0068rem + 0.7609vw, 0.625rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: clamp(1.6875rem, 1.3519rem + 1.413vw, 2.5rem);
   border-radius: 20px;
   color: #ffffff;
   border: 3px solid #132F75;
@@ -176,15 +189,30 @@ nav ul a.active, nav ul a:hover {
   border: 3px solid #ffffff;
   color: #ffffff;
 }
+@media (max-width: 599.98px) {
+  nav ul a {
+    width: 100%;
+  }
+}
 
 body {
   display: flex;
   gap: 30px;
 }
+@media (max-width: 599.98px) {
+  body {
+    display: block;
+  }
+}
 
 main {
   width: 100%;
   padding-right: 30px;
+}
+@media (max-width: 599.98px) {
+  main {
+    padding: 0;
+  }
 }
 main header ul {
   list-style: none;
@@ -194,14 +222,19 @@ main header ul {
   gap: 30px;
   padding: 20px 0;
 }
+@media (max-width: 599.98px) {
+  main header ul {
+    padding-bottom: 0;
+  }
+}
 main header ul a {
   font-weight: 700;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(1.1875rem, 0.9035rem + 1.1957vw, 1.875rem);
+  line-height: clamp(1.875rem, 1.6685rem + 0.8696vw, 2.375rem);
   text-align: center;
   color: #132F75;
   text-decoration: none;
-  padding: 10px 25px;
+  padding: clamp(0.3125rem, 0.1834rem + 0.5435vw, 0.625rem) clamp(1.125rem, 0.9443rem + 0.7609vw, 1.5625rem);
   transition: all 0.2s ease-in-out;
   border: 3px solid #ffffff;
   border-radius: 30px;
@@ -216,17 +249,17 @@ main .head {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px 0 50px;
-  gap: 30px;
+  margin: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem) 0 clamp(1.25rem, 0.4755rem + 3.2609vw, 3.125rem);
+  gap: clamp(0.625rem, 0.1087rem + 2.1739vw, 1.875rem);
 }
 main .head a {
   font-weight: 500;
-  font-size: 35px;
-  line-height: 44px;
+  font-size: clamp(1.125rem, 0.6861rem + 1.8478vw, 2.1875rem);
+  line-height: clamp(1.4375rem, 0.8954rem + 2.2826vw, 2.75rem);
   text-align: center;
   color: #132F75;
   text-decoration: none;
-  padding: 12px 40px;
+  padding: 12px clamp(0rem, -1.0326rem + 4.3478vw, 2.5rem);
   display: block;
   border-radius: 30px;
   border: 3px solid #ffffff;
@@ -236,6 +269,26 @@ main .head a.active, main .head a:hover {
   background: #FFFFFF;
   border: 3px solid #FFC400;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+}
+main .table_clients {
+  background: #FFFFFF;
+  border: 2px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  padding: 30px;
+  margin-top: 30px;
+}
+main .table_clients table {
+  width: 100%;
+}
+main .table_clients table td, main .table_clients table th {
+  padding: 10px;
+}
+main .table_clients table tbody tr {
+  color: #132F75;
+}
+main .table_clients table tbody tr:nth-child(odd) {
+  background: #D7D7D7;
 }
 main .table .request {
   background: #FFFFFF;
@@ -266,6 +319,100 @@ main .table .request .btns a:nth-child(2) {
 }
 main .table .request .btns a:last-child {
   background: rgb(117, 18, 18);
+}
+@media (max-width: 599.98px) {
+  main .preview_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+main .preview_wrapper .profile {
+  flex-direction: column;
+  gap: 0;
+  text-align: center;
+}
+main .preview_wrapper .profile .img {
+  width: clamp(9.375rem, 8.0842rem + 5.4348vw, 12.5rem);
+  height: clamp(9.375rem, 8.0842rem + 5.4348vw, 12.5rem);
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+main .preview_wrapper .profile .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+main .preview_wrapper .profile h1 {
+  color: #132F75;
+  font-weight: 500;
+  margin-top: 10px;
+}
+main .preview_wrapper .profile h4 {
+  color: #5a5a5a;
+}
+@media (max-width: 599.98px) {
+  main .preview_wrapper .profile h4 {
+    font-size: 17px;
+  }
+}
+main .preview_wrapper .profile p {
+  max-width: 440px;
+  text-align: center;
+  color: #525252;
+}
+main .preview_wrapper .cer_wrapper {
+  grid-column: span 4;
+  text-align: center;
+  gap: 10px;
+  padding: 25px;
+  display: flex;
+}
+main .preview_wrapper .cer_wrapper i {
+  color: #132F75;
+}
+main .preview_wrapper .cer_wrapper .cer {
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid;
+  border-radius: 10px;
+}
+main .preview_wrapper .cer_wrapper .cer img {
+  width: 100%;
+}
+main .preview_wrapper .btns {
+  margin: clamp(0.3125rem, -0.0747rem + 1.6304vw, 1.25rem) 0 clamp(0.9375rem, 0.4212rem + 2.1739vw, 2.1875rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+main .preview_wrapper .btns a {
+  font-size: clamp(1.375rem, 1.2717rem + 0.4348vw, 1.625rem);
+  border-radius: 20px;
+  padding: clamp(0.4375rem, 0.3601rem + 0.3261vw, 0.625rem) clamp(0.9375rem, 0.8084rem + 0.5435vw, 1.25rem);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.input {
+  background: #ffffff !important;
+  border: 1px solid #FFC400;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem);
+  padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem);
+  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
+  resize: none;
+  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /*# sourceMappingURL=admin.css.map */

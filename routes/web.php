@@ -138,6 +138,9 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
     Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/', [AdminMainController::class, 'usersClientIndex']);
         Route::get('/therapists', [AdminMainController::class, 'usersTherapistsIndex']);
+        Route::get('/therapists-preview', [AdminMainController::class, 'usersTherapistsPreviewIndex']);
+        Route::get('/therapists/request/{id}', [AdminMainController::class, 'returnTherapistRequest']);
         Route::post('/therapists-approve', [AdminMainController::class, 'approveTherapist']);
+        Route::post('/therapists-delete', [AdminMainController::class, 'deleteTherapist']);
     });
 });

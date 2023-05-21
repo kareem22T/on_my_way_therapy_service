@@ -12,6 +12,7 @@ headers: {
 document.getElementById("step1_submit").addEventListener("click", function(event) {
     event.preventDefault();
 	let formData = new FormData(document.getElementById('step-1'))
+	$('.loader').fadeIn().css('display', 'flex');
 	$.ajax({
 		url: '/therapist/check-registration-info',
 		method: 'POST',
@@ -20,7 +21,6 @@ document.getElementById("step1_submit").addEventListener("click", function(event
 		data: formData,
 		success: function (data) {
             if (data.status == 200) {
-                $('.loader').fadeIn().css('display', 'flex');
                 sendCodes(formData.get('countryCode'), formData.get('phone'), formData.get('email'))
             }
 		},
@@ -33,6 +33,7 @@ document.getElementById("step1_submit").addEventListener("click", function(event
 				document.getElementById('errors').append(error)
 			});
 			$('#errors').fadeIn('slow')
+			$('.loader').fadeOut()
 			setTimeout(() => {
 				$('#errors').fadeOut('slow')
 			}, 3500);

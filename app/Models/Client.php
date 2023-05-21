@@ -17,6 +17,7 @@ class Client extends Authenticatable
         'first_name',
         'last_name',
         'phone',
+        'phone_key',
         'email',
         'password',
         'dob',

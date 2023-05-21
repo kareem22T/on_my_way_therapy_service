@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="{{ asset('/css/admin.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('/css/maps.css') }}?v={{ time() }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <style>
+        .container {
+            width: 100%;
+        }
+    </style>
     <title>Admin | @yield('title')</title>
 </head>
 

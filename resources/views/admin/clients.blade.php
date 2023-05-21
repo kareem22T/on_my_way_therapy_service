@@ -10,7 +10,39 @@
             $clients_active = 'active';
             $therapists_active = null;
         @endphp
-
         @include('admin.includes.header-users')
+
+        <div class="table_clients">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($clients_data->count() > 0)
+                        @foreach ($clients_data as $client)
+                            <tr>
+                                <td># {{ $client->id }}</td>
+                                <td>{{ $client->first_name . ' ' . $client->last_name }}</td>
+                                <td>{{ $client->email }}</td>
+                                <td>+{{ $client->phone_key . ' ' . $client->phone }}</td>
+                                <td>{{ Carbon\Carbon::parse($client->dob)->age }} yo</td>
+                                <td>{{ explode(',', $client->address)[0] }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="6" class="text-center">No clients yet!</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </main>
 @endsection

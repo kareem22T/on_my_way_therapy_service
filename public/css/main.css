@@ -379,6 +379,68 @@ main .hero .container:last-child p {
     max-width: 100%;
   }
 }
+main .professions_wrapper h1 {
+  font-weight: 500;
+  font-size: clamp(1.625rem, 1.2636rem + 1.5217vw, 2.5rem);
+  line-height: clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem);
+  text-align: center;
+  color: #132F75;
+  margin-bottom: clamp(0.9375rem, 0.4212rem + 2.1739vw, 2.1875rem);
+}
+main .professions_wrapper .professions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
+}
+main .professions_wrapper .professions .profession {
+  width: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  color: #132F75;
+  position: relative;
+  padding: 0 20px clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
+  text-decoration: none;
+}
+main .professions_wrapper .professions .profession h4 {
+  font-size: clamp(1.0625rem, 0.4688rem + 2.5vw, 2.5rem);
+}
+main .professions_wrapper .professions .profession .img {
+  width: clamp(6.25rem, 4.9592rem + 5.4348vw, 9.375rem);
+  height: clamp(6.25rem, 4.9592rem + 5.4348vw, 9.375rem);
+  background: #FFC400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+main .professions_wrapper .professions .profession .img img {
+  width: clamp(2.5rem, 1.8546rem + 2.7174vw, 4.0625rem);
+  height: clamp(2.8125rem, 2.038rem + 3.2609vw, 4.6875rem);
+  object-fit: contain;
+}
+main .professions_wrapper .professions .profession .bg {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - clamp(3.4375rem, 2.9212rem + 2.1739vw, 4.6875rem));
+  bottom: 0;
+  background: #FFFFFF;
+  border: 1px solid #132F75;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  z-index: -1;
+}
 main #how {
   height: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
   margin-top: calc(-1 * clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem) - clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem));
@@ -404,6 +466,7 @@ main .how .container:first-of-type p {
   text-align: center;
   color: #132F75;
   padding-left: 20px;
+  max-width: 750px;
   visibility: hidden;
 }
 @media (max-width: 599.98px) {

@@ -1,8 +1,8 @@
 @extends('doctor.layouts.register-layout')
 
-@section("title", "Verfy | phone & email")
+@section('title', 'Set Password')
 
-@section("content")
+@section('content')
     @include('site.includes.loader')
     <style>
         body {
@@ -35,7 +35,8 @@
                     <input type="password" name="password" id="password" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm password">
+                    <input type="password" name="password_confirmation" id="password_confirmation"
+                        placeholder="Confirm password">
                 </div>
                 <div class="form-group">
                     <button type="submit">Next</button>
@@ -46,5 +47,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/set_pass.js') }}?v={{time()}}"></script>
+    <script src="{{ asset('/js/doctor/set_pass.js') }}?v={{ time() }}"></script>
 @endsection
