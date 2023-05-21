@@ -18,7 +18,7 @@
 
         <div class="head">
             <a href="/admin/therapists">account requests</a>
-            <a href="">current therapists</a>
+            <a href="/admin/therapists-preview">current therapists</a>
         </div>
 
         <div class="container preview_wrapper lg-grid">

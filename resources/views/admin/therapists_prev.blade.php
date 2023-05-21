@@ -9,7 +9,7 @@
         @php
             $clients_active = null;
             $therapists_active = 'active';
-            $therapists = App\Models\Doctor::paginate(10);
+            $therapists = App\Models\Doctor::where('approved', 1)->paginate(10);
         @endphp
 
         @include('admin.includes.header-users')
