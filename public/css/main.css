@@ -386,6 +386,7 @@ main .professions_wrapper h1 {
   text-align: center;
   color: #132F75;
   margin-bottom: clamp(0.9375rem, 0.4212rem + 2.1739vw, 2.1875rem);
+  visibility: hidden;
 }
 main .professions_wrapper .professions {
   display: flex;
@@ -396,6 +397,7 @@ main .professions_wrapper .professions {
   gap: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
 }
 main .professions_wrapper .professions .profession {
+  visibility: hidden;
   width: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
   min-width: 30%;
   display: flex;
@@ -657,6 +659,12 @@ main .contact section a i {
 .help-wrapper section:last-child {
   flex-direction: column;
   gap: clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem);
+  margin-top: -30px;
+}
+@media (max-width: 599.98px) {
+  .help-wrapper section:last-child {
+    margin-top: 0;
+  }
 }
 .help-wrapper section:last-child a {
   font-weight: 700;
@@ -696,8 +704,8 @@ main .contact section a i {
 }
 .help-wrapper .extra_section .part-time .value, .help-wrapper .extra_section .full-time .value, .help-wrapper .extra_section .value {
   font-weight: 700;
-  font-size: 35px;
-  line-height: 44px;
+  font-size: clamp(1.3125rem, 0.9511rem + 1.5217vw, 2.1875rem);
+  line-height: clamp(0.875rem, 0.1005rem + 3.2609vw, 2.75rem);
   text-align: center;
   color: #132F75;
   width: 100%;
@@ -722,14 +730,14 @@ main .contact section a i {
 }
 .help-wrapper .extra_section .part-time a, .help-wrapper .extra_section .full-time a, .help-wrapper .extra_section a {
   font-weight: 800;
-  font-size: 40px;
-  line-height: 63px;
+  font-size: clamp(1.75rem, 1.4402rem + 1.3043vw, 2.5rem);
+  line-height: clamp(2.0625rem, 1.288rem + 3.2609vw, 3.9375rem);
   text-align: center;
   color: #132F75;
   text-decoration: none;
   display: block;
-  border: 5px solid #132F75;
-  border-radius: 30px;
+  border: clamp(0.1875rem, 0.1359rem + 0.2174vw, 0.3125rem) solid #132F75;
+  border-radius: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem);
   width: fit-content;
   padding: 10px 50px;
 }

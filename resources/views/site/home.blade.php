@@ -150,6 +150,18 @@
                     // }
 
                 }
+                if ($(window).scrollTop() >= ($('.professions_wrapper').offset().top - $(window).height() / 2)) {
+                    $('.professions_wrapper >h1').addClass('animate__animated animate__bounceInDown').css(
+                        'visibility',
+                        'visible');
+                    for (let index = 0; index < $('.profession').length; index++) {
+                        setTimeout(() => {
+                            $('.profession').eq(index).addClass('animate__animated animate__fadeInUp').css(
+                                'visibility', 'visible');
+                        }, 250 + 100 * index);
+                    }
+
+                }
             }
         })
     </script>
