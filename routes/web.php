@@ -31,6 +31,28 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 
+Route::get('/specialization/1', function () {
+    return view('site.professions.Physiotherapy');
+});
+Route::get('/specialization/2', function () {
+    return view('site.professions.speech');
+});
+Route::get('/specialization/3', function () {
+    return view('site.professions.Podiatry');
+});
+Route::get('/specialization/4', function () {
+    return view('site.professions.Occupational');
+});
+Route::get('/specialization/5', function () {
+    return view('site.professions.Behavior');
+});
+Route::get('/specialization/6', function () {
+    return view('site.professions.Psychology');
+});
+Route::get('/specialization/8', function () {
+    return view('site.professions.Dietetics');
+});
+
 ######################################## star therapist routes ###############################################
 
 Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {

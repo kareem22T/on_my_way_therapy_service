@@ -193,9 +193,20 @@
                 </div>
                 <div class="g-12 plan-managed-form lg-grid">
                     <div class="form-group g-12">
-                        <input type="email" name="manager_email" id="Plan_manager_email" placeholder="Manager email"
-                            class="form-control">
+                        <input type="email" name="manager_email" id="Plan_manager_email"
+                            placeholder="Plan manager email" class="form-control">
                     </div>
+                </div>
+
+                <div class="g-12 agency-managed-form"
+                    style="
+                        font-size: clamp(1.25rem, 0.8886rem + 1.5217vw, 2.125rem);
+                        text-align: center;
+                        font-weight: 500;
+                        color: #132F75;
+                        display: none
+                    ">
+                    you’re all set to go!
                 </div>
 
                 <div class="g-12 self-managed-form lg-grid">

@@ -31,6 +31,8 @@ class Doctor extends Authenticatable
         'client_diagnosis',
         'WWCC_path',
         'AHPRA_path',
+        'SPA_path',
+        'practitioner_number',
         'NDIS_path',
         'about_me',
         'client_age_range',

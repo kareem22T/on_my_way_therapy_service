@@ -1,8 +1,8 @@
 @extends('doctor.layouts.register-layout')
 
-@section("title", "step 2 | information")
+@section('title', 'step 2 | information')
 
-@section("content")
+@section('content')
     <div id="errors">
         {{-- validation errors will appear here. --}}
     </div>
@@ -23,13 +23,13 @@
                         <option value="" selected>Profession ...</option>
                         @if ($professions)
                             @foreach ($professions as $profession)
-                                <option value="{{$profession->id}}">{{$profession->title}}</option>
+                                <option value="{{ $profession->id }}">{{ $profession->title }}</option>
                             @endforeach
                         @endif
                     </select>
                 </div>
                 <div class="form-group g-4">
-                    <select name="client_gender" id="client_gender"  class="form-control">
+                    <select name="client_gender" id="client_gender" class="form-control">
                         <option value="">Preferred client gender ...</option>
                         <option value="0">Male</option>
                         <option value="1">Female</option>
@@ -37,10 +37,12 @@
                     </select>
                 </div>
                 <div class="form-group g-4">
-                    <input type="number" name="experience" id="experience" placeholder="Years of experience " class="form-control">
+                    <input type="number" name="experience" id="experience" placeholder="Years of experience "
+                        class="form-control">
                 </div>
                 <div class="form-group g-12 diagnosis_wrapper">
-                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Preferred client diagnosis" class="form-control">
+                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Preferred client diagnosis"
+                        class="form-control">
                     <ul class="diagnosis">
                         {{-- <li>example <i class="fa-regular fa-circle-xmark"></i></li> --}}
                         {{-- selecte diagnosis will appear here --}}
@@ -49,17 +51,21 @@
                 </div>
                 <div class="form-group g-4 file">
                     <input type="file" name="WWCC" id="WWCC" placeholder="WWCC check" class="form-control">
-                    <label for="WWCC"  class="certificte-input" >WWCC check <i class="fa-solid fa-camera"></i></label>
+                    <label for="WWCC" class="certificte-input">WWCC check <i class="fa-solid fa-camera"></i></label>
                     <a href="https://wwccheck.ocg.nsw.gov.au/FindMyNumber">don’t have one?</a>
                 </div>
-                <div class="form-group g-4 file">
-                    <input type="file" name="AHPRA" id="AHPRA" placeholder="AHPRA No.\ SPA" class="form-control">
-                    <label for="AHPRA"  class="certificte-input" >AHPRA No.\ SPA <i class="fa-solid fa-camera"></i></label>
+                <div class="form-group g-4 file changable-cer">
+                    <input type="file" name="AHPRA" id="AHPRA" placeholder="AHPRA Registration"
+                        class="form-control">
+                    <label for="AHPRA" class="certificte-input">AHPRA Registration <i
+                            class="fa-solid fa-camera"></i></label>
                     <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file">
-                    <input type="file" name="NDIS" id="NDIS" placeholder="NDIS worker screening" class="form-control">
-                    <label for="NDIS"  class="certificte-input" >NDIS worker screening <i class="fa-solid fa-camera"></i></label>
+                    <input type="file" name="NDIS" id="NDIS" placeholder="NDIS worker screening"
+                        class="form-control">
+                    <label for="NDIS" class="certificte-input">NDIS worker screening <i
+                            class="fa-solid fa-camera"></i></label>
                     <a href="https://www.service.nsw.gov.au/transaction/ndiswc-apply">don’t have one?</a>
                 </div>
                 <div class="form-group g-12">
@@ -69,10 +75,11 @@
                     <h1>Preferred age range for your clients?</h1>
                     <div>
                         @if ($Client_age_range)
-                            @foreach($Client_age_range as $range)
+                            @foreach ($Client_age_range as $range)
                                 <div class="form-group">
-                                    <input type="checkbox" name="client_age_range[]" id="{{ 'p_age_range_'. $range->id }}" value="{{$range->id}}">
-                                    <label for="{{ 'p_age_range_'. $range->id }}">{{ $range->range }}</label>
+                                    <input type="checkbox" name="client_age_range[]" id="{{ 'p_age_range_' . $range->id }}"
+                                        value="{{ $range->id }}">
+                                    <label for="{{ 'p_age_range_' . $range->id }}">{{ $range->range }}</label>
                                 </div>
                             @endforeach
                         @endif
@@ -124,5 +131,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/get-information.js') }}?v={{time()}}"></script>
+    <script src="{{ asset('/js/doctor/get-information.js') }}?v={{ time() }}"></script>
 @endsection

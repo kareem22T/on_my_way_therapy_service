@@ -201,8 +201,15 @@ class RegisterController extends Controller
         $WWCC_name = $this->saveCertificate($request->WWCC, 'imgs/doctor/uploads/therapist_certificates', 'WWCC');
         $insert->WWCC_path = $WWCC_name;
 
-        $AHPRA_name = $this->saveCertificate($request->AHPRA, 'imgs/doctor/uploads/therapist_certificates', 'AHPRA');
-        $insert->AHPRA_path = $AHPRA_name;
+        if ($request->AHPRA) {
+            $AHPRA_name = $this->saveCertificate($request->AHPRA, 'imgs/doctor/uploads/therapist_certificates', 'AHPRA');
+            $insert->AHPRA_path = $AHPRA_name;
+        } else if ($request->SPA) {
+            $SPA_name = $this->saveCertificate($request->SPA, 'imgs/doctor/uploads/therapist_certificates', 'SPA');
+            $insert->SPA_path = $SPA_name;
+        } else if ($request->practitioner_number) {
+            $insert->practitioner_number = $request->practitioner_number;
+        };
 
         $NDIS_name = $this->saveCertificate($request->NDIS, 'imgs/doctor/uploads/therapist_certificates', 'NDIS');
         $insert->NDIS_path = $NDIS_name;

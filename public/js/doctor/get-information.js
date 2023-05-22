@@ -25,6 +25,34 @@ $(document).on('click', '.diagnosis li i',  function(e) {
         $(this).parent().remove()
     }, 150);
 })
+
+$('#profession').on('change', function () {
+    if ($(this).val() == 2)
+    {
+        $('.changable-cer input').attr('placeholder', 'SPA registration')
+        $('.changable-cer input').attr('type', 'file')
+        $('.changable-cer input').attr('name', 'SPA')
+        $('.changable-cer input').attr('id', 'SPA')
+        $('.changable-cer input').fadeOut()
+        $('.changable-cer label').fadeIn()
+        $('.changable-cer label').html('SPA registration <i class="fa-solid fa-camera"></i>')
+    } else if ($(this).val() == 5) {
+        $('.changable-cer input').attr('placeholder', 'Practitioner Number')
+        $('.changable-cer input').attr('type', 'text')
+        $('.changable-cer input').attr('name', 'practitioner_number')
+        $('.changable-cer input').attr('id', 'practitioner_number')
+        $('.changable-cer input').fadeIn()
+        $('.changable-cer label').fadeOut('fast')
+    }else {
+        $('.changable-cer input').attr('placeholder', 'AHPRA registration')
+        $('.changable-cer input').attr('type', 'file')
+        $('.changable-cer input').attr('name', 'AHPRA')
+        $('.changable-cer input').attr('id', 'AHPRA')
+        $('.changable-cer input').fadeOut()
+        $('.changable-cer label').fadeIn()
+        $('.changable-cer label').html('AHPRA registration <i class="fa-solid fa-camera"></i>')
+    }
+})
 // end ...
 
 // methods ...................................

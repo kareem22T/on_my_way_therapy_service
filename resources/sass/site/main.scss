@@ -22,20 +22,21 @@ header {
                 clamp(0.9375rem, calc(0.5357rem + 1.6484vw), 1.875rem);
         ul {
             @extend %flex-center;
+            gap: clamp(0.625rem, calc(0.3668rem + 1.087vw), 1.25rem);
             list-style: none;
             justify-content: space-between;
             li {
-                &:first-child a{
+                 a{
                     @extend %flex-center;
                     font-weight: 500;
-                    font-size: clamp(0.875rem, calc(0.462rem + 1.7391vw), 1.875rem);
+                    font-size: clamp(0.8125rem, calc(0.3736rem + 1.8478vw), 1.875rem);
                     line-height: clamp(1.75rem, calc(1.4821rem + 1.0989vw), 2.375rem);
                     color: $main-color;
                     text-decoration: none;
                     gap: clamp(0.625rem, calc(0.3571rem + 1.0989vw), 1.25rem);
                     .img {
-                        width: clamp(1.875rem, calc(1.6071rem + 1.0989vw), 2.5rem);
-                        height: clamp(1.875rem, calc(1.6071rem + 1.0989vw), 2.5rem);
+                        width: clamp(1.25rem, calc(0.7337rem + 2.1739vw), 2.5rem);
+                        height: clamp(1.25rem, calc(0.7337rem + 2.1739vw), 2.5rem);
                         background-color: $main-color;
                         border-radius: 50%;
                     }
@@ -49,57 +50,21 @@ header {
                 position: relative;
                 #menu-icon {
                     display: inline-block;
-                    
-                    .bar {
-                        border-radius: 50px;
-                        margin: 6px;
-                        width: 35px;
-                        height: 4px;
-                        background: $main-color;
-                        border-radius: 1.5px;
-                        transition: margin 0.2s, transform 0.2s;
-                    
-                        /* same as above but with prefixes added */
-                        -webkit-transition: margin 0.2s, -webkit-transform 0.2s;
-                        transition: margin 0.2s, -webkit-transform 0.2s;
-                        -o-transition: margin 0.2s, transform 0.2s;
-                        transition: margin 0.2s, transform 0.2s;
-                        transition: margin 0.2s, transform 0.2s, -webkit-transform 0.2s;
-                        display: block;
-                    }
-
-                    &:not(.close):hover .bar {
-                        // margin: 7px 5px;
-                    }
-                    &.close .bar:first-child {
-                        -webkit-transform: translateY(9px) rotate(45deg);
-                        -ms-transform: translateY(9px) rotate(45deg);
-                        transform: translateY(9px) rotate(45deg);
-                    }
-
-                    &.close .bar:nth-child(2) {
-                        opacity: 0;
-                    }
-
-                    &.close .bar:last-child {
-                        -webkit-transform: translateY(-9px) rotate(-45deg);
-                        -ms-transform: translateY(-9px) rotate(-45deg);
-                        transform: translateY(-9px) rotate(-45deg);
-                    }
-                    &.close .bar:first-child {
-                        -webkit-transform: translateY(9px) rotate(45deg);
-                        -ms-transform: translateY(9px) rotate(45deg);
-                        transform: translateY(9px) rotate(45deg);
-                    }
-                    
-                    &.close .bar:nth-child(2) {
-                        opacity: 0;
-                    }
-                    
-                    &.close .bar:last-child {
-                        -webkit-transform: translateY(-9px) rotate(-45deg);
-                        -ms-transform: translateY(-9px) rotate(-45deg);
-                        transform: translateY(-9px) rotate(-45deg);
+                    font-size: clamp(0.75rem, calc(0.2853rem + 1.9565vw), 1.875rem);
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    gap: clamp(0.3125rem, calc(-0.0747rem + 1.6304vw), 1.25rem);
+                    a {
+                        font-weight: 600;
+                        font-size: clamp(0.8125rem, calc(0.3736rem + 1.8478vw), 1.875rem);
+                        line-height: clamp(1.0625rem, calc(0.5204rem + 2.2826vw), 2.375rem);
+                        text-align: center;
+                        color: #FFC400;
+                        text-decoration: none;
+                        &:last-child {
+                            color: $main-color
+                        }
                     }
                 }
 
@@ -118,10 +83,16 @@ header {
                     border-radius: 30px;
                     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                     >li {
-                        font-weight: 700;
-                        font-size: 40px;
-                        line-height: 50px;
                         color: $main-color;
+                        font-size: 30px;
+                        font-weight: 700;
+                        width: 100%;
+                        @extend %flex-center;
+                        justify-content: space-between;
+                        i {
+                            font-size: 22px;
+                            cursor: pointer;
+                        }
                         >ul {
                             @extend %flex-center;
                             gap: 10px;

@@ -36,10 +36,10 @@
             </div>
         </section>
         <section class="professions_wrapper">
-            <h1>We have it all! Allied Health</h1>
+            <h1>Therapy Anywhere – Anytime</h1>
             <div class="professions">
                 @foreach (App\Models\Profession::all() as $profession)
-                    <a href="/client/search:{{ $profession->title }}" class="profession">
+                    <a href="specialization/{{ $profession->id }}" target="_blanck" class="profession">
                         <div class="img">
                             <img src="{{ asset('/imgs/professions/' . $profession->id . '.png') }}" alt="">
                         </div>

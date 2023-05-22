@@ -1,7 +1,7 @@
 <footer>
     <div class="container">
         <div>
-            <h3>We have it all! Allied Health:</h3>
+            <h3>Therapy Anywhere – Anytime</h3>
             <div>
                 @foreach (App\Models\Profession::all() as $profession)
                     <a href="" class="profession">
@@ -12,12 +12,26 @@
         </div>
         <hr>
         <div>
-            <h4>Contact us or leave a feedback</h4>
-            <a href="mailto:Info@onmywaytherapy.com.au">
-                <i class="fa-solid fa-envelope"></i>
-                Info@onmywaytherapy.com.au
-            </a>
-            <a href="tel:1800666992"><i class="fa fa-phone"></i> 1800 ON MY WAY</a>
+            <h4>Contact us or leave feedback</h4>
+            <div class="contact">
+                <div>
+                    <a href="https://www.linkedin.com/company/94288210/admin/">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100092588026660">
+                        <i class="fa-brands fa-square-facebook"></i>
+                    </a>
+                    <a
+                        href="https://www.instagram.com/on_my_way_therapy/?fbclid=IwAR1XA8L5BTH-EcKaqqCYeKxfgOoBTa-LKg_IE_rFqBlYMIXwNWm_v9hIEPI">
+                        <i class="fa-brands fa-square-instagram"></i>
+                    </a>
+                    <a href="mailto:Info@onmywaytherapy.com.au">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Info@onmywaytherapy.com.au</span>
+                    </a>
+                </div>
+                <a href="tel:1800666992"><i class="fa fa-phone"></i> <span>1800 ON MY WAY</span></a>
+            </div>
         </div>
         <div>
             <p>All rights received - On My Way Therapy Services @ {{ date('Y') }}</p>
@@ -36,42 +50,59 @@
     }
 
     footer .container div:first-child div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        white-space: nowrap;
-        flex-wrap: wrap;
-        gap: 5px 30px;
+        gap: clamp(0.625rem, calc(0.3668rem + 1.087vw), 1.25rem);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(clamp(8.75rem, calc(5.1359rem + 15.2174vw), 17.5rem), 1fr));
     }
 
     footer .container div:first-child h3 {
-        font-size: clamp(1.375rem, calc(1.1685rem + 0.8696vw), 1.875rem);
+        font-weight: 700;
+        font-size: clamp(1.375rem, calc(1.091rem + 1.1957vw), 2.0625rem);
+        line-height: clamp(2.5rem, calc(2.2418rem + 1.087vw), 3.125rem);
+        text-align: center;
         margin-bottom: 15px;
     }
 
     footer .container div:first-child div a {
-        color: #FFC400;
         text-decoration: none;
-        font-size: clamp(0.9375rem, calc(0.7052rem + 0.9783vw), 1.5rem);
+    }
+
+    footer .container div:first-child div a h4 {
+        font-size: clamp(0.8125rem, calc(0.5285rem + 1.1957vw), 1.5rem);
+        font-weight: 700 !important;
+        text-align: center;
+        color: #132F75;
+        background: #FFFFFF;
+        border-radius: 20px;
+        padding: 15px;
+    }
+
+    footer .container div:first-child div a h4 {
+        margin: 0
     }
 
     footer hr {
-        height: 2px;
+        height: 4px;
         margin: 25px 0;
-        border-color: #FFC400
+        background: #FFC400;
+        border-color: #FFC400;
     }
 
     footer .container div:nth-of-type(2) {
         display: flex;
         justify-content: space-between;
+        flex-direction: column
     }
 
     footer .container div:nth-of-type(2) h4 {
-        font-size: clamp(1.125rem, calc(0.8668rem + 1.087vw), 1.75rem);
+        font-weight: 700;
+        font-size: clamp(1.375rem, calc(1.091rem + 1.1957vw), 2.0625rem);
+        line-height: clamp(1.25rem, calc(0.4755rem + 3.2609vw), 3.125rem);
+        text-align: center;
     }
 
     footer .container div:nth-of-type(2) a {
-        color: #FFC400;
+        color: #132F75;
         text-decoration: none;
         font-size: clamp(0.9375rem, calc(0.7052rem + 0.9783vw), 1.5rem);
         display: flex;
@@ -81,12 +112,39 @@
         margin: 5px 0;
     }
 
+    @media (max-width: 599.98px) {
+        footer .container div:nth-of-type(2) a span {
+            display: none
+        }
+
+        .contact {
+            justify-content: center !important;
+        }
+    }
+
     footer .container div:last-child {
         display: flex;
         justify-content: space-between;
         gap: clamp(0.625rem, calc(0.3668rem + 1.087vw), 1.25rem);
         font-size: clamp(0.8125rem, calc(0.4253rem + 1.6304vw), 1.75rem);
         margin-top: 15px;
+    }
+
+    .contact {
+        background: #FFFFFE;
+        border-radius: 20px;
+        padding: 7px 20px;
+    }
+
+    .contact i {
+        font-size: 28px;
+    }
+
+    .contact>div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
     }
 
     @media (max-width: 899.98px) {

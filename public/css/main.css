@@ -47,7 +47,7 @@ body::after {
   margin: 0 auto;
 }
 
-.help-wrapper section:last-child, .help-wrapper section > div > div, .help-wrapper section > div, main .how .container:last-child > div, main .how .container:last-child, main .hero .container:last-child, main .hero .container:nth-child(2) > div, main .hero .container:nth-child(2), header nav ul .more > ul > li > ul, header nav ul li:first-child a, header nav ul,
+.help-wrapper section:last-child, .help-wrapper section > div > div, .help-wrapper section > div, main .how .container:last-child > div, main .how .container:last-child, main .hero .container:last-child, main .hero .container:nth-child(2) > div, main .hero .container:nth-child(2), header nav ul .more > ul > li > ul, header nav ul .more > ul > li, header nav ul li a, header nav ul,
 .flex-center {
   display: flex;
   justify-content: center;
@@ -161,20 +161,21 @@ header nav {
   padding: clamp(0.9375rem, 0.8036rem + 0.5495vw, 1.25rem) clamp(0.9375rem, 0.5357rem + 1.6484vw, 1.875rem);
 }
 header nav ul {
+  gap: clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
   list-style: none;
   justify-content: space-between;
 }
-header nav ul li:first-child a {
+header nav ul li a {
   font-weight: 500;
-  font-size: clamp(0.875rem, 0.462rem + 1.7391vw, 1.875rem);
+  font-size: clamp(0.8125rem, 0.3736rem + 1.8478vw, 1.875rem);
   line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
   color: #132F75;
   text-decoration: none;
   gap: clamp(0.625rem, 0.3571rem + 1.0989vw, 1.25rem);
 }
-header nav ul li:first-child a .img {
-  width: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
-  height: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
+header nav ul li a .img {
+  width: clamp(1.25rem, 0.7337rem + 2.1739vw, 2.5rem);
+  height: clamp(1.25rem, 0.7337rem + 2.1739vw, 2.5rem);
   background-color: #132F75;
   border-radius: 50%;
 }
@@ -187,48 +188,22 @@ header nav ul .more {
 }
 header nav ul .more #menu-icon {
   display: inline-block;
+  font-size: clamp(0.75rem, 0.2853rem + 1.9565vw, 1.875rem);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.3125rem, -0.0747rem + 1.6304vw, 1.25rem);
 }
-header nav ul .more #menu-icon .bar {
-  border-radius: 50px;
-  margin: 6px;
-  width: 35px;
-  height: 4px;
-  background: #132F75;
-  border-radius: 1.5px;
-  transition: margin 0.2s, transform 0.2s;
-  /* same as above but with prefixes added */
-  -webkit-transition: margin 0.2s, -webkit-transform 0.2s;
-  transition: margin 0.2s, -webkit-transform 0.2s;
-  -o-transition: margin 0.2s, transform 0.2s;
-  transition: margin 0.2s, transform 0.2s;
-  transition: margin 0.2s, transform 0.2s, -webkit-transform 0.2s;
-  display: block;
+header nav ul .more #menu-icon a {
+  font-weight: 600;
+  font-size: clamp(0.8125rem, 0.3736rem + 1.8478vw, 1.875rem);
+  line-height: clamp(1.0625rem, 0.5204rem + 2.2826vw, 2.375rem);
+  text-align: center;
+  color: #FFC400;
+  text-decoration: none;
 }
-header nav ul .more #menu-icon.close .bar:first-child {
-  -webkit-transform: translateY(9px) rotate(45deg);
-  -ms-transform: translateY(9px) rotate(45deg);
-  transform: translateY(9px) rotate(45deg);
-}
-header nav ul .more #menu-icon.close .bar:nth-child(2) {
-  opacity: 0;
-}
-header nav ul .more #menu-icon.close .bar:last-child {
-  -webkit-transform: translateY(-9px) rotate(-45deg);
-  -ms-transform: translateY(-9px) rotate(-45deg);
-  transform: translateY(-9px) rotate(-45deg);
-}
-header nav ul .more #menu-icon.close .bar:first-child {
-  -webkit-transform: translateY(9px) rotate(45deg);
-  -ms-transform: translateY(9px) rotate(45deg);
-  transform: translateY(9px) rotate(45deg);
-}
-header nav ul .more #menu-icon.close .bar:nth-child(2) {
-  opacity: 0;
-}
-header nav ul .more #menu-icon.close .bar:last-child {
-  -webkit-transform: translateY(-9px) rotate(-45deg);
-  -ms-transform: translateY(-9px) rotate(-45deg);
-  transform: translateY(-9px) rotate(-45deg);
+header nav ul .more #menu-icon a:last-child {
+  color: #132F75;
 }
 header nav ul .more > ul {
   position: absolute;
@@ -245,10 +220,15 @@ header nav ul .more > ul {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 header nav ul .more > ul > li {
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 50px;
   color: #132F75;
+  font-size: 30px;
+  font-weight: 700;
+  width: 100%;
+  justify-content: space-between;
+}
+header nav ul .more > ul > li i {
+  font-size: 22px;
+  cursor: pointer;
 }
 header nav ul .more > ul > li > ul {
   gap: 10px;

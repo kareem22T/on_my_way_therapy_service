@@ -21,14 +21,17 @@ $(function () {
 
     $('label[for="plan_managment_1"]').on('click', function () {
         $('.plan-managed-form, .self-managed-form').fadeOut()
+        $('.agency-managed-form').fadeIn()
     })
     $('label[for="plan_managment_2"]').on('click', function () {
         $('.plan-managed-form').fadeIn()
         $('.self-managed-form').fadeOut()
+        $('.agency-managed-form').fadeOut()
     })
     $('label[for="plan_managment_3"]').on('click', function () {
         $('.plan-managed-form').fadeOut('fast')
         $('.self-managed-form').fadeIn().css('display', 'grid')
+        $('.agency-managed-form').fadeOut()
     })
 
 })
