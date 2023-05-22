@@ -32,7 +32,7 @@
         color: #FFC400;
         padding: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem) 0;
         height: auto;
-        margin-top: 15px;
+        margin-top: 40px;
     }
 
     footer .container div:first-child div {

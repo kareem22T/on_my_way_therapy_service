@@ -66,6 +66,8 @@ class RegisterController extends Controller
             'password' => Hash::make($request->input('password')),
             'company_name' => $request->input('company_name') ? $request->input('company_name') : null,
             'company_email' => $request->input('company_email') ? $request->input('company_email') : null,
+            'company_phone_number' => $request->input('company_phone_number') ? $request->input('company_phone_number') : null,
+            'company_address' => $request->input('company_address') ? $request->input('company_address') : null,
             'relation_to_patient' =>
             $request->input('relation_to_patient') ? $request->input('relation_to_patient') : 'self',
             'account_type' => $request->input('account_type'),

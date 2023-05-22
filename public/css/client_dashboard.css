@@ -798,8 +798,6 @@ header .notification-wrapper ul li .steps > div.done span {
 
 body {
   min-height: 100vh;
-  position: relative;
-  padding-bottom: 120px;
 }
 
 .home .container > h1 {
@@ -822,7 +820,7 @@ body {
   position: absolute;
   top: 50%;
   left: 20px;
-  transform: translateY(-38%);
+  transform: translateY(-50%);
   font-size: clamp(1.375rem, 1.0394rem + 1.413vw, 2.1875rem);
   color: #132F75;
 }
@@ -1400,8 +1398,6 @@ footer {
   height: 70px;
   background-color: #132F75;
   margin-top: 40px;
-  position: absolute;
-  bottom: 0;
 }
 
 /*# sourceMappingURL=client_dashboard.css.map */

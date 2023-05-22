@@ -125,6 +125,13 @@ $('.coming-soon-pop-up-1 #cancel').on('click', function () {
     $('.hide-content').fadeOut()
 })
 
+$('label[for="account_type_2"]').on('click', function () {
+    $('.for_some_one').fadeIn()
+})
+$('label[for="account_type_1"]').on('click', function () {
+    $('.for_some_one').fadeOut()
+})
+
 $('.coming-soon-2').on('click', function () {
     $('.coming-soon-pop-up-2').fadeIn()
     $('.hide-content').fadeIn()
@@ -198,13 +205,13 @@ function clientRegisteration () {
 		},
 		error: function (err) {
 			document.getElementById('errors').innerHTML = ''
+            $('.loader').fadeOut()
 			$.each(err.responseJSON.errors, function(key, value) {
 				let error = document.createElement('div')
 				error.classList = 'alert alert-danger'
 				error.innerHTML = value[0]
 				document.getElementById('errors').append(error)
 			});
-            $('.loader').fadeOut()
 			$('#errors').fadeIn('slow')
 			setTimeout(() => {
 				$('#errors').fadeOut('slow')

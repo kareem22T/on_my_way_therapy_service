@@ -27,6 +27,8 @@ class Client extends Authenticatable
         'gender',
         'company_name',
         'company_email',
+        'company_phone_number',
+        'company_address',
         'session_type',
         'client_type',
         'managment_type',

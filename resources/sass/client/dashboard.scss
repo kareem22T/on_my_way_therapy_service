@@ -651,8 +651,6 @@ header {
 
 body {
     min-height: 100vh;
-    position: relative;
-    padding-bottom: 120px;
 }
 
 .home {
@@ -677,7 +675,7 @@ body {
                 position: absolute;
                 top: 50%;
                 left: 20px;
-                transform: translateY(-38%);
+                transform: translateY(-50%);
                 font-size: clamp(1.375rem, calc(1.0394rem + 1.413vw), 2.1875rem);
                 color: $main-color;
             }
@@ -1271,6 +1269,4 @@ footer {
     height: 70px;
     background-color: $main-color;
     margin-top: 40px;
-    position: absolute;
-    bottom: 0;
 }

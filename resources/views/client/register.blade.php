@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <input type="radio" name="account_type" id="account_type_2" value="1">
-                            <label for="account_type_2">For someone else</label>
+                            <label for="account_type_2" style="font-size: 22px;">For someone else – As referrer</label>
                         </div>
                     </div>
                 </div>
@@ -88,6 +88,14 @@
                         <input type="email" name="company_email" id="company_email" class="form-control"
                             placeholder="Company email">
                     </div>
+                    <div class="form-group g-6">
+                        <input type="text" name="company_phone_number" id="company_phone_number"
+                            placeholder="Company phone number" class="form-control">
+                    </div>
+                    <div class="form-group g-6">
+                        <input type="text" name="company_address" id="company_address" placeholder="Company address"
+                            class="form-control">
+                    </div>
 
                     <div class="form-group g-12">
                         <input type="text" name="relation_to_patient" id="relation_to_patient"
@@ -141,10 +149,14 @@
                         </div>
                         <div class="form-group client_type_2">
                             <input type="radio" name="client_type" id="client_type_2" value="1" checked>
-                            <label for="client_type_2">NDIS</label>
+                            <label for="client_type_2" style="padding: 10px 20px;">
+                                <img style="height: 55px;" src="{{ asset('imgs/client/ndis-logo.png') }}">
+                            </label>
                         </div>
                         <div class="form-group">
-                            <label class="coming-soon-2">Medicare</label>
+                            <label class="coming-soon-2" style="padding: 10px 20px;">
+                                <img style="height: 55px;" src="{{ asset('imgs/client/medicare.png') }}">
+                            </label>
                         </div>
 
                     </div>
