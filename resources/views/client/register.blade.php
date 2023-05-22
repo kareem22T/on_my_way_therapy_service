@@ -105,29 +105,12 @@
                     <a href="" class="add_diagnosis">Add <i class="fa fa-plus"></i></a>
                 </div>
 
-                <div class="form-group g-12 choice radio mt-3">
-                    <h1>Do you prefer a male or a female therapist</h1>
-                    <div>
-                        <div class="form-group">
-                            <input type="radio" name="therapist_gender" id="therapist_gender_1" value="0">
-                            <label for="therapist_gender_1">Male</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="radio" name="therapist_gender" id="therapist_gender_2" value="1">
-                            <label for="therapist_gender_2">Female</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="radio" name="therapist_gender" id="therapist_gender_3" value="2">
-                            <label for="therapist_gender_3">Either</label>
-                        </div>
-                    </div>
-                </div>
                 <div class="g-12 flex-center">
                     <hr>
                 </div>
                 <div class="form-group g-12 choice mt-3">
                     <h1>What do you prefer? (session type)</h1>
-                    <div>
+                    <div style="flex-direction: column;">
                         <div class="form-group">
                             <input type="checkbox" name="session_type[]" id="session_type_1" value="1">
                             <label for="session_type_1">

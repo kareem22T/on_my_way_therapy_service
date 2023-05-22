@@ -72,7 +72,6 @@ class RegisterController extends Controller
             'session_type' =>
             count($request->input('session_type')) > 1 ? 2 : $request->input('session_type')[0],
             'client_type' => $request->input('client_type'),
-            'therapist_gender' => $request->input('therapist_gender'),
             'managment_type' => $request->input('client_type') == 1 ? $request->input('managment_type') : null,
             'manager_email' => $request->input('manager_email') ? $request->input('manager_email') : null,
             'card_number' => $request->input('card_number') ? $request->input('card_number') : null,

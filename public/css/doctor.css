@@ -408,7 +408,10 @@ body::after {
 #register_root form .choice > div > .form-group {
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: start;
+}
+#register_root form .choice > div > .form-group #session_type_1, #register_root form .choice > div > .form-group #session_type_2 {
+  transform: translateY(115%);
 }
 #register_root form .choice label {
   cursor: pointer;
