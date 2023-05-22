@@ -137,14 +137,14 @@
                     <h1>Client type</h1>
                     <div>
                         <div class="form-group">
-                            <label style="opacity: .5;cursor: not-allowed;">Private</label>
+                            <label class="coming-soon-1">Private</label>
                         </div>
                         <div class="form-group client_type_2">
                             <input type="radio" name="client_type" id="client_type_2" value="1" checked>
                             <label for="client_type_2">NDIS</label>
                         </div>
                         <div class="form-group">
-                            <label style="opacity: .5;cursor: not-allowed;">Medicare</label>
+                            <label class="coming-soon-2">Medicare</label>
                         </div>
 
                     </div>
@@ -266,6 +266,21 @@
             <button type="submit" class="btn btn-danger" id="cancel">Cancel</button>
         </div>
     </form>
+
+    <div class="pop-up coming-soon-pop-up-2">
+        Coming soon !
+        <p style="font-size: 16px;font-weight: 500;">
+            You will be able to use your medicare rebates with us – stay Tuned
+        </p>
+        <button type="submit" class="btn btn-secondary mt-3" id="cancel">Cancel</button>
+    </div>
+    <div class="pop-up coming-soon-pop-up-1">
+        Coming soon !
+        <p style="font-size: 16px;font-weight: 500;">
+            you will be able to use your private health fund and/or pay privately for your session
+        </p>
+        <button type="submit" class="btn btn-secondary mt-3" id="cancel">Cancel</button>
+    </div>
 
     @include('site.includes.loader')
 @endsection

@@ -116,7 +116,23 @@ document.getElementById("client_submit").addEventListener("click", function(even
 	})
 });
 
+$('.coming-soon-1').on('click', function () {
+    $('.coming-soon-pop-up-1').fadeIn()
+    $('.hide-content').fadeIn()
+})
+$('.coming-soon-pop-up-1 #cancel').on('click', function () {
+    $('.coming-soon-pop-up-1').fadeOut()
+    $('.hide-content').fadeOut()
+})
 
+$('.coming-soon-2').on('click', function () {
+    $('.coming-soon-pop-up-2').fadeIn()
+    $('.hide-content').fadeIn()
+})
+$('.coming-soon-pop-up-2 #cancel').on('click', function () {
+    $('.coming-soon-pop-up-2').fadeOut()
+    $('.hide-content').fadeOut()
+})
 
 $('.verify-pop-up #cancel').on('click', function (e) {
     e.preventDefault()
