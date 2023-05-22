@@ -4,7 +4,7 @@
             <h3>Therapy Anywhere – Anytime</h3>
             <div>
                 @foreach (App\Models\Profession::all() as $profession)
-                    <a href="" class="profession">
+                    <a href="specialization/{{ $profession->id }}" class="profession">
                         <h4>{{ $profession->title }}</h4>
                     </a>
                 @endforeach
@@ -15,14 +15,14 @@
             <h4>Contact us or leave feedback</h4>
             <div class="contact">
                 <div>
-                    <a href="https://www.linkedin.com/company/94288210/admin/">
+                    <a href="https://www.linkedin.com/company/94288210/admin/" target="_blanck">
                         <i class="fa-brands fa-linkedin"></i>
                     </a>
-                    <a href="https://www.facebook.com/profile.php?id=100092588026660">
+                    <a href="https://www.facebook.com/profile.php?id=100092588026660" target="_blanck">
                         <i class="fa-brands fa-square-facebook"></i>
                     </a>
-                    <a
-                        href="https://www.instagram.com/on_my_way_therapy/?fbclid=IwAR1XA8L5BTH-EcKaqqCYeKxfgOoBTa-LKg_IE_rFqBlYMIXwNWm_v9hIEPI">
+                    <a href="https://www.instagram.com/on_my_way_therapy/?fbclid=IwAR1XA8L5BTH-EcKaqqCYeKxfgOoBTa-LKg_IE_rFqBlYMIXwNWm_v9hIEPI"
+                        target="_blanck">
                         <i class="fa-brands fa-square-instagram"></i>
                     </a>
                     <a href="mailto:Info@onmywaytherapy.com.au">
