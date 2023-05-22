@@ -35,7 +35,7 @@
                 </p>
             </div>
         </section>
-        <section class="professions_wrapper">
+        <section class="professions_wrapper container">
             <h1>Therapy Anywhere – Anytime</h1>
             <div class="professions">
                 @foreach (App\Models\Profession::all() as $profession)

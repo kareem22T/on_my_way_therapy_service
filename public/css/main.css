@@ -168,7 +168,6 @@ header nav ul {
 header nav ul li a {
   font-weight: 500;
   font-size: clamp(0.8125rem, 0.3736rem + 1.8478vw, 1.875rem);
-  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
   color: #132F75;
   text-decoration: none;
   gap: clamp(0.625rem, 0.3571rem + 1.0989vw, 1.25rem);
@@ -221,7 +220,7 @@ header nav ul .more > ul {
 }
 header nav ul .more > ul > li {
   color: #132F75;
-  font-size: 30px;
+  font-size: clamp(1.1875rem, 0.9035rem + 1.1957vw, 1.875rem);
   font-weight: 700;
   width: 100%;
   justify-content: space-between;
@@ -246,6 +245,9 @@ header nav ul .more > ul > li > ul a {
   padding-left: 10px;
   margin-top: 8px;
   text-decoration: none;
+}
+header nav ul .more .login-pop-up li:first-child {
+  color: #FFC400;
 }
 
 footer {
@@ -387,29 +389,34 @@ main .professions_wrapper .professions {
 }
 main .professions_wrapper .professions .profession {
   visibility: hidden;
-  width: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
-  min-width: 30%;
+  width: 200px;
+  min-width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
   font-style: normal;
   font-weight: 500;
-  font-size: 40px;
-  line-height: 50px;
+  font-size: clamp(2.375rem, 2.0652rem + 1.3043vw, 3.125rem);
+  line-height: clamp(2.375rem, 2.0652rem + 1.3043vw, 3.125rem);
   text-align: center;
   color: #132F75;
   position: relative;
   padding: 0 20px clamp(0.625rem, 0.3668rem + 1.087vw, 1.25rem);
   text-decoration: none;
 }
+@media (max-width: 599.98px) {
+  main .professions_wrapper .professions .profession {
+    width: clamp(10rem, 8.9674rem + 4.3478vw, 12.5rem);
+  }
+}
 main .professions_wrapper .professions .profession h4 {
-  font-size: clamp(1.0625rem, 0.4688rem + 2.5vw, 2.5rem);
+  font-size: clamp(0.8125rem, 0.606rem + 0.8696vw, 1.3125rem);
+  white-space: nowrap;
 }
 main .professions_wrapper .professions .profession .img {
-  width: clamp(6.25rem, 4.9592rem + 5.4348vw, 9.375rem);
-  height: clamp(6.25rem, 4.9592rem + 5.4348vw, 9.375rem);
+  width: clamp(5rem, 4.4837rem + 2.1739vw, 6.25rem);
+  height: clamp(5rem, 4.4837rem + 2.1739vw, 6.25rem);
   background: #FFC400;
   display: flex;
   justify-content: center;
@@ -417,14 +424,14 @@ main .professions_wrapper .professions .profession .img {
   border-radius: 50%;
 }
 main .professions_wrapper .professions .profession .img img {
-  width: clamp(2.5rem, 1.8546rem + 2.7174vw, 4.0625rem);
-  height: clamp(2.8125rem, 2.038rem + 3.2609vw, 4.6875rem);
+  width: clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem);
+  height: clamp(3.125rem, 2.8668rem + 1.087vw, 3.75rem);
   object-fit: contain;
 }
 main .professions_wrapper .professions .profession .bg {
   position: absolute;
   width: 100%;
-  height: calc(100% - clamp(3.4375rem, 2.9212rem + 2.1739vw, 4.6875rem));
+  height: calc(100% - clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem));
   bottom: 0;
   background: #FFFFFF;
   border: 1px solid #132F75;
@@ -433,7 +440,7 @@ main .professions_wrapper .professions .profession .bg {
   z-index: -1;
 }
 main #how {
-  height: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
+  height: clamp(8.125rem, 7.6087rem + 2.1739vw, 9.375rem);
   margin-top: calc(-1 * clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem) - clamp(1.25rem, 0.9821rem + 1.0989vw, 1.875rem));
 }
 main .how {

@@ -917,15 +917,16 @@ body {
     }
 
     .professions_wrapper {
+        margin: clamp(1.875rem, 1.3587rem + 2.1739vw, 3.125rem) 0;
         h1 {
             font-weight: 500;
             font-size: clamp(1.625rem, calc(1.2636rem + 1.5217vw), 2.5rem);
             line-height: clamp(2.5rem, calc(2.2418rem + 1.087vw), 3.125rem);
             text-align: center;
             color: $main-color;
-            margin-top: clamp(1.5625rem, calc(0.788rem + 3.2609vw), 3.4375rem);
             margin-bottom: clamp(0.9375rem, calc(0.4212rem + 2.1739vw), 2.1875rem);
         }
+
         .professions {
             display: flex;
             justify-content: center;
@@ -933,42 +934,54 @@ body {
             flex-wrap: wrap;
             align-items: stretch;
             gap: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
+
             .profession {
-                width: clamp(10rem, calc(8.9674rem + 4.3478vw), 12.5rem);
-                min-width: 30%;
+                width: 200px;
+                min-width: 20%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 20px;
                 font-style: normal;
                 font-weight: 500;
-                font-size: 40px;
-                line-height: 50px;
+                font-size: clamp(2.375rem, calc(2.0652rem + 1.3043vw), 3.125rem);
+                line-height: clamp(2.375rem, calc(2.0652rem + 1.3043vw), 3.125rem);
                 text-align: center;
                 color: $main-color;
                 position: relative;
                 padding: 0 20px clamp(0.625rem, calc(0.3668rem + 1.087vw), 1.25rem);
                 text-decoration: none;
-                h4 {font-size: clamp(1.0625rem, calc(0.4688rem + 2.5vw), 2.5rem);}
+                gap: 12px;
+
+                @media (max-width: 599.98px) {
+                    width: clamp(10rem, calc(8.9674rem + 4.3478vw), 12.5rem);
+                }
+
+                h4 {
+                    font-size: clamp(0.8125rem, calc(0.606rem + 0.8696vw), 1.3125rem);
+                    white-space: nowrap;
+                }
+
                 .img {
-                    width: clamp(6.25rem, calc(4.9592rem + 5.4348vw), 9.375rem);
-                    height: clamp(6.25rem, calc(4.9592rem + 5.4348vw), 9.375rem);
+                    width: clamp(5rem, calc(4.4837rem + 2.1739vw), 6.25rem);
+                    height: clamp(5rem, calc(4.4837rem + 2.1739vw), 6.25rem);
                     background: #FFC400;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     border-radius: 50%;
+
                     img {
-                        width: clamp(2.5rem, calc(1.8546rem + 2.7174vw), 4.0625rem);
-                        height: clamp(2.8125rem, calc(2.038rem + 3.2609vw), 4.6875rem);
+                        width: clamp(2.5rem, calc(2.2418rem + 1.087vw), 3.125rem);
+                        height: clamp(3.125rem, calc(2.8668rem + 1.087vw), 3.75rem);
                         object-fit: contain;
                     }
                 }
+
                 .bg {
                     position: absolute;
                     width: 100%;
-                    height: calc(100% - clamp(3.4375rem, calc(2.9212rem + 2.1739vw), 4.6875rem));
+                    height: calc(100% - clamp(2.5rem, calc(2.2418rem + 1.087vw), 3.125rem));
                     bottom: 0;
                     background: #FFFFFF;
                     border: 1px solid $main-color;
@@ -979,7 +992,6 @@ body {
             }
         }
     }
-
     .search_wrapper {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
