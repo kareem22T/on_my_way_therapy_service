@@ -19,30 +19,18 @@ $(function () {
         $(this).parent().siblings().find('label').removeClass('active');
     })
 
-    $('.client_type_2').on('click', function () {
-        $('.ndis-form').fadeIn().css('display', 'grid')
-        $('.plan-managed-btns, .plan-managed-form .Plan_manager_email_parent').fadeIn()
+    $('label[for="plan_managment_1"]').on('click', function () {
+        $('.plan-managed-form, .self-managed-form').fadeOut()
     })
-    $('.client_type_2').siblings().not(':last-child').on('click', function () {
-        $('.ndis-form').fadeOut()
-        $('.plan-managed-btns, .plan-managed-form .Plan_manager_email_parent').fadeOut()
-        $('#card_number').fadeIn()
+    $('label[for="plan_managment_2"]').on('click', function () {
+        $('.plan-managed-form').fadeIn()
+        $('.self-managed-form').fadeOut()
     })
-
-    $('label[for="account_type_2"]').on('click', function () {
-        $('.for_some_one').fadeIn()
-    })
-    $('label[for="account_type_1"]').on('click', function () {
-        $('.for_some_one').fadeOut()
+    $('label[for="plan_managment_3"]').on('click', function () {
+        $('.plan-managed-form').fadeOut('fast')
+        $('.self-managed-form').fadeIn().css('display', 'grid')
     })
 
-    $('.plan_managment_1').on('click', function () {
-        $('.plan-managed-form').fadeIn().css('display', 'grid')
-        $('.Plan_manager_email_parent').fadeIn()
-    })
-    $('.plan_managment_1').siblings().on('click', function () {
-        $('.Plan_manager_email_parent').fadeOut()
-    })
 })
 
 $("#photo").change(function() {
@@ -96,6 +84,7 @@ $(document).on('click', '#verfiy_client',  function(e) {
 
 document.getElementById("client_submit").addEventListener("click", function(event) {
     event.preventDefault();
+    $('.loader').fadeIn().css('display', 'flex');
         let formData = new FormData(document.getElementById('client_register'))
         $('.diagnosis li').each(function () {
             formData.append('diagnosis[]', $(this).text());
@@ -108,7 +97,6 @@ document.getElementById("client_submit").addEventListener("click", function(even
 		data: formData,
 		success: function (data) {
             if (data.status == 200) {
-                $('.loader').fadeIn().css('display', 'flex');
                 sendCodes(formData.get('countryCode'), formData.get('phone'), formData.get('email'))
             }
 		},

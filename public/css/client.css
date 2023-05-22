@@ -151,10 +151,7 @@ body::after {
   border: 3px solid #FFC400;
   border-radius: 20px;
 }
-.client_register .ndis-form {
-  display: none;
-}
-.client_register .plan-managed-btns, .client_register .plan-managed-form .Plan_manager_email_parent {
+.client_register .self-managed-form {
   display: none;
 }
 .client_register .choice ul {

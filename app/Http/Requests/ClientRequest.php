@@ -48,10 +48,13 @@ class ClientRequest extends FormRequest
             'client_type' => 'required',
             'NDIS_number' => 'required_if:client_type,1',
             'NDIS_end_date' => 'required_if:client_type,1',
-            'plan_managment' => 'required',
-            'card_number' => 'required',
             'phone_code' => 'required_if:phone_code,',
             'email_code' => 'required_if:email_code,',
+            'manager_email' => 'required_if:managment_type,1',
+            'card_number' => 'required_if:managment_type,2',
+            'name_on_card' => 'required_if:managment_type,2',
+            'expiration_date' => 'required_if:managment_type,2',
+            'security_code' => 'required_if:managment_type,2',
         ];
     }
 
@@ -82,10 +85,11 @@ class ClientRequest extends FormRequest
             'client_type.required' => 'Please choose a client type',
             'NDIS_number.required_if' => 'Please enter the NDIS number',
             'NDIS_end_date.required_if' => 'Please select the NDIS end date',
-            'manager_email.required' => 'Please enter the manager email',
-            'card_number.required' => 'Please enter the card number',
-            'phone_code.required_if' => 'Please enter the phone verfication code.',
-            'email_code.required_if' => 'Please enter the email verfication code.',
+            'manager_email.required_if' => 'Please enter the manager email address',
+            'card_number.required_if' => 'Please enter the credit card number',
+            'name_on_card.required_if' => 'Please enter your name as it is on the card',
+            'expiration_date.required_if' => 'Please enter card expiration date',
+            'security_code.required_if' => 'Please enter card expiration security code',
         ];
     }
 

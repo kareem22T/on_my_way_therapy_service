@@ -1,6 +1,6 @@
 @extends('client.layouts.register-layout')
 
-@section("title", "Register")
+@section('title', 'Register')
 
 @section('content')
     <div id="errors">
@@ -31,7 +31,8 @@
                 <div class="form-group g-12 photo_group">
                     <input type="file" name="photo" id="photo" class="form-control">
                     <label for="photo" class="mb-3">
-                        <img id="preview" src="{{ asset('/imgs/doctor/uploads/therapist_profile/default.png') }}" alt="">
+                        <img id="preview" src="{{ asset('/imgs/doctor/uploads/therapist_profile/default.png') }}"
+                            alt="">
                         <i class="fa fa-user"></i>
                         <div class="after">
                             <i class="fa fa-plus"></i>
@@ -49,7 +50,8 @@
                 </div>
                 <div class="form-group g-6 lg-grid">
                     @include('doctor.includes.phonekeys')
-                    <input type="text" name="phone" id="phone" class="form-control g-7" placeholder="Phone number *">
+                    <input type="text" name="phone" id="phone" class="form-control g-7"
+                        placeholder="Phone number *">
                 </div>
                 <div class="form-group g-12">
                     <input type="hidden" name="address_lat" id="address_lat">
@@ -61,12 +63,12 @@
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password *">
                 </div>
                 <div class="form-group g-6">
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm password *">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
+                        placeholder="Confirm password *">
                 </div>
                 <div class="form-group g-6">
                     <input type="text" name="dob" id="dob" placeholder="Date of birth *"
-                            onfocus="(this.type='date')"
-                            onblur="(this.type='text')" class="form-control">
+                        onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control">
                 </div>
                 <div class="form-group g-6">
                     <select name="gender" id="gender" class="form-control">
@@ -78,20 +80,24 @@
 
                 <div class="lg-grid g-12 for_some_one" style="display: none">
                     <div class="form-group g-6">
-                        <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Company name">
+                        <input type="text" name="company_name" id="company_name" class="form-control"
+                            placeholder="Company name">
                     </div>
 
                     <div class="form-group g-6">
-                        <input type="email" name="company_email" id="company_email" class="form-control" placeholder="Company email">
+                        <input type="email" name="company_email" id="company_email" class="form-control"
+                            placeholder="Company email">
                     </div>
 
                     <div class="form-group g-12">
-                        <input type="text" name="relation_to_patient" id="relation_to_patient" placeholder="relationship to client" class="form-control">
+                        <input type="text" name="relation_to_patient" id="relation_to_patient"
+                            placeholder="relationship to client" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group g-12 diagnosis_wrapper">
-                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Basic diagnosis" class="form-control">
+                    <input type="text" name="diagnosis" id="diagnosis" placeholder="Basic diagnosis"
+                        class="form-control">
                     <ul class="diagnosis">
                         {{-- <li>example <i class="fa-regular fa-circle-xmark"></i></li> --}}
                         {{-- selecte diagnosis will appear here --}}
@@ -148,17 +154,16 @@
                     <h1>Client type</h1>
                     <div>
                         <div class="form-group">
-                            <input type="radio" name="client_type" id="client_type_1" value="0" checked>
-                            <label for="client_type_1">Private</label>
+                            <label style="opacity: .5;cursor: not-allowed;">Private</label>
                         </div>
                         <div class="form-group client_type_2">
-                            <input type="radio"  name="client_type" id="client_type_2" value="1">
+                            <input type="radio" name="client_type" id="client_type_2" value="1" checked>
                             <label for="client_type_2">NDIS</label>
                         </div>
                         <div class="form-group">
                             <label style="opacity: .5;cursor: not-allowed;">Medicare</label>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -167,32 +172,53 @@
                 </div>
                 <div class="ndis-form lg-grid g-12">
                     <div class="form-group g-12">
-                        <input type="text" name="NDIS_number" id="NDIS_number" placeholder="NDIS number" class="form-control">
+                        <input type="text" name="NDIS_number" id="NDIS_number" placeholder="NDIS number"
+                            class="form-control">
                     </div>
                     <div class="form-group g-12">
                         <input type="text" name="NDIS_end_date" id="NDIS_end_date" placeholder="Plan end date"
-                            onfocus="(this.type='date')"
-                            onblur="(this.type='text')" class="form-control">
+                            onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control">
                     </div>
                 </div>
                 <div class="form-group g-12 choice radio lg-grid plan-managed-btns">
                     <div class="lg-grid g-12">
                         <div class="form-group g-6 lg-grid plan_managment_1">
-                            <input type="radio" name="plan_managment" id="plan_managment_1" value="0" checked>
-                            <label for="plan_managment_1" class="g-12">Plan-managed?</label>
+                            <input type="radio" name="managment_type" id="plan_managment_1" value="0">
+                            <label for="plan_managment_1" class="g-12">Ndis-a?</label>
+                        </div>
+                        <div class="form-group g-6 lg-grid plan_managment_1">
+                            <input type="radio" name="managment_type" id="plan_managment_2" value="1" checked>
+                            <label for="plan_managment_2" class="g-12">Plan-managed?</label>
                         </div>
                         <div class="form-group g-6 lg-grid">
-                            <input type="radio" name="plan_managment" id="plan_managment_2" value="1">
-                            <label for="plan_managment_2" class="g-12">Self-managed?</label>
+                            <input type="radio" name="managment_type" id="plan_managment_3" value="2">
+                            <label for="plan_managment_3" class="g-12">Self-managed?</label>
                         </div>
                     </div>
                 </div>
                 <div class="g-12 plan-managed-form lg-grid">
-                    <div class="form-group g-12 Plan_manager_email_parent">
-                        <input type="email" name="manager_email" id="Plan_manager_email" placeholder="Manager email" class="form-control">
+                    <div class="form-group g-12">
+                        <input type="email" name="manager_email" id="Plan_manager_email" placeholder="Manager email"
+                            class="form-control">
                     </div>
-                    <div class="form-group g-12 card_number">
-                        <input type="text" name="card_number" id="card_number" placeholder="Credit card number " class="form-control">
+                </div>
+
+                <div class="g-12 self-managed-form lg-grid">
+                    <div class="form-group g-12">
+                        <input type="text" name="card_number" id="card_number" placeholder="Card number "
+                            class="form-control">
+                    </div>
+                    <div class="form-group g-12">
+                        <input type="text" name="name_on_card" id="name_on_card" placeholder="Name on card"
+                            class="form-control">
+                    </div>
+                    <div class="form-group g-6">
+                        <input type="text" name="expiration_date" id="expiration_date"
+                            placeholder="Expiration date (MM/YY)" class="form-control">
+                    </div>
+                    <div class="form-group g-6">
+                        <input type="text" name="security_code" id="security_code" placeholder="Security code"
+                            class="form-control">
                     </div>
                 </div>
 
@@ -262,10 +288,9 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/maps.js') }}?v={{time()}}"></script>
-<script src="{{ asset('/js/client/register.js') }}?v={{time()}}"></script>
-<script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
-defer
-></script>
+    <script src="{{ asset('/js/maps.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('/js/client/register.js') }}?v={{ time() }}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
+        defer></script>
 @endsection

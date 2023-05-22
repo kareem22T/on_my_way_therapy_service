@@ -8,6 +8,7 @@ use App\Http\Traits\SendEmail;
 use App\Http\Traits\UploadClientPhoto;
 use App\Models\Client;
 use App\Models\Diagnosi;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,9 +45,6 @@ class RegisterController extends Controller
     // register and validate client information ................................
     public function register(ClientRequest $request)
     {
-        $request->validate([
-            'manager_email' => (($request->input('plan_managment') == 0) && ($request->input('client_type') == 1)) ? 'required' : ''
-        ]);
         $profile_picture_name = null;
         if ($request->photo)
             $profile_picture_name =
@@ -74,10 +72,13 @@ class RegisterController extends Controller
             'session_type' =>
             count($request->input('session_type')) > 1 ? 2 : $request->input('session_type')[0],
             'client_type' => $request->input('client_type'),
-            'card_number' => $request->input('card_number'),
             'therapist_gender' => $request->input('therapist_gender'),
-            'managment_type' => $request->input('client_type') == 1 ? $request->input('plan_managment') : null,
-            'manager_email' => $request->input('client_type') == 0 ? $request->input('manager_email') : null,
+            'managment_type' => $request->input('client_type') == 1 ? $request->input('managment_type') : null,
+            'manager_email' => $request->input('manager_email') ? $request->input('manager_email') : null,
+            'card_number' => $request->input('card_number') ? $request->input('card_number') : null,
+            'name_on_card' => $request->input('name_on_card') ? $request->input('name_on_card') : null,
+            'expiration_date' => null,
+            'security_code' => $request->input('security_code') ? $request->input('security_code') : null
         ]);
 
         if ($request->diagnosis)
