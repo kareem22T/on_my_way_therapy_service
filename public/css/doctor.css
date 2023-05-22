@@ -169,6 +169,11 @@ body::after {
   object-fit: contain;
 }
 
+input[type=checkbox] {
+  width: 25px;
+  height: 25px;
+}
+
 #register_root {
   width: 100%;
   max-width: 1000px;
@@ -411,7 +416,7 @@ body::after {
   align-items: start;
 }
 #register_root form .choice > div > .form-group #session_type_1, #register_root form .choice > div > .form-group #session_type_2 {
-  transform: translateY(115%);
+  transform: translateY(45%);
 }
 #register_root form .choice label {
   cursor: pointer;
