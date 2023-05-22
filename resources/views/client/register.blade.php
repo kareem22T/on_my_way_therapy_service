@@ -167,7 +167,7 @@
                     <div class="lg-grid g-12">
                         <div class="form-group g-6 lg-grid plan_managment_1">
                             <input type="radio" name="managment_type" id="plan_managment_1" value="0">
-                            <label for="plan_managment_1" class="g-12">NDIS/Agency Managed</label>
+                            <label for="plan_managment_1" class="g-12">Agency managed</label>
                         </div>
                         <div class="form-group g-6 lg-grid plan_managment_1">
                             <input type="radio" name="managment_type" id="plan_managment_2" value="1" checked>
