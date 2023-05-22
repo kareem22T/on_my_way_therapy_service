@@ -254,12 +254,21 @@ footer {
   background-color: #132F75;
 }
 
+body {
+  zoom: 90%;
+}
+
+@media (max-height: 800px) and (min-width: 1000px) {
+  body {
+    zoom: 75%;
+  }
+}
 main {
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: clamp(2.1875rem, 0.4464rem + 7.1429vw, 6.25rem);
-  margin: clamp(1.5625rem, 0.8929rem + 2.7473vw, 3.125rem) 0;
+  margin: clamp(1.5625rem, 0.8929rem + 2.7473vw, 3.125rem) auto;
 }
 main .hero {
   display: flex;

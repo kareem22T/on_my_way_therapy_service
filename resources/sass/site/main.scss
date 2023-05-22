@@ -121,6 +121,14 @@ footer {
     height: 70px;
     background-color: $main-color;
 }
+body {
+    zoom: 90%;
+}
+@media (max-height: 800px) and (min-width: 1000px) {
+    body {
+        zoom: 75%;
+    }
+}
 
 // start home ...
 main {
@@ -128,7 +136,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: clamp(2.1875rem, calc(0.4464rem + 7.1429vw), 6.25rem);
-    margin: clamp(1.5625rem, calc(0.8929rem + 2.7473vw), 3.125rem) 0;
+    margin: clamp(1.5625rem, calc(0.8929rem + 2.7473vw), 3.125rem) auto;
 
     .hero {
         display: flex;
