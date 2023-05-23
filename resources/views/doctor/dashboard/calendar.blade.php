@@ -204,11 +204,13 @@
                             <label for="form_new">Distance in KM: </label>
                             <div class="form-group">
                                 <select name="distance" id="distance" class="form-control">
-                                    <option value="1" {{ $therapist_times['travel_range'] = 1 ? 'selected' : '' }}>10
+                                    <option value="1" {{ $therapist_times['travel_range'] == 1 ? 'selected' : '' }}>
+                                        10
                                     </option>
-                                    <option value="2" {{ $therapist_times['travel_range'] = 2 ? 'selected' : '' }}>20
+                                    <option value="2" {{ $therapist_times['travel_range'] == 2 ? 'selected' : '' }}>
+                                        20
                                     </option>
-                                    <option value="3" {{ $therapist_times['travel_range'] = 3 ? 'selected' : '' }}>30
+                                    <option value="3" {{ $therapist_times['travel_range'] == 3 ? 'selected' : '' }}>30
                                         +</option>
                                 </select>
                             </div>
@@ -216,11 +218,11 @@
 
                         <div class="btns">
                             <button class="btn btn-danger cancel">Cancel</button>
-                            <button class="btn btn-success set-hours">Set</button>
+                            <button class="btn btn-success set-distance">Set</button>
                         </div>
                     </div>
                     <div class="pop-up edit_holidays_pop_up">
-                        Set your holidays
+                        Set your new holidays
                         <div class="form-group">
                             <label for="form_new">Select holidays: </label>
                             <div>
@@ -237,19 +239,13 @@
                                     </select>
                                 </div>
                                 <ul class="holidays mt-3">
-                                    @foreach ($therapist_times['holidays'] as $holiday)
-                                        <li val="{{ $holiday->id }}">
-                                            {{ $holiday->name }}
-                                            <i class="fa-regular fa-circle-xmark"></i>
-                                        </li>
-                                    @endforeach
                                 </ul>
                             </div>
                         </div>
 
                         <div class="btns">
                             <button class="btn btn-danger cancel">Cancel</button>
-                            <button class="btn btn-success set-hours">Set</button>
+                            <button class="btn btn-success set-holidays">Set</button>
                         </div>
                     </div>
                     <div class="hide-content"></div>

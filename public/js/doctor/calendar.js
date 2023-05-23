@@ -341,6 +341,72 @@ $('.set-hours').on('click', function () {
       }
   })
 })
+$('.set-distance').on('click', function () {
+  $.ajax({
+    url: '/therapist/edit-times',
+    method: 'POST',
+    data: {distance: $('#distance').val()},
+    success: function (data) {
+      if (data.status == 200) {
+          document.getElementById('errors').innerHTML = ''
+          let error = document.createElement('div')
+          error.classList = 'alert alert-success'
+          error.innerHTML = data.msg
+          document.getElementById('errors').append(error)
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+              location.reload()
+          }, 1200);
+      }
+      }, error: function (err) {
+          document.getElementById('errors').innerHTML = ''
+          $.each(err.responseJSON.errors, function(key, value) {
+            let error = document.createElement('div')
+            error.classList = 'alert alert-danger'
+            error.innerHTML = value[0]
+            document.getElementById('errors').append(error)
+          });
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+            $('#errors').fadeOut('slow')
+          }, 2000);
+      }
+  })
+})
+$('.set-holidays').on('click', function () {
+  $.ajax({
+    url: '/therapist/edit-times',
+    method: 'POST',
+    data: {holidays_arr: holidays},
+    success: function (data) {
+      if (data.status == 200) {
+          document.getElementById('errors').innerHTML = ''
+          let error = document.createElement('div')
+          error.classList = 'alert alert-success'
+          error.innerHTML = data.msg
+          document.getElementById('errors').append(error)
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+              location.reload()
+          }, 1200);
+      }
+      }, error: function (err) {
+          document.getElementById('errors').innerHTML = ''
+          $.each(err.responseJSON.errors, function(key, value) {
+            let error = document.createElement('div')
+            error.classList = 'alert alert-danger'
+            error.innerHTML = value[0]
+            document.getElementById('errors').append(error)
+          });
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+            $('#errors').fadeOut('slow')
+          }, 2000);
+      }
+  })
+})
+
+
 
 $('#edit-hours').on('click', function (e) {
   e.preventDefault();

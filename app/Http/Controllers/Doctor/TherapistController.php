@@ -118,6 +118,7 @@ class TherapistController extends Controller
             $validated = $request->validate([
                 'holidays_arr' => 'required|array',
             ]);
+            $therapist->holidays()->detach();
             foreach ($request->holidays_arr as $day) {
                 $therapist->holidays()->syncWithoutDetaching(Day::find($day)->id);
             }
