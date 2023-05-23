@@ -53,7 +53,7 @@ Route::get('/specialization/8', function () {
     return view('site.professions.Dietetics');
 });
 
-######################################## star therapist routes ###############################################
+######################################## start therapist routes ###############################################
 
 Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
     // routes can be visit as both 
@@ -92,7 +92,9 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
         Route::group(['middleware' => 'therapist_dashboard_vistors'], function () {
             Route::get('/', [TherapistController::class, 'indexCalendar']);
             Route::post('/save-times', [TherapistController::class, 'saveWorkingTimes']);
+            Route::post('/edit-times', [TherapistController::class, 'editWorkingTimes']);
             Route::get('/my-account', [TherapistController::class, 'indexMyAccount']);
+            Route::get('/my-account/profile', [TherapistController::class, 'indexProfile']);
             Route::get('/chats/{id?}', [TherapistController::class, 'indexChats']);
             Route::get('/appointment/{id?}', [TherapistController::class, 'appointmentDetails']);
         });

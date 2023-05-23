@@ -112,6 +112,7 @@ document.getElementById("client_submit").addEventListener("click", function(even
 				document.getElementById('errors').append(error)
 			});
 			$('#errors').fadeIn('slow')
+            $('.loader').fadeOut()
 			setTimeout(() => {
 				$('#errors').fadeOut('slow')
 			}, 3500);

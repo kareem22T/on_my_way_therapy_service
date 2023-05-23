@@ -309,6 +309,39 @@ $('#working_hours').on('submit', function (e) {
   })
 })
 
+$('.set-hours').on('click', function () {
+  $.ajax({
+    url: '/therapist/edit-times',
+    method: 'POST',
+    data: {from: $('#from').val(), to: $('#to').val()},
+    success: function (data) {
+      if (data.status == 200) {
+          document.getElementById('errors').innerHTML = ''
+          let error = document.createElement('div')
+          error.classList = 'alert alert-success'
+          error.innerHTML = data.msg
+          document.getElementById('errors').append(error)
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+              location.reload()
+          }, 1200);
+      }
+      }, error: function (err) {
+          document.getElementById('errors').innerHTML = ''
+          $.each(err.responseJSON.errors, function(key, value) {
+            let error = document.createElement('div')
+            error.classList = 'alert alert-danger'
+            error.innerHTML = value[0]
+            document.getElementById('errors').append(error)
+          });
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+            $('#errors').fadeOut('slow')
+          }, 2000);
+      }
+  })
+})
+
 $('#edit-hours').on('click', function (e) {
   e.preventDefault();
   $('.edit_hours_pop_up').fadeIn()

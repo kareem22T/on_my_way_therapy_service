@@ -30,6 +30,11 @@ class TherapistController extends Controller
         return view('doctor.dashboard.account')->with(compact('therapist'));
     }
 
+    public function indexProfile()
+    {
+        return view('doctor.dashboard.profile');
+    }
+
     public function indexChats($client_id = null)
     {
         $client_data = null;
@@ -86,6 +91,45 @@ class TherapistController extends Controller
                 [
                     'status' => 200,
                     'msg' => 'You have set your time'
+                ]
+            );
+    }
+    public function editWorkingTimes(Request $request)
+    {
+        $therapist = Auth::guard('doctor')->user();
+
+        if ($request->distance) :
+            $validated = $request->validate([
+                'distance' => 'required',
+            ]);
+            $therapist->travel_range = $request->distance;
+        endif;
+
+        if ($request->from && $request->to) :
+            $validated = $request->validate([
+                'from' => 'required',
+                'to' => 'required|gte:from|different:from',
+            ]);
+            $therapist->working_hours_from = $request->from;
+            $therapist->working_hours_to = $request->to;
+        endif;
+
+        if ($request->holidays_arr) :
+            $validated = $request->validate([
+                'holidays_arr' => 'required|array',
+            ]);
+            foreach ($request->holidays_arr as $day) {
+                $therapist->holidays()->syncWithoutDetaching(Day::find($day)->id);
+            }
+        endif;
+
+        $therapist->save();
+
+        if ($therapist)
+            return response()->json(
+                [
+                    'status' => 200,
+                    'msg' => 'Your schedule has been updated!'
                 ]
             );
     }

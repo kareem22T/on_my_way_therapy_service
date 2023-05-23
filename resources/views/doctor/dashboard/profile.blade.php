@@ -1,33 +1,32 @@
-@extends('client.layouts.dashboard-layout')
+@extends('doctor.layouts.dashboard-layout')
 
 @section('account_link', 'active')
 
-@section('title', 'Account')
+@section('title', 'Profile')
 
 @section('content')
     @php
-        $client = Auth::guard('client')->user();
+        $doctor = Auth::guard('doctor')->user();
     @endphp
     <main class="account_wrapper">
         <div class="container lg-grid">
             <div class="profile g-12">
                 <div class="img">
-                    <img src="/imgs/client/uploads/client_profile/{{ $client->photo ? $client->photo : 'default_client_profile.jpg' }}"
-                        alt="">
+                    <img src="/imgs/doctor/uploads/therapist_profile/{{ $doctor->photo }}" alt="">
                 </div>
-                <h1>{{ $client->first_name }} {{ $client->last_name }}</h1>
-                <a href="/client/logout" class="btn btn-danger">Log out</a>
+                <h1>{{ $doctor->first_name }} {{ $doctor->last_name }}</h1>
+                <a href="/therapist/logout" class="btn btn-danger">Log out</a>
             </div>
 
             <div class="form-group g-12">
-                <a type="text" id="old_address">{{ $client->address }}</a>
+                <a type="text" id="old_address">{{ $doctor->address }}</a>
                 <input type="hidden" name="address" id="address">
                 <input type="hidden" name="address_lat" id="address_lat">
                 <input type="hidden" name="address_lng" id="address_lng">
                 <button id="edit-address"><i class="fa fa-edit"></i></button>
             </div>
             <div class="form-group g-12" style="margin-bottom: 50px;">
-                <input type="text" name="number" id="number" value="{{ $client->phone }}" disabled>
+                <input type="text" name="number" id="number" value="{{ $doctor->phone }}" disabled>
                 <span>Still your number? <a class="btn btn-danger">No</a></span>
             </div>
         </div>
