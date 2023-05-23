@@ -42,7 +42,7 @@ class ClientRequest extends FormRequest
             ],
             'company_name' => 'required_if:account_type,1|max:100',
             'company_email' => 'required_if:account_type,1|nullable|email',
-            'company_phone_number' => 'required_if:account_type,1|regex:/^[0-9]{7,}$/',
+            'company_phone_number' => 'required_if:account_type,1',
             'company_address' => 'required_if:account_type,1',
             'relation_to_patient' => 'required_if:account_type,1',
             'session_type' => ['required'],
