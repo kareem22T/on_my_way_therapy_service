@@ -80,3 +80,13 @@ body {
     z-index: 222222222222222222222222222222;
     display: none;
 }
+
+body {
+    zoom: 95%;
+}
+
+@media (max-height: 800px) and (min-width: 1000px) {
+    body {
+        zoom: 75%;
+    }
+}

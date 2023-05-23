@@ -63,7 +63,7 @@
                     <button>Part-time</button>
                 </div>
                 <div class="full-time">
-                    <input class="custom-range" type="range" value="0" min="0" max="38"
+                    <input class="custom-range" type="range" value="1" min="1" max="38"
                         v-model="fullval">
                     <div class="value">
                         <output>@{{ fullval }} hours per week</output>
@@ -72,7 +72,7 @@
                     <a href="" @click.prevent>= $@{{ fullval * 139 }}</a>
                 </div>
                 <div class="part-time">
-                    <input class="custom-range" type="range" value="0" min="0" max="30"
+                    <input class="custom-range" type="range" value="1" min="1" max="30"
                         v-model="partval">
                     <div class="value">
                         <output>@{{ partval }} hours per week</output>
@@ -149,8 +149,8 @@
         createApp({
             data() {
                 return {
-                    fullval: 0,
-                    partval: 0,
+                    fullval: 1,
+                    partval: 1,
                 }
             }
         }).mount('#therapy')

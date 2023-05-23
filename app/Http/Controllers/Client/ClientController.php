@@ -29,20 +29,21 @@ class ClientController extends Controller
         } elseif (strpos($usernameOrSearch, 'search:') !== false) {
             $search = substr($usernameOrSearch, strpos($usernameOrSearch, ':') + 1);
             $profession_name = str_replace("%20", " ", $search);
-            $profession = Profession::where('title', 'LIKE', "%{$profession_name}%")->first();
+            $profession = Profession::where('working_hours_from', '!=', null)->where('title', 'LIKE', "%{$profession_name}%")->first();
             $search_profession = [];
             if ($profession)
                 $search_profession = Doctor::select('id', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
+                    ->where('working_hours_from', '!=', null)
                     ->where('profession_id', $profession->id)->where('approved', 1)->paginate(5);
 
             $diagnosis_name = str_replace("%20", " ", $search);
-            $search_diagnosis = Doctor::whereHas('diagnosis', function ($query) use ($diagnosis_name) {
+            $search_diagnosis = Doctor::where('working_hours_from', '!=', null)->whereHas('diagnosis', function ($query) use ($diagnosis_name) {
                 $query->where('name', 'LIKE', "%{$diagnosis_name}%");
             })->paginate(5);
 
             $doctor_name = str_replace("%20", " ", $search);
             $doctor_first_name = explode(' ', trim($doctor_name))[0];
-            $doctor = Doctor::where('first_name', 'LIKE', "%{$doctor_first_name}%")
+            $doctor = Doctor::where('working_hours_from', '!=', null)->where('first_name', 'LIKE', "%{$doctor_first_name}%")
                 ->orWhere('last_name', 'LIKE', "%{$doctor_first_name}%")
                 ->first();
             if ($doctor)
@@ -159,6 +160,7 @@ class ClientController extends Controller
             ->toArray();
 
         $doctors = Doctor::select('first_name', 'last_name')
+            ->where('working_hours_from', '!=', null)
             ->where('first_name', 'LIKE', "%{$request->search}%")
             ->orWhere('last_name', 'LIKE', "%{$request->search}%")
             ->take(5)->get();

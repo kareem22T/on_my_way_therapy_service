@@ -104,6 +104,23 @@ body::after {
   grid-column: span 12;
 }
 
+#errors {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 222222222222222200000000000000;
+  display: none;
+}
+
+body {
+  zoom: 95%;
+}
+
+@media (max-height: 800px) and (min-width: 1000px) {
+  body {
+    zoom: 75%;
+  }
+}
 header {
   padding: 20px 0;
 }

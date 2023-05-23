@@ -112,6 +112,15 @@ body::after {
   display: none;
 }
 
+body {
+  zoom: 95%;
+}
+
+@media (max-height: 800px) and (min-width: 1000px) {
+  body {
+    zoom: 75%;
+  }
+}
 .login_wrapper {
   width: 100%;
   min-height: 100%;

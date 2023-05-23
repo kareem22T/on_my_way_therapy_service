@@ -2,22 +2,28 @@
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="{{asset('/imgs/site/logo.png')}}" alt="">
+                <img src="{{ asset('/imgs/site/logo.png') }}" alt="">
             </div>
             <ul class="links">
-                <li><a href="/client" class="@yield('home_link')"><span>Home</span> <i class="fa-solid fa-house"></i></a></li>
+                <li><a href="/client" class="@yield('home_link')"><span>Home</span> <i class="fa-solid fa-house"></i></a>
+                </li>
                 <li>
-                    <a href="/client/chats" class="@yield('chats_link')"><span>Chats </span><i class="fa-solid fa-comment-dots"></i></a>
+                    <a href="/client/chats" class="@yield('chats_link')"><span>Chats </span><i
+                            class="fa-solid fa-comment-dots"></i></a>
                     @php
                         $guard_type = Auth::guard('client')->check() ? 2 : 1;
                         $unSeen = 0;
-                        foreach (Auth::user()->chats as $chat) :
-                            $unSeen += $chat->msgs->where('seen', 0)->where('sender_guard', '!=', $guard_type)->count();
+                        foreach (Auth::user()->chats as $chat):
+                            $unSeen += $chat->msgs
+                                ->where('seen', 0)
+                                ->where('sender_guard', '!=', $guard_type)
+                                ->count();
                         endforeach;
                     @endphp
-                    <span style="display: {{$unSeen > 0 ? 'flex' : 'none'}}">{{$unSeen > 0 ? $unSeen : ''}}</span>
+                    <span style="display: {{ $unSeen > 0 ? 'flex' : 'none' }}">{{ $unSeen > 0 ? $unSeen : '' }}</span>
                 </li>
-                <li><a href="/client/account" class="@yield('account_link')"><span>Account </span><i class="fa-solid fa-user"></i></a></a></li>
+                <li><a href="/client/account" class="@yield('account_link')"><span>Account </span><i
+                            class="fa-solid fa-user"></i></a></a></li>
             </ul>
             <div class="notification-wrapper">
                 <a href="" class="notification">
@@ -25,6 +31,7 @@
                     <span class="no num-noti"></span>
                 </a>
                 <ul style="display: none">
+                    <div class="dots"></div>
                     {{-- <li>
                         <div class="img">
                             <img src="{{asset('/imgs/doctor/uploads/therapist_profile/1_profile_picture.png')}}" alt="client img">
@@ -68,12 +75,15 @@
 </header>
 
 <style>
-    header .img, header .logo {
+    header .img,
+    header .logo {
         overflow: visible;
         background-color: #fff !important;
         border-radius: 0 !important;
     }
-    header .img img, header .logo img {
+
+    header .img img,
+    header .logo img {
         width: 100%;
         height: 100%;
         object-fit: contain;

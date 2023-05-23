@@ -197,9 +197,9 @@
             @if (count($search_results) > 0)
                 <div class="container search_wrapper">
                     <div class="form-group g-3 mt-0 mb-2">
-                        <input type="text" name="search" id="search" placeholder="specialist you need"
+                        <input type="text" name="search" id="search" placeholder="Search ..."
                             class="form-control">
-                        <i class="fa-solid fa-stethoscope"></i>
+                        <i class="fa-solid fa-search"></i>
                         <div class="results">
                         </div>
                     </div>
@@ -237,9 +237,9 @@
                 gap: 0;">
                         <h1 class="mb-3">Try again</h1>
                         <div class="form-group g-2 mt-0 mb-5">
-                            <input type="text" name="search" id="search" placeholder="specialist you need"
+                            <input type="text" name="search" id="search" placeholder="Search ..."
                                 class="form-control">
-                            <i class="fa-solid fa-stethoscope"></i>
+                            <i class="fa-solid fa-search"></i>
                             <div class="results">
                             </div>
                         </div>
