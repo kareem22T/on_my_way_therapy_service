@@ -19,7 +19,7 @@
                     <div>
                         <div class="form-group">
                             <input type="radio" name="account_type" id="account_type_1" value="0" checked>
-                            <label for="account_type_1">For my self</label>
+                            <label for="account_type_1">For Myself</label>
                         </div>
                         <div class="form-group">
                             <input type="radio" name="account_type" id="account_type_2" value="1">
@@ -39,6 +39,21 @@
                         </div>
                     </label>
                 </div>
+
+                <div class="form-group g-12 lg-grid services_inputs">
+                    @php
+                        $services = App\Models\Profession::all();
+                    @endphp
+                    <p class="g-12">please select required services (you can select more than one)</p>
+                    @foreach ($services as $service)
+                        <div class="form-group g-6">
+                            <input type="checkbox" name="services[]" id="services_{{ $service->id }}"
+                                value="{{ $service->id }}">
+                            <label for="services_{{ $service->id }}">{{ $service->title }}</label>
+                        </div>
+                    @endforeach
+                </div>
+
                 <div class="form-group g-6">
                     <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First name *">
                 </div>
@@ -98,8 +113,15 @@
                     </div>
 
                     <div class="form-group g-12">
-                        <input type="text" name="relation_to_patient" id="relation_to_patient"
-                            placeholder="relationship to client" class="form-control">
+                        @php
+                            $relations = App\Models\Relation_to_else_client::all();
+                        @endphp
+                        <select name="relation_to_patient" id="relation_to_patient" class="form-control">
+                            <option value="">What best describes you ...</option>
+                            @foreach ($relations as $relation)
+                                <option value="{{ $relation->id }}">{{ $relation->relation }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -144,14 +166,15 @@
                 <div class="form-group g-12 choice radio">
                     <h1>Client type</h1>
                     <div>
-                        <div class="form-group">
-                            <label class="coming-soon-1">Private</label>
-                        </div>
                         <div class="form-group client_type_2">
                             <input type="radio" name="client_type" id="client_type_2" value="1" checked>
                             <label for="client_type_2" style="padding: 10px 20px;">
                                 <img style="height: 55px;" src="{{ asset('imgs/client/ndis-logo.png') }}">
                             </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" name="client_type" id="client_type_1" value="0">
+                            <label for="client_type_1">Private</label>
                         </div>
                         <div class="form-group">
                             <label class="coming-soon-2" style="padding: 10px 20px;">
@@ -209,7 +232,7 @@
                     you’re all set to go!
                 </div>
 
-                <div class="g-12 self-managed-form lg-grid">
+                <div class="g-12 self-managed-form private-form lg-grid">
                     <div class="form-group g-12">
                         <input type="text" name="card_number" id="card_number" placeholder="Card number "
                             class="form-control">
@@ -226,6 +249,25 @@
                         <input type="text" name="security_code" id="security_code" placeholder="Security code"
                             class="form-control">
                     </div>
+                </div>
+                <div class="form-group g-12 choice radio lg-grid paying-form" style="display: none">
+                    <div class="lg-grid g-12">
+                        <div class="form-group g-6 lg-grid ">
+                            <input type="radio" name="private_paying_method" id="private_paying_method_1"
+                                value="0" checked>
+                            <label for="private_paying_method_1" class="g-12">Private paying</label>
+                        </div>
+                        <div class="form-group g-6 lg-grid ">
+                            <input type="radio" name="private_paying_method" id="private_paying_method_2"
+                                value="1">
+                            <label for="private_paying_method_2" class="g-12">Private health</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Private-health g-12">
+                    <p>Private health coming soon</p>
+                    <img src="{{ asset('/imgs/site/private-health.png') }}" alt="">
                 </div>
 
                 <div class="g-12 flex-center plan-managed-hr">

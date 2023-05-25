@@ -52,10 +52,12 @@ class ClientRequest extends FormRequest
             'phone_code' => 'required_if:phone_code,',
             'email_code' => 'required_if:email_code,',
             'manager_email' => 'required_if:managment_type,1',
-            'card_number' => 'required_if:managment_type,2',
-            'name_on_card' => 'required_if:managment_type,2',
-            'expiration_date' => 'required_if:managment_type,2',
-            'security_code' => 'required_if:managment_type,2',
+            'card_number' => 'required_if:managment_type,2|required_if:client_type,0',
+            'name_on_card' => 'required_if:managment_type,2|required_if:client_type,0',
+            'expiration_date' => 'required_if:managment_type,2|required_if:client_type,0',
+            'security_code' => 'required_if:managment_type,2|required_if:client_type,0',
+            'services' => ['required', 'array', 'min:1'],
+            'services.*' => ['numeric'],
         ];
     }
 
@@ -90,6 +92,7 @@ class ClientRequest extends FormRequest
             'name_on_card.required_if' => 'Please enter your name as it is on the card',
             'expiration_date.required_if' => 'Please enter card expiration date',
             'security_code.required_if' => 'Please enter card expiration security code',
+            'relation_to_patient.required_if' => 'Please select your relation to client',
         ];
     }
 

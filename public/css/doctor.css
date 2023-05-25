@@ -261,8 +261,8 @@ input[type=checkbox] {
 #register_root form.payment_form input {
   max-width: 800px;
 }
-#register_root form input:not([type=checkbox], [type=radio]), #register_root form select,
-#register_root form button, #register_root form textarea, #register_root form .file label {
+#register_root form input:not([type=checkbox], [type=radio], [type=range]), #register_root form select,
+#register_root form button:not(.btns-extra button), #register_root form textarea, #register_root form .file label {
   background: #ffffff;
   border: 1px solid #FFC400;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -306,7 +306,7 @@ input[type=checkbox] {
 #register_root form input[type=file] {
   display: none;
 }
-#register_root form button {
+#register_root form button:not(.btns-extra button) {
   background-color: #FFC400;
   color: #132F75;
   border: 3px solid #FFC400;
@@ -316,7 +316,7 @@ input[type=checkbox] {
   transition: all 0.2s ease-out;
   cursor: pointer;
 }
-#register_root form button:hover {
+#register_root form button:not(.btns-extra button):hover {
   background-color: transparent;
 }
 #register_root form option {
@@ -479,6 +479,95 @@ input[type=checkbox] {
 }
 #register_root form .diagnosis_wrapper a:hover {
   background-color: rgba(255, 196, 0, 0.8392156863);
+}
+
+.extra_section .part-time,
+.extra_section .full-time,
+.extra_section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+}
+.extra_section .part-time .head,
+.extra_section .full-time .head,
+.extra_section .head {
+  font-size: clamp(1.0625rem, -0.1875rem + 4vw, 2.0625rem) !important;
+}
+.extra_section .part-time > p,
+.extra_section .full-time > p,
+.extra_section > p {
+  font-weight: 500;
+  font-size: calc(clamp(1.0625rem, 0.5804rem + 1.978vw, 2.1875rem) - 4px);
+  line-height: clamp(1.5rem, 0.9643rem + 2.1978vw, 2.75rem);
+  text-align: center;
+  color: #132F75;
+}
+.extra_section .part-time.part-time,
+.extra_section .full-time.part-time,
+.extra_section.part-time {
+  display: none;
+}
+.extra_section .part-time .value,
+.extra_section .full-time .value,
+.extra_section .value {
+  font-weight: 700;
+  font-size: clamp(1.3125rem, 0.9511rem + 1.5217vw, 2.1875rem);
+  line-height: clamp(0.875rem, 0.1005rem + 3.2609vw, 2.75rem);
+  text-align: center;
+  color: #132F75;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 !important;
+}
+.extra_section .part-time .btns-extra button,
+.extra_section .full-time .btns-extra button,
+.extra_section .btns-extra button {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+  background: transparent;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+.extra_section .part-time .btns-extra button.active,
+.extra_section .full-time .btns-extra button.active,
+.extra_section .btns-extra button.active {
+  border: 2px solid #FFC400;
+}
+.extra_section .part-time a,
+.extra_section .full-time a,
+.extra_section a {
+  font-weight: 800;
+  font-size: clamp(1.75rem, 1.4402rem + 1.3043vw, 2.5rem);
+  line-height: clamp(2.0625rem, 1.288rem + 3.2609vw, 3.9375rem);
+  text-align: center;
+  color: #132F75;
+  text-decoration: none;
+  display: block;
+  border: clamp(0.1875rem, 0.1359rem + 0.2174vw, 0.3125rem) solid #132F75;
+  border-radius: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem);
+  width: fit-content;
+  padding: 10px 50px;
+}
+
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #FFC400;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 50px;
 }
 
 /*# sourceMappingURL=doctor.css.map */

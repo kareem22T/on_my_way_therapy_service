@@ -19,6 +19,14 @@ $(function () {
         $(this).parent().siblings().find('label').removeClass('active');
     })
 
+    $('.services_inputs label').on('click', function () {
+        $(this).toggleClass('active');
+    })
+    $('.services_inputs input:checked').each(function () {
+        $(this).next('label').addClass('active');
+        $(this).parent().siblings().find('label').removeClass('active');
+    })
+
     $('label[for="plan_managment_1"]').on('click', function () {
         $('.plan-managed-form, .self-managed-form').fadeOut()
         $('.agency-managed-form').fadeIn()
@@ -32,6 +40,25 @@ $(function () {
         $('.plan-managed-form').fadeOut('fast')
         $('.self-managed-form').fadeIn().css('display', 'grid')
         $('.agency-managed-form').fadeOut()
+    })
+
+    $('label[for="client_type_1"]').on('click', function () {
+        $('.ndis-form, .plan-managed-btns, .plan-managed-form').fadeOut()
+        $('.private-form, .paying-form').fadeIn().css('display', 'grid')
+    })
+    
+    $('label[for="private_paying_method_2"]').on('click', function () {
+        $(".Private-health").fadeIn().css('display', 'flex')
+    })
+    $('label[for="private_paying_method_1"]').on('click', function () {
+        $(".Private-health").fadeOut()
+    })
+
+    $('label[for="client_type_2"]').on('click', function () {
+        $('.ndis-form, .plan-managed-btns, .plan-managed-form').fadeIn().css('display', 'grid')
+        $('label[for="plan_managment_2"]').trigger('click').addClass('active').parent().siblings().find('label').removeClass('active')
+        $('label[for="private_paying_method_1"]').trigger('click').addClass('active').parent().siblings().find('label').removeClass('active')
+        $('.private-form, .paying-form, .Private-health').fadeOut()
     })
 
 })
@@ -92,6 +119,10 @@ document.getElementById("client_submit").addEventListener("click", function(even
         $('.diagnosis li').each(function () {
             formData.append('diagnosis[]', $(this).text());
         });
+        // const checkedBoxes = document.querySelectorAll('input[name="service[]"]:checked');
+        // checkedBoxes.forEach((box) => {
+        //     formData.append('services[]', box.value);
+        // });
 	$.ajax({
 		url: '/client/check-info',
 		method: 'POST',
@@ -155,9 +186,13 @@ $('.verify-pop-up #cancel').on('click', function (e) {
 // step 1 of registration
 function clientRegisteration () {
     let formData = new FormData(document.getElementById('client_register'))
-        $('.diagnosis li').each(function () {
+    $('.diagnosis li').each(function () {
         formData.append('diagnosis[]', $(this).text());
     });
+    // const checkedBoxes = document.querySelectorAll('input[name="service[]"]:checked');
+    // checkedBoxes.forEach((box) => {
+    //     formData.append('services[]', box.value);
+    // });
 
     formData.append('phone_code', $('#phone_code').val());
     formData.append('email_code', $('#email_code').val());

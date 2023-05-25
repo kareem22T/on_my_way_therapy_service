@@ -68,8 +68,8 @@ class RegisterController extends Controller
             'company_email' => $request->input('company_email') ? $request->input('company_email') : null,
             'company_phone_number' => $request->input('company_phone_number') ? $request->input('company_phone_number') : null,
             'company_address' => $request->input('company_address') ? $request->input('company_address') : null,
-            'relation_to_patient' =>
-            $request->input('relation_to_patient') ? $request->input('relation_to_patient') : 'self',
+            'relation_to_else_client_id' =>
+            $request->input('relation_to_patient') ? $request->input('relation_to_patient') : null,
             'account_type' => $request->input('account_type'),
             'session_type' =>
             count($request->input('session_type')) > 1 ? 2 : $request->input('session_type')[0],
@@ -91,6 +91,11 @@ class RegisterController extends Controller
         if ($request->diagnosis)
             foreach ($request->diagnosis as $dia) {
                 $client->diagnosis()->syncWithoutDetaching(Diagnosi::where('name', $dia)->first()->id);
+            }
+
+        if ($request->services)
+            foreach ($request->services as $service) {
+                $client->professions()->syncWithoutDetaching($service);
             }
 
         if ($client) {

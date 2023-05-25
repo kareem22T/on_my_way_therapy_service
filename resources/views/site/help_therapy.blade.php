@@ -55,6 +55,31 @@
                 </div>
             </section>
 
+            <section>
+                <div>
+                    <div class="img">
+                        <img src="{{ asset('/imgs/site/therapy-help-5.png') }}" alt="">
+                    </div>
+                    <div class="text">
+                        With On My Way Therapy you can have direct access to NDIS Clients, Medicare Clients or private
+                        paying/ Private health fund Clients Saving you time consuming administrative tasks such as
+                        invoicing, claiming, scheduling, registrations and audits! On my way therapy does all that for you
+                        and pays you directly to your account. How good is that?!
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-no-photo">
+                <hr>
+                <div>
+                    <div class="text" style="visibility: visible">You also have access to so many resources such as report
+                        templates, assessments
+                        forms
+                        and more!</div>
+                </div>
+                <hr>
+            </section>
+
 
             <section class="extra_section" id="therapy">
                 <h1 class="head">The expected earnings from your work with us</h1>
@@ -132,6 +157,14 @@
                         'visibility', 'visible');
                     setTimeout(() => {
                         $('section:nth-child(3)').find('.text').addClass(
+                            'animate__animated animate__fadeInUp').css('visibility', 'visible');
+                    }, 250);
+                }
+                if ($(window).scrollTop() >= ($('section:nth-child(5)').offset().top - $(window).height() / 1.2)) {
+                    $('section:nth-child(5)').find('.img').addClass('animate__animated animate__fadeInUp').css(
+                        'visibility', 'visible');
+                    setTimeout(() => {
+                        $('section:nth-child(5)').find('.text').addClass(
                             'animate__animated animate__fadeInUp').css('visibility', 'visible');
                     }, 250);
                 }

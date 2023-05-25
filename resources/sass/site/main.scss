@@ -677,4 +677,19 @@ main {
     cursor: pointer;
 }
 
+.sec-no-photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    hr {
+        width: 100%;
+        max-width: 600px;
+        height: 4px;
+        background-color: #FFC400;
+        border: none;
+        opacity: 1;
+    }
+}
 

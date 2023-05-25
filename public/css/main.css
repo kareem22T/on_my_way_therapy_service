@@ -771,4 +771,20 @@ main .contact section a i {
   cursor: pointer;
 }
 
+.sec-no-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.sec-no-photo hr {
+  width: 100%;
+  max-width: 600px;
+  height: 4px;
+  background-color: #FFC400;
+  border: none;
+  opacity: 1;
+}
+
 /*# sourceMappingURL=main.css.map */

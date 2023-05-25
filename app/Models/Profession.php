@@ -22,4 +22,8 @@ class Profession extends Model
     {
         return $this->hasMany('App\Models\Doctor', 'profession_id');
     }
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
+    }
 }

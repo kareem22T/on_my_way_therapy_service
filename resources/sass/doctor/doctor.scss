@@ -148,8 +148,8 @@ input[type=checkbox] {
                 max-width: 800px;
             }
         }
-        input:not([type=checkbox], [type=radio]), select,
-        button, textarea, .file label {
+        input:not([type=checkbox], [type=radio], [type=range]), select,
+        button:not(.btns-extra button), textarea, .file label {
             background: $white;
             border: 1px solid $secondary-color;
             box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -195,7 +195,7 @@ input[type=checkbox] {
             display: none;
         }
     
-        button {
+        button:not(.btns-extra button) {
             background-color: $secondary-color;
             color: $main-color;
             border: 3px solid $secondary-color;
@@ -382,4 +382,85 @@ input[type=checkbox] {
             }
         }
     }
+}
+
+.extra_section .part-time,
+.extra_section .full-time,
+.extra_section {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+    .head {
+        font-size: clamp(1.0625rem, -0.1875rem + 4vw, 2.0625rem) !important;
+    }
+    >p {
+        font-weight: 500;
+        font-size: calc(clamp(1.0625rem, 0.5804rem + 1.978vw, 2.1875rem) - 4px);
+        line-height: clamp(1.5rem, 0.9643rem + 2.1978vw, 2.75rem);
+        text-align: center;
+        color: #132F75;
+    }
+    &.part-time {
+        display: none;
+    }
+
+    .value {
+        font-weight: 700;
+        font-size: clamp(1.3125rem, calc(0.9511rem + 1.5217vw), 2.1875rem);
+        line-height: clamp(0.875rem, calc(0.1005rem + 3.2609vw), 2.75rem);
+        text-align: center;
+        color: $main-color;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 !important;
+    }
+
+    .btns-extra {
+        button {
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 44px;
+            text-align: center;
+            color: #132F75;
+            background: transparent;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+
+            &.active {
+                border: 2px solid $secondary-color;
+            }
+        }
+    }
+
+    a {
+        font-weight: 800;
+        font-size: clamp(1.75rem, calc(1.4402rem + 1.3043vw), 2.5rem);
+        line-height: clamp(2.0625rem, calc(1.288rem + 3.2609vw), 3.9375rem);
+        text-align: center;
+        color: $main-color;
+        text-decoration: none;
+        display: block;
+        border: clamp(0.1875rem, calc(0.1359rem + 0.2174vw), 0.3125rem) solid $main-color;
+        border-radius: clamp(1.25rem, calc(0.9918rem + 1.087vw), 1.875rem);
+        width: fit-content;
+        padding: 10px 50px;
+    }
+}
+
+.custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #FFC400;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 50px;
 }

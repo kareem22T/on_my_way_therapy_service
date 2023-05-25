@@ -215,4 +215,57 @@ body {
   font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem) !important;
 }
 
+.services_inputs {
+  margin: 20px 0;
+}
+.services_inputs p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 44px;
+  text-align: center;
+  color: #132F75;
+  text-align: center;
+}
+.services_inputs input {
+  display: none;
+}
+.services_inputs label {
+  background: #FFFFFF;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #132F75;
+  width: 100%;
+  padding: 15px;
+  cursor: pointer;
+}
+.services_inputs label.active {
+  background-color: #FFC400;
+}
+
+.Private-health {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 50px;
+  color: #132F75;
+  margin-top: 30px;
+  display: none;
+  text-align: center;
+}
+.Private-health img {
+  max-width: fit-content;
+  width: 100%;
+}
+
 /*# sourceMappingURL=client.css.map */

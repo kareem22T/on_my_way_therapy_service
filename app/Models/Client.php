@@ -38,7 +38,7 @@ class Client extends Authenticatable
         'expiration_date',
         'security_code',
         'verified',
-        'relation_to_patient',
+        'relation_to_else_client_id',
         'created_at',
         'updated_at',
     ];
@@ -67,6 +67,16 @@ class Client extends Authenticatable
     public function appointments()
     {
         return $this->hasMany('App\Models\Appointment', 'client_id');
+    }
+
+    public function relation_to_else_client()
+    {
+        return $this->belongsTo('App\Models\Relation_to_else_client', 'relation_to_else_client_id');
+    }
+
+    public function professions()
+    {
+        return $this->belongsToMany(Profession::class);
     }
 
     // getters and setters

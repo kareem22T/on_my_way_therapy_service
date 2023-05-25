@@ -12,7 +12,7 @@
                 </li>
                 <li class="more">
                     <span href="" id="menu-icon">
-                        <a href="" id="sign_in">Sign in</a>
+                        <a href="" id="sign_in">Log in</a>
                         |
                         <a href="" id="sign_up">Sign up</a>
                     </span>
@@ -22,7 +22,7 @@
                         <li><a href="/therapist/register">as therapist</a></li>
                     </ul>
                     <ul class="login-pop-up">
-                        <li>Sign in <i class="fa fa-x-login fa-x"></i></li>
+                        <li>Log in <i class="fa fa-x-login fa-x"></i></li>
                         <li><a href="/client/login">as referrer</a></li>
                         <li><a href="/therapist/login">as therapist</a></li>
                     </ul>
