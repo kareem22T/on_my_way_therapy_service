@@ -51,7 +51,7 @@ class ClientRequest extends FormRequest
             'NDIS_end_date' => 'required_if:client_type,1',
             'phone_code' => 'required_if:phone_code,',
             'email_code' => 'required_if:email_code,',
-            'manager_email' => 'required_if:managment_type,1|required_with:client_type,1',
+            'manager_email' => 'required_if:client_type,1|required_if:management_type,1|',
             'card_number' => 'required_if:managment_type,2|required_if:client_type,0',
             'name_on_card' => 'required_if:managment_type,2|required_if:client_type,0',
             'expiration_date' => 'required_if:managment_type,2|required_if:client_type,0',
