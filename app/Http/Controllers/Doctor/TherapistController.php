@@ -51,15 +51,28 @@ class TherapistController extends Controller
     {
         $therapist_times = Auth::guard('doctor')->user()->only(['working_hours_from', 'working_hours_to', 'holidays', 'travel_range']);
 
+        $events = [];
+
+        $appointments = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', '!=', 4)->with(['client', 'doctor'])->get();
+
+        foreach ($appointments as $appointment) {
+            $events[] = [
+                'title' => 'session by: ' . $appointment->client->first_name,
+                'start' => $appointment->start_time,
+                'end' => $appointment->finish_time,
+            ];
+        }
+
+
         if (
             $therapist_times['working_hours_from'] !== null &&
             $therapist_times['working_hours_to'] !== null &&
             count($therapist_times['holidays']) > 0 &&
             $therapist_times['travel_range'] !== null
         )
-            return view('doctor.dashboard.calendar')->with(compact('therapist_times'));
+            return view('doctor.dashboard.calendar')->with(compact('therapist_times', 'events'));
 
-        return view('doctor.dashboard.calendar');
+        return view('doctor.dashboard.calendar')->with(compact('events'));
     }
 
     public function appointmentDetails($appointment_id = null)

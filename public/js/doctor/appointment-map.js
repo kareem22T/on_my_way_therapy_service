@@ -126,7 +126,7 @@ $('.confirm-start').on('click', function () {
   $('.hide-content').fadeOut();
 })
 
-$('.Arrived').on('click', function () {
+$(document).on('click', '.Arrived', function () {
   $.ajax({
     url: '/arrived',
     method: 'POST',
@@ -141,7 +141,7 @@ $('.Arrived').on('click', function () {
   })
 })
 
-$('.complete').on('click', function () {
+$(document).on('click', '.complete', function () {
   $.ajax({
     url: '/complete',
     method: 'POST',

@@ -9,6 +9,7 @@ use App\Http\Controllers\Doctor\RegisterController as TherapisRegisterController
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\RegisterController as AdminRegisterController;
 use App\Http\Controllers\Doctor\TherapistController;
+use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 

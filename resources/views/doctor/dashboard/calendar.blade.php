@@ -118,6 +118,8 @@
                     </form>
                 @else
                     <h1>Your working hours
+                        <input type="hidden" name="start_table" value="{{ $therapist_times['working_hours_from'] }}">
+                        <input type="hidden" name="end_table" value="{{ $therapist_times['working_hours_to'] }}">
                         <span>
                             {{ $therapist_times['working_hours_from'] <= 12 ? $therapist_times['working_hours_from'] . ' am' : $therapist_times['working_hours_from'] - 12 . ' pm' }}
                         </span> -
@@ -210,7 +212,8 @@
                                     <option value="2" {{ $therapist_times['travel_range'] == 2 ? 'selected' : '' }}>
                                         20
                                     </option>
-                                    <option value="3" {{ $therapist_times['travel_range'] == 3 ? 'selected' : '' }}>30
+                                    <option value="3" {{ $therapist_times['travel_range'] == 3 ? 'selected' : '' }}>
+                                        30
                                         +</option>
                                 </select>
                             </div>
@@ -252,42 +255,6 @@
                 @endif
             </div>
 
-            <div class="preview" style="display: none;">
-                <div class="left">
-                    <div class="calendar">
-                        <div class="month">
-                            <i class="fas fa-angle-left prev"></i>
-                            <div class="date">december 2015</div>
-                            <i class="fas fa-angle-right next"></i>
-                        </div>
-
-                        <div class="weekdays">
-                            <div>Sun</div>
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
-                        </div>
-
-                        <div class="days"></div>
-
-                        {{-- <div class="goto-today">
-                    <button class="today-btn">Today</button>
-                </div> --}}
-                    </div>
-
-                </div>
-
-                <div class="right">
-                    <div class="today-date">
-                        <div class="event-day">wed</div>
-                        <div class="event-date">12th december 2022</div>
-                    </div>
-                </div>
-            </div>
-
             @php
                 $appoinments_sessions = App\Models\Appointment::where('status', 1)
                     ->where('doctor_id', Auth::guard('doctor')->user()->id)
@@ -318,50 +285,9 @@
 
             <div class="this_week_wrapper">
                 <h1>
-                    This week
+                    My schedule
                 </h1>
-                <div class="this-week">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Day</th>
-                                <th>Appointments</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (range(0, 6) as $i)
-                                <tr>
-                                    <td>{{ \Carbon\Carbon::today()->addDays($i)->format('M j, D') }}</td>
-                                    <td>
-
-                                        @if (
-                                            \App\Models\Appointment::where('status', 1)->where('journey', '!', 1)->whereDate(
-                                                    'date',
-                                                    '=',
-                                                    \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'))->get()->count() == 0)
-                                            <p>There is no appointment yet!</p>
-                                        @endif
-
-                                        @foreach (\App\Models\Appointment::where('journey', 1)->whereDate(
-                'date',
-                '=',
-                \Carbon\Carbon::today()->addDays($i)->format('Y-m-d'),
-            )->where('status', 1)->get() as $appointment)
-                                            <p>
-                                                <span>{{ date('F j', strtotime($appointment->date)) }}</span>
-                                                <span>{{ date('h:i A', strtotime($appointment->date)) }}</span>
-                                                <span>{{ $appointment->client->address }}</span>
-                                                <span>15 km in 10 min</span>
-                                                <span>{{ $appointment->client->gender }}</span>
-                                                <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
-                                            </p>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <div id="calendar"></div>
             </div>
 
         </div>
@@ -370,4 +296,16 @@
 
 @section('scripts')
     <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                slotMinTime: $('input[name="start_table"]').val() + ':00:00',
+                slotMaxTime: $('input[name="end_table"]').val() + ':00:00',
+                events: @json($events),
+            });
+            calendar.render();
+        });
+    </script>
 @endsection

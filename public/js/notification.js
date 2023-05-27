@@ -25,6 +25,7 @@ $('.notification').on('click', function (e) {
                                 minute: 'numeric',
                                 hour12: true
                             });
+                            $('.notification-wrapper ul').find('.dots').css('display', 'none')
                             if (appointment)
                                 $('.notification-wrapper ul').append('\
                                     <li>\

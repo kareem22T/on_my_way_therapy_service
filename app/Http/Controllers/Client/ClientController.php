@@ -29,10 +29,11 @@ class ClientController extends Controller
         } elseif (strpos($usernameOrSearch, 'search:') !== false) {
             $search = substr($usernameOrSearch, strpos($usernameOrSearch, ':') + 1);
             $profession_name = str_replace("%20", " ", $search);
-            $profession = Profession::where('working_hours_from', '!=', null)->where('title', 'LIKE', "%{$profession_name}%")->first();
+            $profession = Profession::where('title', 'LIKE', "%{$profession_name}%")->first();
             $search_profession = [];
             if ($profession)
                 $search_profession = Doctor::select('id', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
+                    ->where('working_hours_from', '!=', null)
                     ->where('working_hours_from', '!=', null)
                     ->where('profession_id', $profession->id)->where('approved', 1)->paginate(5);
 
@@ -87,6 +88,8 @@ class ClientController extends Controller
             'client_id' => Auth::guard('client')->user()->id,
             'visit_type' => $request->visit_type,
             'date' => $request->date,
+            'start_time' => $request->date,
+            'finish_time' => Carbon::parse($request->date)->addHours(1.5),
             'address' => $request->address,
             'address_lat' => $request->address_lat,
             'address_lng' => $request->address_lng,
