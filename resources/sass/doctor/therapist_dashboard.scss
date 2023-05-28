@@ -409,16 +409,6 @@ header {
         font-weight: 600;
         color: #3e3e3e;
     }
-    // tr.fc-scrollgrid-section.fc-scrollgrid-section-body {
-    //     display: none;
-    // }
-    tbody {
-        tr.fc-scrollgrid-section {
-            &:first-of-type {
-                display: none;
-            }
-        }
-    }
     .fc-v-event .fc-event-main-frame {
         padding: 5px;
     }

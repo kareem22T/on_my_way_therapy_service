@@ -527,9 +527,6 @@ header .container nav .fa-bell {
   font-weight: 600;
   color: #3e3e3e;
 }
-#calendar tbody tr.fc-scrollgrid-section:first-of-type {
-  display: none;
-}
 #calendar .fc-v-event .fc-event-main-frame {
   padding: 5px;
 }
