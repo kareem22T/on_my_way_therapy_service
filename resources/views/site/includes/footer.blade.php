@@ -4,7 +4,7 @@
             <h3>Therapy Anywhere – Anytime</h3>
             <div>
                 @foreach (App\Models\Profession::all() as $profession)
-                    <a href="specialization/{{ $profession->id }}" target="_blanck" class="profession">
+                    <a href="/specialization/{{ $profession->id }}" target="_blanck" class="profession">
                         <h4>{{ $profession->title }}</h4>
                     </a>
                 @endforeach

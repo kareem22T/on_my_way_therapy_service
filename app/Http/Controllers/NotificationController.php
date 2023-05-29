@@ -38,4 +38,8 @@ class NotificationController extends Controller
         }
         $noti->save();
     }
+
+    public function rateTherapist(Request $request)
+    {
+    }
 }

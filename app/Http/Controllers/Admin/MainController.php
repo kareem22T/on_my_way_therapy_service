@@ -19,6 +19,10 @@ class MainController extends Controller
     {
         return view('admin.therapists');
     }
+    public function sessionsIndex()
+    {
+        return view('admin.sessions');
+    }
     public function usersTherapistsPreviewIndex()
     {
         return view('admin.therapists_prev');

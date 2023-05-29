@@ -34,15 +34,31 @@ $('.notification').on('click', function (e) {
                                         </div>\
                                         <div>\
                                             <h1>\
-                                                ' + appointment.doctor.first_name + ' ' + appointment.doctor.last_name + ' \
+                                                ' + appointment.doctor.first_name + ' ' + appointment.doctor.last_name +
+                                                (appointment.journey >= 4 ? '\
                                                 <span class="rate">\
-                                                    <i class="fa-solid fa-star"></i>\
-                                                    <i class="fa-solid fa-star"></i>\
-                                                    <i class="fa-solid fa-star"></i>\
-                                                    <i class="fa-solid fa-star"></i>\
-                                                    <i class="fa-regular fa-star"></i>\
-                                                </span>\
-                                            </h1>\
+                                                    <div class="form-group">\
+                                                        <input type="radio" name="rate" id="rate_5" value="5">\
+                                                        <label for="rate_5"><i class="fa-solid fa-star"></i></label>\
+                                                    </div>\
+                                                    <div class="form-group">\
+                                                        <input type="radio" name="rate" id="rate_4" value="4">\
+                                                        <label for="rate_4"><i class="fa-solid fa-star"></i></label>\
+                                                    </div>\
+                                                    <div class="form-group">\
+                                                        <input type="radio" name="rate" id="rate_3" value="3">\
+                                                        <label for="rate_3"><i class="fa-solid fa-star"></i></label>\
+                                                    </div>\
+                                                    <div class="form-group">\
+                                                        <input type="radio" name="rate" id="rate_2" value="2">\
+                                                        <label for="rate_2"><i class="fa-solid fa-star"></i></label>\
+                                                    </div>\
+                                                    <div class="form-group">\
+                                                        <input type="radio" name="rate" id="rate_1" value="1">\
+                                                        <label for="rate_1"><i class="fa-solid fa-star"></i></label>\
+                                                    </div>\
+                                                </span>' : '') + 
+                                            '</h1>\
                                             <span>' + new Date(appointment.date).toLocaleString('default', { month: 'long', day: 'numeric' }) + ', ' + 
                                             new Date(new Date(appointment.date).getTime()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + 
                                             '</span>\
@@ -99,3 +115,9 @@ function seenNoti() {
         }
     })
 }
+
+$(document).on('click', '.rate i', function() {
+    $(this).css('color', '#132F75').parents('.form-group').nextAll().find('i').css('color', '#132F75')
+    $(this).css('color', '#132F75').parents('.form-group').prevAll().find('i').css('color', 'gray')
+})
+

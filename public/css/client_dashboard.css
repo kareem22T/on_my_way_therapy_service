@@ -267,9 +267,23 @@ header .notification-wrapper ul li h1 {
 }
 header .notification-wrapper ul li h1 .rate {
   font-size: 14px;
-  color: #132F75;
+  color: gray;
   margin-bottom: 5px;
   font-weight: 400;
+  display: flex;
+  flex-direction: row-reverse;
+  /* Change color of element on hover */
+  /* Change color of previous siblings on hover */
+}
+header .notification-wrapper ul li h1 .rate input {
+  display: none;
+}
+header .notification-wrapper ul li h1 .rate .form-group i:hover {
+  color: #132F75;
+  cursor: pointer;
+}
+header .notification-wrapper ul li h1 .rate .form-group:hover ~ * i {
+  color: #132F75;
 }
 header .notification-wrapper ul li > div > span {
   margin: 5px 20px 10px;

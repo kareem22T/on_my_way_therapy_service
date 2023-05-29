@@ -179,8 +179,8 @@ body {
 }
 
 input[type=checkbox] {
-  width: 25px;
-  height: 25px;
+  width: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
+  height: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
 }
 
 #register_root {
@@ -405,8 +405,8 @@ input[type=checkbox] {
 }
 #register_root form .choice h1 {
   font-weight: 700;
-  font-size: 35px;
-  line-height: 44px;
+  font-size: clamp(1.125rem, 0.712rem + 1.7391vw, 2.125rem);
+  line-height: clamp(0.875rem, 0.1005rem + 3.2609vw, 2.75rem);
   text-align: center;
   color: #132F75;
   margin-bottom: 20px;
@@ -414,10 +414,15 @@ input[type=checkbox] {
 #register_root form .choice > div {
   gap: 20px;
   font-weight: 500;
-  font-size: 31px;
-  line-height: 44px;
+  font-size: clamp(1rem, 0.6128rem + 1.6304vw, 1.9375rem);
+  line-height: clamp(1.5rem, 0.9837rem + 2.1739vw, 2.75rem);
   text-align: center;
   color: #132F75;
+}
+@media (max-width: 599.98px) {
+  #register_root form .choice > div {
+    flex-direction: column;
+  }
 }
 #register_root form .choice > div > .form-group {
   display: flex;
@@ -426,6 +431,11 @@ input[type=checkbox] {
 }
 #register_root form .choice > div > .form-group #session_type_1, #register_root form .choice > div > .form-group #session_type_2 {
   transform: translateY(45%);
+}
+@media (max-width: 599.98px) {
+  #register_root form .choice > div > .form-group #session_type_1, #register_root form .choice > div > .form-group #session_type_2 {
+    transform: translateY(35%);
+  }
 }
 #register_root form .choice label {
   cursor: pointer;

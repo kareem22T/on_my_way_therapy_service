@@ -217,12 +217,13 @@ body {
 
 .services_inputs {
   margin: 20px 0;
+  gap: clamp(0.75rem, 0.5435rem + 0.8696vw, 1.25rem);
 }
 .services_inputs p {
   font-style: normal;
   font-weight: 500;
-  font-size: 35px;
-  line-height: 44px;
+  font-size: clamp(1.5625rem, 1.3043rem + 1.087vw, 2.1875rem);
+  line-height: clamp(2.125rem, 1.8668rem + 1.087vw, 2.75rem);
   text-align: center;
   color: #132F75;
   text-align: center;
@@ -236,13 +237,13 @@ body {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: 30px;
   font-weight: 500;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: clamp(0.8125rem, 0.3736rem + 1.8478vw, 1.875rem);
+  line-height: clamp(1.8125rem, 1.5802rem + 0.9783vw, 2.375rem);
   text-align: center;
   text-transform: capitalize;
   color: #132F75;
   width: 100%;
-  padding: 15px;
+  padding: clamp(0.3125rem, 0.0543rem + 1.087vw, 0.9375rem);
   cursor: pointer;
 }
 .services_inputs label.active {

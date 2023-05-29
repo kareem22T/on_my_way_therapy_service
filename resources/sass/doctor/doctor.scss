@@ -59,8 +59,8 @@
 }
 
 input[type=checkbox] {
-    width: 25px;
-    height: 25px;
+    width: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
+    height: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
 }
 
 #register_root {
@@ -301,8 +301,8 @@ input[type=checkbox] {
             }
             h1 {
                 font-weight: 700;
-                font-size: 35px;
-                line-height: 44px;
+                font-size: clamp(1.125rem, calc(0.712rem + 1.7391vw), 2.125rem);
+                line-height: clamp(0.875rem, calc(0.1005rem + 3.2609vw), 2.75rem);
                 text-align: center;
                 color: $main-color;
                 margin-bottom: 20px;
@@ -311,16 +311,22 @@ input[type=checkbox] {
                 @extend %flex-center;
                 gap: 20px;
                 font-weight: 500;
-                font-size: 31px;
-                line-height: 44px;
+                font-size: clamp(1rem, calc(0.6128rem + 1.6304vw), 1.9375rem);
+                line-height: clamp(1.5rem, calc(0.9837rem + 2.1739vw), 2.75rem);
                 text-align: center;
                 color: $main-color;
+                @media (max-width: 599.98px) {
+                    flex-direction: column;
+                }
                 >.form-group {
                     display: flex;
                     gap: 10px;
                     align-items: start;
                     #session_type_1, #session_type_2 {
                         transform: translateY(45%);
+                        @media (max-width: 599.98px) {
+                            transform: translateY(35%);
+                        }
                     }
                 }
             }
