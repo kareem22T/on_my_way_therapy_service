@@ -16,11 +16,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}?v={{ time() }}">
+    @if (Auth::guard('client')->check() || Auth::guard('doctor')->check())
+        <link rel="stylesheet" href="{{ asset('/css/therapist_dashboard.css') }}?v={{ time() }}">
+        <style>
+            nav {
+                padding: 0 !important;
+                background: none !important;
+                backdrop-filter: none !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            header {
+                position: static !important;
+            }
+        </style>
+    @endif
     <title>@yield('title')</title>
 </head>
 
 <body>
-    @include('site.includes.header')
+    @if (!Auth::guard('client')->check() && !Auth::guard('doctor')->check())
+        @include('site.includes.header')
+    @elseif (Auth::guard('client')->check())
+        @include('client.includes.header')
+    @elseif (Auth::guard('doctor')->check())
+        @include('doctor.includes.header')
+    @endif
+    @include('site.includes.loader')
     @yield('content')
     @include('site.includes.footer')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"

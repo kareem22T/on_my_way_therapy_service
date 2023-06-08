@@ -2,7 +2,7 @@
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="{{ asset('/imgs/site/logo.png') }}" alt="">
+                <a href="/"><img src="{{ asset('/imgs/site/logo.png') }}" alt=""></a>
             </div>
             <ul class="links">
                 <li><a href="/client" class="@yield('home_link')"><span>Home</span> <i class="fa-solid fa-house"></i></a>
@@ -13,7 +13,7 @@
                     @php
                         $guard_type = Auth::guard('client')->check() ? 2 : 1;
                         $unSeen = 0;
-                        foreach (Auth::user()->chats as $chat):
+                        foreach (Auth::guard('client')->user()->chats as $chat):
                             $unSeen += $chat->msgs
                                 ->where('seen', 0)
                                 ->where('sender_guard', '!=', $guard_type)

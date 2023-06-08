@@ -124,7 +124,42 @@ class ClientController extends Controller
             $this->sendEmail(
                 $appointment->doctor->email,
                 'New Appointment',
-                'You have new appointment by: ' . $appointment->client->first_name . '<a href="/therapist/chats/' . $appointment->id . '"> View appointmet</a>'
+                'Hi "' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . '"<br>' . 'Congratulations you have a booking request on your profile <br> 
+                Login <a href="https://onmywaytherapy.com.au/therapist/login">HERE</a> to see contact client or simply accept <br><br><b>Session details: </b><br>
+                ' . ($appointment->visit_type == 0 ? 'Session type: Mobile visit<br>' : 'Session type: Online session <br>') .
+                    'Client name: ' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '<br>' .
+                    ($appointment->visit_type == 0 ?
+                        "Client address: " . $appointment->address . '<br>' : '') .
+                    "Client gender: " . $appointment->client->gender . '<br>' .
+                    "Client age: " .  Carbon::parse($appointment->client->dob)->age . ' years old<br><hr><br>'
+                    . 'Contact us: <br>' .
+                    '
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/94288210/admin/">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h3>Call: 1800666992</h3>
+                    ',
+
             );
 
             return response()->json(

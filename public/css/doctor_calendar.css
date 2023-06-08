@@ -380,13 +380,16 @@ form button:hover {
 form >div >div{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     font-weight: 600;
     font-size: 25px;
     line-height: 38px;
     text-align: center;
     color: var(--primary-clr);
     gap: 20px;
+}
+form >div >div label{
+    cursor: pointer;
 }
 
 .this-week-head {

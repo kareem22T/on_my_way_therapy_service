@@ -1,6 +1,6 @@
 @extends('site.layouts.mainLayout')
 
-@section('title', 'Speech Pathology')
+@section('title', 'Exercise physiology ')
 
 @section('content')
     <style>
@@ -45,20 +45,10 @@
         }
     </style>
     <div class="container">
-        <h1 class="head mb-4"><br>Speech Pathology</h1>
+        <h1 class="head mb-4"><br>Exercise physiology </h1>
 
         <article>
-            ​Are you looking for a Speech Pathologist near you?
-            <br>
-            <br>
-            Discover exceptional speech therapy services. Speech pathology services are essential for individuals struggling
-            with communication difficulties. With the support of the National Disability Insurance Scheme (NDIS), people
-            with disabilities can access top-quality speech therapy services. At On My Way Therapy, we provide certified
-            NDIS speech pathologists who are experienced in helping children and adults overcome a range of speech
-            difficulties, from stuttering to language delay. Our speech therapists offer personalized speech therapy
-            services to improve communication skills and enhance the quality of life. With our dedicated and compassionate
-            approach, we strive to make speech therapy accessible and affordable for everyone who needs it. So, take the
-            first step to better communication today and contact us to schedule a speech and language assessment.
+            Looking for an Exercise Physiologist near you?
             <br>
             <br>
             <ul style="list-style: inside">
@@ -71,45 +61,35 @@
             <br>
             <br>
             <ul style="list-style: inside">
-                <li>Child Speech Pathology </li>
-                <li>Adult Speech Pathology</li>
+                <li>Child Exercise Physiology</li>
+                <li>Adult Exercise Physiology</li>
             </ul>
             <br>
             <br>
-            Speech Pathologists study, diagnose and treat communication disorders, including:
+            Accredited exercise physiologists specialise in clinical exercise interventions for people with a broad range of
+            health issues. Those people may be at risk of developing, or have existing, medical conditions and injuries. The
+            aims of exercise physiology interventions are to prevent or manage acute, sub- acute or chronic disease or
+            injury, and assist in restoring one’s optimal physical function, health or wellness. These interventions are
+            exercise-based and include health and physical activity education, advice and support and lifestyle modification
+            with a strong focus on achieving behavioural change.
             <br>
             <br>
-            <ul style="list-style: inside">
-                <li>Difficulties with speaking,</li>
-                <li>Listening,</li>
-                <li>Understanding language,</li>
-                <li>Reading,</li>
-                <li>Writing,</li>
-                <li>Social skills,</li>
-                <li>Stuttering and using voice</li>
-                <li>Difficulty communicating because of developmental delays,</li>
-                <li>Stroke,</li>
-                <li>Brain injuries,</li>
-                <li>Learning disability,</li>
-                <li>Intellectual disability,</li>
-                <li>Cerebral palsy,</li>
-                <li>Dementia and hearing loss,</li>
-                <li>Problems that can affect speech and language</li>
-                <li>Difficulties swallowing food and drinking safely</li>
-                <li>Communication disorders</li>
-                <li>Speech difficulties</li>
-                <li>Language delay</li>
-                <li>Pediatric speech therapy</li>
-                <li>Adult speech therapy</li>
-                <li>Speech and language assessment</li>
-                <li>Speech therapy services</li>
-                <li>Stuttering</li>
-                <li>Articulation disorder</li>
-                <li>Fluency disorder</li>
-                <li>Voice disorder</li>
-                <li>Speech therapy for disabilities</li>
+            Should you see an Exercise Physiologist?
+            <br>
+            <br>
+            There are a wide range of reasons why a person may benefit from consulting an accredited exercise physiologist.
+            These include chronic disease management referrals after diagnosis of a range of conditions including:
+            <br>
+            <ul>
+                <li>cardiovascular disease</li>
+                <li>pulmonary disease</li>
+                <li>metabolic disease</li>
+                <li>neurological disease</li>
+                <li>musculoskeletal disease (including arthritis, osteoporosis/osteopenia, acute and/or chronic
+                    musculoskeletal issues)</li>
+                <li>depression and other mental health conditions</li>
+                <li>cancer</li>
             </ul>
-            <br>
             <br>
             Give us a call or send us an email to make a booking/Referral or to find out more ​​
             1800 ONMYWAY

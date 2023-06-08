@@ -7,6 +7,7 @@ use App\Events\NotificationEvent;
 use App\Http\Traits\SendEmail;
 use App\Models\Appointment;
 use App\Models\Chat;
+use App\Models\Client;
 use App\Models\Doctor;
 use App\Models\Msg;
 use App\Models\Notification;
@@ -58,6 +59,95 @@ class ChatController extends Controller
 
             //     $this->sendEmail($email, $msg_title, $msg_body);
             // }
+
+            $therapist = Doctor::find($request->input('doctor_id'));
+            $client = Client::find($request->input('client_id'));
+
+            if ($receiver_gurard == 1)
+                $this->sendEmail(
+                    $therapist->email,
+                    'New Message',
+                    'Hi "' . $therapist->first_name . ' ' . $therapist->last_name . '"<br>'
+                        .
+                        '
+                        You have a message from "' . $client->first_name . ' ' . $client->last_name . '"
+                        <br>
+                        Login <a href="https://onmywaytherapy.com.au/therapist/login">HERE</a> to reply
+                        <br>
+                        "' . $insertMsg->msg_data . '"
+                        '
+                        . '<br>Contact us: <br>' .
+
+                        '<ul>
+                            <li>
+                                <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                    Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/company/94288210/admin/">
+                                    Linkedin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                    Instagram
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                    Youtube
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <h3>Call: 1800666992</h3>
+                        ',
+
+                );
+            else
+                $this->sendEmail(
+                    $client->email,
+                    'New Message',
+                    'Hi "' . $client->first_name . ' ' . $client->last_name . '"<br>'
+                        .
+                        '
+                        You have a message from your therapist
+                        <br>
+                        Login <a href="https://onmywaytherapy.com.au/client/login">HERE</a> to reply
+                        <br>
+                        "' . $insertMsg->msg_data . '"
+                        <br>
+                        <hr>
+                        If you require any assistance please contact us: <br>
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                    Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/company/94288210/admin/">
+                                    Linkedin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                    Instagram
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                    Youtube
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <h3>Call: 1800666992</h3>
+                        ',
+
+                );
+
             return response()->json([
                 'status' => 200,
                 'message' => 'your message has been sent successfully',
@@ -135,6 +225,45 @@ class ChatController extends Controller
             'receiver_guard_type' => 2,
             'content' => 'appointment-id:' . $appointment->id
         ]);
+
+        $this->sendEmail(
+            $appointment->client->email,
+            'Session approved',
+            'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' .
+                'Your session at ' .
+                Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date)->format('F j, g:i A')
+                . ' has been approved by: Dr.' . $appointment->doctor->first_name .
+                '<br> Login <a href="https://onmywaytherapy.com.au/client/login">Here</a> to contact the therapist and know more details'
+                . '<hr>Contact us: <br>' .
+                '
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/94288210/admin/">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h3>Call: 1800666992</h3>
+                    ',
+
+        );
+
         if ($notification)
             event(new ChatEvent(
                 'new-notification',
@@ -156,6 +285,42 @@ class ChatController extends Controller
         $appointment->journey = 2;
         $appointment->save();
 
+        $this->sendEmail(
+            $appointment->client->email,
+            'The session is approaching',
+            'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' . '
+            <h5>Your therapist is starting to move and is now on his way to you.</h5><br>
+            Login <a href="https://onmywaytherapy.com.au/client/login">HERE</a> to get in touch with your therapist <br>
+            Contact us: <br>' .
+                '
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/94288210/admin/">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h3>Call: 1800666992</h3>
+                    ',
+
+        );
+
         if ($appointment)
             event(new ChatEvent(
                 'new-notification',
@@ -168,6 +333,41 @@ class ChatController extends Controller
         $appointment = Appointment::find($request->id);
         $appointment->journey = 3;
         $appointment->save();
+        $this->sendEmail(
+            $appointment->client->email,
+            'The session is about to start',
+            'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' . '
+            <h5>Your therapist has arrived to your location.</h5>
+            Login <a href="https://onmywaytherapy.com.au/client/login">HERE</a> to get in touch with your therapist <br>
+            Contact us: <br>' .
+                '
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/94288210/admin/">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h3>Call: 1800666992</h3>
+                    ',
+
+        );
 
         if ($appointment)
             event(new ChatEvent(
@@ -243,5 +443,61 @@ class ChatController extends Controller
                 'notification' => 'Wait for client confirmation on the new date!'
             ]);
         endif;
+    }
+
+    public function cancelAppointment(Request $request)
+    {
+        $appointment = Appointment::find($request->id);
+        $appointment->status = 3;
+
+        $appointment->save();
+
+        $this->sendEmail(
+            $appointment->doctor->email,
+            'New Appointment',
+            'Hi "' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . '"<br>' .
+                'Your client has cancelled the session <br> 
+            Login <a href="https://onmywaytherapy.com.au/therapist/chats/' . $appointment->client->id . '">HERE</a> to see contact client <br><br><b>Session details: </b><br>
+            ' . ($appointment->visit_type == 0 ? 'Session type: Mobile visit<br>' : 'Session type: Online session <br>') .
+                'Client name: ' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '<br>' .
+                ($appointment->visit_type == 0 ?
+                    "Client address: " . $appointment->address . '<br>' : '') .
+                "Client gender: " . $appointment->client->gender . '<br>' .
+                "Client age: " .  Carbon::parse($appointment->client->dob)->age . ' years old<br><hr><br>'
+                . 'Contact us: <br>' .
+                '
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/company/94288210/admin/">
+                            Linkedin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/@OnMyWayTherapy">
+                            Youtube
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <h3>Call: 1800666992</h3>
+                ',
+
+        );
+
+        if ($appointment)
+            return response()->json([
+                'status' => 200,
+                'msg' => $appointment->client->first_name . ' ' . $appointment->client->last_name . ' has canceld the session.'
+            ]);
     }
 }

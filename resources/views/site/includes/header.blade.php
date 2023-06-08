@@ -18,12 +18,12 @@
                     </span>
                     <ul class="register-pop-up">
                         <li>Sign up <i class="fa fa-x-register fa-x"></i></li>
-                        <li><a href="/client/register">as referrer</a></li>
+                        <li><a href="/client/register">as referrer/client</a></li>
                         <li><a href="/therapist/register">as therapist</a></li>
                     </ul>
                     <ul class="login-pop-up">
                         <li>Log in <i class="fa fa-x-login fa-x"></i></li>
-                        <li><a href="/client/login">as referrer</a></li>
+                        <li><a href="/client/login">as referrer/client</a></li>
                         <li><a href="/therapist/login">as therapist</a></li>
                     </ul>
                 </li>
@@ -51,14 +51,14 @@
                             <li>
                                 Sign up
                                 <ul>
-                                    <li><a href="/client/register">as referrer</a></li>
+                                    <li><a href="/client/register">as referrer/client</a></li>
                                     <li><a href="/therapist/register">as therapist</a></li>
                                 </ul>
                             </li>
                             <li>
                                 Sign in
                                 <ul>
-                                    <li><a href="/client/login">as referrer</a></li>
+                                    <li><a href="/client/login">as referrer/client</a></li>
                                     <li><a href="/therapist/login">as therapist</a></li>
                                 </ul>
                             </li>

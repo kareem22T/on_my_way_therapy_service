@@ -21,9 +21,13 @@
                     <a href="https://www.facebook.com/profile.php?id=100092588026660" target="_blanck">
                         <i class="fa-brands fa-square-facebook"></i>
                     </a>
-                    <a href="https://www.instagram.com/on_my_way_therapy/?fbclid=IwAR1XA8L5BTH-EcKaqqCYeKxfgOoBTa-LKg_IE_rFqBlYMIXwNWm_v9hIEPI"
+                    <a href="https://www.instagram.com/on_my_way_therapy_australia/"
                         target="_blanck">
                         <i class="fa-brands fa-square-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@OnMyWayTherapy"
+                        target="_blanck">
+                        <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="mailto:Info@onmywaytherapy.com.au">
                         <i class="fa-solid fa-envelope"></i>

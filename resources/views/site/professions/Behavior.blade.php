@@ -158,14 +158,16 @@
             info@onmywaytherapy.com.au
         </article>
 
-        <div class="btns lg-grid">
-            <div class="g-6">
-                <a href="/client/register">Find a therapist - Book/Refer</a>
+        @if (!Auth::guard('client')->check() && !Auth::guard('doctor')->check())
+            <div class="btns lg-grid">
+                <div class="g-6">
+                    <a href="/client/register">Find a therapist - Book/Refer</a>
+                </div>
+                <div class="g-6">
+                    <a href="/therapist/register">Join the team </a>
+                </div>
             </div>
-            <div class="g-6">
-                <a href="/therapist/register">Join the team </a>
-            </div>
-        </div>
+        @endif
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"

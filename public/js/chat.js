@@ -55,6 +55,19 @@ $(document).on('click', '.accept_change', function () {
     $(this).parents('li').find('p').append('<span class=accepted> Accepted !</span>')
 })
 
+$(document).on('click', '.cancel_session', function () {
+  $('.cancel_session_pop_up').fadeIn()
+  $('.hide-content').fadeIn()
+  $('.yes_cancel').attr('appointment_id', $(this).attr('appointment_id'))
+})
+$(document).on('click', '.no', function () {
+  $('.cancel_session_pop_up').fadeOut()
+  $('.hide-content').fadeOut()
+})
+$(document).on('click', '.yes_cancel', function () {
+  cancelAppointment($(this).attr('appointment_id'))
+})
+
 $(document).on('click', '.edit-date', function () {
   $(this).siblings('.set-date').fadeToggle()
   if ($(this).siblings('.set-date').is(':visible'))
@@ -347,6 +360,20 @@ function acceptAppointment (appointment_id, msg_content, msg_id) {
       $('#msg').val(data.msg)
       $('#send').trigger('submit')
       if (data.status == 200)
+        return true
+    }
+  })
+}
+function cancelAppointment (appointment_id) {
+  $.ajax({
+    url: '/cancel-appointment',
+    method: 'POST',
+    data: {id: appointment_id},
+    success: function (data) {
+      $('#msg').val(data.msg)
+      $('#send').trigger('submit')
+      if (data.status == 200)
+        location.reload()
         return true
     }
   })

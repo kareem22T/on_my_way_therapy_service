@@ -39,8 +39,6 @@
                                     {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date, 'UTC')->format('g:i a') }}</span>
                             </div>
                             <div class="btns">
-                                <a href="tel:{{ $appointment->client->phone_key . $appointment->client->phone }}"><i></i>
-                                    Call</a>
                                 <a href="/therapist/chats/{{ $appointment->client_id }}"><i></i> Message</a>
                             </div>
                         </div>

@@ -50,6 +50,9 @@ Route::get('/specialization/5', function () {
 Route::get('/specialization/6', function () {
     return view('site.professions.Psychology');
 });
+Route::get('/specialization/7', function () {
+    return view('site.professions.Exercise');
+});
 Route::get('/specialization/8', function () {
     return view('site.professions.Dietetics');
 });
@@ -117,6 +120,7 @@ Route::post('/get-unseen-per-chat', [ChatController::class, 'getUseenPerChat']);
 Route::post('/get-appointment', [ChatController::class, 'getAppointmentData']);
 Route::post('/approve-appointment', [ChatController::class, 'approveAppointment']);
 Route::post('/accept-appointment', [ChatController::class, 'acceptAppointment']);
+Route::post('/cancel-appointment', [ChatController::class, 'cancelAppointment']);
 Route::post('/edit-appointment', [ChatController::class, 'editAppointmentTime']);
 Route::get('/get-notifications', [NotificationController::class, 'getNotifications']);
 Route::post('/get-notifications-appointment', [NotificationController::class, 'getAppointmentData']);

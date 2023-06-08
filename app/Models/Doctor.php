@@ -40,7 +40,6 @@ class Doctor extends Authenticatable
         'visits',
         'working_hours_from',
         'working_hours_to',
-        'holidays',
         'information_registered',
         'name_payment',
         'BSB_payment',
@@ -73,11 +72,6 @@ class Doctor extends Authenticatable
     public function ClientAgeRange()
     {
         return $this->belongsToMany('App\Models\Client_age_range', 'doctor_client_age_range', 'doctor_id', 'client_age_range_id', 'id', 'id');
-    }
-
-    public function holidays()
-    {
-        return $this->belongsToMany('App\Models\Day', 'holidays_doctor', 'doctor_id', 'day_id', 'id', 'id');
     }
 
     public function chats()

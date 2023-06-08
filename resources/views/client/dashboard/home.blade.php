@@ -97,6 +97,11 @@
                                             <input type="radio" name="visit_type" id="visit_type_1" value="0"
                                                 checked>
                                             <label for="visit_type_1">Mobile therapy includes</label>
+                                            <ul class="mt-2">
+                                                <li>Home-Visits</li>
+                                                <li>School-Visits</li>
+                                                <li>Aged-Care Visits</li>
+                                            </ul>
                                         </div>
                                         <div class="form-group visit_type">
                                             <input type="radio" name="visit_type" id="visit_type_2" value="1">

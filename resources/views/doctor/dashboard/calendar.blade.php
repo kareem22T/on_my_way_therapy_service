@@ -93,24 +93,6 @@
                         </div>
 
                         <div>
-                            <div>
-                                Select holidays
-                                <div class="form-group">
-                                    <select name="holidays[]" id="holidays" class="form-control">
-                                        <option value="">Day ---</option>
-                                        <option value="1">Sun</option>
-                                        <option value="2">Mon</option>
-                                        <option value="3">Tue</option>
-                                        <option value="4">Wed</option>
-                                        <option value="5">Thu</option>
-                                        <option value="6">Fri</option>
-                                        <option value="7">Sat</option>
-                                    </select>
-                                </div>
-                                <ul class="holidays">
-                                </ul>
-                            </div>
-
                             <div class="form-group">
                                 <button class="btn-info">Set</button>
                             </div>
@@ -133,17 +115,6 @@
                             {{ $therapist_times['travel_range'] * 10 . ' km' }}
                         </span>
                         <button id="edit-distance"><i class="fa fa-edit"></i></button>
-                    </h1>
-                    <h1>Your holidays
-                        @php
-                            $daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                        @endphp
-                        @foreach ($therapist_times['holidays'] as $holiday)
-                            <span>
-                                {{ $holiday->name }}
-                            </span>
-                        @endforeach
-                        <button id="edit-holidays"><i class="fa fa-edit"></i></button>
                     </h1>
 
                     <div class="pop-up edit_hours_pop_up">
@@ -222,33 +193,6 @@
                         <div class="btns">
                             <button class="btn btn-danger cancel">Cancel</button>
                             <button class="btn btn-success set-distance">Set</button>
-                        </div>
-                    </div>
-                    <div class="pop-up edit_holidays_pop_up">
-                        Set your new holidays
-                        <div class="form-group">
-                            <label for="form_new">Select holidays: </label>
-                            <div>
-                                <div class="form-group">
-                                    <select name="holidays[]" id="holidays" class="form-control">
-                                        <option value="">Day ---</option>
-                                        <option value="1">Sun</option>
-                                        <option value="2">Mon</option>
-                                        <option value="3">Tue</option>
-                                        <option value="4">Wed</option>
-                                        <option value="5">Thu</option>
-                                        <option value="6">Fri</option>
-                                        <option value="7">Sat</option>
-                                    </select>
-                                </div>
-                                <ul class="holidays mt-3">
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="btns">
-                            <button class="btn btn-danger cancel">Cancel</button>
-                            <button class="btn btn-success set-holidays">Set</button>
                         </div>
                     </div>
                     <div class="hide-content"></div>
