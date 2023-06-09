@@ -48,7 +48,7 @@ class Appointment extends Model
         } else if ($value == 2) {
             return 'edited';
         } else if ($value == 3) {
-            return 'Canceled';
+            return 'Cancelled';
         }
         return null;
     }
