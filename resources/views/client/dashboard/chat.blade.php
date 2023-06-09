@@ -126,7 +126,7 @@
                                                     <div class="status">
                                                         Status: {{ $appointment->status }}
                                                     </div>
-                                                    @if ($appointment->journey < 2 && $appointment->status != 'cancelled')
+                                                    @if ($appointment->journey < 2 && $appointment->status != 'Cancelled')
                                                         <div class="controls">
                                                             <button appointment_id="{{ $appointment->id }}"
                                                                 class="cancel_session">

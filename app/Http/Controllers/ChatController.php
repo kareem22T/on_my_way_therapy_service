@@ -454,7 +454,7 @@ class ChatController extends Controller
 
         $this->sendEmail(
             $appointment->doctor->email,
-            'New Appointment',
+            'Appointment Cancelation',
             'Hi "' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . '"<br>' .
                 'Your client has cancelled the session <br> 
             Login <a href="https://onmywaytherapy.com.au/therapist/chats/' . $appointment->client->id . '">HERE</a> to see contact client <br><br><b>Session details: </b><br>
