@@ -32,6 +32,54 @@
         body {
             padding: 0;
         }
+
+        .emergency {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            padding: 14px;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid #132F75;
+            outline: 2px solid white;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            z-index: 999999;
+        }
+
+        .emergency img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .emergency ul {
+            position: absolute;
+            bottom: 80%;
+            right: 100%;
+            white-space: nowrap;
+            background: white;
+            list-style: none;
+            padding: 15px;
+            margin: 0;
+            background: white;
+            border-radius: 10px;
+            border: 4px solid #132F75;
+            outline: 2px solid white;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #132F75;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            display: none
+        }
+
+        .emergency ul a {
+            color: #132F75;
+        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Dashboard | @yield('title')</title>
@@ -41,6 +89,20 @@
     @include('doctor.includes.header')
     @yield('content')
     @include('site.includes.footer')
+
+    <button class="emergency">
+        <img src="{{ asset('/imgs/doctor/emergency-icon.png') }}" alt="">
+        <ul>
+            <a href="tel:000">
+                <li>Call 000</li>
+            </a>
+            <a href="tel:1800666929">
+                <li>Call On My Way</li>
+            </a>
+        </ul>
+    </button>
+
+
     <input type="hidden" name="pusher_channel_data" id="{{ Auth::guard('doctor')->user()->id }}" guard_type="1">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
@@ -48,6 +110,13 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        $(function() {
+            $('.emergency').click(function() {
+                $(this).find('ul').fadeToggle()
+            })
+        })
+    </script>
     <script src="{{ asset('/js/chat.js') }}?v={{ time() }}"></script>
     @yield('scripts')
 </body>
