@@ -71,5 +71,7 @@ class Kernel extends HttpKernel
         'therapist_dashboard_vistors' => \App\Http\Middleware\TherapistDashboardVisitors::class,
         'therapist_pending_vistors' => \App\Http\Middleware\TherapistPendingVisitors::class,
         'client_dashboard_visitors' => \App\Http\Middleware\ClientDashboardVisitors::class,
+        'service_agreement_visitors' => \App\Http\Middleware\ServiceAgreementVisitors::class,
+        'risk_assessment_visitors' => \App\Http\Middleware\RiskAssessmentVisitors::class,
     ];
 }

@@ -9,6 +9,101 @@
         {{-- validation errors will appear here. --}}
     </div>
     <main class="home">
+        <div class="container">
+            <style>
+                .assessment-alert {
+                    display: flex;
+                    gap: 20px;
+                    justify-content: space-between;
+                    align-items: center;
+                    background: #FFFFFF;
+                    border: 1px solid #FFC400;
+                    box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
+                    border-radius: 30px;
+                    padding: 20px 25px;
+                    font-weight: 600;
+                    font-size: 29px;
+                    text-align: center;
+                    color: #132F75;
+                    margin: 30px 0 40px;
+                }
+
+                .assessment-pop-up .assessment-alert {
+                    flex-direction: column;
+                    margin: 0;
+                    border: none;
+                    box-shadow: none;
+                    background: none;
+                    padding: 0;
+                }
+
+                .assessment-alert>div {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                }
+
+                .assessment-pop-up .assessment-alert>div {
+                    flex-direction: column;
+                    margin: 0;
+                }
+
+                .assessment-alert a {
+                    text-decoration: none;
+                    background: #FFFFFF;
+                    border: 1px solid #D7D7D7;
+                    border-radius: 20px;
+                    padding: 10px 20px;
+                    font-weight: 600;
+                    font-size: 22px;
+                    line-height: 38px;
+                    text-align: center;
+                    color: #000000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                }
+            </style>
+            @if ($serviceAgreement == false || $riskAssessment == false)
+                <div class="assessment-alert">
+                    Pleases, you have to fill these first
+                    <div>
+                        <a href="/client/NDIS/Service-Agreement"
+                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
+                            NDIS service agreement
+                            @if ($serviceAgreement == true)
+                                <i class="fa fa-circle-check text-success"></i>
+                            @else
+                                <i class="fa-regular fa-circle-play text-danger"></i>
+                            @endif
+                        </a>
+                        <a href="/client/assessment/risk" class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
+                            Risk assessment template
+                            @if ($riskAssessment == true)
+                                <i class="fa fa-circle-check text-success"></i>
+                            @else
+                                <i class="fa-regular fa-circle-play text-danger"></i>
+                            @endif
+                        </a>
+                    </div>
+                </div>
+            @endif
+
+            <script>
+                let a1 = document.querySelector(".done_argeement");
+                let a2 = document.querySelector(".done_risk");
+                if (a1)
+                    a1.addEventListener("click", function(event) {
+                        event.preventDefault();
+                    });
+                if (a2)
+                    a2.addEventListener("click", function(event) {
+                        event.preventDefault();
+                    });
+            </script>
+        </div>
+
         @if (!isset($therapist) && !isset($search_results))
             <div class="container">
                 <h1>
@@ -186,6 +281,36 @@
                         <button class="btn btn-success confirm-appointment-address">Confirm</button>
                     </div>
 
+                </div>
+            </div>
+
+            <div class="pop-up assessment-pop-up">
+                <div class="assessment-alert">
+                    Pleases, you have to fill these first
+                    <div>
+                        <a href="/client/NDIS/Service-Agreement"
+                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
+                            NDIS service agreement
+                            @if ($serviceAgreement == true)
+                                <i class="fa fa-circle-check text-success"></i>
+                            @else
+                                <i class="fa-regular fa-circle-play text-danger"></i>
+                            @endif
+                        </a>
+                        <a href="/client/assessment/risk" class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
+                            Risk assessment template
+                            @if ($riskAssessment == true)
+                                <i class="fa fa-circle-check text-success"></i>
+                            @else
+                                <i class="fa-regular fa-circle-play text-danger"></i>
+                            @endif
+                        </a>
+                    </div>
+                </div>
+                <div class="btns">
+                    <button class="btn btn-secondary cancel">
+                        Cancel
+                    </button>
                 </div>
             </div>
 

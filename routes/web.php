@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doctor\RegisterController as TherapisRegisterController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\RegisterController as AdminRegisterController;
+use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Doctor\TherapistController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\HomeController;
@@ -153,6 +154,9 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
             Route::get('/account', [ClientController::class, 'indexAccount']);
             Route::get('/{username?}', [ClientController::class, 'index']);
             Route::post('/get-search-hints', [ClientController::class, 'getSearchHints']);
+            Route::get('/check/assessments', [ClientController::class, 'checkAssessmentsDone']);
+            Route::get('/NDIS/Service-Agreement', [AssessmentController::class, 'serviceAgreementIndex'])->middleware('service_agreement_visitors');
+            Route::get('/assessment/risk', [AssessmentController::class, 'riskAssessmentIndex'])->middleware('risk_assessment_visitors');
         });
     });
     // ......................................

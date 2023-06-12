@@ -21,16 +21,78 @@ class ClientController extends Controller
     use SendEmail;
     public function index($usernameOrSearch = null)
     {
+        // check if this client filled out the service agreement or not to show the alert
+        $cleint = Auth::guard('client')->user();
+        $serviceAgreement = false;
+
+        $apiUrl = 'https://api.jotform.com/form/231594061545557/submissions?apikey=96244a471e11324bcabbe43ab10db2df';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        if ($response === false) {
+            echo 'Error: ' . curl_error($ch);
+        } else {
+            $data = json_decode($response, true);
+
+            foreach ($data['content'] as $content) {
+                if ($content['status'] !== 'DELETED')
+                    foreach ($content['answers'] as $answer) {
+                        if (isset($answer['name']) && $answer['name'] == 'client_id') {
+                            if ($answer['answer'] == $cleint->id) {
+                                $serviceAgreement = true;
+                            }
+                        }
+                    }
+            }
+        }
+        curl_close($ch);
+        // check if this client filled out the  risk assessments or not to show the alert
+        $cleint = Auth::guard('client')->user();
+        $riskAssessment = false;
+
+        $apiUrl = 'https://api.jotform.com/form/231613271952554/submissions?apikey=96244a471e11324bcabbe43ab10db2df';
+
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch2);
+
+        if ($response === false) {
+            echo 'Error: ' . curl_error($ch2);
+        } else {
+            $data = json_decode($response, true);
+
+            foreach ($data['content'] as $content) {
+                if ($content['status'] !== 'DELETED')
+                    foreach ($content['answers'] as $answer) {
+                        if (isset($answer['name']) && $answer['name'] == 'client_id') {
+                            if ($answer['answer'] == $cleint->id) {
+                                $riskAssessment = true;
+                            }
+                        }
+                    }
+            }
+        }
+        curl_close($ch2);
+
         if (strpos($usernameOrSearch, 'therapist@') !== false && strpos($usernameOrSearch, '_') !== false) {
+
             $pos = strpos($usernameOrSearch, '_');
             $therapist_id = substr($usernameOrSearch, $pos + 1);
             $therapist = Doctor::find($therapist_id);
-            return view('client.dashboard.home')->with(compact('therapist'));
+            return view('client.dashboard.home')->with(compact('therapist', 'serviceAgreement', 'riskAssessment'));
         } elseif (strpos($usernameOrSearch, 'search:') !== false) {
+
             $search = substr($usernameOrSearch, strpos($usernameOrSearch, ':') + 1);
             $profession_name = str_replace("%20", " ", $search);
             $profession = Profession::where('title', 'LIKE', "%{$profession_name}%")->first();
             $search_profession = [];
+
             if ($profession)
                 $search_profession = Doctor::select('id', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
                     ->where('working_hours_from', '!=', null)
@@ -47,8 +109,9 @@ class ClientController extends Controller
             $doctor = Doctor::where('working_hours_from', '!=', null)->where('first_name', 'LIKE', "%{$doctor_first_name}%")
                 ->orWhere('last_name', 'LIKE', "%{$doctor_first_name}%")
                 ->first();
+
             if ($doctor)
-                return redirect('/client/therapist@' . $doctor->first_name . '_' . $doctor->id);
+                return redirect('/client/therapist@' . $doctor->first_name . '_' . $doctor->id)->with(compact('serviceAgreement', 'riskAssessment'));
 
             $search_results = null;
             if (count($search_profession) > 0) {
@@ -58,9 +121,9 @@ class ClientController extends Controller
             } else {
                 $search_results = [];
             }
-            return view('client.dashboard.home')->with(compact('search_results', 'search'));
+            return view('client.dashboard.home')->with(compact('search_results', 'search', 'serviceAgreement', 'riskAssessment'));
         } else {
-            return view('client.dashboard.home');
+            return view('client.dashboard.home')->with(compact('serviceAgreement', 'riskAssessment'));
         }
     }
 
@@ -79,6 +142,78 @@ class ClientController extends Controller
         $chats = Auth::guard('client')->user()->chats;
 
         return view('client.dashboard.chat')->with(compact('therapist_data', 'chats'));
+    }
+
+    public function checkAssessmentsDone()
+    {
+        // check if this client filled out the service agreement or not to show the alert
+        $cleint = Auth::guard('client')->user();
+        $serviceAgreement = false;
+
+        $apiUrl = 'https://api.jotform.com/form/231594061545557/submissions?apikey=96244a471e11324bcabbe43ab10db2df';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        if ($response === false) {
+            echo 'Error: ' . curl_error($ch);
+        } else {
+            $data = json_decode($response, true);
+
+            foreach ($data['content'] as $content) {
+                if ($content['status'] !== 'DELETED')
+                    foreach ($content['answers'] as $answer) {
+                        if (isset($answer['name']) && $answer['name'] == 'client_id') {
+                            if ($answer['answer'] == $cleint->id) {
+                                $serviceAgreement = true;
+                            }
+                        }
+                    }
+            }
+        }
+        curl_close($ch);
+        // check if this client filled out the  risk assessments or not to show the alert
+        $cleint = Auth::guard('client')->user();
+        $riskAssessment = false;
+
+        $apiUrl = 'https://api.jotform.com/form/231613271952554/submissions?apikey=96244a471e11324bcabbe43ab10db2df';
+
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch2);
+
+        if ($response === false) {
+            echo 'Error: ' . curl_error($ch2);
+        } else {
+            $data = json_decode($response, true);
+
+            foreach ($data['content'] as $content) {
+                if ($content['status'] !== 'DELETED')
+                    foreach ($content['answers'] as $answer) {
+                        if (isset($answer['name']) && $answer['name'] == 'client_id') {
+                            if ($answer['answer'] == $cleint->id) {
+                                $riskAssessment = true;
+                            }
+                        }
+                    }
+            }
+        }
+        curl_close($ch2);
+
+        if ($serviceAgreement == true && $riskAssessment == true) {
+            return response()->json([
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 419,
+            ]);
+        }
     }
 
     public function insertAppointment(HostAppointmentRequest $request)

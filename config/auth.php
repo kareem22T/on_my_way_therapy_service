@@ -44,13 +44,13 @@ return [
             'driver' => 'session',
             'provider' => 'doctors',
             'lifetime' => 60 * 24 * 30, // session lifetime in minutes
-            'expire_on_close' => false,
+            'expire_on_close' => true,
         ],
         'client' => [
             'driver' => 'session',
             'provider' => 'clients',
             'lifetime' => 60 * 24 * 30, // session lifetime in minutes
-            'expire_on_close' => false,
+            'expire_on_close' => true,
         ],
         'admin' => [
             'driver' => 'session',
