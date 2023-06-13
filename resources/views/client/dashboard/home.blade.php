@@ -13,19 +13,19 @@
             <style>
                 .assessment-alert {
                     display: flex;
-                    gap: 20px;
+                    gap: clamp(0.8125rem, calc(0.6318rem + 0.7609vw), 1.25rem);
                     justify-content: space-between;
                     align-items: center;
                     background: #FFFFFF;
                     border: 1px solid #FFC400;
                     box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
-                    border-radius: 30px;
-                    padding: 20px 25px;
+                    border-radius: clamp(1.25rem, calc(0.9918rem + 1.087vw), 1.875rem);
+                    padding: clamp(1rem, calc(0.8967rem + 0.4348vw), 1.25rem) clamp(1.4375rem, calc(1.3859rem + 0.2174vw), 1.5625rem);
                     font-weight: 600;
-                    font-size: 29px;
+                    font-size: clamp(1.0625rem, calc(0.7527rem + 1.3043vw), 1.8125rem);
                     text-align: center;
                     color: #132F75;
-                    margin: 30px 0 40px;
+                    margin: clamp(0.625rem, calc(0.1087rem + 2.1739vw), 1.875rem) 0 clamp(1.875rem, calc(1.6168rem + 1.087vw), 2.5rem);
                 }
 
                 .assessment-pop-up .assessment-alert {
@@ -53,16 +53,24 @@
                     background: #FFFFFF;
                     border: 1px solid #D7D7D7;
                     border-radius: 20px;
-                    padding: 10px 20px;
+                    padding: clamp(0.5rem, calc(0.4484rem + 0.2174vw), 0.625rem) 20px;
                     font-weight: 600;
-                    font-size: 22px;
-                    line-height: 38px;
+                    font-size: clamp(0.9375rem, calc(0.7568rem + 0.7609vw), 1.375rem);
+                    line-height: clamp(0.625rem, calc(-0.0978rem + 3.0435vw), 2.375rem);
                     text-align: center;
                     color: #000000;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     gap: 10px;
+                }
+
+                @media (max-width: 599.98px) {
+
+                    .assessment-alert,
+                    .assessment-alert>div {
+                        flex-direction: column;
+                    }
                 }
             </style>
             @if ($serviceAgreement == false || $riskAssessment == false)

@@ -671,12 +671,12 @@ body {
         >h1 {
             font-style: normal;
             font-weight: 600;
-            font-size: clamp(1.6875rem, calc(1.3519rem + 1.413vw), 2.5rem);
+            font-size: clamp(1.25rem, calc(0.7337rem + 2.1739vw), 2.5rem);
             text-align: center;
             color: $main-color;
             max-width: 630px;
             margin: clamp(0.625rem, calc(0.3668rem + 1.087vw), 1.25rem) auto;
-            line-height: clamp(2.1875rem, calc(1.697rem + 2.0652vw), 3.375rem);
+            line-height: clamp(2rem, calc(1.4321rem + 2.3913vw), 3.375rem);
         }
 
         >.form-group {
