@@ -226,7 +226,11 @@
                     </tr>
                 @endif
             </div>
-
+            <style>
+                .working-hours {
+                    background: black;
+                }
+            </style>
             <div class="this_week_wrapper">
                 <h1>
                     My schedule
@@ -245,11 +249,24 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridWeek',
-                slotMinTime: $('input[name="start_table"]').val() + ':00:00',
-                slotMaxTime: $('input[name="end_table"]').val() + ':00:00',
                 events: @json($events),
+                editable: true,
+                dayRender: function(dayEl) {
+                    if (dayEl.data('workingHours')) {
+                        dayEl.addClass('working-hours');
+                    }
+                }
             });
+
             calendar.render();
         });
     </script>
+
+
+    <style>
+        .working-hours {
+            background-color: lightgray;
+        }
+    </style>
+
 @endsection

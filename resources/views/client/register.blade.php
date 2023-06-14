@@ -23,8 +23,7 @@
                         </div>
                         <div class="form-group">
                             <input type="radio" name="account_type" id="account_type_2" value="1">
-                            <label for="account_type_2"
-                                style="font-size: clamp(1.0625rem, calc(0.9334rem + 0.5435vw), 1.375rem)">For someone else –
+                            <label for="account_type_2">For someone else –
                                 As referrer</label>
                         </div>
                     </div>

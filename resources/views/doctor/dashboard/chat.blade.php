@@ -33,10 +33,11 @@
                                 <li>
                                     <a href="/therapist/chats/{{ $chat->client_id }}" class="chat_link" sender_guard="2"
                                         chat_id="{{ $chat->id }}">
-                                        <div class="profile">
+                                        <a href="/therapist/client/{{ $chat->client->id }}" target="_blanck"
+                                            class="profile">
                                             <img src="/imgs/client/uploads/client_profile/{{ $chat->client->photo ? $chat->client->photo : 'default_client_profile.jpg' }}"
                                                 alt="client img">
-                                        </div> {{ $chat->client->first_name . ' ' . $chat->client->last_name }}
+                                        </a> {{ $chat->client->first_name . ' ' . $chat->client->last_name }}
                                         <span
                                             style="display: {{ $chat->msgs->where('seen', false)->where('sender_guard', 2)->count() > 0? 'flex': 'none' }}">
                                             {{ $chat->msgs->where('seen', false)->count() > 0 ? $chat->msgs->where('seen', false)->count() : '' }}

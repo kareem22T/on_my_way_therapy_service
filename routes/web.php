@@ -102,6 +102,7 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
             Route::get('/my-account/profile', [TherapistController::class, 'indexProfile']);
             Route::get('/chats/{id?}', [TherapistController::class, 'indexChats']);
             Route::get('/appointment/{id?}', [TherapistController::class, 'appointmentDetails']);
+            Route::get('/client/{id?}', [TherapistController::class, 'getClientProfileIndex']);
         });
 
         Route::get('/pending', [TherapistController::class, 'indexPending'])
@@ -143,7 +144,7 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         Route::post("/check-info", [ClientRegisterController::class, "checkInfo"]);
     });
     Route::post('/send-code', [ClientRegisterController::class, 'sendVerfication']);
-    // just authenticated doctor can visit
+    // just authenticated client can visit
     Route::group(['middleware' => 'auth:client'], function () {
         Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');
 

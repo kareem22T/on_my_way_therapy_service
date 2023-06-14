@@ -16,10 +16,10 @@
                 <input type="hidden" name="current_location_lng" id="current_location_lng" value="">
                 <div class="appointment">
                     <div>
-                        <div class="img">
+                        <a href="/therapist/cliet/{{ $appointment->client->id }}" target="_blanck" class="img">
                             <img src="/imgs/client/uploads/client_profile/{{ $appointment->client->photo ? $appointment->client->photo : 'default_client_profile.jpg' }}"
                                 alt="client img">
-                        </div>
+                        </a>
                         <div class="details">
                             <div class="information">
                                 <h1>

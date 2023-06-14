@@ -24,6 +24,43 @@ class TherapistController extends Controller
         return view('doctor.pending');
     }
 
+    public function getClientProfileIndex($id)
+    {
+        $client = Client::find($id);
+
+        // check if this client filled out the  risk assessments or not to show the alert
+        $cleint = Auth::guard('client')->user();
+        $riskAssessment = false;
+
+        $apiUrl = 'https://api.jotform.com/form/231613271952554/submissions?apikey=96244a471e11324bcabbe43ab10db2df';
+
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch2);
+
+        if ($response === false) {
+            echo 'Error: ' . curl_error($ch2);
+        } else {
+            $data = json_decode($response, true);
+
+            foreach ($data['content'] as $content) {
+                if ($content['status'] !== 'DELETED')
+                    foreach ($content['answers'] as $answer) {
+                        if (isset($answer['name']) && $answer['name'] == 'client_id') {
+                            if ($answer['answer'] == $client->id) {
+                                $answers = $content['answers'];
+                            }
+                        }
+                    }
+            }
+        }
+        curl_close($ch2);
+
+        return view('doctor.dashboard.client_profile')->with(compact('client', 'answers'));
+    }
+
     public function indexMyAccount()
     {
         $therapist = Auth::guard('doctor')->user()->only(['first_name', 'last_name', 'photo', 'profession']);
@@ -51,17 +88,33 @@ class TherapistController extends Controller
     {
         $therapist_times = Auth::guard('doctor')->user()->only(['working_hours_from', 'working_hours_to', 'travel_range']);
 
-        $events = [];
+        $events = [
+            [
+                'title' => 'Work Schedule',
+                'start' => '2023-06-13 12:00:00',
+                'end' => '2023-06-13 13:00:00',
+                'workingHours' => '9:00-17:00',
+                'className' => 'working-hours',
+
+            ],
+            [
+                'title' => 'Work Schedule',
+                'start' => '2023-06-14 14:00:00',
+                'end' => '2023-06-14 15:00:00',
+                'workingHours' => '10:00-18:00',
+            ]
+        ];
 
         $appointments = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->where('journey', '!=', 4)->with(['client', 'doctor'])->get();
 
-        foreach ($appointments as $appointment) {
-            $events[] = [
-                'title' => 'session by: ' . $appointment->client->first_name,
-                'start' => $appointment->start_time,
-                'end' => $appointment->finish_time,
-            ];
-        }
+        // foreach ($appointments as $appointment) {
+        //     $events[] = [
+        //         'title' => 'session by: ' . $appointment->client->first_name,
+        //         'start' => $appointment->start_time,
+        //         'end' => $appointment->finish_time,
+        //         'workingHours' => '10:00-18:00',
+        //     ];
+        // }
 
 
         if (
