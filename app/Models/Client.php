@@ -79,6 +79,10 @@ class Client extends Authenticatable
         return $this->belongsToMany(Profession::class);
     }
 
+    public function therapistRating()
+    {
+        return $this->hasMany('App\Models\Therapist_rating', 'client_id');
+    }
     // getters and setters
     public function getGenderAttribute($value)
     {

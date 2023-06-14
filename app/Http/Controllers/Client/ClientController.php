@@ -292,7 +292,7 @@ class ClientController extends Controller
                         </li>
                     </ul>
                     <hr>
-                    <h3>Call: 1800666992</h3>
+                    <h3>Call: 1800 666 929</h3>
                     ',
 
             );

@@ -29,11 +29,11 @@ class Doctor extends Authenticatable
         'client_gender',
         'experience',
         'client_diagnosis',
-        'WWCC_path',
-        'AHPRA_path',
-        'SPA_path',
+        'WWCC_number',
+        'AHPRA_number',
+        'SPA_number',
         'practitioner_number',
-        'NDIS_path',
+        'NDIS_number',
         'about_me',
         'client_age_range',
         'travel_range',
@@ -77,6 +77,11 @@ class Doctor extends Authenticatable
     public function chats()
     {
         return $this->hasMany('App\Models\Chat', 'doctor_id');
+    }
+
+    public function rating()
+    {
+        return $this->hasMany('App\Models\Therapist_rating', 'doctor_id');
     }
 
     public function appointments()

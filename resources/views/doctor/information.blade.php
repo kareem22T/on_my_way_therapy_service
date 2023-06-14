@@ -50,22 +50,16 @@
                     <a href="" class="add_diagnosis">Add <i class="fa fa-plus"></i></a>
                 </div>
                 <div class="form-group g-4 file">
-                    <input type="file" name="WWCC" id="WWCC" placeholder="WWCC check" class="form-control">
-                    <label for="WWCC" class="certificte-input">WWCC check <i class="fa-solid fa-camera"></i></label>
+                    <input type="text" name="WWCC" id="WWCC" placeholder="WWCC Number" class="form-control">
                     <a href="https://wwccheck.ocg.nsw.gov.au/FindMyNumber">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file changable-cer">
-                    <input type="file" name="AHPRA" id="AHPRA" placeholder="AHPRA Registration"
+                    <input type="text" name="AHPRA" id="AHPRA Number" placeholder="AHPRA Registration"
                         class="form-control">
-                    <label for="AHPRA" class="certificte-input">AHPRA Registration <i
-                            class="fa-solid fa-camera"></i></label>
                     <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file">
-                    <input type="file" name="NDIS" id="NDIS" placeholder="NDIS worker screening"
-                        class="form-control">
-                    <label for="NDIS" class="certificte-input">NDIS worker screening <i
-                            class="fa-solid fa-camera"></i></label>
+                    <input type="text" name="NDIS" id="NDIS" placeholder="NDIS Number" class="form-control">
                     <a href="https://www.service.nsw.gov.au/transaction/ndiswc-apply">don’t have one?</a>
                 </div>
                 <div class="form-group g-12">

@@ -54,25 +54,25 @@
                 <input type="text" disabled name="gender" id="gender" class="input form-control"
                     value="{{ 'Gender: ' . $therapist_data->gender }}">
             </div>
-            <div class="g-4 cer_wrapper input">
-                WWCC Certificate
-                <a href="{{ asset('/imgs/doctor/uploads/therapist_certificates/' . $therapist_data->WWCC_path) }}" download>
-                    <i class="fa fa-download"></i>
-                </a>
+            <div class="form-group g-4">
+                <input type="text" disabled name="WWCC" id="WWCC" class="input form-control"
+                    value="{{ 'WWCC: ' . $therapist_data->WWCC_number }}">
             </div>
-            <div class="g-4 cer_wrapper input">
-                AHPRA Certificate
-                <a href="{{ asset('/imgs/doctor/uploads/therapist_certificates/' . $therapist_data->AHPRA_path) }}"
-                    download>
-                    <i class="fa fa-download"></i>
-                </a>
+            <div class="g-4">
+                @if ($therapist_data->AHPRA_number)
+                    <input type="text" disabled name="AHPRA" id="AHPRA" class="input form-control"
+                        value="{{ 'AHPRA: ' . $therapist_data->AHPRA_number }}">
+                @elseif ($therapist_data->SPA_number)
+                    <input type="text" disabled name="SPA" id="SPA" class="input form-control"
+                        value="{{ 'SPA: ' . $therapist_data->SPA_number }}">
+                @elseif ($therapist_data->practitioner_number)
+                    <input type="text" disabled name="practitioner_number" id="practitioner_number"
+                        class="input form-control" value="{{ 'Practitioner: ' . $therapist_data->practitioner_number }}">
+                @endif
             </div>
-            <div class="g-4 cer_wrapper input">
-                NDIS Certificate
-                <a href="{{ asset('/imgs/doctor/uploads/therapist_certificates/' . $therapist_data->NDIS_path) }}"
-                    download>
-                    <i class="fa fa-download"></i>
-                </a>
+            <div class="g-4">
+                <input type="text" disabled name="NDIS" id="NDIS" class="input form-control"
+                    value="{{ 'NDIS: ' . $therapist_data->NDIS_number }}">
             </div>
             <div class="btns g-12">
                 <a href="/admin/therapists" class="btn btn-secondary" id="{{ $therapist_data->id }}"><i

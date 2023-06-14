@@ -22,7 +22,7 @@ class TherapistPaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'alpha', 'regex:/^[^\s\d]+$/'],
+            'name' => ['required', 'string'],
             'BSB' => ['required', 'digits:6', 'regex:/^[0-9]{6,}$/'],
             'bank_account' => ['required', 'string'],
             'ABN' => ['required', 'digits:11', 'regex:/^[0-9]{11,}$/'],

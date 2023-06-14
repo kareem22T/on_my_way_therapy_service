@@ -198,21 +198,17 @@ class RegisterController extends Controller
             $insert->diagnosis()->syncWithoutDetaching(Diagnosi::where('name', $dia)->first()->id);
         }
 
-        $WWCC_name = $this->saveCertificate($request->WWCC, 'imgs/doctor/uploads/therapist_certificates', 'WWCC');
-        $insert->WWCC_path = $WWCC_name;
+        $insert->WWCC_number = $request->WWCC;
 
         if ($request->AHPRA) {
-            $AHPRA_name = $this->saveCertificate($request->AHPRA, 'imgs/doctor/uploads/therapist_certificates', 'AHPRA');
-            $insert->AHPRA_path = $AHPRA_name;
+            $insert->AHPRA_number = $request->AHPRA;
         } else if ($request->SPA) {
-            $SPA_name = $this->saveCertificate($request->SPA, 'imgs/doctor/uploads/therapist_certificates', 'SPA');
-            $insert->SPA_path = $SPA_name;
+            $insert->SPA_number = $request->SPA;
         } else if ($request->practitioner_number) {
             $insert->practitioner_number = $request->practitioner_number;
         };
 
-        $NDIS_name = $this->saveCertificate($request->NDIS, 'imgs/doctor/uploads/therapist_certificates', 'NDIS');
-        $insert->NDIS_path = $NDIS_name;
+        $insert->NDIS_number = $request->NDIS;
 
         $insert->about_me = $request->input('about_me');
 
