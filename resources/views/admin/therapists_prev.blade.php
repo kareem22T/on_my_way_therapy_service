@@ -31,6 +31,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Age</th>
+                        <th>controls</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,8 @@
                                 <td>{{ $therapist->email }}</td>
                                 <td>{{ $therapist->phone }}</td>
                                 <td>{{ Carbon\Carbon::parse($therapist->dob)->age }} yo</td>
+                                <td><a href="/admin/therapist/{{ $therapist->id }}" class="btn btn-success"><i
+                                            class="fa fa-eye"></i></a></td>
                             </tr>
                         @endforeach
                     @else

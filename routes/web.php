@@ -175,6 +175,8 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
         Route::get('/sessions', [AdminMainController::class, 'sessionsIndex']);
         Route::get('/therapists-preview', [AdminMainController::class, 'usersTherapistsPreviewIndex']);
         Route::get('/therapists/request/{id}', [AdminMainController::class, 'returnTherapistRequest']);
+        Route::get('/therapist/{id}', [AdminMainController::class, 'returnTherapist']);
+        Route::get('/client/{id}', [AdminMainController::class, 'returnClient']);
         Route::post('/therapists-approve', [AdminMainController::class, 'approveTherapist']);
         Route::post('/therapists-delete', [AdminMainController::class, 'deleteTherapist']);
     });

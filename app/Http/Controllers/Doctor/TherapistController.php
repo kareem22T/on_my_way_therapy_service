@@ -88,33 +88,18 @@ class TherapistController extends Controller
     {
         $therapist_times = Auth::guard('doctor')->user()->only(['working_hours_from', 'working_hours_to', 'travel_range']);
 
-        $events = [
-            [
-                'title' => 'Work Schedule',
-                'start' => '2023-06-13 12:00:00',
-                'end' => '2023-06-13 13:00:00',
-                'workingHours' => '9:00-17:00',
-                'className' => 'working-hours',
-
-            ],
-            [
-                'title' => 'Work Schedule',
-                'start' => '2023-06-14 14:00:00',
-                'end' => '2023-06-14 15:00:00',
-                'workingHours' => '10:00-18:00',
-            ]
-        ];
+        $events = [];
 
         $appointments = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->where('journey', '!=', 4)->with(['client', 'doctor'])->get();
 
-        // foreach ($appointments as $appointment) {
-        //     $events[] = [
-        //         'title' => 'session by: ' . $appointment->client->first_name,
-        //         'start' => $appointment->start_time,
-        //         'end' => $appointment->finish_time,
-        //         'workingHours' => '10:00-18:00',
-        //     ];
-        // }
+        foreach ($appointments as $appointment) {
+            $events[] = [
+                'title' => 'session by: ' . $appointment->client->first_name,
+                'start' => $appointment->start_time,
+                'end' => $appointment->finish_time,
+                'workingHours' => '00:00-12:00',
+            ];
+        }
 
 
         if (

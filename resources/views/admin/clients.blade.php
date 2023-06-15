@@ -22,6 +22,7 @@
                         <th>Phone</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Controls</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,9 @@
                                 <td>+{{ $client->phone_key . ' ' . $client->phone }}</td>
                                 <td>{{ Carbon\Carbon::parse($client->dob)->age }} yo</td>
                                 <td>{{ explode(',', $client->address)[0] }}</td>
+                                <td><a href="/admin/client/{{ $client->id }}" class="btn btn-success"><i
+                                            class="fa fa-eye"></i></a></td>
+
                             </tr>
                         @endforeach
                     @else

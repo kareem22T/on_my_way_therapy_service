@@ -7,6 +7,7 @@ use App\Http\Traits\SendEmail;
 use App\Models\Client;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -101,6 +102,52 @@ class MainController extends Controller
         $therapist_data = Doctor::where('approved', 0)->where('payment_registered', 1)->find($therapist_id);
         if ($therapist_data)
             return view('admin.request-prev')->with(compact('therapist_data'));
+        else
+            return redirect('/admin/therapists');
+    }
+    public function returnTherapist($therapist_id)
+    {
+        $therapist_data = Doctor::where('approved', 1)->where('payment_registered', 1)->find($therapist_id);
+        if ($therapist_data)
+            return view('admin.therapist-prev')->with(compact('therapist_data'));
+        else
+            return redirect('/admin/therapists');
+    }
+    public function returnClient($id)
+    {
+        $client = Client::find($id);
+
+        // check if this client filled out the  risk assessments or not to show the alert
+        $cleint = Auth::guard('client')->user();
+
+        $apiUrl = 'https://api.jotform.com/form/231613271952554/submissions?apikey=96244a471e11324bcabbe43ab10db2df';
+
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch2);
+
+        if ($response === false) {
+            echo 'Error: ' . curl_error($ch2);
+        } else {
+            $data = json_decode($response, true);
+
+            foreach ($data['content'] as $content) {
+                if ($content['status'] !== 'DELETED')
+                    foreach ($content['answers'] as $answer) {
+                        if (isset($answer['name']) && $answer['name'] == 'client_id') {
+                            if ($answer['answer'] == $client->id) {
+                                $answers = $content['answers'];
+                            }
+                        }
+                    }
+            }
+        }
+        curl_close($ch2);
+
+        if ($client)
+            return view('admin.client_prev')->with(compact('client', 'answers'));
         else
             return redirect('/admin/therapists');
     }

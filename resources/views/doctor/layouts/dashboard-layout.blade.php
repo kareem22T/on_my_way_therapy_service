@@ -38,8 +38,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 100px;
-            height: 100px;
+            width: clamp(5rem, calc(4.4837rem + 2.1739vw), 6.25rem);
+            height: clamp(5rem, calc(4.4837rem + 2.1739vw), 6.25rem);
             padding: 14px;
             background: white;
             border-radius: 50%;

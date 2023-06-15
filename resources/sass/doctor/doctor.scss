@@ -129,6 +129,7 @@ input[type=checkbox] {
             >.form-group {
                 @media (max-width: 699.98px) {
                     grid-column: span 12;
+                    margin: 0;
                 }
             }
         }
@@ -245,6 +246,7 @@ input[type=checkbox] {
                     left: 0;
                     border: none;
                     border-radius: 50%;
+                    margin-bottom: clamp(0rem, calc(-0.413rem + 1.7391vw), 1rem);
                 }
                 i {
                     position: relative;
@@ -309,7 +311,7 @@ input[type=checkbox] {
             }
             >div {
                 @extend %flex-center;
-                gap: 20px;
+                gap: clamp(0.9375rem, calc(0.8084rem + 0.5435vw), 1.25rem);
                 font-weight: 500;
                 font-size: clamp(1rem, calc(0.6128rem + 1.6304vw), 1.9375rem);
                 line-height: clamp(1.5rem, calc(0.9837rem + 2.1739vw), 2.75rem);

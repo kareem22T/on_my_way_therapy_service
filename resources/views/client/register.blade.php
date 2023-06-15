@@ -31,7 +31,7 @@
 
                 <div class="form-group g-12 photo_group">
                     <input type="file" name="photo" id="photo" class="form-control">
-                    <label for="photo" class="mb-3">
+                    <label for="photo">
                         <img id="preview" src="{{ asset('/imgs/doctor/uploads/therapist_profile/default.png') }}"
                             alt="">
                         <i class="fa fa-user"></i>

@@ -13,7 +13,7 @@
                     @php
                         $guard_type = Auth::guard('client')->check() ? 2 : 1;
                         $unSeen = 0;
-                        foreach (Auth::user()->chats as $chat):
+                        foreach (Auth::guard('doctor')->user()->chats as $chat):
                             $unSeen += $chat->msgs
                                 ->where('seen', 0)
                                 ->where('sender_guard', '!=', $guard_type)
@@ -22,11 +22,11 @@
                     @endphp
                     <span style="display: {{ $unSeen > 0 ? 'flex' : 'none' }}">{{ $unSeen > 0 ? $unSeen : '' }}</span>
                 </li>
-                <li><a href="/therapist/my-account" class="@yield('account_link')"><span>Account </span><i
-                            class="fa-solid fa-user"></i></a></li>
+                <li><a href="/therapist/resources" class="@yield('account_link')"><span>Resources </span><i
+                            class="fa-solid fa-paste"></i></a></li>
             </ul>
-            <a href="" class="nutification">
-                <i class="fa fa-bell"></i>
+            <a href="/therapist/my-account" class="nutification">
+                <i class="fa fa-user"></i>
             </a>
         </nav>
     </div>

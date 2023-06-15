@@ -176,7 +176,7 @@ header .container nav ul li a i {
     padding: 10px;
   }
 }
-header .container nav .fa-bell {
+header .container nav .fa-user {
   font-size: clamp(1.875rem, 1.6071rem + 1.0989vw, 2.5rem);
   color: #132F75;
 }

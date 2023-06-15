@@ -172,7 +172,7 @@ body {
   display: none;
 }
 .client_register .radio label {
-  padding: 16px 35px;
+  padding: clamp(0.6875rem, 0.5584rem + 0.5435vw, 1rem) 35px;
   border: 3px solid #D7D7D7;
   border-radius: 20px;
   transition: border-color 0.2s ease-out;

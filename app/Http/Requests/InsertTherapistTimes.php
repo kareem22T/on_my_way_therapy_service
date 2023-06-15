@@ -25,7 +25,6 @@ class InsertTherapistTimes extends FormRequest
             'from' => 'required',
             'to' => 'required|gte:from|different:from',
             'distance' => 'required',
-            'holidays_arr' => 'required|array',
         ];
     }
 }
