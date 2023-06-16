@@ -206,7 +206,7 @@ header nav ul .more #menu-icon a:last-child {
 }
 header nav ul .more > ul {
   position: absolute;
-  top: calc(100% + 40px);
+  top: calc(100% + clamp(1.5625rem, 1.1753rem + 1.6304vw, 2.5rem));
   right: 0;
   display: flex;
   display: none;
@@ -214,8 +214,8 @@ header nav ul .more > ul {
   white-space: nowrap;
   background: #ffffff;
   border: 3px solid #FFC400;
-  padding: 25px 20px;
-  border-radius: 30px;
+  padding: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem) clamp(0.8125rem, 0.6318rem + 0.7609vw, 1.25rem);
+  border-radius: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 header nav ul .more > ul > li {

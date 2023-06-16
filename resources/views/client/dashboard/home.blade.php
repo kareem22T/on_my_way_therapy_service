@@ -5,6 +5,12 @@
 @section('home_link', 'active')
 
 @section('content')
+    <style>
+        label+ul {
+            font-size: clamp(1rem, 0.6128rem + 1.6304vw, 1.9375rem);
+            line-height: clamp(1.5rem, 0.9837rem + 2.1739vw, 2.75rem);
+        }
+    </style>
     <div id="errors">
         {{-- validation errors will appear here. --}}
     </div>

@@ -203,6 +203,7 @@
                 $appoinments_sessions = App\Models\Appointment::where('status', 1)
                     ->where('doctor_id', Auth::guard('doctor')->user()->id)
                     ->where('journey', '!=', 4)
+                    ->whereDate('date', '>=', now())
                     ->paginate(10);
             @endphp
             <div class="appointments">
@@ -261,12 +262,4 @@
             calendar.render();
         });
     </script>
-
-
-    <style>
-        .working-hours {
-            background-color: lightgray;
-        }
-    </style>
-
 @endsection

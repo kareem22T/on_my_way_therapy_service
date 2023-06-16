@@ -25,6 +25,7 @@
             calendar.render();
         });
     </script>
+    @yield('extra-style')
     <link rel="shortcut icon" href="{{ asset('/imgs/site/logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('/css/therapist_dashboard.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('/css/client_dashboard.css') }}?v={{ time() }}">

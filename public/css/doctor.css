@@ -152,8 +152,8 @@ body {
   width: 100%;
   font-style: normal;
   font-weight: 500;
-  font-size: 23px;
-  line-height: 38px;
+  font-size: clamp(0.8125rem, 0.5543rem + 1.087vw, 1.4375rem);
+  line-height: clamp(1.125rem, 0.6087rem + 2.1739vw, 2.375rem);
 }
 .login_wrapper .doctor_login_form button {
   background-color: #FFC400;
@@ -237,7 +237,7 @@ input[type=checkbox] {
 #register_root form hr {
   width: 100%;
   max-width: 300px;
-  height: 4px;
+  height: clamp(0.0625rem, -0.0149rem + 0.3261vw, 0.25rem);
   background-color: #FFC400;
   border: none;
   opacity: 1;
@@ -264,16 +264,15 @@ input[type=checkbox] {
 }
 #register_root form input:not([type=checkbox], [type=radio], [type=range]), #register_root form select,
 #register_root form button:not(.btns-extra button), #register_root form textarea, #register_root form .file label {
-  background: #ffffff;
-  border: 1px solid #FFC400;
-  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
-  border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem);
+  background: #ffffff !important;
+  border: 1px solid #FFC400 !important;
+  box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25) !important;
+  border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem) !important;
   padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
-  width: 100%;
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem);
-  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
+  font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem) !important;
+  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem) !important;
   resize: none;
   display: block;
   display: flex;
@@ -308,12 +307,14 @@ input[type=checkbox] {
   display: none;
 }
 #register_root form button:not(.btns-extra button) {
-  background-color: #FFC400;
-  color: #132F75;
-  border: 3px solid #FFC400;
-  font-size: clamp(1.3125rem, 1.0446rem + 1.0989vw, 1.9375rem);
-  font-weight: 600;
-  letter-spacing: 2px;
+  background-color: #FFC400 !important;
+  color: #132F75 !important;
+  border: 3px solid #FFC400 !important;
+  font-size: clamp(1.3125rem, 1.0446rem + 1.0989vw, 1.9375rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-align: center !important;
+  justify-content: center;
   transition: all 0.2s ease-out;
   cursor: pointer;
 }
@@ -422,7 +423,7 @@ input[type=checkbox] {
   color: #132F75;
 }
 @media (max-width: 599.98px) {
-  #register_root form .choice > div {
+  #register_root form .choice > div.account_type_wrapper {
     flex-direction: column;
   }
 }
@@ -439,8 +440,25 @@ input[type=checkbox] {
     transform: translateY(35%);
   }
 }
+#register_root form .choice > div input[name=client_type] + label, #register_root form .choice > div .coming-soon-2, #register_root form .choice > div input[name=managment_type] + label {
+  cursor: pointer;
+  width: clamp(6.25rem, 0.5707rem + 23.913vw, 20rem);
+  height: clamp(3.75rem, 3.2337rem + 2.1739vw, 5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#register_root form .choice > div input[name=managment_type] + label {
+  line-height: clamp(1.0625rem, 0.3655rem + 2.9348vw, 2.75rem);
+  font-size: clamp(0.875rem, 0.5136rem + 1.5217vw, 1.75rem);
+}
 #register_root form .choice label {
   cursor: pointer;
+}
+#register_root form .choice label img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 #register_root form .diagnosis_wrapper {
   justify-content: space-between;
@@ -476,12 +494,12 @@ input[type=checkbox] {
 }
 #register_root form .diagnosis_wrapper a {
   position: absolute;
-  top: 16px;
+  top: clamp(0.5625rem, 0.3818rem + 0.7609vw, 1rem);
   right: 15px;
   z-index: 9;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: clamp(1rem, 0.9484rem + 0.2174vw, 1.125rem);
+  line-height: clamp(0.6875rem, 0.4293rem + 1.087vw, 1.3125rem);
   text-decoration: none;
   color: #132F75;
   padding: 12px 15px;

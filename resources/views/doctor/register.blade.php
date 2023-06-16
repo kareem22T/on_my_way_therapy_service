@@ -63,33 +63,6 @@
                     </select>
                 </div>
 
-                <section class="extra_section form-group g-12 pt-3" id="therapy">
-                    <h1 class="head">The expected earnings from your work with us</h1>
-                    <div class="btns-extra">
-                        <button class="active">Full-time</button>
-                        <button>Part-time</button>
-                    </div>
-                    <div class="full-time">
-                        <input class="custom-range" type="range" value="1" min="1" max="38"
-                            v-model="fullval">
-                        <div class="value">
-                            <output>@{{ fullval }} hours per week</output>
-                            <span class="max">38</span>
-                        </div>
-                        <a href="" @click.prevent>= $@{{ fullval * 139 }}</a>
-                    </div>
-                    <div class="part-time">
-                        <input class="custom-range" type="range" value="1" min="1" max="30"
-                            v-model="partval">
-                        <div class="value">
-                            <output>@{{ partval }} hours per week</output>
-                            <span class="max">30</span>
-                        </div>
-                        <a href="" @click.prevent>= $@{{ partval * 139 }}</a>
-                    </div>
-                    <p>You will be paid $139 per hour + 80 cent for each travailed kilometer</p>
-                </section>
-
                 <div class="form-group g-12">
                     <button type="submit" class="btn btn-primary from-control" id="step1_submit">Next</button>
                 </div>
@@ -157,45 +130,4 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
         defer></script>
-
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-    <script>
-        const {
-            createApp
-        } = Vue
-
-        createApp({
-            data() {
-                return {
-                    fullval: 1,
-                    partval: 1,
-                }
-            }
-        }).mount('#therapy')
-    </script>
-
-    <script>
-        $(function() {
-            $('#therapy .btns-extra button:first-child').on('click', function(e) {
-                e.preventDefault();
-                $('.part-time').fadeOut();
-                setTimeout(() => {
-                    $('.full-time').fadeIn().css('display', 'flex');
-                }, 100);
-                $(this).addClass('active');
-                $(this).siblings().removeClass('active');
-            })
-            $('#therapy .btns-extra button:last-child').on('click', function(e) {
-                e.preventDefault();
-                $('.full-time').fadeOut();
-                setTimeout(() => {
-                    $('.part-time').fadeIn().css('display', 'flex');
-                }, 100);
-                $(this).addClass('active');
-                $(this).siblings().removeClass('active');
-            })
-        })
-    </script>
-
 @endsection

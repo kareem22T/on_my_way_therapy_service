@@ -256,6 +256,59 @@ class RegisterController extends Controller
     }
     // .....................................
 
+
+    // update client information ................................
+    public function update(Request $request)
+    {
+        $validator = validator([
+            'photo' => ['mimes:jpeg,png,gif,jpg'],
+            'first_name' => ['alpha', 'regex:/^[^\s\d]+$/'],
+            'last_name' => ['alpha', 'regex:/^[^\s\d]+$/'],
+            'phone' => 'regex:/^[0-9]{7,}$/|unique:clients',
+            'email' => 'email|unique:clients',
+            'dob' => 'date_format:Y-m-d',
+        ]);
+
+        $profile_picture_name = null;
+        if ($request->photo)
+            $profile_picture_name =
+                $this->saveClientImg($request->photo, 'imgs/doctor/uploads/therapist_profile');
+
+        $therapist = Auth::guard('doctor')->user();
+
+        if ($request->photo)
+            $therapist->photo = $profile_picture_name ? $profile_picture_name : null;
+        if ($request->first_name)
+            $therapist->first_name = ucwords($request->input('first_name'));
+        if ($request->last_name)
+            $therapist->last_name = ucwords($request->input('last_name'));
+        if ($request->phone) :
+            $therapist->phone_key = $request->input('countryCode');
+            $therapist->phone = $request->input('phone');
+        endif;
+        if ($request->dob)
+            $therapist->dob = $request->input('dob');
+        if ($request->email)
+            $therapist->email = $request->input('email');
+
+        if ($request->address) :
+            $therapist->address = $request->input('address');
+            $therapist->address_lat = $request->input('address_lat');
+            $therapist->address_lng = $request->input('address_lng');
+        endif;
+        $therapist->save();
+
+        if ($therapist) {
+            return response()->json([
+                'status' => 200,
+                'msg' => 'your data has been updated successfuly.',
+            ]);
+        }
+
+        return 'field to register';
+    }
+    // .....................................
+
     // logout from doctor account
     public function logout()
     {

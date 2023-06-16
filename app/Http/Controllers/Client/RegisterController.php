@@ -111,6 +111,58 @@ class RegisterController extends Controller
     }
     // .....................................
 
+    // update client information ................................
+    public function update(Request $request)
+    {
+        $validator = validator([
+            'photo' => ['mimes:jpeg,png,gif,jpg'],
+            'first_name' => ['alpha', 'regex:/^[^\s\d]+$/'],
+            'last_name' => ['alpha', 'regex:/^[^\s\d]+$/'],
+            'phone' => 'regex:/^[0-9]{7,}$/|unique:clients',
+            'email' => 'email|unique:clients',
+            'dob' => 'date_format:Y-m-d',
+        ]);
+
+        $profile_picture_name = null;
+        if ($request->photo)
+            $profile_picture_name =
+                $this->saveClientImg($request->photo, 'imgs/client/uploads/client_profile');
+
+        $client = Auth::guard('client')->user();
+
+        if ($request->photo)
+            $client->photo = $profile_picture_name ? $profile_picture_name : null;
+        if ($request->first_name)
+            $client->first_name = ucwords($request->input('first_name'));
+        if ($request->last_name)
+            $client->last_name = ucwords($request->input('last_name'));
+        if ($request->phone) :
+            $client->phone_key = $request->input('countryCode');
+            $client->phone = $request->input('phone');
+        endif;
+        if ($request->dob)
+            $client->dob = $request->input('dob');
+        if ($request->email)
+            $client->email = $request->input('email');
+
+        if ($request->address) :
+            $client->address = $request->input('address');
+            $client->address_lat = $request->input('address_lat');
+            $client->address_lng = $request->input('address_lng');
+        endif;
+        $client->save();
+
+        if ($client) {
+            return response()->json([
+                'status' => 200,
+                'msg' => 'your data has been updated successfuly.',
+            ]);
+        }
+
+        return 'field to register';
+    }
+    // .....................................
+
     // verify phone number ..........................................
     public function sendVerfication(Request $request)
     {

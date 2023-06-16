@@ -16,7 +16,7 @@
             <form action="POST" class="lg-grid register_form client_register" id="client_register">
                 @csrf
                 <div class="form-group g-12 choice radio mt-3">
-                    <div>
+                    <div class="account_type_wrapper">
                         <div class="form-group">
                             <input type="radio" name="account_type" id="account_type_1" value="0" checked>
                             <label for="account_type_1">For Myself</label>
@@ -170,7 +170,7 @@
                         <div class="form-group client_type_2">
                             <input type="radio" name="client_type" id="client_type_2" value="1" checked>
                             <label for="client_type_2" style="padding: 10px 20px;">
-                                <img style="height: 55px;" src="{{ asset('imgs/client/ndis-logo.png') }}">
+                                <img src="{{ asset('imgs/client/ndis-logo.png') }}">
                             </label>
                         </div>
                         <div class="form-group">
@@ -179,7 +179,7 @@
                         </div>
                         <div class="form-group">
                             <label class="coming-soon-2" style="padding: 10px 20px;">
-                                <img style="height: 55px;" src="{{ asset('imgs/client/medicare.png') }}">
+                                <img src="{{ asset('imgs/client/medicare.png') }}">
                             </label>
                         </div>
 

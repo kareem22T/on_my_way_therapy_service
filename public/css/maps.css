@@ -33,6 +33,21 @@
     display: none;
 }
 
+.coming-soon-pop-up-2 {
+    color: #132F75;
+}
+
+.coming-soon-pop-up-2 p {
+    color: rgb(39, 39, 39);
+}
+.coming-soon-pop-up-2 button {
+    background-color: #FFC400;
+    color: #132F75 !important;
+    border: 3px solid #FFC400;
+    font-size: clamp(1.3125rem, 1.0446rem + 1.0989vw, 1.9375rem);
+    font-weight: 600;
+}
+
 .autocomplete-map p {
     font-size: clamp(1.0625rem, calc(0.2031rem + 2.75vw), 1.75rem);
 }
@@ -125,13 +140,13 @@
     background: #fff;
     border: 1px solid #FFC400;
     box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 25px;
+    border-radius: clamp(1.25rem, calc(1.1209rem + 0.5435vw), 1.5625rem);
     padding: 20px;
     width: 100%;
     font-style: normal;
     font-weight: 500;
-    font-size: 23px;
-    line-height: 38px;
+    font-size: clamp(1.25rem, calc(1.1726rem + 0.3261vw), 1.4375rem);
+    line-height: clamp(1.125rem, calc(0.8668rem + 1.087vw), 1.75rem);
     display: block;
     color: #000;
     text-decoration: none;
