@@ -94,7 +94,7 @@ class ClientController extends Controller
             $search_profession = [];
 
             if ($profession)
-                $search_profession = Doctor::select('id', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
+                $search_profession = Doctor::select('id', 'address_lat', 'address_lng', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
                     ->where('working_hours_from', '!=', null)
                     ->where('working_hours_from', '!=', null)
                     ->where('profession_id', $profession->id)->where('approved', 1)->paginate(5);

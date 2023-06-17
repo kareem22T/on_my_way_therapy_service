@@ -79,6 +79,10 @@
         form>div {
             margin: 0 !important;
         }
+
+        #update {
+            padding: 0 20px;
+        }
     </style>
     <div id="errors"></div>
     <main class="account_wrapper login_wrapper">

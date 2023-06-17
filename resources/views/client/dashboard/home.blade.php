@@ -239,7 +239,11 @@
                             <i class="fa-regular fa-star"></i>
                         </span>
                         <h3 class="profession">{{ $therapist->profession->title }}</h3>
-                        <p class="distance">10Km away from you</p>
+                        <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
+                            therapist_address_lng="{{ $therapist->address_lng }}"
+                            client_address_lat="{{ Auth::guard('client')->user()->address_lat }}"
+                            client_address_lng="{{ Auth::guard('client')->user()->address_lng }}">
+                        </p>
                         <p class="about">
                             {{ $therapist->about_me }}
                         </p>
@@ -366,7 +370,11 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-regular fa-star"></i>
                             </span>
-                            <p class="distance">10Km away from you</p>
+                            <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
+                                therapist_address_lng="{{ $therapist->address_lng }}"
+                                client_address_lat="{{ Auth::guard('client')->user()->address_lat }}"
+                                client_address_lng="{{ Auth::guard('client')->user()->address_lng }}">
+                            </p>
                             <h4>
                                 {{ $therapist->experience }} years of experience
                             </h4>
