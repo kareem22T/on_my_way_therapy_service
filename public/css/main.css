@@ -322,6 +322,8 @@ main .hero .container:first-child > div a {
   border-bottom: 2px solid #FFC400;
   visibility: hidden;
   animation-duration: 0.6s;
+  margin-top: 10px;
+  font-weight: 600;
 }
 main .hero .container:first-child > div:last-child {
   flex-direction: column;

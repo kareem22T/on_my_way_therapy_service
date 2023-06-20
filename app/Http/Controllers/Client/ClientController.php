@@ -15,6 +15,7 @@ use App\Models\Profession;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -94,15 +95,19 @@ class ClientController extends Controller
             $search_profession = [];
 
             if ($profession)
-                $search_profession = Doctor::select('id', 'address_lat', 'address_lng', 'experience', 'photo', 'first_name', 'last_name', 'gender', 'dob')
+                $search_profession = Doctor::with('rating')->where('working_hours_from', '!=', null)
                     ->where('working_hours_from', '!=', null)
-                    ->where('working_hours_from', '!=', null)
-                    ->where('profession_id', $profession->id)->where('approved', 1)->paginate(5);
+                    ->where('profession_id', $profession->id)
+                    ->where('approved', 1)
+                    ->leftJoin('therapist_ratings', 'doctors.id', '=', 'therapist_ratings.doctor_id')
+                    ->groupBy('doctors.id')
+                    ->orderByDesc(DB::raw('COALESCE(AVG(therapist_ratings.rating), 0)'))
+                    ->paginate(10);
 
             $diagnosis_name = str_replace("%20", " ", $search);
             $search_diagnosis = Doctor::where('working_hours_from', '!=', null)->whereHas('diagnosis', function ($query) use ($diagnosis_name) {
                 $query->where('name', 'LIKE', "%{$diagnosis_name}%");
-            })->paginate(5);
+            })->paginate(10);
 
             $doctor_name = str_replace("%20", " ", $search);
             $doctor_first_name = explode(' ', trim($doctor_name))[0];

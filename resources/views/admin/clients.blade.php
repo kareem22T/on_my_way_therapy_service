@@ -48,5 +48,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="pagination_wrapper">
+            {!! $clients_data->links('pagination::bootstrap-4') !!}
+        </div>
     </main>
 @endsection

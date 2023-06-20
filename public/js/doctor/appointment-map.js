@@ -156,3 +156,22 @@ $(document).on('click', '.complete', function () {
 $(document).on('click', '.go_to_direction', function() {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${parseFloat($('#appointment_lat').val())},${parseFloat($('#appointment_lng').val())}`, '_blank')
 })
+
+const service = new google.maps.DistanceMatrixService(); // instantiate Distance Matrix service
+      const matrixOptions = {
+        origins: ["30.1147,31.3466"], // technician locations
+        destinations: ["Ali Fahmy Kamel, El-Nozha, El Nozha, Cairo Governorate, Egypt"], // customer address
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+      };
+      // Call Distance Matrix service
+      service.getDistanceMatrix(matrixOptions, callback);
+
+      // Callback function used to process Distance Matrix response
+      function callback(response, status) {
+        if (status !== "OK") {
+          alert("Error with distance matrix");
+          return;
+        }
+        console.log(response);        
+      }

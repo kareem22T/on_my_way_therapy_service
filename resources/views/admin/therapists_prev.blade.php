@@ -9,7 +9,9 @@
         @php
             $clients_active = null;
             $therapists_active = 'active';
-            $therapists = App\Models\Doctor::where('approved', 1)->paginate(10);
+            $therapists = App\Models\Doctor::where('approved', 1)
+                ->orderBy('id', 'DESC')
+                ->paginate(10);
         @endphp
 
         @include('admin.includes.header-users')
@@ -55,6 +57,9 @@
                     @endif
                 </tbody>
             </table>
+        </div>
+        <div class="pagination_wrapper">
+            {!! $therapists->links('pagination::bootstrap-4') !!}
         </div>
     </main>
 @endsection

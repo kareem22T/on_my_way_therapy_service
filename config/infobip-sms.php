@@ -7,6 +7,6 @@
  */
 return [
     'from'     => env('INFOBIP_FROM', 'On My Way Therapy Services'),
-    'username' => env('INFOBIP_USERNAME', 'YKweb'),
-    'password' => env('INFOBIP_PASSWORD', 'YK2023###yk'),
+    'username' => env('INFOBIP_USERNAME', 'onmyway'),
+    'password' => env('INFOBIP_PASSWORD', 'Onmywaytherapy9392!'),
 ];

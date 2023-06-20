@@ -232,17 +232,26 @@
                         </div>
                         <h1 class="name">Dr.{{ $therapist->first_name . ' ' . $therapist->last_name }}</h1>
                         <span class="rate">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
+                            @php
+                                $rate = 0;
+                            @endphp
+                            @foreach ($therapist->rating as $rating)
+                                @php
+                                    $rate += (int) $rating->rating;
+                                @endphp
+                            @endforeach
+                            @for ($i = 0; $i < $rate / ($therapist->rating->count() === 0 ? 1 : $therapist->rating->count()); $i++)
+                                <i class="fa-solid fa-star"></i>
+                            @endfor
+                            @for ($i = 0; $i < 5 - $rate / ($therapist->rating->count() === 0 ? 1 : $therapist->rating->count()); $i++)
+                                <i class="fa-regular fa-star"></i>
+                            @endfor
+                            <span class="text-dark">({{ $therapist->rating->count() }})</span>
                         </span>
                         <h3 class="profession">{{ $therapist->profession->title }}</h3>
                         <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
                             therapist_address_lng="{{ $therapist->address_lng }}"
-                            client_address_lat="{{ Auth::guard('client')->user()->address_lat }}"
-                            client_address_lng="{{ Auth::guard('client')->user()->address_lng }}">
+                            client_address="{{ Auth::guard('client')->user()->address }}">
                         </p>
                         <p class="about">
                             {{ $therapist->about_me }}
@@ -335,11 +344,43 @@
             <div class="hide-content"></div>
             @section('scripts')
                 <script src="{{ asset('/js/maps.js') }}?v={{ time() }}"></script>
-                <script
+                {{-- <script
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
-                    defer></script>
+                    defer></script> --}}
                 <script src="{{ asset('/js/doctor/calendar.js') }}?v={{ time() }}"></script>
                 <script src="{{ asset('/js/client/calendar.js') }}?v={{ time() }}"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY" defer></script>
+                <script>
+                    function getdistance(origin, address, element) {
+                        const service = new google.maps.DistanceMatrixService(); // instantiate Distance Matrix service
+                        const matrixOptions = {
+                            origins: [origin], // technician locations
+                            destinations: [address], // customer address
+                            travelMode: 'DRIVING',
+                            unitSystem: google.maps.UnitSystem.METRIC
+                        };
+                        // Call Distance Matrix service
+                        service.getDistanceMatrix(matrixOptions, callback);
+
+                        // Callback function used to process Distance Matrix response
+                        function callback(response, status) {
+                            if (status !== "OK") {
+                                alert("Error with distance matrix");
+                                return;
+                            }
+                            const distanceInKm = response.rows[0].elements[0].distance.value / 1000;
+                            element.text(distanceInKm + ' km away from you');
+                        }
+                    }
+                    $(function() {
+                        $('.distance').each(function() {
+                            getdistance(
+                                $(this).attr('therapist_address_lat') + ',' + $(this).attr('therapist_address_lng'),
+                                $(this).attr('client_address'), $(this));
+                            // $(this).text(distance)
+                        })
+                    })
+                </script>
             @endsection
         @elseif (isset($search_results))
             @if (count($search_results) > 0)
@@ -354,33 +395,36 @@
                     <h2 class="g-3 text-center mb-2">
                         {{ $search }} therapists
                     </h2>
-
-                    @foreach ($search_results as $therapist)
-                        <a href="/client/therapist{{ '@' . $therapist->first_name . '_' . $therapist->id }}"
-                            class="therapist_overview" target="_blanck">
-                            <div class="img">
-                                <img src="{{ asset('imgs/doctor/uploads/therapist_profile/' . $therapist->photo) }}"
-                                    alt="{{ $therapist->first_name }}">
-                            </div>
-                            <h3>{{ $therapist->first_name . ' ' . $therapist->last_name }}</h3>
-                            <span class="rate">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                            <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
-                                therapist_address_lng="{{ $therapist->address_lng }}"
-                                client_address_lat="{{ Auth::guard('client')->user()->address_lat }}"
-                                client_address_lng="{{ Auth::guard('client')->user()->address_lng }}">
-                            </p>
-                            <h4>
-                                {{ $therapist->experience }} years of experience
-                            </h4>
-                            <div class="bg"></div>
-                        </a>
-                    @endforeach
+                    <div class="search_results_wrapper lg-grid">
+                        @foreach ($search_results as $therapist)
+                            <a class="g-4 therapist_overview"
+                                href="/client/therapist{{ '@' . $therapist->first_name . '_' . $therapist->id }}"
+                                target="_blanck">
+                                <div class="img">
+                                    <img src="{{ asset('imgs/doctor/uploads/therapist_profile/' . $therapist->photo) }}"
+                                        alt="{{ $therapist->first_name }}">
+                                </div>
+                                <h3>{{ $therapist->first_name . ' ' . $therapist->last_name }}</h3>
+                                <span class="rate">
+                                    @for ($i = 0; $i < $therapist->rating; $i++)
+                                        <i class="fa-solid fa-star"></i>
+                                    @endfor
+                                    @for ($i = 0; $i < 5 - $therapist->rating; $i++)
+                                        <i class="fa-regular fa-star"></i>
+                                    @endfor
+                                </span>
+                                <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
+                                    therapist_address_lng="{{ $therapist->address_lng }}"
+                                    client_address="{{ Auth::guard('client')->user()->address }}">
+                                </p>
+                                <h4>
+                                    {{ $therapist->experience }} years of experience
+                                </h4>
+                                <div class="bg"></div>
+                            </a>
+                        @endforeach
+                    </div>
+                    {!! $search_results->links('pagination::bootstrap-4') !!}
                 @else
                     <div class="container"
                         style="
@@ -410,4 +454,36 @@
 
 @section('scripts')
     <script src="{{ asset('/js/client/search.js') }}?v={{ time() }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY" defer></script>
+    <script>
+        function getdistance(origin, address, element) {
+            const service = new google.maps.DistanceMatrixService(); // instantiate Distance Matrix service
+            const matrixOptions = {
+                origins: [origin], // technician locations
+                destinations: [address], // customer address
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC
+            };
+            // Call Distance Matrix service
+            service.getDistanceMatrix(matrixOptions, callback);
+
+            // Callback function used to process Distance Matrix response
+            function callback(response, status) {
+                if (status !== "OK") {
+                    alert("Error with distance matrix");
+                    return;
+                }
+                const distanceInKm = response.rows[0].elements[0].distance.value / 1000;
+                element.text(distanceInKm + ' km away from you');
+            }
+        }
+        $(function() {
+            $('.distance').each(function() {
+                getdistance(
+                    $(this).attr('therapist_address_lat') + ',' + $(this).attr('therapist_address_lng'),
+                    $(this).attr('client_address'), $(this));
+                // $(this).text(distance)
+            })
+        })
+    </script>
 @endsection

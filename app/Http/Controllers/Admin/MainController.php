@@ -15,7 +15,7 @@ class MainController extends Controller
 
     public function usersClientIndex()
     {
-        $clients_data = Client::paginate(10);
+        $clients_data = Client::orderBy('id', 'DESC')->paginate(10);
         return view('admin.clients')->with(compact('clients_data'));
     }
 

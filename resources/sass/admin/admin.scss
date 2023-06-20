@@ -1,6 +1,6 @@
 @import "../site/_roles";
 
-nav {
+.side-bar {
     height: 100vh;
     padding: 10px;
     background: $main-color;
@@ -281,4 +281,45 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.pagination_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    .pagination {
+        gap: 8px;
+
+        .page-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50% !important;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            border: none;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+
+        li.page-item.active .page-link {
+            background: $secondary-color;
+            color: $main-color !important;
+        }
+
+        li.page-item:not(:last-child) a.page-link {
+            border: 2px solid $secondary-color;
+            color: $main-color !important;
+        }
+
+        li.page-item:last-child .page-link,
+        li.page-item:first-child .page-link {
+            font-size: 30px;
+            padding-bottom: 5px;
+            color: $main-color !important;
+        }
+    }
 }

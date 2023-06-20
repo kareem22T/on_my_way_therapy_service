@@ -1006,18 +1006,9 @@ body {
         }
     }
     .search_wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 30px;
-        margin-top: clamp(0.625rem, calc(0.1087rem + 2.1739vw), 1.875rem);
-        @media (max-width: 899.98px) {
-            grid-template-columns: 1fr 1fr;
-        }
-        @media (max-width: 599.98px) {
-            grid-template-columns: 1fr;
-            gap: 0px;
-            display: flex;
-        }
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
         >h2 {
             font-style: normal;
             font-weight: 600;
@@ -1034,6 +1025,9 @@ body {
             background: #FFFFFF;
             flex-direction: column;
             position: relative;
+            @media (max-width: 1000px) {
+                grid-column: span 6 !important;
+            }
             .img {
                 width: 170px;
                 height: 170px;
@@ -1050,8 +1044,8 @@ body {
             }
             h3 {
                 font-weight: 700;
-                font-size: 30px;
-                line-height: 38px;
+                font-size: clamp(1.5rem, calc(1.3451rem + 0.6522vw), 1.875rem);
+                line-height: clamp(1.375rem, calc(0.962rem + 1.7391vw), 2.375rem);
                 text-align: center;
                 color: #132F75;
             }
@@ -1081,6 +1075,47 @@ body {
                 box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
                 border-radius: 30px;
                 bottom: 0;
+            }
+        }
+        .search_results_wrapper {
+            @media (max-width: 599.98px) {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            .pagination {
+                gap: 8px;
+                .page-link {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50% !important;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0;
+                    border: none;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                }
+                li.page-item.active .page-link {
+                    background: $secondary-color;
+                    color: $main-color !important;
+                }
+                li.page-item:not(:last-child) a.page-link {
+                    border: 2px solid $secondary-color;
+                    color: $main-color !important;
+                }
+                li.page-item:last-child .page-link, li.page-item:first-child .page-link {
+                    font-size: 30px;
+                    padding-bottom: 5px;
+                    color: $main-color !important;
+                }
             }
         }
     }

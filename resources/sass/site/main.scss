@@ -191,6 +191,8 @@ main {
                     border-bottom: 2px solid $secondary-color;
                     visibility: hidden;
                     animation-duration: .6s;
+                    margin-top: 10px;
+                    font-weight: 600;
                 }
                 &:last-child {
                     flex-direction: column;

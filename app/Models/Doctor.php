@@ -59,6 +59,7 @@ class Doctor extends Authenticatable
     protected  $guard  = "doctor";
 
     // relationships ....
+
     public function profession()
     {
         return $this->belongsTo('App\Models\Profession', 'profession_id');
@@ -83,7 +84,6 @@ class Doctor extends Authenticatable
     {
         return $this->hasMany('App\Models\Therapist_rating', 'doctor_id');
     }
-
     public function appointments()
     {
         return $this->hasMany('App\Models\Appointment', 'doctor_id');

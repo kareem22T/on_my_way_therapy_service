@@ -28,10 +28,18 @@
                         @endphp
                         @foreach (Auth::guard('doctor')->user()->rating as $rating)
                             @php
-                                $rate += $rating;
+                                $rate += (int) $rating->rating;
                             @endphp
-                            <i class="fa-solid fa-star"></i>
                         @endforeach
+                        @for ($i = 0;
+        $i <
+        $rate /
+            (Auth::guard('doctor')->user()->rating->count() === 0
+                ? 1
+                : Auth::guard('doctor')->user()->rating->count());
+        $i++)
+                            <i class="fa-solid fa-star"></i>
+                        @endfor
                         @for ($i = 0;
         $i <
         5 -

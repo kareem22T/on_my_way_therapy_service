@@ -139,26 +139,26 @@ main .preview_wrapper .profile, main .table .request .data, main header,
   display: none;
 }
 
-nav {
+.side-bar {
   height: 100vh;
   padding: 10px;
   background: #132F75;
   width: min-content;
 }
 @media (max-width: 599.98px) {
-  nav {
+  .side-bar {
     height: min-content;
     padding: 8px 5px;
     width: 100vw;
   }
 }
-nav:first-of-type {
+.side-bar:first-of-type {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9;
 }
-nav ul {
+.side-bar ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -168,12 +168,12 @@ nav ul {
   gap: 20px;
 }
 @media (max-width: 599.98px) {
-  nav ul {
+  .side-bar ul {
     display: flex;
     justify-content: space-between;
   }
 }
-nav ul a {
+.side-bar ul a {
   text-decoration: none;
   padding: clamp(0.1875rem, 0.0068rem + 0.7609vw, 0.625rem);
   display: flex;
@@ -185,12 +185,12 @@ nav ul a {
   border: 3px solid #132F75;
   transition: all 0.2s ease-in-out;
 }
-nav ul a.active, nav ul a:hover {
+.side-bar ul a.active, .side-bar ul a:hover {
   border: 3px solid #ffffff;
   color: #ffffff;
 }
 @media (max-width: 599.98px) {
-  nav ul a {
+  .side-bar ul a {
     width: 100%;
   }
 }
@@ -413,6 +413,43 @@ main .preview_wrapper .btns a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.pagination_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.pagination_wrapper .pagination {
+  gap: 8px;
+}
+.pagination_wrapper .pagination .page-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.pagination_wrapper .pagination li.page-item.active .page-link {
+  background: #FFC400;
+  color: #132F75 !important;
+}
+.pagination_wrapper .pagination li.page-item:not(:last-child) a.page-link {
+  border: 2px solid #FFC400;
+  color: #132F75 !important;
+}
+.pagination_wrapper .pagination li.page-item:last-child .page-link,
+.pagination_wrapper .pagination li.page-item:first-child .page-link {
+  font-size: 30px;
+  padding-bottom: 5px;
+  color: #132F75 !important;
 }
 
 /*# sourceMappingURL=admin.css.map */
