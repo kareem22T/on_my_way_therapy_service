@@ -33,13 +33,11 @@
                                 <li>
                                     <a href="/therapist/chats/{{ $chat->client_id }}" class="chat_link" sender_guard="2"
                                         chat_id="{{ $chat->id }}">
-                                        <a href="/therapist/chats/{{ $chat->client->id }}" target="_blanck">
-                                            <div class="profile">
-                                                <img src="/imgs/client/uploads/client_profile/{{ $chat->client->photo ? $chat->client->photo : 'default_client_profile.jpg' }}"
-                                                    alt="client img">
-                                            </div>
-                                            {{ $chat->client->first_name . ' ' . $chat->client->last_name }}
-                                        </a>
+                                        <div class="profile">
+                                            <img src="/imgs/client/uploads/client_profile/{{ $chat->client->photo ? $chat->client->photo : 'default_client_profile.jpg' }}"
+                                                alt="client img">
+                                        </div>
+                                        {{ $chat->client->first_name . ' ' . $chat->client->last_name }}
                                         <span
                                             style="display: {{ $chat->msgs->where('seen', false)->where('sender_guard', 2)->count() > 0? 'flex': 'none' }}">
                                             {{ $chat->msgs->where('seen', false)->count() > 0 ? $chat->msgs->where('seen', false)->count() : '' }}
@@ -58,7 +56,7 @@
                     <div class="head">
                         <div>
                             @if ($client_data)
-                                <a href="/therapist/client/{{$client_data['id']}}" class="profile">
+                                <a href="/therapist/client/{{ $client_data['id'] }}" class="profile">
                                     <img src="/imgs/client/uploads/client_profile/{{ $client_data['photo'] ? $client_data['photo'] : 'default_client_profile.jpg' }}"
                                         alt="client img">
                                 </a> {{ $client_data['first_name'] . ' ' . $client_data['last_name'] }}
