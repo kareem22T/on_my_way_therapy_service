@@ -398,7 +398,7 @@
                     <div class="search_results_wrapper lg-grid">
                         @foreach ($search_results as $therapist)
                             <a class="g-4 therapist_overview"
-                                href="/client/therapist{{ '@' . $therapist->first_name . '_' . $therapist->id }}"
+                                href="/client/therapist{{ '@' . $therapist->first_name . '_' . App\Models\Doctor::where('email', $therapist->email)->first()->id }}"
                                 target="_blanck">
                                 <div class="img">
                                     <img src="{{ asset('imgs/doctor/uploads/therapist_profile/' . $therapist->photo) }}"
