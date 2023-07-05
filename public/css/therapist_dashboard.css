@@ -466,6 +466,25 @@ header .container nav .fa-user, header .container nav .fa-bell {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin-left: 10px;
 }
+.calendar_wrapper .container .work-time table td h4 {
+  display: none;
+}
+@media (max-width: 599.98px) {
+  .calendar_wrapper .container .work-time table th {
+    display: none;
+  }
+  .calendar_wrapper .container .work-time table tbody tr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .calendar_wrapper .container .work-time table tbody tr td:first-child {
+    display: none;
+  }
+  .calendar_wrapper .container .work-time table tbody tr td h4 {
+    display: block;
+  }
+}
 .calendar_wrapper .container .this_week_wrapper {
   margin-top: 35px;
 }

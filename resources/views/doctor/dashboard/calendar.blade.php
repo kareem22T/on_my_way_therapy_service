@@ -39,7 +39,7 @@
                                     @foreach ($days as $day)
                                         <td>
                                             <input type="hidden" class="day_name" value="{{ $day }}">
-
+                                            <h4>{{ $day }}</h4>
                                             <input type="text" class="start form-control"
                                                 name="{{ $day }}_start" placeholder="Start work"
                                                 onfocus="(this.type='time')" onblur="(this.type='text')"
@@ -61,104 +61,6 @@
                             </div>
                         </div>
                     </form>
-                @else
-                    <h1>Your working hours
-                        <input type="hidden" name="start_table" value="{{ $therapist_times['working_hours_from'] }}">
-                        <input type="hidden" name="end_table" value="{{ $therapist_times['working_hours_to'] }}">
-                        <span>
-                            {{ $therapist_times['working_hours_from'] <= 12 ? $therapist_times['working_hours_from'] . ' am' : $therapist_times['working_hours_from'] - 12 . ' pm' }}
-                        </span> -
-                        <span>
-                            {{ $therapist_times['working_hours_to'] <= 12 ? $therapist_times['working_hours_to'] . ' am' : $therapist_times['working_hours_to'] - 12 . ' pm' }}
-                        </span>
-                        <button id="edit-hours"><i class="fa fa-edit"></i></button>
-                    </h1>
-                    <h1>Your max traviling distance
-                        <span>
-                            {{ $therapist_times['travel_range'] * 10 . ' km' }}
-                        </span>
-                        <button id="edit-distance"><i class="fa fa-edit"></i></button>
-                    </h1>
-
-                    <div class="pop-up edit_hours_pop_up">
-                        Set working hours
-                        <div class="form-group">
-                            <label for="form">From: </label>
-                            <select name="from" id="from" class="form-control">
-                                <option value="">From ---</option>
-                                @for ($i = 0; $i < 25; $i++)
-                                    @php
-                                        $hour = null;
-                                        if ($i > 12) {
-                                            $hour = $i - 12 . ' pm';
-                                        } elseif ($i == 12) {
-                                            $hour = $i . ' pm';
-                                        } elseif ($i == 0) {
-                                            $hour = '12 am';
-                                        } else {
-                                            $hour = $i . ' am';
-                                        }
-                                    @endphp
-                                    <option value="{{ $i }}"
-                                        {{ $therapist_times['working_hours_from'] == $i ? 'selected' : '' }}>
-                                        {{ $hour }}</option>
-                                @endfor
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="to">To: </label>
-                            <select name="to" id="to" class="form-control">
-                                <option value="">To ---</option>
-                                @for ($i = 0; $i < 25; $i++)
-                                    @php
-                                        $hour = null;
-                                        if ($i > 12) {
-                                            $hour = $i - 12 . ' pm';
-                                        } elseif ($i == 12) {
-                                            $hour = $i . ' pm';
-                                        } elseif ($i == 0) {
-                                            $hour = '12 am';
-                                        } else {
-                                            $hour = $i . ' am';
-                                        }
-                                    @endphp
-                                    <option value="{{ $i }}"
-                                        {{ $therapist_times['working_hours_to'] == $i ? 'selected' : '' }}>
-                                        {{ $hour }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="btns">
-                            <button class="btn btn-danger cancel">Cancel</button>
-                            <button class="btn btn-success set-hours">Set</button>
-                        </div>
-                    </div>
-                    <div class="pop-up edit_distance_pop_up">
-                        Set your traviling distance
-                        <div class="form-group">
-                            <label for="form_new">Distance in KM: </label>
-                            <div class="form-group">
-                                <select name="distance" id="distance" class="form-control">
-                                    <option value="1" {{ $therapist_times['travel_range'] == 1 ? 'selected' : '' }}>
-                                        10
-                                    </option>
-                                    <option value="2" {{ $therapist_times['travel_range'] == 2 ? 'selected' : '' }}>
-                                        20
-                                    </option>
-                                    <option value="3" {{ $therapist_times['travel_range'] == 3 ? 'selected' : '' }}>
-                                        30
-                                        +</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="btns">
-                            <button class="btn btn-danger cancel">Cancel</button>
-                            <button class="btn btn-success set-distance">Set</button>
-                        </div>
-                    </div>
-                    <div class="hide-content"></div>
                 @endif
             </div>
 
@@ -201,7 +103,7 @@
                 @if ($wait_list->count() > 0)
                     @foreach ($wait_list as $appointment)
                         <tr>
-                            <div class="waiting_wrapper">
+                            <div class="waiting_wrapper" style="flex-wrap: wrap;">
                                 <div class="details">
                                     <span>{{ $appointment->client->first_name . ' ' . $appointment->client->last_name }}</span>
                                     <span>{{ date('F j', strtotime($appointment->date)) }}</span>

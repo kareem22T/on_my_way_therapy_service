@@ -14,6 +14,10 @@
     <div id="errors">
         {{-- validation errors will appear here. --}}
     </div>
+    @php
+        $client = Auth::guard('client')->user();
+    @endphp
+
     <main class="home">
         <div class="container">
             <style>
@@ -83,7 +87,8 @@
                 <div class="assessment-alert">
                     Please, you have to fill these first
                     <div>
-                        <a href="/client/NDIS/Service-Agreement"
+                        <a href="https://form.jotform.com/231594061545557?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
+                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}"
                             class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
                             NDIS service agreement
                             @if ($serviceAgreement == true)
@@ -92,7 +97,9 @@
                                 <i class="fa-regular fa-circle-play text-danger"></i>
                             @endif
                         </a>
-                        <a href="/client/assessment/risk" class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
+                        <a href="https://form.jotform.com/231613271952554?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
+                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}"
+                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
                             Risk assessment template
                             @if ($riskAssessment == true)
                                 <i class="fa fa-circle-check text-success"></i>
@@ -330,7 +337,7 @@
                 <div class="assessment-alert">
                     Please, you have to fill these first
                     <div>
-                        <a href="/client/NDIS/Service-Agreement"
+                        <a href="https://form.jotform.com/231594061545557?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
                             class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
                             NDIS service agreement
                             @if ($serviceAgreement == true)
@@ -339,7 +346,8 @@
                                 <i class="fa-regular fa-circle-play text-danger"></i>
                             @endif
                         </a>
-                        <a href="/client/assessment/risk" class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
+                        <a href="https://form.jotform.com/231613271952554?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
+                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
                             Risk assessment template
                             @if ($riskAssessment == true)
                                 <i class="fa fa-circle-check text-success"></i>

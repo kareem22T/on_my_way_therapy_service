@@ -355,15 +355,15 @@ form >div:not(.row-1) {
 
 form .btn-info {
     font-weight: 700;
-    font-size: 30px;
-    line-height: 38px;
+    font-size: clamp(1.125rem, calc(0.8152rem + 1.3043vw), 1.875rem);
+    line-height: clamp(1.1875rem, calc(0.697rem + 2.0652vw), 2.375rem);
     text-align: center;
     color: var(--primary-clr);
     background: #FFC400;
     box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     border: none;
-    padding: 10px 37px;
+    padding: 10px clamp(1.0625rem, calc(0.5462rem + 2.1739vw), 2.3125rem);
     border: 3px solid #FFC400;
     transition: background-color .3s ease-out;
 }
