@@ -95,8 +95,7 @@ class ClientController extends Controller
             $search_profession = [];
 
             if ($profession)
-                $search_profession = Doctor::with('rating')->where('working_hours_from', '!=', null)
-                    ->where('working_hours_from', '!=', null)
+                $search_profession = Doctor::with('rating')
                     ->where('profession_id', $profession->id)
                     ->where('approved', 1)
                     ->leftJoin('therapist_ratings', 'doctors.id', '=', 'therapist_ratings.doctor_id')
@@ -105,13 +104,13 @@ class ClientController extends Controller
                     ->paginate(10);
 
             $diagnosis_name = str_replace("%20", " ", $search);
-            $search_diagnosis = Doctor::where('working_hours_from', '!=', null)->whereHas('diagnosis', function ($query) use ($diagnosis_name) {
+            $search_diagnosis = Doctor::whereHas('diagnosis', function ($query) use ($diagnosis_name) {
                 $query->where('name', 'LIKE', "%{$diagnosis_name}%");
             })->paginate(10);
 
             $doctor_name = str_replace("%20", " ", $search);
             $doctor_first_name = explode(' ', trim($doctor_name))[0];
-            $doctor = Doctor::where('working_hours_from', '!=', null)->where('first_name', 'LIKE', "%{$doctor_first_name}%")
+            $doctor = Doctor::where('first_name', 'LIKE', "%{$doctor_first_name}%")
                 ->orWhere('last_name', 'LIKE', "%{$doctor_first_name}%")
                 ->first();
 
@@ -311,6 +310,72 @@ class ClientController extends Controller
         }
     }
 
+    public function insertAppointmentToWaitList(HostAppointmentRequest $request)
+    {
+        $appointment = Appointment::create([
+            'doctor_id' => $request->doctor_id,
+            'client_id' => Auth::guard('client')->user()->id,
+            'visit_type' => $request->visit_type,
+            'date' => $request->date,
+            'start_time' => $request->date,
+            'finish_time' => Carbon::parse($request->date)->addHours(1.5),
+            'address' => $request->address,
+            'address_lat' => $request->address_lat,
+            'address_lng' => $request->address_lng,
+            'wait' => 1
+        ]);
+
+        if ($appointment)
+            $this->sendEmail(
+                $appointment->doctor->email,
+                'Cliet Waiting',
+                'Hi "' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . '"<br>' . 'Congratulations you have a client joind wait list on your profile <br> 
+                Login <a href="https://onmywaytherapy.com.au/therapist/login">HERE</a> to see contact client or simply accept <br><br><b>Session details: </b><br>
+                ' . ($appointment->visit_type == 0 ? 'Session type: Mobile visit<br>' : 'Session type: Online session <br>') .
+                    'Client name: ' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '<br>' .
+                    ($appointment->visit_type == 0 ?
+                        "Client address: " . $appointment->address . '<br>' : '') .
+                    "Client gender: " . $appointment->client->gender . '<br>' .
+                    "Client age: " .  Carbon::parse($appointment->client->dob)->age . ' years old<br><hr><br>'
+                    . 'Contact us: <br>' .
+                    '
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/94288210/admin/">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h3>Call: 1800 666 929</h3>
+                    ',
+
+            );
+
+        return response()->json(
+            [
+                'status' => 200,
+                'msg' => 'Your request has been sent successfully, wait for therapists to contact you'
+            ]
+        );
+    }
+
+
     public function getSlotsApproved(Request $request)
     {
         $appointments =
@@ -338,7 +403,6 @@ class ClientController extends Controller
             ->toArray();
 
         $doctors = Doctor::select('first_name', 'last_name')
-            ->where('working_hours_from', '!=', null)
             ->where('first_name', 'LIKE', "%{$request->search}%")
             ->orWhere('last_name', 'LIKE', "%{$request->search}%")
             ->take(5)->get();

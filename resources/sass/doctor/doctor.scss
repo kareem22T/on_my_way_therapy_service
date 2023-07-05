@@ -1,4 +1,4 @@
-@import '_roles.scss';
+@import "_roles.scss";
 
 .login_wrapper {
     width: 100%;
@@ -21,7 +21,8 @@
         .form-group {
             width: 100%;
         }
-        input, button {
+        input,
+        button {
             background: $white;
             border: 1px solid $secondary-color;
             box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -40,7 +41,7 @@
             font-size: 31px;
             font-weight: 600;
             letter-spacing: 2px;
-            transition: all .2s ease-out;
+            transition: all 0.2s ease-out;
             cursor: pointer;
             &:hover {
                 background-color: transparent;
@@ -58,7 +59,7 @@
     }
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
     width: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
     height: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
 }
@@ -69,7 +70,7 @@ input[type=checkbox] {
     @extend %flex-center;
     flex-direction: column;
     gap: clamp(1.25rem, calc(0.8482rem + 1.6484vw), 2.1875rem);
-    >p {
+    > p {
         font-style: normal;
         font-weight: 700;
         font-size: clamp(1.25rem, calc(0.7143rem + 2.1978vw), 2.5rem);
@@ -108,13 +109,21 @@ input[type=checkbox] {
         font-size: clamp(1.125rem, calc(0.8036rem + 1.3187vw), 1.875rem);
         line-height: clamp(1.4375rem, calc(1.0357rem + 1.6484vw), 2.375rem);
         text-align: center;
-        color: $main-color
+        color: $main-color;
     }
     h1 {
         font-weight: 700;
         color: $main-color;
         font-size: clamp(1.5rem, calc(1.0714rem + 1.7582vw), 2.5rem);
         line-height: clamp(1.25rem, calc(0.4464rem + 3.2967vw), 3.125rem);
+        position: relative;
+        i {
+            position: absolute;
+            right: 0;
+            bottom: 50%;
+            transform: translateY(50%);
+            cursor: pointer;
+        }
     }
     form {
         hr {
@@ -126,19 +135,24 @@ input[type=checkbox] {
             opacity: 1;
         }
         &.register_form {
-            >.form-group {
+            > .form-group {
                 @media (max-width: 699.98px) {
                     grid-column: span 12;
                     margin: 0;
                 }
             }
         }
-        &.verfy_form, &.payment_form {
+        &.verfy_form,
+        &.payment_form {
             @extend %flex-center;
             flex-direction: column;
             width: 100%;
-            .form-group {width: 100% !important; @extend %flex-center;}
-            input, select {
+            .form-group {
+                width: 100% !important;
+                @extend %flex-center;
+            }
+            input,
+            select {
                 width: 100%;
                 max-width: 500px;
             }
@@ -149,29 +163,43 @@ input[type=checkbox] {
                 max-width: 800px;
             }
         }
-        input:not([type=checkbox], [type=radio], [type=range]), select,
-        button:not(.btns-extra button), textarea, .file label {
+        input:not([type="checkbox"], [type="radio"], [type="range"]),
+        select,
+        button:not(.btns-extra button),
+        textarea,
+        .file label {
             background: $white !important;
             border: 1px solid $secondary-color !important;
             box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25) !important;
-            border-radius: clamp(1.125rem, calc(0.9375rem + 0.7692vw), 1.5625rem) !important;
+            border-radius: clamp(
+                1.125rem,
+                calc(0.9375rem + 0.7692vw),
+                1.5625rem
+            ) !important;
             padding: clamp(0.75rem, calc(0.5357rem + 0.8791vw), 1.25rem) 20px;
             font-style: normal;
             font-weight: 500;
-            font-size: clamp(1.25rem, calc(1.1696rem + 0.3297vw), 1.4375rem) !important;
-            line-height: clamp(1.75rem, calc(1.4821rem + 1.0989vw), 2.375rem) !important;
+            font-size: 18px;
+            line-height: clamp(
+                1.75rem,
+                calc(1.4821rem + 1.0989vw),
+                2.375rem
+            ) !important;
             resize: none;
             display: block;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .file label {cursor: pointer;}
+        .file label {
+            cursor: pointer;
+        }
 
         select {
             cursor: pointer;
         }
-        .file, .have_one {
+        .file,
+        .have_one {
             @extend %flex-center;
             flex-direction: column;
             gap: 10px;
@@ -187,28 +215,38 @@ input[type=checkbox] {
             }
             i {
                 font-size: 30px;
-                color: $main-color
+                color: $main-color;
             }
         }
 
-        input[type=file] {
+        input[type="file"] {
             display: none;
         }
-    
+
         button:not(.btns-extra button) {
             background-color: $secondary-color !important;
             color: $main-color !important;
             border: 3px solid $secondary-color !important;
-            font-size: clamp(1.3125rem, calc(1.0446rem + 1.0989vw), 1.9375rem) !important;
+            font-size: clamp(
+                1.3125rem,
+                calc(1.0446rem + 1.0989vw),
+                1.9375rem
+            ) !important;
             font-weight: 600 !important;
             letter-spacing: 2px !important;
             text-align: center !important;
             justify-content: center;
-            transition: all .2s ease-out;
+            transition: all 0.2s ease-out;
             cursor: pointer;
-    
+
             &:hover {
                 background-color: transparent;
+            }
+            &.add_client {
+                background: none !important;
+                border-color: gray !important;
+                color: gray !important;
+                margin-top: 30px;
             }
         }
 
@@ -247,7 +285,11 @@ input[type=checkbox] {
                     left: 0;
                     border: none;
                     border-radius: 50%;
-                    margin-bottom: clamp(0rem, calc(-0.413rem + 1.7391vw), 1rem);
+                    margin-bottom: clamp(
+                        0rem,
+                        calc(-0.413rem + 1.7391vw),
+                        1rem
+                    );
                 }
                 i {
                     position: relative;
@@ -259,29 +301,46 @@ input[type=checkbox] {
                     right: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
                     background-color: $secondary-color;
                     color: $main-color;
-                    font-size: clamp(0.9375rem, calc(0.8036rem + 0.5495vw), 1.25rem);
+                    font-size: clamp(
+                        0.9375rem,
+                        calc(0.8036rem + 0.5495vw),
+                        1.25rem
+                    );
                     border: 2px solid $white;
                     font-weight: 600;
                     border-radius: 50%;
-                    width: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);
-                    height: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);
+                    width: clamp(
+                        1.6875rem,
+                        calc(1.2054rem + 1.978vw),
+                        2.8125rem
+                    );
+                    height: clamp(
+                        1.6875rem,
+                        calc(1.2054rem + 1.978vw),
+                        2.8125rem
+                    );
                     z-index: 2255;
                     @extend %flex-center;
                 }
             }
         }
 
-        >.form-group:last-child {
+        > .form-group:last-child {
             width: 100%;
             display: flex;
             justify-content: end;
             button {
                 width: fit-content;
-                padding: clamp(0.625rem, calc(0.3571rem + 1.0989vw), 1.25rem) clamp(1.875rem, calc(1.3393rem + 2.1978vw), 3.125rem);
+                padding: clamp(0.625rem, calc(0.3571rem + 1.0989vw), 1.25rem)
+                    clamp(1.875rem, calc(1.3393rem + 2.1978vw), 3.125rem);
             }
             &.not-step-1 {
                 justify-content: space-between;
-                margin-top: clamp(0.625rem, calc(0.0893rem + 2.1978vw), 1.875rem);
+                margin-top: clamp(
+                    0.625rem,
+                    calc(0.0893rem + 2.1978vw),
+                    1.875rem
+                );
                 button:first-child {
                     background-color: transparent;
                 }
@@ -305,12 +364,12 @@ input[type=checkbox] {
             h1 {
                 font-weight: 700;
                 font-size: clamp(1.125rem, calc(0.712rem + 1.7391vw), 2.125rem);
-                line-height: clamp(0.875rem, calc(0.1005rem + 3.2609vw), 2.75rem);
+                line-height: clamp(1.75rem, calc(1.337rem + 1.7391vw), 2.75rem);
                 text-align: center;
                 color: $main-color;
                 margin-bottom: 20px;
             }
-            >div {
+            > div {
                 @extend %flex-center;
                 &.account_type_wrapper {
                     @media (max-width: 599.98px) {
@@ -323,18 +382,21 @@ input[type=checkbox] {
                 line-height: clamp(1.5rem, calc(0.9837rem + 2.1739vw), 2.75rem);
                 text-align: center;
                 color: $main-color;
-                >.form-group {
+                > .form-group {
                     display: flex;
                     gap: 10px;
-                    align-items: start;
-                    #session_type_1, #session_type_2 {
+                    align-items: center;
+                    #session_type_1,
+                    #session_type_2 {
                         transform: translateY(45%);
                         @media (max-width: 599.98px) {
                             transform: translateY(35%);
                         }
                     }
                 }
-                input[name=client_type] + label, .coming-soon-2, input[name=managment_type] + label {
+                input[name="client_type"] + label,
+                .coming-soon-2,
+                input[name="managment_type"] + label {
                     cursor: pointer;
                     width: clamp(6.25rem, calc(0.5707rem + 23.913vw), 20rem);
                     height: clamp(3.75rem, calc(3.2337rem + 2.1739vw), 5rem);
@@ -343,9 +405,26 @@ input[type=checkbox] {
                     align-items: center;
                 }
 
-                input[name=managment_type] + label {
-                    line-height: clamp(1.0625rem, calc(0.3655rem + 2.9348vw), 2.75rem);
-                    font-size: clamp(0.875rem, calc(0.5136rem + 1.5217vw), 1.75rem);
+                input[name="managment_type"] + label {
+                    line-height: clamp(
+                        1.0625rem,
+                        calc(0.3655rem + 2.9348vw),
+                        2.75rem
+                    );
+                    font-size: clamp(
+                        0.875rem,
+                        calc(0.5136rem + 1.5217vw),
+                        1.75rem
+                    );
+                }
+                &.account_type_wrapper {
+                    font-size: clamp(1rem, 0.716rem + 1.1957vw, 1.6875rem) !important;
+                    >.form-group {
+                        width: 100% !important;
+                        label {
+                            width: 100% !important;
+                        }
+                    }
                 }
             }
             label {
@@ -386,7 +465,7 @@ input[type=checkbox] {
                     color: white;
                     border-radius: 15px;
                     i {
-                        cursor: pointer ;
+                        cursor: pointer;
                         transform: translateY(1px);
                     }
                 }
@@ -398,7 +477,11 @@ input[type=checkbox] {
                 z-index: 9;
                 font-weight: 500;
                 font-size: clamp(1rem, calc(0.9484rem + 0.2174vw), 1.125rem);
-                line-height: clamp(0.6875rem, calc(0.4293rem + 1.087vw), 1.3125rem);
+                line-height: clamp(
+                    0.6875rem,
+                    calc(0.4293rem + 1.087vw),
+                    1.3125rem
+                );
                 text-decoration: none;
                 color: $main-color;
                 padding: 12px 15px;
@@ -425,12 +508,12 @@ input[type=checkbox] {
     .head {
         font-size: clamp(1.0625rem, -0.1875rem + 4vw, 2.0625rem) !important;
     }
-    >p {
+    > p {
         font-weight: 500;
         font-size: calc(clamp(1.0625rem, 0.5804rem + 1.978vw, 2.1875rem) - 4px);
         line-height: clamp(1.5rem, 0.9643rem + 2.1978vw, 2.75rem);
         text-align: center;
-        color: #132F75;
+        color: #132f75;
     }
     &.part-time {
         display: none;
@@ -454,7 +537,7 @@ input[type=checkbox] {
             font-size: 28px;
             line-height: 44px;
             text-align: center;
-            color: #132F75;
+            color: #132f75;
             background: transparent;
             padding: 5px 15px;
             border-radius: 20px;
@@ -475,7 +558,8 @@ input[type=checkbox] {
         color: $main-color;
         text-decoration: none;
         display: block;
-        border: clamp(0.1875rem, calc(0.1359rem + 0.2174vw), 0.3125rem) solid $main-color;
+        border: clamp(0.1875rem, calc(0.1359rem + 0.2174vw), 0.3125rem) solid
+            $main-color;
         border-radius: clamp(1.25rem, calc(0.9918rem + 1.087vw), 1.875rem);
         width: fit-content;
         padding: 10px 50px;
@@ -486,10 +570,20 @@ input[type=checkbox] {
     -webkit-appearance: none;
     width: 100%;
     height: 10px;
-    background: #FFC400;
+    background: #ffc400;
     outline: none;
     opacity: 0.7;
     -webkit-transition: opacity 0.2s;
     transition: opacity 0.2s;
     border-radius: 50px;
+}
+
+
+.additional-info label {
+    cursor: pointer;
+    width: clamp(6.25rem, 0.5707rem + 23.913vw, 20rem);
+    height: clamp(3.75rem, 3.2337rem + 2.1739vw, 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

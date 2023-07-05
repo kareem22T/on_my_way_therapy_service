@@ -47,7 +47,7 @@ body::after {
   margin: 0 auto;
 }
 
-.preview_wrapper .profile, .chat_wapper .container .chat .head,
+.preview_wrapper .profile, .home .container .btns, .chat_wapper .container .chat .head,
 .flex-center {
   display: flex;
   justify-content: center;
@@ -1015,6 +1015,9 @@ body {
   border: 3px solid #FFC400;
   display: block;
 }
+.home .container .btns #join_wait_list {
+  background-color: #ffffff !important;
+}
 .home .container .profile_wrapper > a {
   background-color: #ffffff;
 }
@@ -1582,6 +1585,10 @@ footer {
   height: 70px;
   background-color: #132F75;
   margin-top: 40px;
+}
+
+.join-wait-list-pop-up input {
+  font-size: 20px;
 }
 
 /*# sourceMappingURL=client_dashboard.css.map */

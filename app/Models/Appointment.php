@@ -21,7 +21,8 @@ class Appointment extends Model
         'address',
         'address_lat',
         'address_lng',
-        'journey'
+        'journey',
+        'wait'
     ];
 
     public $timestamps = false;

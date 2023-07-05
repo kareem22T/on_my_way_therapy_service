@@ -13,8 +13,8 @@
     @php
         $client = Auth::guard('client')->user();
     @endphp
-    <script type="text/javascript"
-        src="https://form.jotform.com/jsform/231613271952554?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}">
+    <script
+        src="https://form.jotform.com/jsform/231613271952554?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}&v={{ time() }}">
     </script>
 </body>
 

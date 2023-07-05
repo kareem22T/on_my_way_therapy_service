@@ -101,10 +101,35 @@ class RegisterController extends Controller
         if ($client) {
             $client->verified = true;
             $client->save();
-            return response()->json([
-                'status' => 200,
-                'msg' => 'your account has been registered successfully.',
-            ]);
+            $managed_clients = true;
+            if ($request->managed_clients)
+                foreach ($request->managed_clients as $managed_client) :
+                    $add_managed_client = Client::create([
+                        'account_type' => 2,
+                        'first_name' => ucwords(json_decode($managed_client)->first_name),
+                        'last_name' => ucwords(json_decode($managed_client)->last_name),
+                        'dob' => json_decode($managed_client)->dob,
+                        'gender' => json_decode($managed_client)->gender,
+                        'managment_type' => json_decode($managed_client)->client_type == 1 ? json_decode($managed_client)->managment_type : null,
+                        'manager_email' => json_decode($managed_client)->manager_email ? json_decode($managed_client)->manager_email : null,
+                        'card_number' => isset(json_decode($managed_client)->card_number) ? json_decode($managed_client)->card_number : null,
+                        'name_on_card' => isset(json_decode($managed_client)->name_on_card) ? json_decode($managed_client)->name_on_card : null,
+                        'security_code' => isset(json_decode($managed_client)->security_code) ? json_decode($managed_client)->security_code : null,
+                        'verified' => 1,
+                        'manager_id' => $client->id
+                    ]);
+
+                    if ($add_managed_client)
+                        $managed_clients = true;
+                    else
+                        $managed_clients = false;
+                endforeach;
+
+            if ($managed_clients)
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'your account has been registered successfully.',
+                ]);
         }
 
         return 'field to register';
@@ -182,8 +207,8 @@ class RegisterController extends Controller
 
         return response()->json([
             'status' => 200,
-            'phone_code' => Hash::make($phone_code),
-            'email_code' => Hash::make($email_code)
+            'phone_code' => $phone_code,
+            'email_code' => $email_code
         ]);
     }
     // .....................................

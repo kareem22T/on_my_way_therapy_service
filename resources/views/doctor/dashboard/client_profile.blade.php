@@ -26,10 +26,19 @@
                 <input type="text" disabled name="gender" id="gender" class="input form-control"
                     value="{{ 'Gender: ' . $client->gender }}">
             </div>
-            {{-- <div class='g-12' id="answers">
+            <div class='g-12' id="answers">
                 @if (isset($answers))
                     @foreach ($answers as $answer)
-                        @if (isset($answer['answer']) && $answer['name'] !== 'client_id' && $answer['name'] !== 'first_name' && $answer['name'] !== 'email' && $answer['name'] !== 'phone' && $answer['name'] !== 'dob' && $answer['name'] !== 'typeA105' && $answer['name'] !== 'date' && $answer['name'] !== 'signature' && $answer['name'] !== 'last_name')
+                        @if (isset($answer['answer']) &&
+                                $answer['name'] !== 'client_id' &&
+                                $answer['name'] !== 'first_name' &&
+                                $answer['name'] !== 'email' &&
+                                $answer['name'] !== 'phone' &&
+                                $answer['name'] !== 'dob' &&
+                                $answer['name'] !== 'typeA105' &&
+                                $answer['name'] !== 'date' &&
+                                $answer['name'] !== 'signature' &&
+                                $answer['name'] !== 'last_name')
                             <h4>{{ $answer['text'] }}</h4>
                             <h4>{{ $answer['name'] }}</h4>
                             <p>
@@ -45,7 +54,7 @@
                         @endif
                     @endforeach
                 @endif
-            </div> --}}
+            </div>
         </div>
     </main>
 @endSection

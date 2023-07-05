@@ -78,6 +78,14 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
         Route::post("/send-code", [TherapisRegisterController::class, "sendVerfication"]);
     });
 
+    Route::get('/Policy-and-Procedure-agreement', function () {
+        return view('doctor.agree');
+    });
+
+    Route::get('/faq', function () {
+        return view('doctor.FAQ');
+    });
+
     // just authenticated doctor can visit
     Route::group(['middleware' => 'auth:doctor'], function () {
 
@@ -96,7 +104,7 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
 
         Route::group(['middleware' => 'therapist_dashboard_vistors'], function () {
             Route::get('/', [TherapistController::class, 'indexCalendar']);
-            Route::post('/save-times', [TherapistController::class, 'saveWorkingTimes']);
+            Route::post('/save-times', [TherapistController::class, 'setWorkingHours']);
             Route::post('/edit-times', [TherapistController::class, 'editWorkingTimes']);
             Route::get('/my-account', [TherapistController::class, 'indexMyAccount']);
             Route::get('/my-account/profile', [TherapistController::class, 'indexProfile']);
@@ -144,14 +152,19 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         Route::post("/register", [ClientRegisterController::class, "register"]);
         Route::post("/check-info", [ClientRegisterController::class, "checkInfo"]);
     });
+    Route::get('/faq', function () {
+        return view('client.FAQ');
+    });
     Route::post('/send-code', [ClientRegisterController::class, 'sendVerfication']);
     // just authenticated client can visit
     Route::group(['middleware' => 'auth:client'], function () {
         Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');
 
         Route::group(['middleware' => 'client_dashboard_visitors'], function () {
-            Route::post('/appointment', [ClientController::class, 'insertAppointment']);
+            Route::post('/appoifntment', [ClientController::class, 'insertAppointment']);
+            Route::post('/appoifntment-wait', [ClientController::class, 'insertAppointmentToWaitList']);
             Route::post('/slots_approved', [ClientController::class, 'getSlotsApproved']);
+            Route::post('/get_slots', [TherapistController::class, 'getWorkingHours']);
             Route::get('/chats/{id?}', [ClientController::class, 'indexChats']);
             Route::get('/account', [ClientController::class, 'indexAccount']);
             Route::get('/{username?}', [ClientController::class, 'index']);

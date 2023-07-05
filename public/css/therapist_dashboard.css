@@ -382,30 +382,35 @@ header .container nav .fa-user, header .container nav .fa-bell {
   }
 }
 .calendar_wrapper .container .work-time h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-weight: 500;
-  font-size: clamp(0.9375rem, 0.5503rem + 1.6304vw, 1.875rem);
-  line-height: 38px;
-  text-align: center;
+  font-size: clamp(1.625rem, 1.2636rem + 1.5217vw, 2.5rem);
+  line-height: clamp(2.5rem, 2.2418rem + 1.087vw, 3.125rem);
   color: #132F75;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
 }
-@media (max-width: 599.98px) {
-  .calendar_wrapper .container .work-time h1 {
-    justify-content: space-between;
-  }
+.calendar_wrapper .container .work-time div .form-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
-.calendar_wrapper .container .work-time h1:last-child {
-  grid-column: span 2;
+.calendar_wrapper .container .work-time #working_hours span {
+  margin: 20px 0;
+  display: block;
+  color: black;
 }
-.calendar_wrapper .container .work-time h1:last-child span {
+.calendar_wrapper .container .work-time #working_hours th {
+  font-size: 24px;
+  padding-bottom: 0;
+  color: #494949;
+}
+.calendar_wrapper .container .work-time #working_hours td,
+.calendar_wrapper .container .work-time #working_hours th {
   padding: 5px 10px;
-  border-radius: 10px;
-  margin-left: 5px;
-  background-color: #132F75;
-  color: #ffffff;
+  text-align: center;
+}
+.calendar_wrapper .container .work-time #working_hours td input {
+  margin: 10px 0;
 }
 .calendar_wrapper .container .work-time h1 > button {
   padding: clamp(0rem, -0.1291rem + 0.5435vw, 0.3125rem) 10px;

@@ -6,6 +6,14 @@
     <div id="errors">
         {{-- validation errors will appear here. --}}
     </div>
+    <style>
+        @media (max-width: 599.98px) {
+            form {
+                display: flex !important;
+                flex-direction: column;
+            }
+        }
+    </style>
     <main class="login_wrapper">
         <div id="register_root">
             <p class="h2 text-center">
@@ -59,7 +67,8 @@
                     <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file">
-                    <input type="text" name="NDIS" id="NDIS" placeholder="NDIS Number" class="form-control">
+                    <input type="text" name="NDIS" id="NDIS" placeholder="NDIS worker screening Number"
+                        class="form-control">
                     <a href="https://www.service.nsw.gov.au/transaction/ndiswc-apply">don’t have one?</a>
                 </div>
                 <div class="form-group g-12">

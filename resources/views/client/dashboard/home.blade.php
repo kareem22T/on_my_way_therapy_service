@@ -81,7 +81,7 @@
             </style>
             @if ($serviceAgreement == false || $riskAssessment == false)
                 <div class="assessment-alert">
-                    Pleases, you have to fill these first
+                    Please, you have to fill these first
                     <div>
                         <a href="/client/NDIS/Service-Agreement"
                             class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
@@ -221,7 +221,10 @@
                             </form>
                         </div>
                     </div>
-                    <button id="confirm_appointment" doctor_id="{{ $therapist->id }}">Confirm</button>
+                    <div class="btns">
+                        <button id="confirm_appointment" doctor_id="{{ $therapist->id }}">Confirm</button>
+                        <button id="join_wait_list" doctor_id="{{ $therapist->id }}">Join wait list</button>
+                    </div>
                 </div>
 
                 <div class="profile_wrapper g-5">
@@ -311,9 +314,21 @@
                 </div>
             </div>
 
+            <div class="pop-up join-wait-list-pop-up">
+                <h1>Join wait list</h1>
+                <input type="text" name="date" id="date" placeholder="Session date *"
+                    onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control">
+                <input type="text" name="time" id="time" placeholder="Session time *"
+                    onfocus="(this.type='time')" onblur="(this.type='text')" class="form-control">
+                <div class="btns m-0">
+                    <button class="btn btn-danger cancel">Cancel</button>
+                    <button class="btn btn-success confirm-join-wait-list">Confirm</button>
+                </div>
+            </div>
+
             <div class="pop-up assessment-pop-up">
                 <div class="assessment-alert">
-                    Pleases, you have to fill these first
+                    Please, you have to fill these first
                     <div>
                         <a href="/client/NDIS/Service-Agreement"
                             class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">

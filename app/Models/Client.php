@@ -41,6 +41,7 @@ class Client extends Authenticatable
         'relation_to_else_client_id',
         'created_at',
         'updated_at',
+        'manager_id'
     ];
 
     protected $hidden = [
@@ -82,6 +83,14 @@ class Client extends Authenticatable
     public function therapistRating()
     {
         return $this->hasMany('App\Models\Therapist_rating', 'client_id');
+    }
+    public function managed_clients()
+    {
+        return $this->hasMany('App\Models\Client', 'manager_id');
+    }
+    public function manager()
+    {
+        return $this->belongsTo('App\Models\Client', 'manager_id');
     }
     // getters and setters
     public function getGenderAttribute($value)

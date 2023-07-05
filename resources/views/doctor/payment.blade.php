@@ -1,8 +1,8 @@
 @extends('doctor.layouts.register-layout')
 
-@section("title", "Recive payment")
+@section('title', 'Recive payment')
 
-@section("content")
+@section('content')
     <div id="errors">
         {{-- validation errors will appear here. --}}
     </div>
@@ -19,7 +19,7 @@
             <h1>
                 Receive payment
             </h1>
-            <form action="POST" class="payment_form" id="step-3" >
+            <form action="POST" class="payment_form" id="step-3">
                 @csrf
                 <div class="form-group">
                     <input type="text" name="name" id="name" placeholder="Name" class="form-control">
@@ -36,7 +36,8 @@
                 </div>
                 <div class="form-group choice">
                     <input type="checkbox" name="agree" id="agree" style="width: auto;" value="1">
-                    <label class="agree" for="agree">agree on our <a href="">terms and policy</a></label>
+                    <label class="agree" for="agree">agree on our <a
+                            href="/therapist/Policy-and-Procedure-agreement" target="_blanck">terms and policy</a></label>
                 </div>
 
                 <div class="form-group g-12 not-step-1">
@@ -49,5 +50,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/js/doctor/get-payment.js') }}?v={{time()}}"></script>
+    <script src="{{ asset('/js/doctor/get-payment.js') }}?v={{ time() }}"></script>
 @endsection

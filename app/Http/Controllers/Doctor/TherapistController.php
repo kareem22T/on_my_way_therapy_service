@@ -9,6 +9,8 @@ use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Day;
 use App\Models\Doctor;
+use App\Models\workingHour;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -86,8 +88,6 @@ class TherapistController extends Controller
 
     public function indexCalendar()
     {
-        $therapist_times = Auth::guard('doctor')->user()->only(['working_hours_from', 'working_hours_to', 'travel_range']);
-
         $events = [];
 
         $appointments = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->where('journey', '!=', 4)->with(['client', 'doctor'])->get();
@@ -101,14 +101,6 @@ class TherapistController extends Controller
             ];
         }
 
-
-        if (
-            $therapist_times['working_hours_from'] !== null &&
-            $therapist_times['working_hours_to'] !== null &&
-            $therapist_times['travel_range'] !== null
-        )
-            return view('doctor.dashboard.calendar')->with(compact('therapist_times', 'events'));
-
         return view('doctor.dashboard.calendar')->with(compact('events'));
     }
 
@@ -121,53 +113,70 @@ class TherapistController extends Controller
 
         return view('doctor.dashboard.appointment')->with(compact('appointment'));
     }
-
-    public function saveWorkingTimes(InsertTherapistTimes $request)
+    public function getDateOfSpecificDay($dayAbbreviation)
     {
-        $therapist = Auth::guard('doctor')->user();
+        $now = Carbon::now();
+        $currentDay = $now->dayOfWeek;
 
-        $therapist->travel_range = $request->distance;
-        $therapist->working_hours_from = $request->from;
-        $therapist->working_hours_to = $request->to;
+        $daysOfWeek = [
+            'Mon' => 1,
+            'Tue' => 2,
+            'Wed' => 3,
+            'Thu' => 4,
+            'Fri' => 5,
+            'Sat' => 6,
+            'Sun' => 0
+        ];
 
-        $therapist->save();
+        $targetDay = $daysOfWeek[$dayAbbreviation];
 
-        if ($therapist)
-            return response()->json(
-                [
-                    'status' => 200,
-                    'msg' => 'You have set your time'
-                ]
-            );
+        if ($targetDay === $currentDay && $now == $now->startOfWeek()) {
+            return $now;
+        }
+
+        $difference = ($targetDay - $currentDay + 7) % 7;
+        $date = $now->addDays($difference);
+
+        return $date;
     }
-    public function editWorkingTimes(Request $request)
+    public function setWorkingHours(Request $request)
     {
-        $therapist = Auth::guard('doctor')->user();
+        $therapistId = Auth::guard('doctor')->user()->id; // Assuming you have authentication setup
 
-        if ($request->distance) :
-            $validated = $request->validate([
-                'distance' => 'required',
-            ]);
-            $therapist->travel_range = $request->distance;
-        endif;
 
-        if ($request->from && $request->to) :
-            $validated = $request->validate([
-                'from' => 'required',
-                'to' => 'required|gte:from|different:from',
-            ]);
-            $therapist->working_hours_from = $request->from;
-            $therapist->working_hours_to = $request->to;
-        endif;
+        foreach ($request->working_hours_data as $req) {
+            $day = $req['day_name'];
+            $startTime = $req['start_work'];
+            $endTime = $req['end_work'];
+            $recurring = $request->recurring ? true : false;
 
-        $therapist->save();
+            $date = $this->getDateOfSpecificDay($day);
 
-        if ($therapist)
-            return response()->json(
-                [
-                    'status' => 200,
-                    'msg' => 'Your schedule has been updated!'
-                ]
+            // Store the working hours in the database
+            workingHour::updateOrCreate(
+                ['doctor_id' => $therapistId, 'day_of_week' => $day],
+                ['start_time' => $startTime, 'end_time' => $endTime, 'recurring' => $recurring, 'date' => $date]
             );
+        }
+
+        return response()->json([
+            'status' => 200,
+            'msg'    => $recurring == false ? 'your working times has been set for this week.' : 'Your working times have been set for all weeks',
+        ]);
+    }
+
+    public function getWorkingHours(Request $request)
+    {
+        $dayOfWeek = Carbon::parse($request->date)->format('D');
+
+        $therapistId = $request->therapist_id;
+
+        $workingHours = WorkingHour::where('doctor_id', $therapistId)
+            ->whereDate('date', Carbon::parse($request->date)->format('Y-m-d'))
+            ->orWhere('recurring', true)
+            ->where('day_of_week', $dayOfWeek)
+            ->first();
+
+        return $workingHours;
     }
 }

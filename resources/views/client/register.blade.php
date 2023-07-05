@@ -13,7 +13,7 @@
                 <br><br>
                 Create your account as a Client or as a Referrer
             </p>
-            <form action="POST" class="lg-grid register_form client_register" id="client_register">
+            <form method="POST" class="lg-grid register_form client_register" id="client_register">
                 @csrf
                 <div class="form-group g-12 choice radio mt-3">
                     <div class="account_type_wrapper">
@@ -139,10 +139,12 @@
                 <div class="g-12 flex-center">
                     <hr>
                 </div>
+
+
                 <div class="form-group g-12 choice mt-3">
                     <h1>What do you prefer? (session type)</h1>
                     <div style="flex-direction: column;">
-                        <div class="form-group">
+                        <div class="form-group" style="align-items: start !important;">
                             <input type="checkbox" name="session_type[]" id="session_type_1" value="1">
                             <label for="session_type_1">
                                 Mobile therapy includes:
@@ -153,7 +155,7 @@
                                 </ul>
                             </label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="align-items: start !important;">
                             <input type="checkbox" name="session_type[]" id="session_type_2" value="2">
                             <label for="session_type_2">telehealth online sessions</label>
                         </div>
@@ -163,119 +165,280 @@
                 <div class="g-12 flex-center">
                     <hr>
                 </div>
+                <div class="additional-info g-12 lg-grid">
 
-                <div class="form-group g-12 choice radio">
-                    <h1>Client type</h1>
-                    <div>
-                        <div class="form-group client_type_2">
-                            <input type="radio" name="client_type" id="client_type_2" value="1" checked>
-                            <label for="client_type_2" style="padding: 10px 20px;">
-                                <img src="{{ asset('imgs/client/ndis-logo.png') }}">
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <input type="radio" name="client_type" id="client_type_1" value="0">
-                            <label for="client_type_1">Private</label>
-                        </div>
-                        <div class="form-group">
-                            <label class="coming-soon-2" style="padding: 10px 20px;">
-                                <img src="{{ asset('imgs/client/medicare.png') }}">
-                            </label>
-                        </div>
+                    <div class="form-group g-12 choice radio">
+                        <h1>Client type</h1>
+                        <div>
+                            <div class="form-group client_type_2">
+                                <input type="radio" name="client_type" id="client_type_2" value="1" checked>
+                                <label for="client_type_2" style="padding: 10px 20px;">
+                                    <img src="{{ asset('imgs/client/ndis-logo.png') }}">
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <input type="radio" name="client_type" id="client_type_1" value="0">
+                                <label for="client_type_1">Private</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="coming-soon-2" style="padding: 10px 20px;">
+                                    <img src="{{ asset('imgs/client/medicare.png') }}">
+                                </label>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
 
-                <div class="g-12 flex-center">
-                    <hr>
-                </div>
-                <div class="ndis-form lg-grid g-12">
-                    <div class="form-group g-12">
-                        <input type="text" name="NDIS_number" id="NDIS_number" placeholder="NDIS number"
-                            class="form-control">
+                    <div class="g-12 flex-center">
+                        <hr>
                     </div>
-                    <div class="form-group g-12">
-                        <input type="text" name="NDIS_end_date" id="NDIS_end_date" placeholder="Plan end date"
-                            onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group g-12 choice radio lg-grid plan-managed-btns">
-                    <div class="lg-grid g-12">
-                        <div class="form-group g-6 lg-grid plan_managment_1">
-                            <input type="radio" name="managment_type" id="plan_managment_1" value="0">
-                            <label for="plan_managment_1" class="g-12">Agency managed</label>
+                    <div class="ndis-form lg-grid g-12">
+                        <div class="form-group g-12">
+                            <input type="text" name="NDIS_number" id="NDIS_number" placeholder="NDIS number"
+                                class="form-control">
                         </div>
-                        <div class="form-group g-6 lg-grid plan_managment_1">
-                            <input type="radio" name="managment_type" id="plan_managment_2" value="1" checked>
-                            <label for="plan_managment_2" class="g-12">Plan-managed?</label>
-                        </div>
-                        <div class="form-group g-6 lg-grid">
-                            <input type="radio" name="managment_type" id="plan_managment_3" value="2">
-                            <label for="plan_managment_3" class="g-12">Self-managed?</label>
+                        <div class="form-group g-12">
+                            <input type="text" name="NDIS_end_date" id="NDIS_end_date" placeholder="Plan end date"
+                                onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="g-12 plan-managed-form lg-grid">
-                    <div class="form-group g-12">
-                        <input type="email" name="manager_email" id="Plan_manager_email"
-                            placeholder="Plan manager email" class="form-control">
+                    <div class="form-group g-12 choice radio lg-grid plan-managed-btns">
+                        <div class="lg-grid g-12">
+                            <div class="form-group g-6 lg-grid plan_managment_1">
+                                <input type="radio" name="managment_type" id="plan_managment_1" value="0">
+                                <label for="plan_managment_1" class="g-12">Agency managed</label>
+                            </div>
+                            <div class="form-group g-6 lg-grid plan_managment_1">
+                                <input type="radio" name="managment_type" id="plan_managment_2" value="1"
+                                    checked>
+                                <label for="plan_managment_2" class="g-12">Plan-managed?</label>
+                            </div>
+                            <div class="form-group g-6 lg-grid">
+                                <input type="radio" name="managment_type" id="plan_managment_3" value="2">
+                                <label for="plan_managment_3" class="g-12">Self-managed?</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="g-12 plan-managed-form lg-grid">
+                        <div class="form-group g-12">
+                            <input type="email" name="manager_email" id="Plan_manager_email"
+                                placeholder="Plan manager email" class="form-control">
+                        </div>
+                    </div>
 
-                <div class="g-12 agency-managed-form"
-                    style="
+                    <div class="g-12 agency-managed-form"
+                        style="
                         font-size: clamp(1.25rem, 0.8886rem + 1.5217vw, 2.125rem);
                         text-align: center;
                         font-weight: 500;
                         color: #132F75;
                         display: none
                     ">
-                    you’re all set to go!
-                </div>
+                        you’re all set to go!
+                    </div>
 
-                <div class="g-12 self-managed-form private-form lg-grid">
-                    <div class="form-group g-12">
-                        <input type="text" name="card_number" id="card_number" placeholder="Card number "
-                            class="form-control">
-                    </div>
-                    <div class="form-group g-12">
-                        <input type="text" name="name_on_card" id="name_on_card" placeholder="Name on card"
-                            class="form-control">
-                    </div>
-                    <div class="form-group g-6">
-                        <input type="text" name="expiration_date" id="expiration_date"
-                            placeholder="Expiration date (MM/YY)" class="form-control">
-                    </div>
-                    <div class="form-group g-6">
-                        <input type="text" name="security_code" id="security_code" placeholder="Security code"
-                            class="form-control">
-                    </div>
-                </div>
-                <div class="form-group g-12 choice radio lg-grid paying-form" style="display: none">
-                    <div class="lg-grid g-12">
-                        <div class="form-group g-6 lg-grid ">
-                            <input type="radio" name="private_paying_method" id="private_paying_method_1"
-                                value="0" checked>
-                            <label for="private_paying_method_1" class="g-12">Private paying</label>
+                    <div class="g-12 self-managed-form private-form lg-grid">
+                        <div class="form-group g-12">
+                            <input type="text" name="card_number" id="card_number" placeholder="Card number "
+                                class="form-control">
                         </div>
-                        <div class="form-group g-6 lg-grid ">
-                            <input type="radio" name="private_paying_method" id="private_paying_method_2"
-                                value="1">
-                            <label for="private_paying_method_2" class="g-12">Private health</label>
+                        <div class="form-group g-12">
+                            <input type="text" name="name_on_card" id="name_on_card" placeholder="Name on card"
+                                class="form-control">
+                        </div>
+                        <div class="form-group g-6">
+                            <input type="text" name="expiration_date" id="expiration_date"
+                                placeholder="Expiration date (MM/YY)" class="form-control">
+                        </div>
+                        <div class="form-group g-6">
+                            <input type="text" name="security_code" id="security_code" placeholder="Security code"
+                                class="form-control">
                         </div>
                     </div>
+                    <div class="form-group g-12 choice radio lg-grid paying-form" style="display: none">
+                        <div class="lg-grid g-12">
+                            <div class="form-group g-6 lg-grid ">
+                                <input type="radio" name="private_paying_method" id="private_paying_method_1"
+                                    value="0" checked>
+                                <label for="private_paying_method_1" class="g-12">Private paying</label>
+                            </div>
+                            <div class="form-group g-6 lg-grid ">
+                                <input type="radio" name="private_paying_method" id="private_paying_method_2"
+                                    value="1">
+                                <label for="private_paying_method_2" class="g-12">Private health</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Private-health g-12">
+                        <p>Private health coming soon</p>
+                        <img src="{{ asset('/imgs/site/private-health.png') }}" alt="">
+                    </div>
+                    <div class="g-12 flex-center plan-managed-hr">
+                        <hr>
+                    </div>
+
                 </div>
 
-                <div class="Private-health g-12">
-                    <p>Private health coming soon</p>
-                    <img src="{{ asset('/imgs/site/private-health.png') }}" alt="">
+                <div class="form-group g-12">
+                    <button type="submit" class="btn btn-primary from-control" id="client_submit">finish</button>
+                </div>
+            </form>
+
+            <form method="POST" class="lg-grid register_form client_register managed_client" id="managed_clients_form" style="display: none">
+                <div class="clients_wrapper lg-grid g-12">
+
+                    <div class="additional-info g-12 lg-grid client">
+                        <h1 class="g-12 mt-4">Client <span>#1</span></h1>
+                        <div class="form-group g-6">
+                            <input type="text" name="client_managed_1_first_name" id="client_managed_1_first_name"
+                                class="form-control" placeholder="First name *">
+                        </div>
+                        <div class="form-group g-6">
+                            <input type="text" name="client_managed_1_last_name" id="client_managed_1_last_name"
+                                class="form-control" placeholder="Last name *">
+                        </div>
+                        <div class="form-group g-6">
+                            <input type="text" name="client_managed_1_dob" id="client_managed_1_dob"
+                                placeholder="Date of birth *" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                class="form-control">
+                        </div>
+                        <div class="form-group g-6">
+                            <select name="client_managed_1_gender" id="client_managed_1_gender" class="form-control">
+                                <option value="">Gender *</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                        <div class="g-12 flex-center">
+                            <hr>
+                        </div>
+                        <div class="form-group g-12 choice radio">
+                            <h1>Client type</h1>
+                            <div>
+                                <div class="form-group client_type_2">
+                                    <input type="radio" name="client_managed_1_client_type"
+                                        id="client_managed_1_client_type_2" value="1" checked>
+                                    <label for="client_managed_1_client_type_2" style="padding: 10px 20px;">
+                                        <img src="{{ asset('imgs/client/ndis-logo.png') }}">
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="radio" name="client_managed_1_client_type"
+                                        id="client_managed_1_client_type_1" value="0">
+                                    <label for="client_managed_1_client_type_1">Private</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="coming-soon-2" style="padding: 10px 20px;">
+                                        <img src="{{ asset('imgs/client/medicare.png') }}">
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="g-12 flex-center">
+                            <hr>
+                        </div>
+                        <div class="ndis-form lg-grid g-12">
+                            <div class="form-group g-12">
+                                <input type="text" name="client_managed_1_NDIS_number"
+                                    id="client_managed_1_NDIS_number" placeholder="NDIS number" class="form-control">
+                            </div>
+                            <div class="form-group g-12">
+                                <input type="text" name="client_managed_1_NDIS_end_date"
+                                    id="client_managed_1_NDIS_end_date" placeholder="Plan end date"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group g-12 choice radio lg-grid plan-managed-btns">
+                            <div class="lg-grid g-12">
+                                <div class="form-group g-6 lg-grid plan_managment_1">
+                                    <input type="radio" name="client_managed_1_managment_type"
+                                        id="client_managed_1_plan_managment_1" value="0">
+                                    <label for="client_managed_1_plan_managment_1" class="g-12">Agency managed</label>
+                                </div>
+                                <div class="form-group g-6 lg-grid plan_managment_1">
+                                    <input type="radio" name="client_managed_1_managment_type"
+                                        id="client_managed_1_plan_managment_2" value="1" checked>
+                                    <label for="client_managed_1_plan_managment_2" class="g-12">Plan-managed?</label>
+                                </div>
+                                <div class="form-group g-6 lg-grid">
+                                    <input type="radio" name="client_managed_1_managment_type"
+                                        id="client_managed_1_plan_managment_3" value="2">
+                                    <label for="client_managed_1_plan_managment_3" class="g-12">Self-managed?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="g-12 plan-managed-form lg-grid">
+                            <div class="form-group g-12">
+                                <input type="email" name="client_managed_1_manager_email"
+                                    id="client_managed_1_Plan_manager_email" placeholder="Plan manager email"
+                                    class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="g-12 agency-managed-form"
+                            style="
+                        font-size: clamp(1.25rem, 0.8886rem + 1.5217vw, 2.125rem);
+                        text-align: center;
+                        font-weight: 500;
+                        color: #132F75;
+                        display: none
+                        ">
+                            you’re all set to go!
+                        </div>
+
+                        <div class="g-12 self-managed-form private-form lg-grid">
+                            <div class="form-group g-12">
+                                <input type="text" name="client_managed_1_card_number"
+                                    id="client_managed_1_card_number" placeholder="Card number " class="form-control">
+                            </div>
+                            <div class="form-group g-12">
+                                <input type="text" name="client_managed_1_name_on_card"
+                                    id="client_managed_1_name_on_card" placeholder="Name on card" class="form-control">
+                            </div>
+                            <div class="form-group g-6">
+                                <input type="text" name="client_managed_1_expiration_date"
+                                    id="client_managed_1_expiration_date" placeholder="Expiration date (MM/YY)"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group g-6">
+                                <input type="text" name="client_managed_1_security_code"
+                                    id="client_managed_1_security_code" placeholder="Security code" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group g-12 choice radio lg-grid paying-form" style="display: none">
+                            <div class="lg-grid g-12">
+                                <div class="form-group g-6 lg-grid ">
+                                    <input type="radio" name="client_managed_1_private_paying_method"
+                                        id="client_managed_1_private_paying_method_1" value="0" checked>
+                                    <label for="client_managed_1_private_paying_method_1" class="g-12">Private
+                                        paying</label>
+                                </div>
+                                <div class="form-group g-6 lg-grid ">
+                                    <input type="radio" name="client_managed_1_private_paying_method"
+                                        id="client_managed_1_private_paying_method_2" value="1">
+                                    <label for="client_managed_1_private_paying_method_2" class="g-12">Private
+                                        health</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="Private-health g-12">
+                            <p>Private health coming soon</p>
+                            <img src="{{ asset('/imgs/site/private-health.png') }}" alt="">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="g-12 flex-center plan-managed-hr">
+                <button class="btn btn-secondary form-control g-12 add_client"><i class="fa fa-plus"></i> Add another
+                    client</button>
+                <div class="g-12 flex-center">
                     <hr>
                 </div>
                 <div class="form-group g-12">
-                    <button type="submit" class="btn btn-primary from-control" id="client_submit">finish</button>
+                    <button type="submit" class="btn btn-primary from-control" id="manager_submit">finish</button>
                 </div>
             </form>
         </div>

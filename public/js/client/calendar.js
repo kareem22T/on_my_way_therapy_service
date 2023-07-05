@@ -266,9 +266,17 @@ $(document).on('click', '.slots ul li', function () {
     $(this).addClass('selected').siblings().removeClass('selected')
 })
 
+$('.cancel').on('click', function () {
+  $('.pop-up, .hide-content').fadeOut()
+})
+
 // on submit appointment
 $('#confirm_appointment').on('click', function (e) {
     e.preventDefault();
+    $('.address-pop-up').removeAttr('wait');
+    $('.address-pop-up').removeAttr('date');
+    $('.address-pop-up').removeAttr('time');
+    $('.loader').fadeIn().css('display', 'flex');
     $.ajax({
       url: '/client/check/assessments',
       method: 'GET',
@@ -319,11 +327,91 @@ $('#confirm_appointment').on('click', function (e) {
                       }
                   })
               }
+          } else {
+                document.getElementById('errors').innerHTML = ''
+                let error = document.createElement('div')
+                error.classList = 'alert alert-danger'
+                error.innerHTML = 'Please select a slot or join wait list'
+                document.getElementById('errors').append(error)
+                $('#errors').fadeIn('slow')
+                setTimeout(() => {
+                    $('#errors').fadeOut('slow')
+                    $('.loader').fadeOut()
+                }, 2000);
           }
         }
       }
     })
 })
+
+$('#join_wait_list').on('click', function (e) {
+    e.preventDefault();
+    $('.loader').fadeIn().css('display', 'flex');
+    $.ajax({
+      url: '/client/check/assessments',
+      method: 'GET',
+      success: function (data) {
+        if (data.status == 419) {
+          $('.assessment-pop-up').fadeIn().css('display', 'flex');
+          $('.hide-content').fadeIn()
+          $('.loader').fadeOut()
+        } else {
+          $('.join-wait-list-pop-up, .hide-content').fadeIn().css('display', 'flex');
+          $('.loader').fadeOut()
+        }
+      }
+    })
+})
+
+$('.confirm-join-wait-list').on('click', function (e) {
+  e.preventDefault();
+  $('.loader').fadeIn().css('display', 'flex');
+  if ($('input[name=visit_type]').val() == 1)
+    $.ajax({
+      url: '/client/appoifntment-wait',
+      method: 'POST',
+      data: {
+          doctor_id: $('#join_wait_list').attr('doctor_id'),
+          date: $('.join-wait-list-pop-up #date').val() + ' ' + $('.join-wait-list-pop-up #time').val(),
+          visit_type: $('input[name=visit_type]:checked').val()
+      },
+      success: function (data) {
+          if (data.status == 200) {
+              document.getElementById('errors').innerHTML = ''
+              let error = document.createElement('div')
+              error.classList = 'alert alert-success'
+              error.innerHTML = data.msg
+              document.getElementById('errors').append(error)
+              $('#errors').fadeIn('slow')
+              setTimeout(() => {
+                  $('#errors').fadeOut()
+                  $('.join-wait-list-pop-up, .hide-content').fadeOut()
+              }, 3000);
+          }
+      }, error: function (err) {
+          document.getElementById('errors').innerHTML = ''
+          $.each(err.responseJSON.errors, function (key, value) {
+              let error = document.createElement('div')
+              error.classList = 'alert alert-danger'
+              error.innerHTML = value[0]
+              document.getElementById('errors').append(error)
+          });
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+              $('#errors').fadeOut('slow')
+          }, 2000);
+      }
+    })
+  else {
+    $('.address-pop-up').attr('wait', true);
+    $('.address-pop-up').attr('date', $('.join-wait-list-pop-up #date').val());
+    $('.address-pop-up').attr('time', $('.join-wait-list-pop-up #time').val());
+    $('.address-pop-up, .hide-content').fadeIn()
+    $('.join-wait-list-pop-up').fadeOut()
+    $('.loader').fadeOut()
+  }
+})
+
 $('.confirm-appointment-address').on('click', function (e) {
     e.preventDefault()
     if (addressLat && addressLng) {
@@ -336,11 +424,11 @@ $('.confirm-appointment-address').on('click', function (e) {
         $('.loader').fadeIn().css('display', 'flex')
         let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
         $.ajax({
-            url: '/client/appointment',
+            url: $('.address-pop-up').attr('wait') ? '/client/appoifntment-wait' : '/client/appointment',
             method: 'POST',
             data: {
                 doctor_id: $('#confirm_appointment').attr('doctor_id'),
-                date: selected_slot,
+                date: $('.address-pop-up').attr('wait') ? $('.address-pop-up').attr('date') + ' ' + $('.address-pop-up').attr('time'): selected_slot,
                 visit_type: $('input[name=visit_type]').val(),
                 address: $('#address').val(),
                 address_lat: $('#address_lat').val(),
@@ -354,9 +442,14 @@ $('.confirm-appointment-address').on('click', function (e) {
                     error.innerHTML = data.msg
                     document.getElementById('errors').append(error)
                     $('#errors').fadeIn('slow')
-                    setTimeout(() => {
-                        location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
-                    }, 1200);
+                    if ( !$('.address-pop-up').attr('wait') )
+                      setTimeout(() => {
+                          location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+                      }, 1200);
+                    else 
+                      setTimeout(() => {
+                        $('#errors').fadeOut()
+                      }, 3000);
                 }
             }, error: function (err) {
                 document.getElementById('errors').innerHTML = ''
@@ -388,17 +481,17 @@ $('.confirm-appointment-address').on('click', function (e) {
 })
 $('.confirm-appointment-address-old').on('click', function (e) {
     e.preventDefault()
-    if ($('.slots ul li.selected').length > 0) {
+    if ($('.slots ul li.selected').length > 0 || $('.address-pop-up').attr('wait')) {
         $('.address-pop-up').fadeOut();
         $('.hide-content').fadeOut()
         $('.loader').fadeIn().css('display', 'flex')
         let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
         $.ajax({
-            url: '/client/appointment',
+            url: $('.address-pop-up').attr('wait') ? '/client/appoifntment-wait' : '/client/appointment',
             method: 'POST',
             data: {
                 doctor_id: $('#confirm_appointment').attr('doctor_id'),
-                date: selected_slot,
+                date: $('.address-pop-up').attr('wait') ? $('.address-pop-up').attr('date') + ' ' + $('.address-pop-up').attr('time'): selected_slot,
                 visit_type: $('input[name=visit_type]').val(),
                 address: $('#address').val(),
                 address_lat: $('#address_lat').val(),
@@ -412,9 +505,15 @@ $('.confirm-appointment-address-old').on('click', function (e) {
                     error.innerHTML = data.msg
                     document.getElementById('errors').append(error)
                     $('#errors').fadeIn('slow')
-                    setTimeout(() => {
-                        location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
-                    }, 1200);
+                    if ( !$('.address-pop-up').attr('wait') )
+                      setTimeout(() => {
+                          location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+                      }, 1200);
+                    else 
+                      setTimeout(() => {
+                        $('#errors').fadeOut()
+                        $('.loader').fadeOut()
+                    }, 3000);
                 }
             }, error: function (err) {
                 document.getElementById('errors').innerHTML = ''
@@ -477,9 +576,6 @@ $('.today').on('click', function () {
 
 
 // methods ----------------------------------------------------------------
-let start_work = parseInt($('.slots >div').attr('start'))
-let end_work = parseInt($('.slots >div').attr('to'))
-
 function getDateInTimestapsFormat(dateString) {
     let date = new Date(dateString);
     let month = String(date.getMonth() + 1).padStart(2, '0');
@@ -498,7 +594,7 @@ function returnSlotTimeInNum(date) {
     return parseFloat(timeInHours);
 }
 
-function getAvilableSlots(Hosted_slots_in_num) {
+function getAvilableSlots(Hosted_slots_in_num, start_work, end_work) {
     // Define the working time interval
     let startTime;
     let dayDate = new Date(getDateInTimestapsFormat($('.event-date').text()))
@@ -511,7 +607,7 @@ function getAvilableSlots(Hosted_slots_in_num) {
 
     if (
         formattedDayDate === formattedTodayDate &&
-        parseInt($('.slots >div').attr('start')) < returnSlotTimeInNum(Date.now())
+        parseInt(start_work) < returnSlotTimeInNum(Date.now())
     ) {
         startTime =
             Math.round(returnSlotTimeInNum(Date.now())) <= Math.floor(returnSlotTimeInNum(Date.now())) ?
@@ -578,7 +674,14 @@ function getAvilableSlotsByAjax(date) {
                 hosted_slots.push(returnSlotTimeInNum(slot_date.date))
             }
             $('.slots ul').html(' ')
-            getAvilableSlots(hosted_slots)
+            $.ajax({
+              url: '/client/get_slots',
+              method: 'POST',
+              data: {therapist_id: $('#confirm_appointment').attr('doctor_id'), date: date },
+              success: function (data) {
+                getAvilableSlots(hosted_slots, parseInt(data.start_time), parseInt(data.end_time))
+              }
+            })
         }
     })
 }

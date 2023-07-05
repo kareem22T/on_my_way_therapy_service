@@ -17,84 +17,47 @@
             <div class="work-time">
                 @if (!isset($therapist_times))
                     <form action="" id="working_hours" class="g-2">
-                        <div class="row-1">
-                            <div>
-                                Working hours
-                                <div class="form-group">
-                                    <select name="from" id="from" class="form-control">
-                                        <option value="">From ---</option>
-                                        <option value="0">12 am</option>
-                                        <option value="1">1 am</option>
-                                        <option value="2">2 am</option>
-                                        <option value="3">3 am</option>
-                                        <option value="4">4 am</option>
-                                        <option value="5">5 am</option>
-                                        <option value="6">6 am</option>
-                                        <option value="7">7 am</option>
-                                        <option value="8">8 am</option>
-                                        <option value="9">9 am</option>
-                                        <option value="10">10 am</option>
-                                        <option value="11">11 am</option>
-                                        <option value="12">12 pm</option>
-                                        <option value="13">1 pm</option>
-                                        <option value="14">2 pm</option>
-                                        <option value="15">3 pm</option>
-                                        <option value="16">4 pm</option>
-                                        <option value="17">5 pm</option>
-                                        <option value="18">6 pm</option>
-                                        <option value="19">7 pm</option>
-                                        <option value="20">8 pm</option>
-                                        <option value="21">9 pm</option>
-                                        <option value="22">10 pm</option>
-                                        <option value="23">11 pm</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select name="to" id="to" class="form-control">
-                                        <option value="">To ---</option>
-                                        <option value="0">12 am</option>
-                                        <option value="1">1 am</option>
-                                        <option value="2">2 am</option>
-                                        <option value="3">3 am</option>
-                                        <option value="4">4 am</option>
-                                        <option value="5">5 am</option>
-                                        <option value="6">6 am</option>
-                                        <option value="7">7 am</option>
-                                        <option value="8">8 am</option>
-                                        <option value="9">9 am</option>
-                                        <option value="10">10 am</option>
-                                        <option value="11">11 am</option>
-                                        <option value="12">12 pm</option>
-                                        <option value="13">1 pm</option>
-                                        <option value="14">2 pm</option>
-                                        <option value="15">3 pm</option>
-                                        <option value="16">4 pm</option>
-                                        <option value="17">5 pm</option>
-                                        <option value="18">6 pm</option>
-                                        <option value="19">7 pm</option>
-                                        <option value="20">8 pm</option>
-                                        <option value="21">9 pm</option>
-                                        <option value="22">10 pm</option>
-                                        <option value="23">11 pm</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                Max travelling distance
-                                <div class="form-group">
-                                    <select name="distance" id="distance" class="form-control">
-                                        <option value="">Distance in KM</option>
-                                        <option value="1">10</option>
-                                        <option value="2">20</option>
-                                        <option value="3">30 +</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        <h1>Customize your week</h1>
+                        @php
+                            $days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                        @endphp
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    @foreach ($days as $day)
+                                        <th>{{ $day }}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span>Start</span>
+                                        <span>End</span>
+                                    </td>
+                                    @foreach ($days as $day)
+                                        <td>
+                                            <input type="hidden" class="day_name" value="{{ $day }}">
 
+                                            <input type="text" class="start form-control"
+                                                name="{{ $day }}_start" placeholder="Start work"
+                                                onfocus="(this.type='time')" onblur="(this.type='text')"
+                                                value="{{ App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->start_time }}">
+
+                                            <input type="text" class="end form-control" name="{{ $day }}_end"
+                                                placeholder="End work" onfocus="(this.type='time')"
+                                                onblur="(this.type='text')"
+                                                value="{{ App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->end_time }}">
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            </tbody>
+                        </table>
                         <div>
                             <div class="form-group">
-                                <button class="btn-info">Set</button>
+                                <button class="btn-info" id="set_week">Set this week</button>
+                                <button class="btn-info" id="set_all_weeks">Set all weeks</button>
                             </div>
                         </div>
                     </form>
@@ -205,7 +168,12 @@
                     ->where('journey', '!=', 4)
                     ->whereDate('date', '>=', now())
                     ->paginate(10);
+                
+                $wait_list = App\Models\Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)
+                    ->where('wait', 1)
+                    ->paginate(10);
             @endphp
+
             <div class="appointments">
                 <h3>Up coming sessions</h3>
                 @if ($appoinments_sessions->count() > 0)
@@ -215,7 +183,6 @@
                                 <span>{{ date('F j', strtotime($appointment->date)) }}</span>
                                 <span>{{ date('h:i A', strtotime($appointment->date)) }}</span>
                                 <span>{{ $appointment->client->address }}</span>
-                                <span>15 km in 10 min</span>
                                 <span>{{ $appointment->client->gender }}</span>
                                 <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
                             </a>
@@ -227,6 +194,35 @@
                     </tr>
                 @endif
             </div>
+
+
+            <div class="appointments">
+                <h3>Wait list</h3>
+                @if ($wait_list->count() > 0)
+                    @foreach ($wait_list as $appointment)
+                        <tr>
+                            <div>
+                                <div class="details">
+                                    <span>{{ date('F j', strtotime($appointment->date)) }}</span>
+                                    <span>{{ $appointment->client->first_name . ' ' . $appointment->client->last_name }}</span>
+                                    <span>{{ date('h:i A', strtotime($appointment->date)) }}</span>
+                                    <span>{{ $appointment->client->gender }}</span>
+                                    <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
+                                </div>
+                                <div class="btns">
+                                    <a href="">Set time</a>
+                                    <a href="/therapist/chats/{{ $appointment->client->id }}">Contact</a>
+                                </div>
+                            </div>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <p>There are no waiting!</p>
+                    </tr>
+                @endif
+            </div>
+
             <style>
                 .working-hours {
                     background: black;

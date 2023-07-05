@@ -66,11 +66,17 @@ class DoctorRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
+            if ($this->input('correct_phone_code') && $this->input('phone_code') == '') {
+                $validator->errors()->add('phone_code', 'Please enter the phone validation code');
+            }
+            if ($this->input('correct_email_code') && $this->input('email_code') == '') {
+                $validator->errors()->add('email_code', 'Please enter the phone validation code');
+            }
             if ($this->input('phone_code') && $this->input('email_code')) :
-                if (!Hash::check($this->input('phone_code'), $this->input('correct_phone_code'))) {
+                if ($this->input('phone_code') !== $this->input('correct_phone_code')) {
                     $validator->errors()->add('phone_code', 'The phone verfication code is not corect');
                 }
-                if (!Hash::check($this->input('email_code'), $this->input('correct_email_code'))) {
+                if ($this->input('email_code') !== $this->input('correct_email_code')) {
                     $validator->errors()->add('email_code', 'The email verfication code is not corect');
                 }
                 if ($this->input('remainingTime') >= 360000) {

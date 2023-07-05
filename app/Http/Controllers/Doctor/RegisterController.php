@@ -156,8 +156,8 @@ class RegisterController extends Controller
 
         return response()->json([
             'status' => 200,
-            'phone_code' => Hash::make($phone_code),
-            'email_code' => Hash::make($email_code)
+            'phone_code' => $phone_code,
+            'email_code' => $email_code
         ]);
     }
     // .....................................

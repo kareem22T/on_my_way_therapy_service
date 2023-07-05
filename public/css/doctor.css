@@ -43,7 +43,8 @@ body::after {
   margin: 0 auto;
 }
 
-#register_root form .diagnosis_wrapper ul li, #register_root form .diagnosis_wrapper, #register_root form .choice > div, #register_root form .photo_group label .after, #register_root form .file, #register_root form .have_one, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
+#register_root form .diagnosis_wrapper ul li, #register_root form .diagnosis_wrapper, #register_root form .choice > div, #register_root form .photo_group label .after, #register_root form .file,
+#register_root form .have_one, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,7 +144,8 @@ body {
 .login_wrapper .doctor_login_form .form-group {
   width: 100%;
 }
-.login_wrapper .doctor_login_form input, .login_wrapper .doctor_login_form button {
+.login_wrapper .doctor_login_form input,
+.login_wrapper .doctor_login_form button {
   background: #ffffff;
   border: 1px solid #FFC400;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -233,6 +235,14 @@ input[type=checkbox] {
   color: #132F75;
   font-size: clamp(1.5rem, 1.0714rem + 1.7582vw, 2.5rem);
   line-height: clamp(1.25rem, 0.4464rem + 3.2967vw, 3.125rem);
+  position: relative;
+}
+#register_root h1 i {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+  transform: translateY(50%);
+  cursor: pointer;
 }
 #register_root form hr {
   width: 100%;
@@ -255,15 +265,20 @@ input[type=checkbox] {
 #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group {
   width: 100% !important;
 }
-#register_root form.verfy_form input, #register_root form.verfy_form select, #register_root form.payment_form input, #register_root form.payment_form select {
+#register_root form.verfy_form input,
+#register_root form.verfy_form select, #register_root form.payment_form input,
+#register_root form.payment_form select {
   width: 100%;
   max-width: 500px;
 }
 #register_root form.payment_form input {
   max-width: 800px;
 }
-#register_root form input:not([type=checkbox], [type=radio], [type=range]), #register_root form select,
-#register_root form button:not(.btns-extra button), #register_root form textarea, #register_root form .file label {
+#register_root form input:not([type=checkbox], [type=radio], [type=range]),
+#register_root form select,
+#register_root form button:not(.btns-extra button),
+#register_root form textarea,
+#register_root form .file label {
   background: #ffffff !important;
   border: 1px solid #FFC400 !important;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25) !important;
@@ -271,7 +286,7 @@ input[type=checkbox] {
   padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem) !important;
+  font-size: 18px;
   line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem) !important;
   resize: none;
   display: block;
@@ -285,21 +300,25 @@ input[type=checkbox] {
 #register_root form select {
   cursor: pointer;
 }
-#register_root form .file, #register_root form .have_one {
+#register_root form .file,
+#register_root form .have_one {
   flex-direction: column;
   gap: 10px;
 }
-#register_root form .file label, #register_root form .have_one label {
+#register_root form .file label,
+#register_root form .have_one label {
   font-size: 19px;
 }
-#register_root form .file a, #register_root form .have_one a {
+#register_root form .file a,
+#register_root form .have_one a {
   font-weight: 500;
   font-size: 25px;
   line-height: 32px;
   color: #132F75;
   text-decoration: none;
 }
-#register_root form .file i, #register_root form .have_one i {
+#register_root form .file i,
+#register_root form .have_one i {
   font-size: 30px;
   color: #132F75;
 }
@@ -320,6 +339,12 @@ input[type=checkbox] {
 }
 #register_root form button:not(.btns-extra button):hover {
   background-color: transparent;
+}
+#register_root form button:not(.btns-extra button).add_client {
+  background: none !important;
+  border-color: gray !important;
+  color: gray !important;
+  margin-top: 30px;
 }
 #register_root form option {
   font-size: 18px;
@@ -409,7 +434,7 @@ input[type=checkbox] {
 #register_root form .choice h1 {
   font-weight: 700;
   font-size: clamp(1.125rem, 0.712rem + 1.7391vw, 2.125rem);
-  line-height: clamp(0.875rem, 0.1005rem + 3.2609vw, 2.75rem);
+  line-height: clamp(1.75rem, 1.337rem + 1.7391vw, 2.75rem);
   text-align: center;
   color: #132F75;
   margin-bottom: 20px;
@@ -430,17 +455,21 @@ input[type=checkbox] {
 #register_root form .choice > div > .form-group {
   display: flex;
   gap: 10px;
-  align-items: start;
+  align-items: center;
 }
-#register_root form .choice > div > .form-group #session_type_1, #register_root form .choice > div > .form-group #session_type_2 {
+#register_root form .choice > div > .form-group #session_type_1,
+#register_root form .choice > div > .form-group #session_type_2 {
   transform: translateY(45%);
 }
 @media (max-width: 599.98px) {
-  #register_root form .choice > div > .form-group #session_type_1, #register_root form .choice > div > .form-group #session_type_2 {
+  #register_root form .choice > div > .form-group #session_type_1,
+  #register_root form .choice > div > .form-group #session_type_2 {
     transform: translateY(35%);
   }
 }
-#register_root form .choice > div input[name=client_type] + label, #register_root form .choice > div .coming-soon-2, #register_root form .choice > div input[name=managment_type] + label {
+#register_root form .choice > div input[name=client_type] + label,
+#register_root form .choice > div .coming-soon-2,
+#register_root form .choice > div input[name=managment_type] + label {
   cursor: pointer;
   width: clamp(6.25rem, 0.5707rem + 23.913vw, 20rem);
   height: clamp(3.75rem, 3.2337rem + 2.1739vw, 5rem);
@@ -451,6 +480,15 @@ input[type=checkbox] {
 #register_root form .choice > div input[name=managment_type] + label {
   line-height: clamp(1.0625rem, 0.3655rem + 2.9348vw, 2.75rem);
   font-size: clamp(0.875rem, 0.5136rem + 1.5217vw, 1.75rem);
+}
+#register_root form .choice > div.account_type_wrapper {
+  font-size: clamp(1rem, 0.716rem + 1.1957vw, 1.6875rem) !important;
+}
+#register_root form .choice > div.account_type_wrapper > .form-group {
+  width: 100% !important;
+}
+#register_root form .choice > div.account_type_wrapper > .form-group label {
+  width: 100% !important;
 }
 #register_root form .choice label {
   cursor: pointer;
@@ -533,7 +571,7 @@ input[type=checkbox] {
   font-size: calc(clamp(1.0625rem, 0.5804rem + 1.978vw, 2.1875rem) - 4px);
   line-height: clamp(1.5rem, 0.9643rem + 2.1978vw, 2.75rem);
   text-align: center;
-  color: #132F75;
+  color: #132f75;
 }
 .extra_section .part-time.part-time,
 .extra_section .full-time.part-time,
@@ -560,7 +598,7 @@ input[type=checkbox] {
   font-size: 28px;
   line-height: 44px;
   text-align: center;
-  color: #132F75;
+  color: #132f75;
   background: transparent;
   padding: 5px 15px;
   border-radius: 20px;
@@ -592,12 +630,21 @@ input[type=checkbox] {
   -webkit-appearance: none;
   width: 100%;
   height: 10px;
-  background: #FFC400;
+  background: #ffc400;
   outline: none;
   opacity: 0.7;
   -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
   border-radius: 50px;
+}
+
+.additional-info label {
+  cursor: pointer;
+  width: clamp(6.25rem, 0.5707rem + 23.913vw, 20rem);
+  height: clamp(3.75rem, 3.2337rem + 2.1739vw, 5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=doctor.css.map */

@@ -1,193 +1,89 @@
-
-// set works time
-let holidays = [];
-$('#holidays').on('change', function () {
-  if ($.inArray($(this).find('option:selected').val(), holidays) == -1 ) {
-    if (holidays.length < 3) {
-        $('.holidays').append('<li val="' + $(this).find('option:selected').val() + '">' 
-                              + $(this).find('option:selected').text() + 
-                              '<i class="fa-regular fa-circle-xmark"></i></li>');
-      holidays.push($(this).find('option:selected').val());
-      $(this).val('')
-    } else {
-      alert('you can choose max 3 days holidays')
-      $(this).val('')
-    }
-  } else {
-      $(this).val('')
-  }
-})
-
-$(document).on('click', '.holidays i',  function () {
-  holidays = holidays.filter((value) => value != $(this).parent().attr('val'));
-  $(this).parent().remove()
-})
-
 // set csrf token for all requests
 var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
 $.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': csrf_token
-}
+  headers: {
+    'X-CSRF-TOKEN': csrf_token
+  }
 });
 // end ...
-
+let weekWoorkingHours = [];
 $('#working_hours').on('submit', function (e) {
   e.preventDefault();
+})
+$('#set_week').on('click', function (e) {
+  e.preventDefault();
+
+  $('#working_hours .day_name').each(function () {
+    let day_data = {};
+    let day_name = $(this).val();
+    let start_work = $(this).siblings('.start').val();
+    let end_work = $(this).siblings('.end').val();
+
+    day_data.day_name = day_name;
+    day_data.start_work = start_work;
+    day_data.end_work = end_work
+
+    weekWoorkingHours.push(day_data);
+  })
   $.ajax({
-    url: '/therapist/save-times',
     method: 'POST',
-    data: {holidays_arr: holidays, from: $('select[name="from"]').val(), to: $('select[name="to"]').val(), distance: $('select[name="distance"]').val()},
+    url: '/therapist/save-times',
+    data: {working_hours_data: weekWoorkingHours},
     success: function (data) {
-      if (data.status == 200) {
-          document.getElementById('errors').innerHTML = ''
-          let error = document.createElement('div')
-          error.classList = 'alert alert-success'
-          error.innerHTML = data.msg
-          document.getElementById('errors').append(error)
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-              location.reload()
-          }, 1200);
+      if (data.status === 200) {
+        if (data.status == 200) {
+            document.getElementById('errors').innerHTML = ''
+            let error = document.createElement('div')
+            error.classList = 'alert alert-success'
+            error.innerHTML = data.msg
+            document.getElementById('errors').append(error)
+            $('#errors').fadeIn('slow')
+            setTimeout(() => {
+              $('#errors').fadeOut('slow')
+            }, 2000);
+        }
+
       }
-    }, error: function (err) {
-        document.getElementById('errors').innerHTML = ''
-        $.each(err.responseJSON.errors, function(key, value) {
-          let error = document.createElement('div')
-          error.classList = 'alert alert-danger'
-          error.innerHTML = value[0]
-          document.getElementById('errors').append(error)
-        });
-        $('#errors').fadeIn('slow')
-        setTimeout(() => {
-          $('#errors').fadeOut('slow')
-        }, 2000);
     }
   })
 })
+$('#set_all_weeks').on('click', function (e) {
+  e.preventDefault();
 
-$('.set-hours').on('click', function () {
-  $.ajax({
-    url: '/therapist/edit-times',
-    method: 'POST',
-    data: {from: $('#from').val(), to: $('#to').val()},
-    success: function (data) {
-      if (data.status == 200) {
-          document.getElementById('errors').innerHTML = ''
-          let error = document.createElement('div')
-          error.classList = 'alert alert-success'
-          error.innerHTML = data.msg
-          document.getElementById('errors').append(error)
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-              location.reload()
-          }, 1200);
-      }
-      }, error: function (err) {
-          document.getElementById('errors').innerHTML = ''
-          $.each(err.responseJSON.errors, function(key, value) {
-            let error = document.createElement('div')
-            error.classList = 'alert alert-danger'
-            error.innerHTML = value[0]
-            document.getElementById('errors').append(error)
-          });
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-            $('#errors').fadeOut('slow')
-          }, 2000);
-      }
+  $('#working_hours .day_name').each(function () {
+    let day_data = {};
+    let day_name = $(this).val();
+    let start_work = $(this).siblings('.start').val();
+    let end_work = $(this).siblings('.end').val();
+
+    day_data.day_name = day_name;
+    day_data.start_work = start_work;
+    day_data.end_work = end_work
+
+    weekWoorkingHours.push(day_data);
   })
-})
-$('.set-distance').on('click', function () {
   $.ajax({
-    url: '/therapist/edit-times',
     method: 'POST',
-    data: {distance: $('#distance').val()},
+    url: '/therapist/save-times',
+    data: {working_hours_data: weekWoorkingHours, recurring: true},
     success: function (data) {
-      if (data.status == 200) {
-          document.getElementById('errors').innerHTML = ''
-          let error = document.createElement('div')
-          error.classList = 'alert alert-success'
-          error.innerHTML = data.msg
-          document.getElementById('errors').append(error)
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-              location.reload()
-          }, 1200);
-      }
-      }, error: function (err) {
-          document.getElementById('errors').innerHTML = ''
-          $.each(err.responseJSON.errors, function(key, value) {
+      if (data.status === 200) {
+        if (data.status == 200) {
+            document.getElementById('errors').innerHTML = ''
             let error = document.createElement('div')
-            error.classList = 'alert alert-danger'
-            error.innerHTML = value[0]
+            error.classList = 'alert alert-success'
+            error.innerHTML = data.msg
             document.getElementById('errors').append(error)
-          });
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-            $('#errors').fadeOut('slow')
-          }, 2000);
+            $('#errors').fadeIn('slow')
+            setTimeout(() => {
+              $('#errors').fadeOut('slow')
+            }, 2000);
+        }
+
       }
+    }
   })
-})
-$('.set-holidays').on('click', function () {
-  $.ajax({
-    url: '/therapist/edit-times',
-    method: 'POST',
-    data: {holidays_arr: holidays},
-    success: function (data) {
-      if (data.status == 200) {
-          document.getElementById('errors').innerHTML = ''
-          let error = document.createElement('div')
-          error.classList = 'alert alert-success'
-          error.innerHTML = data.msg
-          document.getElementById('errors').append(error)
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-              location.reload()
-          }, 1200);
-      }
-      }, error: function (err) {
-          document.getElementById('errors').innerHTML = ''
-          $.each(err.responseJSON.errors, function(key, value) {
-            let error = document.createElement('div')
-            error.classList = 'alert alert-danger'
-            error.innerHTML = value[0]
-            document.getElementById('errors').append(error)
-          });
-          $('#errors').fadeIn('slow')
-          setTimeout(() => {
-            $('#errors').fadeOut('slow')
-          }, 2000);
-      }
-  })
-})
-
-
-
-$('#edit-hours').on('click', function (e) {
-  e.preventDefault();
-  $('.edit_hours_pop_up').fadeIn()
-  $('.hide-content').fadeIn()
-})
-
-$('#edit-distance').on('click', function (e) {
-  e.preventDefault();
-  $('.edit_distance_pop_up').fadeIn()
-  $('.hide-content').fadeIn()
-})
-
-$('#edit-holidays').on('click', function (e) {
-  e.preventDefault();
-  $('.edit_holidays_pop_up').fadeIn()
-  $('.hide-content').fadeIn()
-})
-
-$('.cancel').on('click', function (e) {
-  e.preventDefault();
-  $('.pop-up').fadeOut()
-  $('.hide-content').fadeOut()
 })
 
 $('.appointments tr').on('click', function (e) {

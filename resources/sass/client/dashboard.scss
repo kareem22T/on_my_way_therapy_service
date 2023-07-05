@@ -847,6 +847,13 @@ body {
             display: block;
         }
 
+        .btns {
+            @extend %flex-center;
+            #join_wait_list {
+                background-color: $white !important;
+            }
+        }
+
         .profile_wrapper >a {
             background-color: $white;
         }
@@ -1437,4 +1444,11 @@ footer {
     height: 70px;
     background-color: $main-color;
     margin-top: 40px;
+}
+
+
+.join-wait-list-pop-up {
+    input {
+        font-size: 20px;
+    }
 }
