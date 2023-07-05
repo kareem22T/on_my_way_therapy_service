@@ -248,6 +248,12 @@ class RegisterController extends Controller
             $insert->payment_registered = true;
             $insert->save();
 
+            $email = 'info@onmywaytherapy.com.au';
+            $msg_title = 'New therapist';
+            $msg_body = 'New therapist has been registered see its data <a href="http://www.onmywaytherapy.com.au/therapist/' . $insert->id . '">Here</a>';
+
+            $this->sendEmail($email, $msg_title, $msg_body);
+
             return response()->json([
                 'status' => 200,
                 'msg' => 'your payment information has been registed successfully'

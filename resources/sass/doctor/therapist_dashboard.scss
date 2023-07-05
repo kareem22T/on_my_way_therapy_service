@@ -209,6 +209,52 @@ header {
                     text-align: center;
                 }
             }
+
+            .waiting_wrapper {
+                display: flex;
+                gap: 20px;
+                justify-content: space-between;
+                font-size: 18px;
+                color: #444444;
+                background: #f9f9f9;
+                padding: 10px 15px;
+                border-radius: 10px;
+                margin: 15px 0;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                .details {
+                    display: flex;
+                    gap: 20px;
+                }
+                .btns {
+                    position: relative;
+                    .set-date {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+                        position: absolute;
+                        background: rgba(145, 145, 145, 0.7607843137);
+                        padding: 10px;
+                        bottom: 125%;
+                        right: 0;
+                        border-radius: 15px;
+                        backdrop-filter: blur(1px);
+                        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                        display: none;
+                        input {
+                            padding: 10px;
+                            border-radius: 20px;
+                            border: none;
+                            max-width: 200px;
+                        }
+                        input[type=submit] {
+                            background-color: #132F75;
+                            color: #FFC400;
+                            transition: background-color 0.2s ease-in-out;
+                        }
+                    }
+                }
+            }
+
             h3 {
                 font-size: clamp(1.625rem, calc(1.2636rem + 1.5217vw), 2.5rem);
                 line-height: clamp(2.5rem, calc(2.2418rem + 1.087vw), 3.125rem);

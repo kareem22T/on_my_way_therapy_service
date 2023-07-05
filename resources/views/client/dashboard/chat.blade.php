@@ -160,7 +160,6 @@
                                 @endif
                             @endforeach
                         @else
-                            no messages yet did you say hi!
                         @endif
                     @else
                         <p>

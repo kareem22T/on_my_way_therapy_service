@@ -47,7 +47,6 @@
                             @endif
                         @endforeach
                     @else
-                        <h1>No chats yet, wait until client contact you!</h1>
                     @endif
                 </ul>
             </div>
@@ -163,12 +162,10 @@
                                         @endforeach
                                     </ul>
                                 @else
-                                    no messages yet did you say hi!
                                     <ul></ul>
                                 @endif
                             @endforeach
                         @else
-                            no messages yet did you say hi!
                             <ul></ul>
                         @endif
                     @else

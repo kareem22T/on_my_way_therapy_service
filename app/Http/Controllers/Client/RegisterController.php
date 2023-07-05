@@ -125,11 +125,18 @@ class RegisterController extends Controller
                         $managed_clients = false;
                 endforeach;
 
-            if ($managed_clients)
+            if ($managed_clients) :
+                $email = 'info@onmywaytherapy.com.au';
+                $msg_title = 'New Client';
+                $msg_body = 'New client has been registered see its data <a href="http://www.onmywaytherapy.com.au/client/' . $client->id . '">Here</a>';
+
+                $this->sendEmail($email, $msg_title, $msg_body);
+
                 return response()->json([
                     'status' => 200,
                     'msg' => 'your account has been registered successfully.',
                 ]);
+            endif;
         }
 
         return 'field to register';
@@ -193,11 +200,6 @@ class RegisterController extends Controller
     {
         $phone_code = rand(100000, 999999);
         $email_code = rand(100000, 999999);
-        $response =
-            InfobipSms::send(
-                "+" . $request->phone_key . $request->phone,
-                'Your phone verification code is: ' . $phone_code
-            );
 
         $email = $request->email;
         $msg_title = 'Verfication code';

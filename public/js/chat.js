@@ -55,7 +55,7 @@ $(document).on('click', '.accept_change', function () {
     $(this).parents('li').find('p').append('<span class=accepted> Accepted !</span>')
 })
 
-$(document).on('click', '.cancel_session', function () {
+$(document).on('click', '.cancel_session, .cancel_change', function () {
   $('.cancel_session_pop_up').fadeIn()
   $('.hide-content').fadeIn()
   $('.yes_cancel').attr('appointment_id', $(this).attr('appointment_id'))
@@ -411,6 +411,7 @@ function editAppointmentDate(new_date, appointment_id, client_id, doctor_id) {
         $('#errors').fadeIn('slow')
         setTimeout(() => {
           $('#errors').fadeOut('slow')
+          location.reload()
         }, 2500);
         return true
       }

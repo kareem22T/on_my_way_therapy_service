@@ -40,7 +40,7 @@
                                 $answer['name'] !== 'signature' &&
                                 $answer['name'] !== 'last_name')
                             <h4>{{ $answer['text'] }}</h4>
-                            <h4>{{ $answer['name'] }}</h4>
+                            {{-- <h4>{{ $answer['name'] }}</h4> --}}
                             <p>
                                 @if (is_array($answer['answer']))
                                     @foreach ($answer['answer'] as $ans)

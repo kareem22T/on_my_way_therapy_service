@@ -201,17 +201,28 @@
                 @if ($wait_list->count() > 0)
                     @foreach ($wait_list as $appointment)
                         <tr>
-                            <div>
+                            <div class="waiting_wrapper">
                                 <div class="details">
-                                    <span>{{ date('F j', strtotime($appointment->date)) }}</span>
                                     <span>{{ $appointment->client->first_name . ' ' . $appointment->client->last_name }}</span>
+                                    <span>{{ date('F j', strtotime($appointment->date)) }}</span>
                                     <span>{{ date('h:i A', strtotime($appointment->date)) }}</span>
                                     <span>{{ $appointment->client->gender }}</span>
                                     <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
                                 </div>
-                                <div class="btns">
-                                    <a href="">Set time</a>
-                                    <a href="/therapist/chats/{{ $appointment->client->id }}">Contact</a>
+                                <div class="btns controls">
+                                    <button class="edit-date btn btn-secondary" appointment_date="{{ $appointment->date }}"
+                                        client_id="{{ $appointment->client->id }}"
+                                        doctor_id="{{ $appointment->doctor->id }}">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                    </button>
+                                    <div class="set-date">
+                                        <input type="datetime-local" name="new_date" id="new_date">
+                                        <input type="submit" name="submit_new_date"
+                                            appointment_id="{{ $appointment->id }}" value="Set date">
+                                    </div>
+
+                                    <a href="/therapist/chats/{{ $appointment->client->id }}" target="_blank"
+                                        class="btn btn-primary">Contact</a>
                                 </div>
                             </div>
                         </tr>

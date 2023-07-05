@@ -13,6 +13,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="stylesheet" href="{{ asset('/css/client.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('/css/doctor.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('/css/maps.css') }}?v={{ time() }}">

@@ -299,7 +299,7 @@ header .container nav .fa-user, header .container nav .fa-bell {
   background: #d5d5d5;
   border-radius: 50px;
 }
-.calendar_wrapper .container .appointments a {
+.calendar_wrapper .container .appointments > a {
   font-size: 19px;
   display: flex;
   gap: 13px;
@@ -314,11 +314,55 @@ header .container nav .fa-user, header .container nav .fa-bell {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 @media (max-width: 599.98px) {
-  .calendar_wrapper .container .appointments a {
+  .calendar_wrapper .container .appointments > a {
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     text-align: center;
   }
+}
+.calendar_wrapper .container .appointments .waiting_wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #444444;
+  background: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.calendar_wrapper .container .appointments .waiting_wrapper .details {
+  display: flex;
+  gap: 20px;
+}
+.calendar_wrapper .container .appointments .waiting_wrapper .btns {
+  position: relative;
+}
+.calendar_wrapper .container .appointments .waiting_wrapper .btns .set-date {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  background: rgba(145, 145, 145, 0.7607843137);
+  padding: 10px;
+  bottom: 125%;
+  right: 0;
+  border-radius: 15px;
+  backdrop-filter: blur(1px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: none;
+}
+.calendar_wrapper .container .appointments .waiting_wrapper .btns .set-date input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  max-width: 200px;
+}
+.calendar_wrapper .container .appointments .waiting_wrapper .btns .set-date input[type=submit] {
+  background-color: #132F75;
+  color: #FFC400;
+  transition: background-color 0.2s ease-in-out;
 }
 .calendar_wrapper .container .appointments h3 {
   font-size: clamp(1.625rem, 1.2636rem + 1.5217vw, 2.5rem);

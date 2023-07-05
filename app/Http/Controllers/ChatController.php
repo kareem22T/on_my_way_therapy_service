@@ -412,6 +412,7 @@ class ChatController extends Controller
         $appointment = Appointment::find($request->id);
         $appointment->date = $request->new_date;
         $appointment->status = 2;
+        $appointment->wait = 0;
         $appointment->save();
 
         if ($appointment) :

@@ -86,7 +86,7 @@
     <main class="account_wrapper login_wrapper">
         <div id="register_root">
             <form action="" id="update" class="lg-grid register_form client_register">
-                <div class="profile g-12 lg-grid" style="flex-direction: column;gap: 0px;">
+                <div class="profile g-12" style="flex-direction: column;gap: 0px;">
                     <div class="form-group g-12 photo_group">
                         <input type="file" name="photo" id="photo" class="form-control">
                         <label for="photo">
@@ -98,7 +98,7 @@
                             </div>
                         </label>
                     </div>
-                    <h1>{{ $client->first_name }} {{ $client->last_name }}</h1>
+                    <h1 class="">{{ $client->first_name }} {{ $client->last_name }}</h1>
                     <a href="/client/logout" class="btn btn-danger">Log out</a>
                 </div>
 

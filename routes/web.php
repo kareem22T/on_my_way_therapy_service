@@ -161,8 +161,8 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
         Route::get("/logout", [ClientRegisterController::class, "logout"])->name('client.logout');
 
         Route::group(['middleware' => 'client_dashboard_visitors'], function () {
-            Route::post('/appoifntment', [ClientController::class, 'insertAppointment']);
-            Route::post('/appoifntment-wait', [ClientController::class, 'insertAppointmentToWaitList']);
+            Route::post('/appointment', [ClientController::class, 'insertAppointment']);
+            Route::post('/appointment-wait', [ClientController::class, 'insertAppointmentToWaitList']);
             Route::post('/slots_approved', [ClientController::class, 'getSlotsApproved']);
             Route::post('/get_slots', [TherapistController::class, 'getWorkingHours']);
             Route::get('/chats/{id?}', [ClientController::class, 'indexChats']);

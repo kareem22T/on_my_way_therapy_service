@@ -368,7 +368,7 @@ $('.confirm-join-wait-list').on('click', function (e) {
   $('.loader').fadeIn().css('display', 'flex');
   if ($('input[name=visit_type]').val() == 1)
     $.ajax({
-      url: '/client/appoifntment-wait',
+      url: '/client/appointment-wait',
       method: 'POST',
       data: {
           doctor_id: $('#join_wait_list').attr('doctor_id'),
@@ -424,7 +424,7 @@ $('.confirm-appointment-address').on('click', function (e) {
         $('.loader').fadeIn().css('display', 'flex')
         let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
         $.ajax({
-            url: $('.address-pop-up').attr('wait') ? '/client/appoifntment-wait' : '/client/appointment',
+            url: $('.address-pop-up').attr('wait') ? '/client/appointment-wait' : '/client/appointment',
             method: 'POST',
             data: {
                 doctor_id: $('#confirm_appointment').attr('doctor_id'),
@@ -487,7 +487,7 @@ $('.confirm-appointment-address-old').on('click', function (e) {
         $('.loader').fadeIn().css('display', 'flex')
         let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
         $.ajax({
-            url: $('.address-pop-up').attr('wait') ? '/client/appoifntment-wait' : '/client/appointment',
+            url: $('.address-pop-up').attr('wait') ? '/client/appointment-wait' : '/client/appointment',
             method: 'POST',
             data: {
                 doctor_id: $('#confirm_appointment').attr('doctor_id'),

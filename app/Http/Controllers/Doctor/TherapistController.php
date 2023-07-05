@@ -91,15 +91,20 @@ class TherapistController extends Controller
         $events = [];
 
         $appointments = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->where('journey', '!=', 4)->with(['client', 'doctor'])->get();
+        $start = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->where('journey', '!=', 4)->with(['client', 'doctor'])->where('date', '>=', Carbon::now())
+            ->orderBy('date', 'asc')->first();
+        $end = Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)->where('journey', 1)->where('journey', '!=', 4)->with(['client', 'doctor'])->where('date', '>=', Carbon::now())
+            ->orderBy('date', 'asc')->first();
 
-        foreach ($appointments as $appointment) {
-            $events[] = [
-                'title' => 'session by: ' . $appointment->client->first_name,
-                'start' => $appointment->start_time,
-                'end' => $appointment->finish_time,
-                'workingHours' => '00:00-12:00',
-            ];
-        }
+        if (!empty($appointments))
+            foreach ($appointments as $appointment) {
+                $events[] = [
+                    'title' => 'session by: ' . $appointment->client->first_name,
+                    'start' => $start->date,
+                    'end' => $end->date,
+                    'workingHours' => '00:00-12:00',
+                ];
+            }
 
         return view('doctor.dashboard.calendar')->with(compact('events'));
     }
