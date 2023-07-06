@@ -152,15 +152,14 @@ class TherapistController extends Controller
 
 
             $currentDayNumber = Carbon::now()->dayOfWeek;
-
-            $today = Carbon::now();
+            $today = Carbon::now('UTC');
 
             $date = $currentDayNumber == $index + 1 ? $today : ((($index + 1) - $currentDayNumber) < 0 ? $today->subDays((($index + 1) - $currentDayNumber) * -1) : $today->addDays(($index + 1) - $currentDayNumber));
 
             // store the working hours in the database
             workinghour::updateOrCreate(
                 ['doctor_id' => $therapistId, 'day_of_week' => $day],
-                ['start_time' => $starttime, 'end_time' => $endtime, 'recurring' => $recurring, 'date' => $date]
+                ['start_time' => $starttime, 'end_time' => $endtime, 'recurring' => $recurring, 'date' => $date->format('Y-m-d')]
             );
         }
 

@@ -39,8 +39,10 @@ $('#set_week').on('click', function (e) {
             error.innerHTML = data.msg
             document.getElementById('errors').append(error)
             $('#errors').fadeIn('slow')
+            $('.loader').fadeIn()
             setTimeout(() => {
               $('#errors').fadeOut('slow')
+              location.reload()
             }, 2000);
         }
 
@@ -76,8 +78,10 @@ $('#set_all_weeks').on('click', function (e) {
             error.innerHTML = data.msg
             document.getElementById('errors').append(error)
             $('#errors').fadeIn('slow')
+            $('.loader').fadeIn()
             setTimeout(() => {
               $('#errors').fadeOut('slow')
+              location.reload()
             }, 2000);
         }
 
