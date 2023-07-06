@@ -144,18 +144,23 @@ class TherapistController extends Controller
         $therapistId = Auth::guard('doctor')->user()->id; // Assuming you have authentication setup
 
 
-        foreach ($request->working_hours_data as $req) {
+        foreach ($request->working_hours_data as $index => $req) {
             $day = $req['day_name'];
-            $startTime = $req['start_work'];
-            $endTime = $req['end_work'];
+            $starttime = $req['start_work'];
+            $endtime = $req['end_work'];
             $recurring = $request->recurring ? true : false;
 
-            $date = $this->getDateOfSpecificDay($day);
 
-            // Store the working hours in the database
-            workingHour::updateOrCreate(
+            $currentDayNumber = Carbon::now()->dayOfWeek;
+
+            $today = Carbon::now();
+
+            $date = $currentDayNumber == $index + 1 ? $today : ((($index + 1) - $currentDayNumber) < 0 ? $today->subDays((($index + 1) - $currentDayNumber) * -1) : $today->addDays(($index + 1) - $currentDayNumber));
+
+            // store the working hours in the database
+            workinghour::updateOrCreate(
                 ['doctor_id' => $therapistId, 'day_of_week' => $day],
-                ['start_time' => $startTime, 'end_time' => $endTime, 'recurring' => $recurring, 'date' => $date]
+                ['start_time' => $starttime, 'end_time' => $endtime, 'recurring' => $recurring, 'date' => $date]
             );
         }
 
