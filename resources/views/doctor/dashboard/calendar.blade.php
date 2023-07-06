@@ -42,13 +42,11 @@
                                             <h4>{{ $day }}</h4>
                                             <input type="text" class="start form-control"
                                                 name="{{ $day }}_start" placeholder="Start work"
-                                                onfocus="(this.type='time')" onblur="(this.type='text')"
-                                                value="{{ isset(App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->start_time)? App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->start_time: '' }}">
+                                                onfocus="(this.type='time')" onblur="(this.type='text')" value="">
 
                                             <input type="text" class="end form-control" name="{{ $day }}_end"
                                                 placeholder="End work" onfocus="(this.type='time')"
-                                                onblur="(this.type='text')"
-                                                value="{{ isset(App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->end_time)? App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->end_time: '' }}">
+                                                onblur="(this.type='text')" value="">
                                         </td>
                                     @endforeach
                                 </tr>
