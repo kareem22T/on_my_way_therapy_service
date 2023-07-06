@@ -98,7 +98,6 @@ class TherapistController extends Controller
                     'title' => 'session by: ' . $appointment->client->first_name,
                     'start' => $appointment->start_time,
                     'end' => $appointment->finish_time,
-                    'workingHours' => '00:00-12:00',
                 ];
             }
 

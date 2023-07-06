@@ -126,12 +126,8 @@ class ClientRequest extends FormRequest
                 foreach ($this->input('managed_clients') as $index => $managed_client) :
                     if (json_decode($managed_client)->first_name == '')
                         $validator->errors()->add('client' . ' ' . ($index + 1) . '_first_name', 'Please enter ' . 'client' . ' ' . ($index + 1) . ' first name');
-                    if (preg_match('/^[a-zA-Z\-\'\s]+$/u', json_decode($managed_client)->first_name))
-                        $validator->errors()->add('client' . ' ' . ($index + 1) . '_first_name', 'Please enter valid first name for' . 'client' . $index);
                     if (json_decode($managed_client)->last_name == '')
                         $validator->errors()->add('client' . ' ' . ($index + 1) . '_last_name', 'Please enter ' . 'client' . ' ' . ($index + 1) . ' last name');
-                    if (preg_match('/^[a-zA-Z\-\'\s]+$/u', json_decode($managed_client)->last_name))
-                        $validator->errors()->add('client' . ' ' . ($index + 1) . '_last_name', 'Please enter valid first name for' . 'client' . $index);
                     if (json_decode($managed_client)->dob == '')
                         $validator->errors()->add('client' . ' ' . ($index + 1) . '_dob', 'Please enter ' . 'client' . ' ' . ($index + 1) . ' Date of brith');
                     if (json_decode($managed_client)->gender == '')

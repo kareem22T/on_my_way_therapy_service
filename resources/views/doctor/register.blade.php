@@ -112,7 +112,7 @@
 
     <form action="" class="pop-up verify-pop-up">
         We have sent you verification code on your email
-        <input type="text" name="phone_code" id="phone_code" placeholder="Enter phone code">
+        <input type="text" name="email_code" id="email_code" placeholder="Enter email code">
         <div class="btns">
             <button type="submit" class="btn btn-success" id="verfiy_therapist">Verify</button>
             <button type="submit" class="btn btn-danger" id="cancel">Cancel</button>
