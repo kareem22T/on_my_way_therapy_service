@@ -43,12 +43,13 @@
                                             <input type="text" class="start form-control"
                                                 name="{{ $day }}_start" placeholder="Start work"
                                                 onfocus="(this.type='time')" onblur="(this.type='text')"
-                                                value="{{ App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->start_time }}">
+                                                value="{{ App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first() == null? '': App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first() == null->start_time }}">
 
                                             <input type="text" class="end form-control" name="{{ $day }}_end"
                                                 placeholder="End work" onfocus="(this.type='time')"
                                                 onblur="(this.type='text')"
-                                                value="{{ App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->end_time }}">                                        </td>
+                                                value="{{ App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first() == null? '': App\Models\WorkingHour::where('day_of_week', $day)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->end_time }}">
+                                        </td>
                                     @endforeach
                                 </tr>
                             </tbody>
