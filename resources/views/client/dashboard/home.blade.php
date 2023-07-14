@@ -259,8 +259,8 @@
                             <span class="text-dark">({{ $therapist->rating->count() }})</span>
                         </span>
                         <h3 class="profession">{{ $therapist->profession->title }}</h3>
-                        <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
-                            therapist_address_lng="{{ $therapist->address_lng }}"
+                        <p class="distance" therapist_profession="{{ $therapist->profession->id }}"
+                            therapist_address="{{ $therapist->address }}"
                             client_address="{{ Auth::guard('client')->user()->address }}">
                         </p>
                         <p class="about">
@@ -373,32 +373,43 @@
                 <script src="{{ asset('/js/doctor/calendar.js') }}?v={{ time() }}"></script>
                 <script src="{{ asset('/js/client/calendar.js') }}?v={{ time() }}"></script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY" defer></script>
-                <script>
-                    function getdistance(origin, address, element) {
-                        const service = new google.maps.DistanceMatrixService(); // instantiate Distance Matrix service
-                        const matrixOptions = {
-                            origins: [origin], // technician locations
-                            destinations: [address], // customer address
-                            travelMode: 'DRIVING',
-                            unitSystem: google.maps.UnitSystem.METRIC
-                        };
-                        // Call Distance Matrix service
-                        service.getDistanceMatrix(matrixOptions, callback);
 
-                        // Callback function used to process Distance Matrix response
-                        function callback(response, status) {
-                            if (status !== "OK") {
-                                alert("Error with distance matrix");
-                                return;
+                <script>
+                    function getdistance(originAddress, destinationAddress, element) {
+                        // Initialize the Directions Service
+                        var directionsService = new google.maps.DirectionsService();
+
+                        // Create a Directions Request object
+                        var request = {
+                            origin: originAddress,
+                            destination: destinationAddress,
+                            travelMode: google.maps.TravelMode.DRIVING, // You can change the travel mode as per your requirement
+                        };
+
+                        // Call the route method of DirectionsService
+                        directionsService.route(request, function(response, status) {
+                            if (status == google.maps.DirectionsStatus.OK) {
+                                // Get the distance in kilometers
+                                var distanceInMeters = response.routes[0].legs[0].distance.value;
+                                var distanceInKilometers = (distanceInMeters / 1000).toFixed(2);
+                                // Get the duration in seconds
+                                var durationInSeconds = response.routes[0].legs[0].duration.value;
+                                // Calculate the average time in minutes
+                                var averageTimeInMinutes = durationInSeconds / 60;
+                                let cost = averageTimeInMinutes * (element.attr('therapist_profession') == 6 ? 3.57 : 3.23)
+
+                                element.html(distanceInKilometers + ` km away | costs $${cost.toFixed(2)}` + (
+                                    distanceInKilometers > 30 ?
+                                    "<br> recomended telehealth" : ''));
+                            } else {
+                                console.log("Error: " + status);
                             }
-                            const distanceInKm = response.rows[0].elements[0].distance.value / 1000;
-                            element.text(distanceInKm + ' km away from you');
-                        }
+                        });
                     }
                     $(function() {
                         $('.distance').each(function() {
                             getdistance(
-                                $(this).attr('therapist_address_lat') + ',' + $(this).attr('therapist_address_lng'),
+                                $(this).attr('therapist_address'),
                                 $(this).attr('client_address'), $(this));
                             // $(this).text(distance)
                         })
@@ -436,8 +447,8 @@
                                         <i class="fa-regular fa-star"></i>
                                     @endfor
                                 </span>
-                                <p class="distance" therapist_address_lat="{{ $therapist->address_lat }}"
-                                    therapist_address_lng="{{ $therapist->address_lng }}"
+                                <p class="distance" therapist_profession="{{ $therapist->profession->id }}"
+                                    therapist_address="{{ $therapist->address }}"
                                     client_address="{{ Auth::guard('client')->user()->address }}">
                                 </p>
                                 <h4>
@@ -479,31 +490,41 @@
     <script src="{{ asset('/js/client/search.js') }}?v={{ time() }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY" defer></script>
     <script>
-        function getdistance(origin, address, element) {
-            const service = new google.maps.DistanceMatrixService(); // instantiate Distance Matrix service
-            const matrixOptions = {
-                origins: [origin], // technician locations
-                destinations: [address], // customer address
-                travelMode: 'DRIVING',
-                unitSystem: google.maps.UnitSystem.METRIC
-            };
-            // Call Distance Matrix service
-            service.getDistanceMatrix(matrixOptions, callback);
+        function getdistance(originAddress, destinationAddress, element) {
+            // Initialize the Directions Service
+            var directionsService = new google.maps.DirectionsService();
 
-            // Callback function used to process Distance Matrix response
-            function callback(response, status) {
-                if (status !== "OK") {
-                    alert("Error with distance matrix");
-                    return;
+            // Create a Directions Request object
+            var request = {
+                origin: originAddress,
+                destination: destinationAddress,
+                travelMode: google.maps.TravelMode.DRIVING, // You can change the travel mode as per your requirement
+            };
+
+            // Call the route method of DirectionsService
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // Get the distance in kilometers
+                    var distanceInMeters = response.routes[0].legs[0].distance.value;
+                    var distanceInKilometers = (distanceInMeters / 1000).toFixed(2);
+                    // Get the duration in seconds
+                    var durationInSeconds = response.routes[0].legs[0].duration.value;
+                    // Calculate the average time in minutes
+                    var averageTimeInMinutes = durationInSeconds / 60;
+                    let cost = averageTimeInMinutes * (element.attr('therapist_profession') == 6 ? 3.57 : 3.23)
+
+                    element.html(distanceInKilometers + ` km away | costs $${cost.toFixed(2)}` + (
+                        distanceInKilometers > 30 ?
+                        "<br> recomended telehealth" : ''));
+                } else {
+                    console.log("Error: " + status);
                 }
-                const distanceInKm = response.rows[0].elements[0].distance.value / 1000;
-                element.text(distanceInKm + ' km away from you');
-            }
+            });
         }
         $(function() {
             $('.distance').each(function() {
                 getdistance(
-                    $(this).attr('therapist_address_lat') + ',' + $(this).attr('therapist_address_lng'),
+                    $(this).attr('therapist_address'),
                     $(this).attr('client_address'), $(this));
                 // $(this).text(distance)
             })
