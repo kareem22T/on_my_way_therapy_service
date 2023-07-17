@@ -112,6 +112,7 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
             Route::get('/appointment/{id?}', [TherapistController::class, 'appointmentDetails']);
             Route::get('/client/{id?}', [TherapistController::class, 'getClientProfileIndex']);
             Route::post("/update", [TherapisRegisterController::class, "update"]);
+            Route::post('/delete-appointment', [TherapistController::class, "deleteAppointemt"]);
         });
 
         Route::get('/pending', [TherapistController::class, 'indexPending'])

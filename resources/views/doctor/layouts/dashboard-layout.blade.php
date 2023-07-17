@@ -91,6 +91,7 @@
     @include('doctor.includes.header')
     @yield('content')
     @include('site.includes.footer')
+    @include('site.includes.loader')
 
     <button class="emergency">
         <img src="{{ asset('/imgs/doctor/emergency-icon.png') }}" alt="">

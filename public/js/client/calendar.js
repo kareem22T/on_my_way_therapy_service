@@ -267,7 +267,7 @@ $(document).on('click', '.slots ul li', function () {
 })
 
 $('.cancel').on('click', function () {
-  $('.pop-up, .hide-content').fadeOut()
+  $('.pop-up, .hide-content, .loader').fadeOut()
 })
 
 // on submit appointment

@@ -116,7 +116,11 @@
                                                     @if ($appointment->visit_type == 0)
                                                         <div class="address">
                                                             <span>{{ $appointment->client->address }}</span>
-                                                            <span>15 km in 5 min</span>
+                                                            <span class="distance"
+                                                                therapist_profession="{{ $appointment->doctor->profession->id }}"
+                                                                therapist_address="{{ $appointment->doctor->address }}"
+                                                                client_address="{{ $appointment->client->address }}">
+                                                            </span>
                                                         </div>
                                                     @else
                                                         <div class="online_session">
@@ -203,4 +207,45 @@
 @endSection
 
 @section('scripts')
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY" defer></script>
+
+    <script>
+        function getdistance(originAddress, destinationAddress, element) {
+            // Initialize the Directions Service
+            var directionsService = new google.maps.DirectionsService();
+
+            // Create a Directions Request object
+            var request = {
+                origin: originAddress,
+                destination: destinationAddress,
+                travelMode: google.maps.TravelMode.DRIVING, // You can change the travel mode as per your requirement
+            };
+
+            // Call the route method of DirectionsService
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // Get the distance in kilometers
+                    var distanceInMeters = response.routes[0].legs[0].distance.value;
+                    var distanceInKilometers = (distanceInMeters / 1000).toFixed(2);
+                    // Get the duration in seconds
+                    var durationInSeconds = response.routes[0].legs[0].duration.value;
+                    // Calculate the average time in minutes
+                    var averageTimeInMinutes = durationInSeconds / 60;
+                    let cost = averageTimeInMinutes * (element.attr('therapist_profession') == 6 ? 3.57 : 3.23)
+
+                    element.html(`${distanceInKilometers} km in ${averageTimeInMinutes.toFixed(0)} min`);
+                } else {
+                    console.log("Error: " + status);
+                }
+            });
+        }
+        $(function() {
+            $('.distance').each(function() {
+                getdistance(
+                    $(this).attr('therapist_address'),
+                    $(this).attr('client_address'), $(this));
+                // $(this).text(distance)
+            })
+        })
+    </script>
 @endsection

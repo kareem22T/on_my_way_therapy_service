@@ -58,9 +58,19 @@
                     </span>
                 </div>
                 <div class="g-4">
+                    @php
+                        use Carbon\Carbon;
+                        $currentMonth = Carbon::now()->month;
+                        $appointmentsPerMonth = auth()
+                            ->guard('doctor')
+                            ->user()
+                            ->appointments()
+                            ->whereMonth('date', '=', $currentMonth)
+                            ->count();
+                    @endphp
                     <h1>Sessions of month</h1>
                     <span>
-                        {{ Auth::guard('doctor')->user()->appointments()->count() }}
+                        {{ $appointmentsPerMonth }}
                     </span>
                 </div>
                 <div class="g-4">

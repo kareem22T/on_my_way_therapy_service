@@ -400,7 +400,7 @@
 
                                 element.html(distanceInKilometers + ` km away | costs $${cost.toFixed(2)}` + (
                                     distanceInKilometers > 30 ?
-                                    "<br> recomended telehealth" : ''));
+                                    "<br> (recomended telehealth)" : ''));
                             } else {
                                 console.log("Error: " + status);
                             }
@@ -515,7 +515,7 @@
 
                     element.html(distanceInKilometers + ` km away | costs $${cost.toFixed(2)}` + (
                         distanceInKilometers > 30 ?
-                        "<br> recomended telehealth" : ''));
+                        "<br> (recomended telehealth)" : ''));
                 } else {
                     console.log("Error: " + status);
                 }

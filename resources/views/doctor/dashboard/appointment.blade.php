@@ -31,7 +31,7 @@
                                 </p>
                             </div>
                             <div class="address">
-                                {{ $appointment->address }}
+                                {{ trim(explode(',', $appointment->address)[0]) }}
                             </div>
                             <div class="time">
                                 <span>{{ \Carbon\Carbon::parse($appointment->date)->format('M d') }}</span>
@@ -92,6 +92,35 @@
             </div>
         </div>
         <div class="hide-content"></div>
+        <div class="pop-up complete-pop-up">
+            <h4>what was the session duration?</h4>
+            <select name="duration" id="duration" class="form-control">
+                <option value="45">45 minutes</option>
+                <option value="60">60 minutes</option>
+                <option value="75">1 hour 15 minutes</option>
+                <option value="90">1 hour 30 minutes</option>
+                <option value="120">2 hours</option>
+            </select>
+            <h4>Do you want to repeat this session again?</h4>
+            <div class="radio">
+                <div class="form-group">
+                    <input type="radio" name="repeat" id="no_repeat" class="form-control" value="0">
+                    <label for="no_repeat">None</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" name="repeat" id="week" class="form-control" value="1">
+                    <label for="week">weekly</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" name="repeat" id="two_week" class="form-control" value="2">
+                    <label for="two_week">every 2 week</label>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="cancel btn btn-secondary">Cancel</button>
+                <button class="confirm-complete btn btn-success">Confirm</button>
+            </div>
+        </div>
     @else
         <h1 class="text-center">Appointment not found</h1>
     @endif

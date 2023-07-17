@@ -113,6 +113,18 @@ class TherapistController extends Controller
 
         return view('doctor.dashboard.appointment')->with(compact('appointment'));
     }
+
+    public function deleteAppointemt(Request $request)
+    {
+        $appointment = Appointment::where('id', $request->appointment_id)->first();
+        $appointment->delete();
+
+        if ($appointment)
+            return response()->json([
+                'status' => 200,
+                'msg' => 'The client has been removed from wait list successfully'
+            ]);
+    }
     public function getDateOfSpecificDay($dayAbbreviation)
     {
         $now = Carbon::now();

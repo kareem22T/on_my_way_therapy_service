@@ -142,16 +142,19 @@ $(document).on('click', '.Arrived', function () {
 })
 
 $(document).on('click', '.complete', function () {
-  $.ajax({
-    url: '/complete',
-    method: 'POST',
-    data: {id: $('.dirction').attr('id'),
-    success: function () {
-        $('.next-step').html('<h1 class="arrived">Completed !</h1>')
-    }
-  }
-  })
+  $('.complete-pop-up, .hide-content').fadeIn()
 })
+// $(document).on('click', '.complete', function () {
+//   $.ajax({
+//     url: '/complete',
+//     method: 'POST',
+//     data: {id: $('.dirction').attr('id'),
+//     success: function () {
+//         $('.next-step').html('<h1 class="arrived">Completed !</h1>')
+//     }
+//   }
+//   })
+// })
 
 $(document).on('click', '.go_to_direction', function() {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${parseFloat($('#appointment_lat').val())},${parseFloat($('#appointment_lng').val())}`, '_blank')

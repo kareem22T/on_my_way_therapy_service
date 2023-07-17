@@ -69,10 +69,12 @@
                     ->where('doctor_id', Auth::guard('doctor')->user()->id)
                     ->where('journey', '!=', 4)
                     ->whereDate('date', '>=', now())
+                    ->orderBy('date', 'ASC')
                     ->paginate(10);
                 
                 $wait_list = App\Models\Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)
                     ->where('wait', 1)
+                    ->orderBy('date', 'ASC')
                     ->paginate(10);
             @endphp
 
@@ -84,7 +86,7 @@
                             <a href="/therapist/appointment/{{ $appointment->id }}" target="_blank">
                                 <span>{{ date('F j', strtotime($appointment->date)) }}</span>
                                 <span>{{ date('h:i A', strtotime($appointment->date)) }}</span>
-                                <span>{{ $appointment->client->address }}</span>
+                                <span>{{ trim(explode(',', $appointment->client->address)[0]) }}</span>
                                 <span>{{ $appointment->client->gender }}</span>
                                 <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
                             </a>
@@ -125,9 +127,19 @@
 
                                     <a href="/therapist/chats/{{ $appointment->client->id }}" target="_blank"
                                         class="btn btn-primary">Contact</a>
+                                    <a href="/" appointment_id="{{ $appointment->id }}" id="delete_appointment"
+                                        class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                             </div>
                         </tr>
+                        <div class="pop-up delete-appointment-pop-up">
+                            <h1>Are you sure you want to remove <span>xxxx</span> form wait list</h1>
+                            <div class="btns">
+                                <button class="cancel btn btn-secondary">Cancel</button>
+                                <button class="delete-appointment btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                        <div class="hide-content"></div>
                     @endforeach
                 @else
                     <tr>

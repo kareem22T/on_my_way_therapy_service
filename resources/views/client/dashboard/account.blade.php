@@ -128,7 +128,7 @@
                 <div class="form-group g-6">
                     <input type="text" name="dob" id="dob" placeholder="Date of birth *"
                         onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control"
-                        value="{{ $client->dob }}">
+                        value="{{ \Carbon\Carbon::parse($client->dob)->format('Y-m-d') }}">
                 </div>
                 <div class="form-group g-6">
                     <button type="submit" class="btn btn-primary text-center form-control w-100"
