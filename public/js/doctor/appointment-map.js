@@ -1,5 +1,14 @@
 // Initialize and add the map
+$(function () {
+  $('input[type="radio"]:checked').each(function () {
+      $(this).nextAll("label").addClass("active");
+  });
 
+  $(document).on("click", ".radio label", function () {
+      $(this).addClass("active");
+      $(this).parent().siblings().find("label").removeClass("active");
+  });
+})
 let map, directionsService, directionsRenderer, marker;
 
 async function initMap() {
@@ -144,17 +153,47 @@ $(document).on('click', '.Arrived', function () {
 $(document).on('click', '.complete', function () {
   $('.complete-pop-up, .hide-content').fadeIn()
 })
-// $(document).on('click', '.complete', function () {
-//   $.ajax({
-//     url: '/complete',
-//     method: 'POST',
-//     data: {id: $('.dirction').attr('id'),
-//     success: function () {
-//         $('.next-step').html('<h1 class="arrived">Completed !</h1>')
-//     }
-//   }
-//   })
-// })
+$(document).on('click', '.confirm-complete', function () {
+  $('.loader').fadeIn().css('display', 'flex')
+  $.ajax({
+    url: '/complete',
+    method: 'POST',
+    data: {id: $('.dirction').attr('id'), duration: $(this).parents('.pop-up').find('#duration').val(), repeat: $(this).parents('.pop-up').find('input[name="repeat"]:checked').val()}
+    ,success: function (data) {
+        if (data.status == 200) {
+          $('.next-step').html('<h1 class="arrived">Completed !</h1>')
+          $('.pop-up, .hide-content').fadeOut()
+          $('.loader').fadeOut()
+          document.getElementById("errors").innerHTML = "";
+          let error = document.createElement("div");
+          error.classList = "alert alert-success";
+          error.innerHTML = data.msg;
+          document.getElementById("errors").append(error);
+          $("#errors").fadeIn("slow");
+          setTimeout(() => {
+            $('.msg-pop-up, .hide-content').fadeIn()
+          }, 500);
+          setTimeout(() => {
+            $("#errors").fadeOut("slow");
+          }, 3000);
+        }
+      },
+      error: function (err) {
+          document.getElementById("errors").innerHTML = "";
+          $(".loader").fadeOut();
+          $.each(err.responseJSON.errors, function (key, value) {
+              let error = document.createElement("div");
+              error.classList = "alert alert-danger";
+              error.innerHTML = value[0];
+              document.getElementById("errors").append(error);
+          });
+          $("#errors").fadeIn("slow");
+          setTimeout(() => {
+              $("#errors").fadeOut("slow");
+          }, 5000);
+      },
+  })
+})
 
 $(document).on('click', '.go_to_direction', function() {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${parseFloat($('#appointment_lat').val())},${parseFloat($('#appointment_lng').val())}`, '_blank')

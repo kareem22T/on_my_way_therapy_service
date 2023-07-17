@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
 {
@@ -289,7 +290,7 @@ class ChatController extends Controller
             $appointment->client->email,
             'The session is approaching',
             'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' . '
-            <h5>Your therapist is starting to move and is now on his way to you.</h5><br>
+            <h3>Your therapist is starting to move and is now on his way to you.</h3><br>
             Login <a href="https://onmywaytherapy.com.au/client/login">HERE</a> to get in touch with your therapist <br>
             Contact us: <br>' .
                 '
@@ -337,7 +338,7 @@ class ChatController extends Controller
             $appointment->client->email,
             'The session is about to start',
             'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' . '
-            <h5>Your therapist has arrived to your location.</h5>
+            <h3>Your therapist has arrived to your location.</h3>
             Login <a href="https://onmywaytherapy.com.au/client/login">HERE</a> to get in touch with your therapist <br>
             Contact us: <br>' .
                 '
@@ -377,9 +378,108 @@ class ChatController extends Controller
     }
     public function complete(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'duration' => 'required',
+            'repeat' => 'required',
+        ], [
+            'duration.required' => 'Please confirm the session duration.',
+            'repeat.required' => 'Please chose how you want repeat this session.',
+        ]);
+
         $appointment = Appointment::find($request->id);
         $appointment->journey = 4;
+        $appointment->duration = $request->duration;
         $appointment->save();
+
+        switch ($request->repeat) {
+            case 1:
+                $insert = Appointment::create([
+                    'doctor_id' => $appointment->doctor_id,
+                    'client_id' => $appointment->client_id,
+                    'visit_type' => $appointment->visit_type,
+                    'date' => Carbon::parse($appointment->date)->addWeek(),
+                    'start_time' => $appointment->date,
+                    'finish_time' => Carbon::parse($appointment->date)->addWeek()->addHours(1.5),
+                    'address' => $appointment->address,
+                    'address_lat' => $appointment->address_lat,
+                    'address_lng' => $appointment->address_lng,
+                ]);
+                if ($insert)
+                    event(new ChatEvent(
+                        'new-notification',
+                        $appointment->client_id . '_' . 2
+                    ));
+                break;
+            case 2:
+                $insert = Appointment::create([
+                    'doctor_id' => $appointment->doctor_id,
+                    'client_id' => $appointment->client_id,
+                    'visit_type' => $appointment->visit_type,
+                    'date' => Carbon::parse($appointment->date)->addWeeks(2),
+                    'start_time' => $appointment->date,
+                    'finish_time' => Carbon::parse($appointment->date)->addWeeks(2)->addHours(1.5),
+                    'address' => $appointment->address,
+                    'address_lat' => $appointment->address_lat,
+                    'address_lng' => $appointment->address_lng,
+                ]);
+                if ($insert)
+                    event(new ChatEvent(
+                        'new-notification',
+                        $appointment->client_id . '_' . 2
+                    ));
+                break;
+
+            default:
+                break;
+        }
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        if ($appointment) :
+            $this->sendEmail(
+                $appointment->client->email,
+                'Session confirmation',
+                'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' . '
+                <h3>Has the session at ' . $appointment->date . ' with Dr.' . $appointment->doctor->first_name .
+                    ' ' . $appointment->doctor->last_name . 'completed?</h3>
+                Please confirm it is completed from here <a href="https://onmywaytherapy.com.au/client/session-confirmation/' . $appointment->id . '">HERE</a><br>
+                Contact us: <br>' .
+                    '
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                    Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/company/94288210/admin/">
+                                    Linkedin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                    Instagram
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                    Youtube
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <h3>Call: 1800 666 929</h3>
+                        ',
+
+            );
+            return response()->json([
+                'status' => 200,
+                'msg' => 'The session has been completed successfuly,<br> wait for the client to confirm it'
+            ]);
+        endif;
     }
 
     public function acceptAppointment(Request $request)

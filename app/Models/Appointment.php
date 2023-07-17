@@ -22,6 +22,7 @@ class Appointment extends Model
         'address_lat',
         'address_lng',
         'journey',
+        'duration',
         'wait'
     ];
 
