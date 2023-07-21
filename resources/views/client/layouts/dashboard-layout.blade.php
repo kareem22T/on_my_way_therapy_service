@@ -28,6 +28,7 @@
     @include('client.includes.header')
     @yield('content')
     @include('site.includes.footer')
+    @include('site.includes.loader')
 
     <input type="hidden" name="pusher_channel_data" id="{{ Auth::guard('client')->user()->id }}" guard_type="2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"

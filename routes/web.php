@@ -174,6 +174,8 @@ Route::group(["namespace" => "client", "prefix" => "client"], function () {
             Route::get('/NDIS/Service-Agreement', [AssessmentController::class, 'serviceAgreementIndex'])->middleware('service_agreement_visitors');
             Route::get('/assessment/risk', [AssessmentController::class, 'riskAssessmentIndex'])->middleware('risk_assessment_visitors');
             Route::post("/update", [ClientRegisterController::class, "update"]);
+            Route::get('/session-confirmation/{id?}', [ChatController::class, "sessionConfirmationIndex"])->middleware('confirm_session_visitor');
+            Route::post('/session-confirmation', [ChatController::class, "confirmSession"]);
         });
     });
     // ......................................

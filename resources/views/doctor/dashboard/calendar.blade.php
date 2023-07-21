@@ -72,6 +72,13 @@
                     ->orderBy('date', 'ASC')
                     ->paginate(10);
                 
+                $meetings = App\Models\Appointment::where('status', 1)
+                    ->where('doctor_id', Auth::guard('doctor')->user()->id)
+                    ->where('visit_type', 1)
+                    ->whereDate('date', '>=', now())
+                    ->orderBy('date', 'ASC')
+                    ->paginate(10);
+                
                 $wait_list = App\Models\Appointment::where('doctor_id', Auth::guard('doctor')->user()->id)
                     ->where('wait', 1)
                     ->orderBy('date', 'ASC')
@@ -148,17 +155,49 @@
                 @endif
             </div>
 
+            <div class="appointments">
+                <h3>Online sessions</h3>
+                @if ($meetings->count() > 0)
+                    @foreach ($meetings as $appointment)
+                        <tr>
+                            <div class="waiting_wrapper" style="flex-wrap: wrap;">
+                                <div class="details">
+                                    <span>{{ $appointment->client->first_name . ' ' . $appointment->client->last_name }}</span>
+                                    <span>{{ date('F j', strtotime($appointment->date)) }}</span>
+                                    <span>{{ date('h:i A', strtotime($appointment->date)) }}</span>
+                                    <span>{{ $appointment->client->gender }}</span>
+                                    <span>{{ Carbon\Carbon::parse($appointment->client->dob)->age }} yo</span>
+                                </div>
+                                <div class="btns controls">
+                                    <a href="/therapist/chats/{{ $appointment->client->id }}" target="_blank"
+                                        class="btn btn-primary">Contact</a>
+
+                                    <button class="btn btn-success" client_id="{{ $appointment->client->id }}"><i
+                                            class="fa fa-evelope"></i> send meeting link</button>
+                                    <button class="btn btn-secondary"><i class="fa fa-link"></i></button>
+                                </div>
+                            </div>
+                        </tr>
+                        <div class="hide-content"></div>
+                    @endforeach
+                @else
+                    <tr>
+                        <p>There are no online sessions!</p>
+                    </tr>
+                @endif
+            </div>
+
             <style>
                 .working-hours {
                     background: black;
                 }
             </style>
-            <div class="this_week_wrapper">
+            {{-- <div class="this_week_wrapper">
                 <h1>
                     My schedule
                 </h1>
                 <div id="calendar"></div>
-            </div>
+            </div> --}}
 
         </div>
     </main>
@@ -166,7 +205,7 @@
 
 @section('scripts')
     <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -182,5 +221,5 @@
 
             calendar.render();
         });
-    </script>
+    </script> --}}
 @endsection

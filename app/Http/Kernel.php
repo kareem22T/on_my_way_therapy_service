@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'client_dashboard_visitors' => \App\Http\Middleware\ClientDashboardVisitors::class,
         'service_agreement_visitors' => \App\Http\Middleware\ServiceAgreementVisitors::class,
         'risk_assessment_visitors' => \App\Http\Middleware\RiskAssessmentVisitors::class,
+        'confirm_session_visitor' => \App\Http\Middleware\ConfirmSessionVisitors::class,
     ];
 }

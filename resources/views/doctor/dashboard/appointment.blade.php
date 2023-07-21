@@ -181,7 +181,7 @@
             </div>
         </div>
 
-        <div class="msg-pop-up pop-up" style="display: block;">
+        <div class="msg-pop-up pop-up">
             <h3 style="font-weight: 600;">Please ensure that the client has confirmed the session from their side</h3>
             <h3>(They have recieved an email)</h3>
             <div class="btns">

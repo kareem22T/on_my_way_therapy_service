@@ -119,7 +119,7 @@
                                                             <span class="distance"
                                                                 therapist_profession="{{ $appointment->doctor->profession->id }}"
                                                                 therapist_address="{{ $appointment->doctor->address }}"
-                                                                client_address="{{ $appointment->client->address }}">
+                                                                client_address="{{ $appointment->address }}">
                                                             </span>
                                                         </div>
                                                     @else

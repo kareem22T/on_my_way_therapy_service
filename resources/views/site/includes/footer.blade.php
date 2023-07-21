@@ -12,7 +12,13 @@
         </div>
         <hr>
         <div>
-            <h4>Contact us or leave feedback</h4>
+            <h4>
+                Contact us or leave feedback
+                <span>
+                    <a href="/client/faq" target="_blanck">FAQ for client</a>
+                    <a href="/therapist/fap" target="_blanck">FAQ for therapist</a>
+                </span>
+            </h4>
             <div class="contact">
                 <div>
                     <a href="https://www.linkedin.com/company/94288210/admin/" target="_blanck">
@@ -169,5 +175,21 @@
         footer {
             flex-direction: column;
         }
+    }
+
+    footer h4 span {
+        display: flex;
+        gap: 15px
+    }
+
+    footer h4 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer h4 span a {
+        color: #FFC400 !important
     }
 </style>

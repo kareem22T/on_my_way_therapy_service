@@ -404,6 +404,8 @@ class ChatController extends Controller
                     'address' => $appointment->address,
                     'address_lat' => $appointment->address_lat,
                     'address_lng' => $appointment->address_lng,
+                    'journey' => 1,
+                    'status' => 1
                 ]);
                 if ($insert)
                     event(new ChatEvent(
@@ -422,6 +424,8 @@ class ChatController extends Controller
                     'address' => $appointment->address,
                     'address_lat' => $appointment->address_lat,
                     'address_lng' => $appointment->address_lng,
+                    'journey' => 1,
+                    'status' => 1
                 ]);
                 if ($insert)
                     event(new ChatEvent(
@@ -600,5 +604,51 @@ class ChatController extends Controller
                 'status' => 200,
                 'msg' => $appointment->client->first_name . ' ' . $appointment->client->last_name . ' has canceld the session.'
             ]);
+    }
+
+    public function sessionConfirmationIndex($appointment_id)
+    {
+        $appointment = Appointment::find($appointment_id);
+        return view('Client.dashboard.confirm-session')->with(compact('appointment'));
+    }
+
+    public function confirmSession(Request $request)
+    {
+        $appointment = Appointment::find($request->input('appointment_id'));
+        $appointment->journey = 5;
+        $appointment->save();
+
+        if ($appointment) :
+            $this->sendEmail(
+                "info@onmywaytherapy.com.au",
+                'a Session have Completed',
+                '
+                <b>Session details</b> <br>
+                Date:' . Carbon::parse($appointment->date)->format('M d') . ' ' . Carbon::parse($appointment->date)->format('h:i a') . '
+                Client name: ' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '<br>' .
+                    'Therapist name: ' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . '<br>' .
+                    ($appointment->visit_type == 0 ?
+                        "Client address: " . $appointment->address . '<br>' : '') .
+                    "Client gender: " . $appointment->client->gender . '<br>' .
+                    "Client age: " .  Carbon::parse($appointment->client->dob)->age . ' years old<br><hr><br>
+                    <b>Invoice</b>: <br>
+                    Costs the client: ' .
+                    (((int) $appointment->duration) / 60) *
+                    ($appointment->doctor->profession->id == 6 ? 214.41 : 193.99)
+                    . ' + ' . $request->input('client_cost') . ' Travel cost<br>
+                    Therapist profit: ' .
+                    (((int) $appointment->duration) / 60) *
+                    (139)
+                    . ' + '
+                    . $request->input('therapist_profit') . ' Travel cost<br>
+                    Session duration: ' . $appointment->duration . '<br>
+                    ' . ($appointment->duration != $request->input('duration') ? "<br> Note: The client confirmed the session as " . $request->input('duration') . " min while the therapist confirmed as " . $appointment->duration . " whitch is not the same" : '')
+            );
+
+            return response()->json([
+                'status' => 200,
+                'msg' => 'thanks for confirm session!'
+            ]);
+        endif;
     }
 }
