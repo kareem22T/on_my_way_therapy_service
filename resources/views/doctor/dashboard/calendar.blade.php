@@ -187,11 +187,6 @@
                 @endif
             </div>
 
-            <style>
-                .working-hours {
-                    background: black;
-                }
-            </style>
             <div class="this_week_wrapper">
                 <h1>
                     My schedule
@@ -205,7 +200,7 @@
 
 @section('scripts')
     <script src="{{ asset('/js/doctor/calendar.js') }}"></script>
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -221,5 +216,5 @@
 
             calendar.render();
         });
-    </script> --}}
+    </script>
 @endsection
