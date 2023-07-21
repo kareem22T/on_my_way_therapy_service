@@ -192,12 +192,12 @@
                     background: black;
                 }
             </style>
-            {{-- <div class="this_week_wrapper">
+            <div class="this_week_wrapper">
                 <h1>
                     My schedule
                 </h1>
                 <div id="calendar"></div>
-            </div> --}}
+            </div>
 
         </div>
     </main>
