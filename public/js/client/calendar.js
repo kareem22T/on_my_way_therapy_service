@@ -296,7 +296,7 @@ $('#confirm_appointment').on('click', function (e) {
                       url: '/client/appointment',
                       method: 'POST',
                       data: {
-                          doctor_id: $(this).attr('doctor_id'),
+                          doctor_id: $('#confirm_appointment').attr('doctor_id'),
                           date: selected_slot,
                           visit_type: $('input[name=visit_type]:checked').val()
                       },

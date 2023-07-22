@@ -156,7 +156,6 @@
                 </div>
             </div>
         @elseif (isset($therapist))
-            @include('site.includes.loader')
             <div class="container lg-grid client_calendar_wrapper">
                 <div class="booking g-7">
                     <div class="preview_warapper">

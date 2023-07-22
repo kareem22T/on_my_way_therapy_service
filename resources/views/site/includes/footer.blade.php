@@ -16,7 +16,7 @@
                 Contact us or leave feedback
                 <span>
                     <a href="/client/faq" target="_blanck">FAQ for client</a>
-                    <a href="/therapist/fap" target="_blanck">FAQ for therapist</a>
+                    <a href="/therapist/faq" target="_blanck">FAQ for therapist</a>
                 </span>
             </h4>
             <div class="contact">

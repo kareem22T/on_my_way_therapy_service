@@ -17,6 +17,7 @@ class Appointment extends Model
         'finish_time',
         'comments',
         'visit_type',
+        'meeting_link',
         'status',
         'address',
         'address_lat',

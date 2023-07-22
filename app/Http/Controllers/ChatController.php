@@ -16,6 +16,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Google\Service\Calendar;
 
 class ChatController extends Controller
 {
@@ -219,6 +220,40 @@ class ChatController extends Controller
         $appointment->status = true;
         $appointment->journey = true;
 
+        if ($appointment->visit_type == 1) :
+            $calendar = new Calendar([
+                'credentials' => [
+                    'web' => [
+                        'client_id' => '532068462627-8v0td17onc5e0rv59j1re9q34pkcnah4.apps.googleusercontent.com',
+                        'project_id' => 'on-my-way-therapy',
+                        'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
+                        'token_uri' => 'https://oauth2.googleapis.com/token',
+                        'auth_provider_x509_cert_url' => 'https://www.googleapis.com/oauth2/v1/certs',
+                        'client_secret' => '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',
+                    ],
+                ],
+            ]);
+
+
+            $event = new \Google\Service\Calendar\Event(array(
+                'summary' => $appointment->doctor->profession->title . ' session with Dr.' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . 'for ' .
+                    $appointment->client->first_name . ' ' . $appointment->client->last_name,
+                'start' => array(
+                    'dateTime' => Carbon::parse($appointment->date),
+                    'timeZone' => 'UTC',
+                ),
+                'end' => array(
+                    'dateTime' => Carbon::parse($appointment->date)->addHours(2),
+                    'timeZone' => 'UTC',
+                ),
+            ));
+
+            $event = $calendar->events->insert('primary', $event);
+
+            $meetingLink = $event->getHtmlLink();
+            $appointment->meeting_link = $meetingLink;
+        endif;
+
         $appointment->save();
 
         $notification = Notification::create([
@@ -234,6 +269,7 @@ class ChatController extends Controller
                 'Your session at ' .
                 Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date)->format('F j, g:i A')
                 . ' has been approved by: Dr.' . $appointment->doctor->first_name .
+                ($appointment->visit_type == 1 ? '<br><b>Here is the session link <a href="' . $appointment->meeting_link . '">Join here</a></b>' : '') .
                 '<br> Login <a href="https://onmywaytherapy.com.au/client/login">Here</a> to contact the therapist and know more details'
                 . '<hr>Contact us: <br>' .
                 '
@@ -491,6 +527,39 @@ class ChatController extends Controller
         $appointment = Appointment::find($request->id);
 
         $appointment->status = true;
+        if ($appointment->visit_type == 1) :
+            $calendar = new Calendar([
+                'credentials' => [
+                    'web' => [
+                        'client_id' => '532068462627-8v0td17onc5e0rv59j1re9q34pkcnah4.apps.googleusercontent.com',
+                        'project_id' => 'on-my-way-therapy',
+                        'auth_uri' => 'https://accounts.google.com/o/oauth2/auth',
+                        'token_uri' => 'https://oauth2.googleapis.com/token',
+                        'auth_provider_x509_cert_url' => 'https://www.googleapis.com/oauth2/v1/certs',
+                        'client_secret' => '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',
+                    ],
+                ],
+            ]);
+
+
+            $event = new \Google\Service\Calendar\Event(array(
+                'summary' => $appointment->doctor->profession->title . ' session with Dr.' . $appointment->doctor->first_name . ' ' . $appointment->doctor->last_name . 'for ' .
+                    $appointment->client->first_name . ' ' . $appointment->client->last_name,
+                'start' => array(
+                    'dateTime' => Carbon::parse($appointment->date),
+                    'timeZone' => 'UTC',
+                ),
+                'end' => array(
+                    'dateTime' => Carbon::parse($appointment->date)->addHours(2),
+                    'timeZone' => 'UTC',
+                ),
+            ));
+
+            $event = $calendar->events->insert('primary', $event);
+
+            $meetingLink = $event->getHtmlLink();
+            $appointment->meeting_link = $meetingLink;
+        endif;
 
         $appointment->save();
 
@@ -498,11 +567,50 @@ class ChatController extends Controller
         $msg->msg_data = '<p>' . $request->msg_content . '</p><span class=accepted> Accepted !</span>';
         $msg->save();
 
-        if ($appointment && $msg)
+        if ($appointment && $msg) :
+            $this->sendEmail(
+                $appointment->client->email,
+                'Session approved',
+                'Hi "' . $appointment->client->first_name . ' ' . $appointment->client->last_name . '"<br>' .
+                    'Your session at ' .
+                    Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date)->format('F j, g:i A')
+                    . ' has been approved by: Dr.' . $appointment->doctor->first_name .
+                    ($appointment->visit_type == 1 ? '<br><b>Here is the session link <a href="' . $appointment->meeting_link . '">Join here</a></b>' : '') .
+                    '<br> Login <a href="https://onmywaytherapy.com.au/client/login">Here</a> to contact the therapist and know more details'
+                    . '<hr>Contact us: <br>' .
+                    '
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/people/On-My-Way-Therapy/100092588026660/">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/94288210/admin/">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/on_my_way_therapy_australia/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@OnMyWayTherapy">
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h3>Call: 1800 666 929</h3>
+                    ',
+
+            );
             return response()->json([
                 'status' => 200,
                 'msg' => $appointment->client->first_name . ' ' . $appointment->client->last_name . ' has accepted the new session date.'
             ]);
+        endif;
     }
 
     public function editAppointmentTime(Request $request)
