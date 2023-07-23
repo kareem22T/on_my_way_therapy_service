@@ -249,22 +249,9 @@ class RegisterController extends Controller
     }
     // .....................................
 
-    public function getUserFromToken(Request $request)
+    function currentUser()
     {
-
-        // Get the token from the database.
-        $tokenData = \App\Models\PersonalAccessToken::where('token', $request->token)->first();
-
-        // If the token is not found, return an error.
-        if ($tokenData === null) {
-            return response()->json(['error' => 'Invalid token.'], 401);
-        }
-
-        // Get the user from the token.
-        $user = $tokenData->tokenable;
-
-        // Return the user.
-        return $user;
+        return Auth::guard('client')->user();
     }
 
     // logout from client account
