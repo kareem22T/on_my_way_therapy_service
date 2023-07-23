@@ -11,8 +11,6 @@ Route::group(['middleware' => 'api_password_middleware'], function () {
     });
     Route::group(['prefix' => '/client'], function () {
         Route::post('/login', [ClientRegisterController::class, 'loginApi']);
-        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-            return $request->user();
-        });
+        Route::post('/client-user', [ClientRegisterController::class, 'getUserFromToken']);
     });
 });
