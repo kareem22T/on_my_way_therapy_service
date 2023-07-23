@@ -241,10 +241,13 @@ class RegisterController extends Controller
         }
 
         if (Auth::guard('client')->attempt($credentials)) {
-            $token = Auth::guard('client')->user()->createToken('Personal Access Token');
+            $token = JWT::encode([
+                'id' => Auth::guard('client')->user()->id,
+                'name' => Auth::guard('client')->user()->first_name,
+            ], $secretKey, ['HS256']);
 
             return response()->json([
-                'access_token' => $token->accessToken,
+                'access_token' => $token,
                 'token_type' => 'Client',
             ]);
         }

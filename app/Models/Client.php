@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use \Tymon\JWTAuth\JWT;
 
 class Client extends Authenticatable
 {
@@ -50,16 +49,6 @@ class Client extends Authenticatable
     ];
 
     protected  $guard  = "client";
-
-    public function createToken()
-    {
-        $token = JWT::encode([
-            'id' => $this->id,
-            'name' => $this->first_name,
-        ], $this->secretKey, ['HS256']);
-
-        return $token;
-    }
 
     // realations 
     public function diagnosis()
