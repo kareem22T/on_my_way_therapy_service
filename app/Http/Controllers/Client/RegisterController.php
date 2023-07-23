@@ -240,13 +240,16 @@ class RegisterController extends Controller
             $credentials = ['phone' => $request->input('emailorphone'), 'password' => $request->input('password')];
         }
 
-        if (!Auth::guard('client_jwt')->attempt($credentials)) {
-            return back()->with(['errorLogin' => 'Your email/phone number or password are incorrect']);
+        if (Auth::guard('client')->attempt($credentials)) {
+            $token = Auth::guard('client')->user()->createToken('Personal Access Token');
+
+            return response()->json([
+                'access_token' => $token->accessToken,
+                'token_type' => 'Client',
+            ]);
         }
 
-        $token = auth()->attempt($credentials);
-
-        return response()->json(['token' => $token]);
+        return response()->json(['errorLogin' => 'Your email/phone number or password are incorrect']);
     }
     // .....................................
 

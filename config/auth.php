@@ -52,14 +52,6 @@ return [
             'lifetime' => 60 * 24 * 30, // session lifetime in minutes
             'expire_on_close' => true,
         ],
-        'doctor_jwt' => [
-            'driver' => 'jwt',
-            'provider' => 'doctors',
-        ],
-        'client_jwt' => [
-            'driver' => 'jwt',
-            'provider' => 'clients',
-        ],
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
