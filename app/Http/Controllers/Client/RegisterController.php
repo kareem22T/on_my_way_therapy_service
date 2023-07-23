@@ -251,10 +251,9 @@ class RegisterController extends Controller
 
     public function getUserFromToken(Request $request)
     {
-        $token = $request->bearerToken();
 
         // Get the token from the database.
-        $tokenData = \App\Models\PersonalAccessToken::where('token', $token)->first();
+        $tokenData = \App\Models\PersonalAccessToken::where('token', $request->token)->first();
 
         // If the token is not found, return an error.
         if ($tokenData === null) {
