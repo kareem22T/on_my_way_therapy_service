@@ -11,5 +11,6 @@ Route::group(['middleware' => 'api_password_middleware'], function () {
     });
     Route::group(['prefix' => '/client'], function () {
         Route::post('/login', [ClientRegisterController::class, 'loginApi']);
+        Route::post('/user', [ClientRegisterController::class, 'currentUser']);
     });
 });

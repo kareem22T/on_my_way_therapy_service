@@ -25,4 +25,15 @@ class Authenticate extends Middleware
 
         return $request->expectsJson() ? null : route('site.home');
     }
+
+    public function handle($request, Closure $next, ...$guards)
+    {
+        if ($jwt = $request->token) {
+            $request->headers->set('Authorization', 'Bearer ' . $jwt);
+        }
+
+        $this->authenticate($request, $guards);
+
+        return $next($request);
+    }
 }

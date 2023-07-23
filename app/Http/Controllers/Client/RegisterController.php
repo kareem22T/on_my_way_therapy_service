@@ -249,6 +249,10 @@ class RegisterController extends Controller
     }
     // .....................................
 
+    function currentUser() {
+        return Auth::guard('client')->user();
+    }
+
     // logout from client account
     public function logout()
     {
