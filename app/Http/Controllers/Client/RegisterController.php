@@ -249,8 +249,6 @@ class RegisterController extends Controller
     }
     // .....................................
 
-    use Illuminate\Http\Request;
-
     public function getUserFromToken(Request $request)
     {
         $token = $request->bearerToken();
