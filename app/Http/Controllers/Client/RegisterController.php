@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Pnlinh\InfobipSms\Facades\InfobipSms;
+use Tymon\JWTAuth\JWT;
 
 class RegisterController extends Controller
 {
@@ -231,8 +232,8 @@ class RegisterController extends Controller
     }
     // .....................................
 
-    // login as a client from api jwt.........................................
-    public function jwtLogin(Request $request)
+    // login as a client .........................................
+    public function loginApi(Request $request)
     {
         if (filter_var($request->input('emailorphone'), FILTER_VALIDATE_EMAIL)) {
             $credentials = ['email' => $request->input('emailorphone'), 'password' => $request->input('password')];
@@ -241,17 +242,9 @@ class RegisterController extends Controller
         }
 
         if (Auth::guard('client')->attempt($credentials)) {
-            $token = JWT::encode([
-                'id' => Auth::guard('client')->user()->id,
-                'name' => Auth::guard('client')->user()->first_name,
-            ], $secretKey, ['HS256']);
-
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'Client',
-            ]);
+            $token = Auth::guard('client')->user()->createToken('token')->plainTextToken;
+            return $token;
         }
-
         return response()->json(['errorLogin' => 'Your email/phone number or password are incorrect']);
     }
     // .....................................
