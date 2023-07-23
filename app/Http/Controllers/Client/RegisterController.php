@@ -231,6 +231,25 @@ class RegisterController extends Controller
     }
     // .....................................
 
+    // login as a client from api jwt.........................................
+    public function jwtLogin(Request $request)
+    {
+        if (filter_var($request->input('emailorphone'), FILTER_VALIDATE_EMAIL)) {
+            $credentials = ['email' => $request->input('emailorphone'), 'password' => $request->input('password')];
+        } else {
+            $credentials = ['phone' => $request->input('emailorphone'), 'password' => $request->input('password')];
+        }
+
+        if (!Auth::guard('client_jwt')->attempt($credentials)) {
+            return back()->with(['errorLogin' => 'Your email/phone number or password are incorrect']);
+        }
+
+        $token = auth()->attempt($credentials);
+
+        return response()->json(['token' => $token]);
+    }
+    // .....................................
+
     // logout from client account
     public function logout()
     {

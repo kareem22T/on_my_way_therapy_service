@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
         'service_agreement_visitors' => \App\Http\Middleware\ServiceAgreementVisitors::class,
         'risk_assessment_visitors' => \App\Http\Middleware\RiskAssessmentVisitors::class,
         'confirm_session_visitor' => \App\Http\Middleware\ConfirmSessionVisitors::class,
+        'api_password_middleware' => \App\Http\Middleware\apiPasswordMiddleware::class,
     ];
 }
