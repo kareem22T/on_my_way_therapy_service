@@ -146,7 +146,7 @@
                 </div>
                 <div id="choose_location">
                     <i class="fa-solid fa-map-location-dot"></i>
-                    <p>Choose location on map</p>
+                    <p>write your location</p>
                 </div>
                 <button class="btn btn-danger cancel">Cancel</button>
             </div>
