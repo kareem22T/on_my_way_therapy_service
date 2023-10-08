@@ -75,12 +75,14 @@
                     <input type="hidden" name="address" id="address">
                     <a href="" id="address-a">Address *</a>
                 </div>
-                <div class="form-group g-6">
+                <div class="form-group g-6 pass-group">
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password *">
+                    <i class="fa fa-eye togglePassVisabilaty"></i>
                 </div>
-                <div class="form-group g-6">
+                <div class="form-group g-6 pass-group">
                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
                         placeholder="Confirm password *">
+                    <i class="fa fa-eye togglePassVisabilaty"></i>
                 </div>
                 <div class="form-group g-6">
                     <input type="text" name="dob" id="dob" placeholder="Date of birth *"

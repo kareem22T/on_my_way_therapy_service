@@ -20,8 +20,9 @@
                 <input type="text" name="emailorphone" id="emailorphone" class="form-control" placeholder="Email or phone number" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group pass-group">
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                <i class="fa fa-eye togglePassVisabilaty"></i>
             </div>
 
             <button type="submit" class="g-2 btn btn-primary form-control">Login</button>
@@ -36,7 +37,7 @@
         $('#errors').fadeIn('slow')
         setTimeout(() => {
             $('#errors').fadeOut('slow')
-        }, 2000);
+        }, 8000);
     })
 </script>
 @endsection

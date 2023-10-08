@@ -89,7 +89,7 @@
                     <div>
                         <a href="https://form.jotform.com/231594061545557?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
                             class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}"
-                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
+                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}" target="_blanck">
                             NDIS service agreement
                             @if ($serviceAgreement == true)
                                 <i class="fa fa-circle-check text-success"></i>
@@ -99,7 +99,7 @@
                         </a>
                         <a href="https://form.jotform.com/231613271952554?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
                             class="{{ $riskAssessment == true ? 'done_risk' : '' }}"
-                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
+                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}" target="_blanck">
                             Risk assessment template
                             @if ($riskAssessment == true)
                                 <i class="fa fa-circle-check text-success"></i>
@@ -337,7 +337,7 @@
                     Please, you have to fill these first
                     <div>
                         <a href="https://form.jotform.com/231594061545557?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
-                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}">
+                            class="{{ $serviceAgreement == true ? 'done_argeement' : '' }}" target="_blanck">
                             NDIS service agreement
                             @if ($serviceAgreement == true)
                                 <i class="fa fa-circle-check text-success"></i>
@@ -346,7 +346,7 @@
                             @endif
                         </a>
                         <a href="https://form.jotform.com/231613271952554?client_id={{ $client->id }}&first_name={{ $client->first_name }}&last_name={{ $client->last_name }}&email={{ $client->email }}&phone={{ $client->phone }}&dob={{ $client->dob }}"
-                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}">
+                            class="{{ $riskAssessment == true ? 'done_risk' : '' }}" target="_blanck">
                             Risk assessment template
                             @if ($riskAssessment == true)
                                 <i class="fa fa-circle-check text-success"></i>
@@ -366,12 +366,13 @@
             <div class="hide-content"></div>
             @section('scripts')
                 <script src="{{ asset('/js/maps.js') }}?v={{ time() }}"></script>
-                {{-- <script
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
-                    defer></script> --}}
                 <script src="{{ asset('/js/doctor/calendar.js') }}?v={{ time() }}"></script>
                 <script src="{{ asset('/js/client/calendar.js') }}?v={{ time() }}"></script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY" defer></script>
+                <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGhGk3DTCkjF1EUxpMm5ypFoQ-ecrS2gY&callback=initMap&libraries=places&v=weekly"
+                    defer></script>
+
 
                 <script>
                     function getdistance(originAddress, destinationAddress, element) {
@@ -397,9 +398,7 @@
                                 var averageTimeInMinutes = durationInSeconds / 60;
                                 let cost = averageTimeInMinutes * (element.attr('therapist_profession') == 6 ? 3.57 : 3.23)
 
-                                element.html(distanceInKilometers + ` km away | costs $${cost.toFixed(2)}` + (
-                                    distanceInKilometers > 30 ?
-                                    "<br> (recomended telehealth)" : ''));
+                                element.html(distanceInKilometers + ` km away ` + (distanceInKilometers < 30 ? `| travel cost $${cost.toFixed(2)}` : "<br> (recomended telehealth)"))
                             } else {
                                 console.log("Error: " + status);
                             }
@@ -512,9 +511,7 @@
                     var averageTimeInMinutes = durationInSeconds / 60;
                     let cost = averageTimeInMinutes * (element.attr('therapist_profession') == 6 ? 3.57 : 3.23)
 
-                    element.html(distanceInKilometers + ` km away | costs $${cost.toFixed(2)}` + (
-                        distanceInKilometers > 30 ?
-                        "<br> (recomended telehealth)" : ''));
+                    element.html(distanceInKilometers + ` km away ` + (distanceInKilometers < 30 ? `| travel cost $${cost.toFixed(2)}` : "<br> (recomended telehealth)"))
                 } else {
                     console.log("Error: " + status);
                 }

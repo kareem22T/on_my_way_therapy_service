@@ -85,7 +85,6 @@ class MainController extends Controller
         $therapist = Doctor::find($request->therapist_id);
         $therapist->diagnosis()->delete();
         $therapist->ClientAgeRange()->delete();
-        $therapist->holidays()->delete();
         $therapist->chats()->delete();
         $therapist->appointments()->delete();
         $therapist->delete();

@@ -90,8 +90,8 @@ $(function () {
         const clientForm = $('.managed_client .additional-info:first-child').clone();
         $('.clients_wrapper').append(clientForm)
         clientForm.find('>h1').html('Client <span>#' + (clientForm.parent().children().length) + '</span><i class="fa fa-close"></i>')
-        
-        clientForm.find('input, select').each(function() {
+
+        clientForm.find('input, select').each(function () {
             let name = $(this).attr('name');
             let id = $(this).attr('id');
 
@@ -102,8 +102,8 @@ $(function () {
 
             $(this).not('[type="radio"]').val('')
         });
-        
-        clientForm.find('label').each(function() {
+
+        clientForm.find('label').each(function () {
             let forAttr = $(this).attr('for');
 
             if (forAttr) {
@@ -125,7 +125,7 @@ $(function () {
             let last_name = $(`#client_managed_${i}_last_name`).val()
             let dob = $(`#client_managed_${i}_dob`).val()
             let gender = $(`#client_managed_${i}_gender`).val()
-            let client_type = i > 1 ? $(`input[name="client_managed_${i}_client_type"]:checked`).attr('value'): document.querySelector(`input[name="client_managed_${i}_client_type"]:checked`).value 
+            let client_type = i > 1 ? $(`input[name="client_managed_${i}_client_type"]:checked`).attr('value') : document.querySelector(`input[name="client_managed_${i}_client_type"]:checked`).value
             let managment_type = i > 1 ? $(`input[name="client_managed_${i}_managment_type"]:checked`).attr('value') : document.querySelector(`input[name="client_managed_${i}_managment_type"]:checked`).value
 
             client.first_name = first_name
@@ -195,7 +195,7 @@ $(function () {
                 $(".loader").fadeOut();
                 setTimeout(() => {
                     $("#errors").fadeOut("slow");
-                }, 5000);
+                }, 8000);
             },
         });
     })
@@ -216,7 +216,7 @@ $("#photo").change(function () {
         $("#errors").fadeIn("slow");
         setTimeout(() => {
             $("#errors").fadeOut("slow");
-        }, 2000);
+        }, 8000);
 
         $(this).val(null);
         $("#preview").attr(
@@ -292,7 +292,7 @@ document
                 $(".loader").fadeOut();
                 setTimeout(() => {
                     $("#errors").fadeOut("slow");
-                }, 5000);
+                }, 8000);
             },
         });
     });
@@ -349,10 +349,10 @@ function clientRegisteration() {
     formData.append("correct_email_code", sessionStorage.getItem("emailCode"));
 
     if (document.querySelector(`input[name="account_type"]:checked`).value == 1)
-    clients.forEach((object, index) => {
-        const jsonString = JSON.stringify(object);
-        formData.append(`managed_clients[${index}]`, jsonString);
-    });
+        clients.forEach((object, index) => {
+            const jsonString = JSON.stringify(object);
+            formData.append(`managed_clients[${index}]`, jsonString);
+        });
 
     let now = new Date();
     let created_at = new Date(sessionStorage.getItem("code_expiration"));
@@ -408,7 +408,7 @@ function clientRegisteration() {
             $("#errors").fadeIn("slow");
             setTimeout(() => {
                 $("#errors").fadeOut("slow");
-            }, 5000);
+            }, 8000);
         },
     });
 }
@@ -423,13 +423,13 @@ function addDiagnosis() {
         $("#errors").fadeIn("slow");
         setTimeout(() => {
             $("#errors").fadeOut("slow");
-        }, 2000);
+        }, 8000);
     } else {
         $(".diagnosis").append(
             "<li>" +
-                $("#diagnosis").val() +
-                '<i class="fa-regular fa-circle-xmark"></i>' +
-                "</li>"
+            $("#diagnosis").val() +
+            '<i class="fa-regular fa-circle-xmark"></i>' +
+            "</li>"
         );
         $("#diagnosis").val("");
     }
@@ -460,7 +460,7 @@ function sendCodes(phone_key, phone, email) {
                 setTimeout(() => {
                     $("#errors").fadeOut("slow");
                     $(".loader").fadeOut("slow");
-                }, 5000);
+                }, 8000);
             }
         },
     });

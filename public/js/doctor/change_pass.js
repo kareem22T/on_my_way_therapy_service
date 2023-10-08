@@ -19,25 +19,24 @@ $('#step-1-v2').on('submit', function (e) {
 
 function submitVerfication() {
     let formData = new FormData(document.getElementById('step-1-v2'));
-
+    $('.loader').fadeIn().css('display', 'flex')
     $.ajax({
-        url: '/therapist/set-password',
+        url: '/therapist/show-change-password-view',
         method: "POST",
         data: formData,
         processData: false,
         contentType: false,
         success: function (data) {
-            if (data.status == 200) {
-                document.getElementById('errors').innerHTML = ''
-                let error = document.createElement('div')
-                error.classList = 'alert alert-success'
-                error.innerHTML = data.msg
-                document.getElementById('errors').append(error)
-                $('#errors').fadeIn('slow')
-                setTimeout(() => {
-                    location.reload()
-                }, 1200);
-            }
+            document.getElementById('errors').innerHTML = ''
+            let error = document.createElement('div')
+            error.classList = 'alert alert-success'
+            error.innerHTML = data.msg
+            document.getElementById('errors').append(error)
+            $('#errors').fadeIn('slow')
+            setTimeout(() => {
+                // $('html').html(data);
+                $('.loader').fadeOut()
+            }, 1200);
         },
         error: function (err) {
             document.getElementById('errors').innerHTML = ''

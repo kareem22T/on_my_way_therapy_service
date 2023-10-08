@@ -3,14 +3,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
 }
 
 body {
   overflow: hidden auto;
 }
 body::after {
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   position: fixed;
@@ -18,7 +18,7 @@ body::after {
   left: 0;
   background-attachment: fixed;
   z-index: -1;
-  opacity: 0.08;
+  opacity: .08;
 }
 
 /* nice scroll bar */
@@ -43,8 +43,8 @@ body::after {
   margin: 0 auto;
 }
 
-#register_root form .diagnosis_wrapper ul li, #register_root form .diagnosis_wrapper, #register_root form .choice > div, #register_root form .photo_group label .after, #register_root form .file,
-#register_root form .have_one, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form.verfy_form, #register_root form.payment_form, #register_root .steps li, #register_root .steps, #register_root, .login_wrapper, .flex-center {
+.login_wrapper, #register_root, #register_root .steps, #register_root .steps li, #register_root form.verfy_form, #register_root form.payment_form, #register_root form.verfy_form .form-group, #register_root form.payment_form .form-group, #register_root form .file,
+#register_root form .have_one, #register_root form .photo_group label .after, #register_root form .choice > div, #register_root form .diagnosis_wrapper, #register_root form .diagnosis_wrapper ul li, .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,7 +109,7 @@ body::after {
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 222222222222222200000000000000;
+  z-index: 222222222222222222222222222222;
   display: none;
 }
 
@@ -134,7 +134,7 @@ body {
   gap: 25px;
   max-width: 550px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.3411764706);
+  background: #ffffff57;
   padding: 30px;
   border-radius: 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -154,8 +154,8 @@ body {
   width: 100%;
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(0.8125rem, 0.5543rem + 1.087vw, 1.4375rem);
-  line-height: clamp(1.125rem, 0.6087rem + 2.1739vw, 2.375rem);
+  font-size: clamp(0.8125rem, calc(0.5543rem + 1.087vw), 1.4375rem);
+  line-height: clamp(1.125rem, calc(0.6087rem + 2.1739vw), 2.375rem);
 }
 .login_wrapper .doctor_login_form button {
   background-color: #FFC400;
@@ -180,22 +180,22 @@ body {
   object-fit: contain;
 }
 
-input[type=checkbox] {
-  width: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
-  height: clamp(0.9375rem, 0.6793rem + 1.087vw, 1.5625rem);
+input[type="checkbox"] {
+  width: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
+  height: clamp(0.9375rem, calc(0.6793rem + 1.087vw), 1.5625rem);
 }
 
 #register_root {
   width: 100%;
   max-width: 1000px;
   flex-direction: column;
-  gap: clamp(1.25rem, 0.8482rem + 1.6484vw, 2.1875rem);
+  gap: clamp(1.25rem, calc(0.8482rem + 1.6484vw), 2.1875rem);
 }
 #register_root > p {
   font-style: normal;
   font-weight: 700;
-  font-size: clamp(1.25rem, 0.7143rem + 2.1978vw, 2.5rem);
-  line-height: clamp(1.375rem, 0.625rem + 3.0769vw, 3.125rem);
+  font-size: clamp(1.25rem, calc(0.7143rem + 2.1978vw), 2.5rem);
+  line-height: clamp(1.375rem, calc(0.625rem + 3.0769vw), 3.125rem);
   text-align: center;
   color: #132F75;
   margin: 0;
@@ -204,11 +204,11 @@ input[type=checkbox] {
   list-style: none;
 }
 #register_root .steps li {
-  width: clamp(2.5rem, 1.9643rem + 2.1978vw, 3.75rem);
-  height: clamp(2.5rem, 1.9643rem + 2.1978vw, 3.75rem);
+  width: clamp(2.5rem, calc(1.9643rem + 2.1978vw), 3.75rem);
+  height: clamp(2.5rem, calc(1.9643rem + 2.1978vw), 3.75rem);
   background: #D7D7D7;
   font-weight: 700;
-  font-size: clamp(1.3125rem, 0.8036rem + 2.0879vw, 2.5rem);
+  font-size: clamp(1.3125rem, calc(0.8036rem + 2.0879vw), 2.5rem);
   line-height: 50px;
   text-align: center;
   color: #132F75;
@@ -225,16 +225,16 @@ input[type=checkbox] {
 }
 #register_root h6 {
   font-weight: 500;
-  font-size: clamp(1.125rem, 0.8036rem + 1.3187vw, 1.875rem);
-  line-height: clamp(1.4375rem, 1.0357rem + 1.6484vw, 2.375rem);
+  font-size: clamp(1.125rem, calc(0.8036rem + 1.3187vw), 1.875rem);
+  line-height: clamp(1.4375rem, calc(1.0357rem + 1.6484vw), 2.375rem);
   text-align: center;
   color: #132F75;
 }
 #register_root h1 {
   font-weight: 700;
   color: #132F75;
-  font-size: clamp(1.5rem, 1.0714rem + 1.7582vw, 2.5rem);
-  line-height: clamp(1.25rem, 0.4464rem + 3.2967vw, 3.125rem);
+  font-size: clamp(1.5rem, calc(1.0714rem + 1.7582vw), 2.5rem);
+  line-height: clamp(1.25rem, calc(0.4464rem + 3.2967vw), 3.125rem);
   position: relative;
 }
 #register_root h1 i {
@@ -247,7 +247,7 @@ input[type=checkbox] {
 #register_root form hr {
   width: 100%;
   max-width: 300px;
-  height: clamp(0.0625rem, -0.0149rem + 0.3261vw, 0.25rem);
+  height: clamp(0.0625rem, calc(-0.0149rem + 0.3261vw), 0.25rem);
   background-color: #FFC400;
   border: none;
   opacity: 1;
@@ -262,19 +262,19 @@ input[type=checkbox] {
   flex-direction: column;
   width: 100%;
 }
-#register_root form.verfy_form .form-group, #register_root form.payment_form .form-group {
-  width: 100% !important;
-}
-#register_root form.verfy_form input,
-#register_root form.verfy_form select, #register_root form.payment_form input,
-#register_root form.payment_form select {
+#register_root form.verfy_form input::not(type=checkbox), #register_root form.verfy_form input::not(type=radio),
+#register_root form.verfy_form select::not(type=checkbox),
+#register_root form.verfy_form select::not(type=radio), #register_root form.payment_form input::not(type=checkbox), #register_root form.payment_form input::not(type=radio),
+#register_root form.payment_form select::not(type=checkbox),
+#register_root form.payment_form select::not(type=radio) {
   width: 100%;
+  min-width: 340px;
   max-width: 500px;
 }
 #register_root form.payment_form input {
   max-width: 800px;
 }
-#register_root form input:not([type=checkbox], [type=radio], [type=range]),
+#register_root form input:not([type="checkbox"], [type="radio"], [type="range"]),
 #register_root form select,
 #register_root form button:not(.btns-extra button),
 #register_root form textarea,
@@ -282,12 +282,12 @@ input[type=checkbox] {
   background: #ffffff !important;
   border: 1px solid #FFC400 !important;
   box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25) !important;
-  border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem) !important;
-  padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
+  border-radius: clamp(1.125rem, calc(0.9375rem + 0.7692vw), 1.5625rem) !important;
+  padding: clamp(0.75rem, calc(0.5357rem + 0.8791vw), 1.25rem) 20px;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
-  line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem) !important;
+  line-height: clamp(1.75rem, calc(1.4821rem + 1.0989vw), 2.375rem) !important;
   resize: none;
   display: block;
   display: flex;
@@ -322,14 +322,14 @@ input[type=checkbox] {
   font-size: 30px;
   color: #132F75;
 }
-#register_root form input[type=file] {
+#register_root form input[type="file"] {
   display: none;
 }
 #register_root form button:not(.btns-extra button) {
   background-color: #FFC400 !important;
   color: #132F75 !important;
   border: 3px solid #FFC400 !important;
-  font-size: clamp(1.3125rem, 1.0446rem + 1.0989vw, 1.9375rem) !important;
+  font-size: clamp(1.3125rem, calc(1.0446rem + 1.0989vw), 1.9375rem) !important;
   font-weight: 600 !important;
   letter-spacing: 2px !important;
   text-align: center !important;
@@ -360,9 +360,9 @@ input[type=checkbox] {
   display: none;
 }
 #register_root form .photo_group label {
-  font-size: clamp(2.5rem, 1.6964rem + 3.2967vw, 4.375rem);
-  width: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
-  height: clamp(6.25rem, 4.9107rem + 5.4945vw, 9.375rem);
+  font-size: clamp(2.5rem, calc(1.6964rem + 3.2967vw), 4.375rem);
+  width: clamp(6.25rem, calc(4.9107rem + 5.4945vw), 9.375rem);
+  height: clamp(6.25rem, calc(4.9107rem + 5.4945vw), 9.375rem);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -382,7 +382,7 @@ input[type=checkbox] {
   left: 0;
   border: none;
   border-radius: 50%;
-  margin-bottom: clamp(0rem, -0.413rem + 1.7391vw, 1rem);
+  margin-bottom: clamp(0rem, calc(-0.413rem + 1.7391vw), 1rem);
 }
 #register_root form .photo_group label i {
   position: relative;
@@ -390,16 +390,16 @@ input[type=checkbox] {
 }
 #register_root form .photo_group label .after {
   position: absolute;
-  bottom: clamp(0.3125rem, 0.4464rem - 0.5495vw, 0rem);
-  right: clamp(0.3125rem, 0.4464rem - 0.5495vw, 0rem);
+  bottom: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
+  right: clamp(0.3125rem, calc(0.4464rem + -0.5495vw), 0rem);
   background-color: #FFC400;
   color: #132F75;
-  font-size: clamp(0.9375rem, 0.8036rem + 0.5495vw, 1.25rem);
+  font-size: clamp(0.9375rem, calc(0.8036rem + 0.5495vw), 1.25rem);
   border: 2px solid #ffffff;
   font-weight: 600;
   border-radius: 50%;
-  width: clamp(1.6875rem, 1.2054rem + 1.978vw, 2.8125rem);
-  height: clamp(1.6875rem, 1.2054rem + 1.978vw, 2.8125rem);
+  width: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);
+  height: clamp(1.6875rem, calc(1.2054rem + 1.978vw), 2.8125rem);
   z-index: 2255;
 }
 #register_root form > .form-group:last-child {
@@ -409,11 +409,11 @@ input[type=checkbox] {
 }
 #register_root form > .form-group:last-child button {
   width: fit-content;
-  padding: clamp(0.625rem, 0.3571rem + 1.0989vw, 1.25rem) clamp(1.875rem, 1.3393rem + 2.1978vw, 3.125rem);
+  padding: clamp(0.625rem, calc(0.3571rem + 1.0989vw), 1.25rem) clamp(1.875rem, calc(1.3393rem + 2.1978vw), 3.125rem);
 }
 #register_root form > .form-group:last-child.not-step-1 {
   justify-content: space-between;
-  margin-top: clamp(0.625rem, 0.0893rem + 2.1978vw, 1.875rem);
+  margin-top: clamp(0.625rem, calc(0.0893rem + 2.1978vw), 1.875rem);
 }
 #register_root form > .form-group:last-child.not-step-1 button:first-child {
   background-color: transparent;
@@ -421,7 +421,7 @@ input[type=checkbox] {
 #register_root form .choice .agree {
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(1.25rem, 0.7143rem + 2.1978vw, 2.5rem);
+  font-size: clamp(1.25rem, calc(0.7143rem + 2.1978vw), 2.5rem);
   line-height: 50px;
   color: #132F75;
   cursor: auto;
@@ -433,17 +433,17 @@ input[type=checkbox] {
 }
 #register_root form .choice h1 {
   font-weight: 700;
-  font-size: clamp(1.125rem, 0.712rem + 1.7391vw, 2.125rem);
-  line-height: clamp(1.75rem, 1.337rem + 1.7391vw, 2.75rem);
+  font-size: clamp(1.125rem, calc(0.712rem + 1.7391vw), 2.125rem);
+  line-height: clamp(1.75rem, calc(1.337rem + 1.7391vw), 2.75rem);
   text-align: center;
   color: #132F75;
   margin-bottom: 20px;
 }
 #register_root form .choice > div {
-  gap: clamp(0.9375rem, 0.8084rem + 0.5435vw, 1.25rem);
+  gap: clamp(0.9375rem, calc(0.8084rem + 0.5435vw), 1.25rem);
   font-weight: 500;
-  font-size: clamp(1rem, 0.6128rem + 1.6304vw, 1.9375rem);
-  line-height: clamp(1.5rem, 0.9837rem + 2.1739vw, 2.75rem);
+  font-size: clamp(1rem, calc(0.6128rem + 1.6304vw), 1.9375rem);
+  line-height: clamp(1.5rem, calc(0.9837rem + 2.1739vw), 2.75rem);
   text-align: center;
   color: #132F75;
 }
@@ -467,22 +467,22 @@ input[type=checkbox] {
     transform: translateY(35%);
   }
 }
-#register_root form .choice > div input[name=client_type] + label,
+#register_root form .choice > div input[name="client_type"] + label,
 #register_root form .choice > div .coming-soon-2,
-#register_root form .choice > div input[name=managment_type] + label {
+#register_root form .choice > div input[name="managment_type"] + label {
   cursor: pointer;
-  width: clamp(6.25rem, 0.5707rem + 23.913vw, 20rem);
-  height: clamp(3.75rem, 3.2337rem + 2.1739vw, 5rem);
+  width: clamp(6.25rem, calc(0.5707rem + 23.913vw), 20rem);
+  height: clamp(3.75rem, calc(3.2337rem + 2.1739vw), 5rem);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#register_root form .choice > div input[name=managment_type] + label {
-  line-height: clamp(1.0625rem, 0.3655rem + 2.9348vw, 2.75rem);
-  font-size: clamp(0.875rem, 0.5136rem + 1.5217vw, 1.75rem);
+#register_root form .choice > div input[name="managment_type"] + label {
+  line-height: clamp(1.0625rem, calc(0.3655rem + 2.9348vw), 2.75rem);
+  font-size: clamp(0.875rem, calc(0.5136rem + 1.5217vw), 1.75rem);
 }
 #register_root form .choice > div.account_type_wrapper {
-  font-size: clamp(1rem, 0.716rem + 1.1957vw, 1.6875rem) !important;
+  font-size: clamp(1rem, calc(0.716rem + 1.1957vw), 1.6875rem) !important;
 }
 #register_root form .choice > div.account_type_wrapper > .form-group {
   width: 100% !important;
@@ -532,12 +532,12 @@ input[type=checkbox] {
 }
 #register_root form .diagnosis_wrapper a {
   position: absolute;
-  top: clamp(0.5625rem, 0.3818rem + 0.7609vw, 1rem);
+  top: clamp(0.5625rem, calc(0.3818rem + 0.7609vw), 1rem);
   right: 15px;
   z-index: 9;
   font-weight: 500;
-  font-size: clamp(1rem, 0.9484rem + 0.2174vw, 1.125rem);
-  line-height: clamp(0.6875rem, 0.4293rem + 1.087vw, 1.3125rem);
+  font-size: clamp(1rem, calc(0.9484rem + 0.2174vw), 1.125rem);
+  line-height: clamp(0.6875rem, calc(0.4293rem + 1.087vw), 1.3125rem);
   text-decoration: none;
   color: #132F75;
   padding: 12px 15px;
@@ -546,7 +546,7 @@ input[type=checkbox] {
   transition: background-color 0.2s ease-out;
 }
 #register_root form .diagnosis_wrapper a:hover {
-  background-color: rgba(255, 196, 0, 0.8392156863);
+  background-color: #ffc400d6;
 }
 
 .extra_section .part-time,
@@ -562,14 +562,14 @@ input[type=checkbox] {
 .extra_section .part-time .head,
 .extra_section .full-time .head,
 .extra_section .head {
-  font-size: clamp(1.0625rem, -0.1875rem + 4vw, 2.0625rem) !important;
+  font-size: clamp(1.0625rem, calc(-0.1875rem + 4vw), 2.0625rem) !important;
 }
 .extra_section .part-time > p,
 .extra_section .full-time > p,
 .extra_section > p {
   font-weight: 500;
   font-size: calc(clamp(1.0625rem, 0.5804rem + 1.978vw, 2.1875rem) - 4px);
-  line-height: clamp(1.5rem, 0.9643rem + 2.1978vw, 2.75rem);
+  line-height: clamp(1.5rem, calc(0.9643rem + 2.1978vw), 2.75rem);
   text-align: center;
   color: #132f75;
 }
@@ -582,8 +582,8 @@ input[type=checkbox] {
 .extra_section .full-time .value,
 .extra_section .value {
   font-weight: 700;
-  font-size: clamp(1.3125rem, 0.9511rem + 1.5217vw, 2.1875rem);
-  line-height: clamp(0.875rem, 0.1005rem + 3.2609vw, 2.75rem);
+  font-size: clamp(1.3125rem, calc(0.9511rem + 1.5217vw), 2.1875rem);
+  line-height: clamp(0.875rem, calc(0.1005rem + 3.2609vw), 2.75rem);
   text-align: center;
   color: #132F75;
   width: 100%;
@@ -614,14 +614,14 @@ input[type=checkbox] {
 .extra_section .full-time a,
 .extra_section a {
   font-weight: 800;
-  font-size: clamp(1.75rem, 1.4402rem + 1.3043vw, 2.5rem);
-  line-height: clamp(2.0625rem, 1.288rem + 3.2609vw, 3.9375rem);
+  font-size: clamp(1.75rem, calc(1.4402rem + 1.3043vw), 2.5rem);
+  line-height: clamp(2.0625rem, calc(1.288rem + 3.2609vw), 3.9375rem);
   text-align: center;
   color: #132F75;
   text-decoration: none;
   display: block;
-  border: clamp(0.1875rem, 0.1359rem + 0.2174vw, 0.3125rem) solid #132F75;
-  border-radius: clamp(1.25rem, 0.9918rem + 1.087vw, 1.875rem);
+  border: clamp(0.1875rem, calc(0.1359rem + 0.2174vw), 0.3125rem) solid #132F75;
+  border-radius: clamp(1.25rem, calc(0.9918rem + 1.087vw), 1.875rem);
   width: fit-content;
   padding: 10px 50px;
 }
@@ -640,8 +640,8 @@ input[type=checkbox] {
 
 .additional-info label {
   cursor: pointer;
-  width: clamp(6.25rem, 0.5707rem + 23.913vw, 20rem);
-  height: clamp(3.75rem, 3.2337rem + 2.1739vw, 5rem);
+  width: clamp(6.25rem, calc(0.5707rem + 23.913vw), 20rem);
+  height: clamp(3.75rem, calc(3.2337rem + 2.1739vw), 5rem);
   display: flex;
   justify-content: center;
   align-items: center;

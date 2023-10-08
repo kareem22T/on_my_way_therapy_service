@@ -44,7 +44,7 @@
             $('#errors').fadeIn('slow')
             setTimeout(() => {
                 $('#errors').fadeOut('slow')
-            }, 2000);
+            }, 8000);
         })
     </script>
 @endsection

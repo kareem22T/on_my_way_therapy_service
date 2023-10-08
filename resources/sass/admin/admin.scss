@@ -5,17 +5,20 @@
     padding: 10px;
     background: $main-color;
     width: min-content;
+
     @media (max-width: 599.98px) {
         height: min-content;
         padding: 8px 5px;
         width: 100vw;
     }
+
     &:first-of-type {
         position: fixed;
         top: 0;
         left: 0;
         z-index: 9;
     }
+
     ul {
         list-style: none;
         padding: 0;
@@ -24,10 +27,12 @@
         grid-template-rows: repeat(2, 1fr);
         height: 100%;
         gap: 20px;
+
         @media (max-width: 599.98px) {
             display: flex;
             justify-content: space-between;
         }
+
         a {
             text-decoration: none;
             padding: clamp(0.1875rem, calc(0.0068rem + 0.7609vw), 0.625rem);
@@ -39,10 +44,13 @@
             color: $white;
             border: 3px solid $main-color;
             transition: all 0.2s ease-in-out;
-            &.active, &:hover {
+
+            &.active,
+            &:hover {
                 border: 3px solid $white;
                 color: $white;
             }
+
             @media (max-width: 599.98px) {
                 width: 100%
             }
@@ -53,6 +61,7 @@
 body {
     display: flex;
     gap: 30px;
+
     @media (max-width: 599.98px) {
         display: block;
     }
@@ -61,11 +70,14 @@ body {
 main {
     width: 100%;
     padding-right: 30px;
+
     @media (max-width: 599.98px) {
         padding: 0;
     }
+
     header {
         @extend %flex-center;
+
         ul {
             list-style: none;
             padding: 0;
@@ -73,9 +85,11 @@ main {
             display: flex;
             gap: 30px;
             padding: 20px 0;
+
             @media (max-width: 599.98px) {
                 padding-bottom: 0;
             }
+
             a {
                 font-weight: 700;
                 font-size: clamp(1.1875rem, calc(0.9035rem + 1.1957vw), 1.875rem);
@@ -87,7 +101,9 @@ main {
                 transition: all 0.2s ease-in-out;
                 border: 3px solid $white;
                 border-radius: 30px;
-                &:hover, &.active {
+
+                &:hover,
+                &.active {
                     background: $white;
                     border: 3px solid $secondary-color;
                     box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -96,12 +112,14 @@ main {
             }
         }
     }
+
     .head {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: clamp(1.25rem, calc(0.9918rem + 1.087vw), 1.875rem) 0 clamp(1.25rem, calc(0.4755rem + 3.2609vw), 3.125rem);
         gap: clamp(0.625rem, calc(0.1087rem + 2.1739vw), 1.875rem);
+
         a {
             font-weight: 500;
             font-size: clamp(1.125rem, calc(0.6861rem + 1.8478vw), 2.1875rem);
@@ -114,7 +132,9 @@ main {
             border-radius: 30px;
             border: 3px solid $white;
             transition: all 0.2s ease-in-out;
-            &.active, &:hover {
+
+            &.active,
+            &:hover {
                 background: #FFFFFF;
                 border: 3px solid #FFC400;
                 box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
@@ -129,13 +149,18 @@ main {
         border-radius: 30px;
         padding: 30px;
         margin-top: 30px;
+
         table {
             width: 100%;
-            td, th {
+
+            td,
+            th {
                 padding: 10px;
             }
+
             tbody tr {
                 color: $main-color;
+
                 &:nth-child(odd) {
                     background: $gray;
                 }
@@ -158,26 +183,27 @@ main {
             align-items: center;
             gap: 15px;
             padding: 20px 20px;
-    
+            margin-bottom: 10px;
+
             .data {
                 @extend %flex-center;
             }
-    
+
             .btns {
                 a {
                     color: white;
                     padding: 10px;
                     width: 30px;
                     border-radius: 10px;
-    
+
                     &:first-child {
                         background: $secondary-color;
                     }
-    
+
                     &:nth-child(2) {
                         background: $main-color;
                     }
-    
+
                     &:last-child {
                         background: rgb(117, 18, 18);
                     }
@@ -192,34 +218,41 @@ main {
             flex-direction: column;
             gap: 20px;
         }
+
         .profile {
             @extend %flex-center;
             flex-direction: column;
             gap: 0;
             text-align: center;
+
             .img {
                 width: clamp(9.375rem, calc(8.0842rem + 5.4348vw), 12.5rem);
                 height: clamp(9.375rem, calc(8.0842rem + 5.4348vw), 12.5rem);
                 overflow: hidden;
                 border-radius: 50%;
                 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
                 img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
                 }
             }
+
             h1 {
                 color: $main-color;
                 font-weight: 500;
                 margin-top: 10px;
             }
+
             h4 {
                 color: #5a5a5a;
+
                 @media (max-width: 599.98px) {
                     font-size: 17px;
                 }
             }
+
             p {
                 max-width: 440px;
                 text-align: center;
@@ -233,14 +266,17 @@ main {
             gap: 10px;
             padding: 25px;
             display: flex;
+
             i {
                 color: $main-color;
             }
+
             .cer {
                 width: 100%;
                 overflow: hidden;
                 border: 2px solid;
                 border-radius: 10px;
+
                 img {
                     width: 100%;
                 }
@@ -248,11 +284,12 @@ main {
         }
 
         .btns {
-            margin: clamp(0.3125rem, calc(-0.0747rem + 1.6304vw), 1.25rem) 0 clamp(0.9375rem,calc(0.4212rem + 2.1739vw), 2.1875rem);
+            margin: clamp(0.3125rem, calc(-0.0747rem + 1.6304vw), 1.25rem) 0 clamp(0.9375rem, calc(0.4212rem + 2.1739vw), 2.1875rem);
             display: flex;
             justify-content: space-between;
             gap: 20px;
             align-items: center;
+
             a {
                 font-size: clamp(1.375rem, calc(1.2717rem + 0.4348vw), 1.625rem);
                 border-radius: 20px;
@@ -269,13 +306,13 @@ main {
     background: #ffffff !important;
     border: 1px solid #FFC400;
     box-shadow: -2px 5px 5px rgba(0, 0, 0, 0.25);
-    border-radius: clamp(1.125rem, 0.9375rem + 0.7692vw, 1.5625rem);
-    padding: clamp(0.75rem, 0.5357rem + 0.8791vw, 1.25rem) 20px;
+    border-radius: clamp(1.125rem, calc(0.9375rem + 0.7692vw), 1.5625rem);
+    padding: clamp(0.75rem, calc(0.5357rem + 0.8791vw), 1.25rem) 20px;
     width: 100%;
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(1.25rem, 1.1696rem + 0.3297vw, 1.4375rem);
-    line-height: clamp(1.75rem, 1.4821rem + 1.0989vw, 2.375rem);
+    font-size: clamp(1.25rem, calc(1.1696rem + 0.3297vw), 1.4375rem);
+    line-height: clamp(1.75rem, calc(1.4821rem + 1.0989vw), 2.375rem);
     resize: none;
     display: block;
     display: flex;
@@ -289,6 +326,7 @@ main {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+
     .pagination {
         gap: 8px;
 

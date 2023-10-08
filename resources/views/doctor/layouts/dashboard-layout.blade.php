@@ -82,6 +82,16 @@
         .emergency ul a {
             color: #132F75;
         }
+        .pass-group {
+            position: relative;
+        }
+        .togglePassVisabilaty {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 23px;
+        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Dashboard | @yield('title')</title>
@@ -122,6 +132,13 @@
     </script>
     <script src="{{ asset('/js/chat.js') }}?v={{ time() }}"></script>
     @yield('scripts')
+    <script>
+        $('.togglePassVisabilaty').on('click', function () {
+            let inputType = $(this).parent().find('input').attr('type')
+            $(this).parent().find('input').attr('type', inputType == 'password' ? 'text' : 'password')
+            $(this).toggleClass('fa-eye fa-eye-slash')
+        })
+    </script>
 </body>
 
 </html>

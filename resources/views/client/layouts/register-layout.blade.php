@@ -25,6 +25,16 @@
             margin: 0;
             padding: 0;
         }
+        .pass-group {
+            position: relative;
+        }
+        .togglePassVisabilaty {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 23px;
+        }
     </style>
     <title>Client | @yield('title')</title>
 </head>
@@ -45,6 +55,13 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <!-- Your custom script here -->
     @yield('scripts')
+    <script>
+        $('.togglePassVisabilaty').on('click', function () {
+            let inputType = $(this).parent().find('input').attr('type')
+            $(this).parent().find('input').attr('type', inputType == 'password' ? 'text' : 'password')
+            $(this).toggleClass('fa-eye fa-eye-slash')
+        })
+    </script>
 </body>
 
 </html>

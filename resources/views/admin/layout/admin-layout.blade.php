@@ -19,6 +19,24 @@
         .container {
             width: 100%;
         }
+        .logout_btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #751212;
+            font-size: 18px;
+            border: 2px solid;
+            padding: .3rem 1rem;
+            border-radius: 20px;
+            transition: .3s ease-in
+        }
+        .logout_btn:hover {
+            background: #751212;
+            color: #fff;
+            border-color: #751212
+        }
     </style>
     <title>Admin | @yield('title')</title>
 </head>
@@ -26,6 +44,7 @@
 <body>
     @include('admin.includes.side-bar')
     @yield('content')
+    <a href="/admin/logout" class="logout_btn">logout</a>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     @yield('scripts')

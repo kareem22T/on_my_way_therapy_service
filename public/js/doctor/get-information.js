@@ -85,7 +85,7 @@ function submitInformation() {
 			$('#errors').fadeIn('slow')
 			setTimeout(() => {
 				$('#errors').fadeOut('slow')
-			}, 2000);
+			}, 8000);
         }
     })
 }
@@ -100,7 +100,7 @@ function addDiagnosis() {
         $('#errors').fadeIn('slow')
         setTimeout(() => {
             $('#errors').fadeOut('slow')
-        }, 2000);
+        }, 8000);
     } else {
         $('.diagnosis').append('<li>' + $('#diagnosis').val() + '<i class="fa-regular fa-circle-xmark"></i>' + '</li>')
         $('#diagnosis').val('')

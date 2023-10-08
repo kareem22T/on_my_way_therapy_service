@@ -315,6 +315,28 @@ class RegisterController extends Controller
     }
     // .....................................
 
+    public function changePassIndex() {
+        return view('doctor.write_email_to_change_pass');
+    }
+
+    public function showChangePassForm(Request $request) {
+        $validator = validator([
+            'email' => ['required', 'email'],
+        ], [
+            'email.required' => 'Please enter your email'
+        ]);
+
+        $email_code = rand(100000, 999999);
+
+        $email = $request->email;
+        $msg_title = 'Verfication code';
+        $msg_body = 'Your email verfication code is: <b>' . $email_code . '</b>';
+
+        return $this->sendEmail($email, $msg_title, $msg_body);
+
+        // return view('doctor.change_password');
+    }
+
     // logout from doctor account
     public function logout()
     {

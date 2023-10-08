@@ -9,7 +9,7 @@
         @php
             $clients_active = null;
             $therapists_active = 'active';
-            $doctors = App\Models\Doctor::where('approved', 0)->paginate(5);
+            $doctors = App\Models\Doctor::where('approved', 0)->paginate(10);
         @endphp
 
         @include('admin.includes.header-users')
@@ -27,7 +27,7 @@
                     <div class="request">
                         <div class="data">
                             <span>{{ $doctor->first_name . ' ' . $doctor->last_name }}</span>
-                            <span>{{ $doctor->profession->title }}</span>
+                            <span>{{ $doctor->profession ? $doctor->profession->title : '' }}</span>
                             <span>{{ Carbon\Carbon::parse($doctor->dob)->age }} yo</span>
                             <span>{{ $doctor->gender }}</span>
                         </div>
@@ -66,6 +66,9 @@
         </div>
 
         <div class="hide-content"></div>
+        <div class="pagination_wrapper">
+            {!! $doctors->links('pagination::bootstrap-4') !!}
+        </div>
     </main>
 @endsection
 

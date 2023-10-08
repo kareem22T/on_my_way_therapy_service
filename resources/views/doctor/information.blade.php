@@ -59,22 +59,22 @@
                 </div>
                 <div class="form-group g-4 file">
                     <input type="text" name="WWCC" id="WWCC" placeholder="WWCC Number" class="form-control">
-                    <a href="https://wwccheck.ocg.nsw.gov.au/FindMyNumber">don’t have one?</a>
+                    <a href="https://wwccheck.ocg.nsw.gov.au/FindMyNumber" target="_blanck">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file changable-cer">
                     <input type="text" name="AHPRA" id="AHPRA Number" placeholder="AHPRA Registration"
                         class="form-control">
-                    <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx">don’t have one?</a>
+                    <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx" target="_blanck">don’t have one?</a>
                 </div>
                 <div class="form-group g-4 file">
                     <input type="text" name="NDIS" id="NDIS" placeholder="NDIS worker screening Number"
                         class="form-control">
-                    <a href="https://www.service.nsw.gov.au/transaction/ndiswc-apply">don’t have one?</a>
+                    <a href="https://www.service.nsw.gov.au/transaction/ndiswc-apply" target="_blanck">don’t have one?</a>
                 </div>
                 <div class="form-group g-12">
                     <textarea name="about_me" id="about" cols="30" rows="3" placeholder="About you" class="form-control"></textarea>
                 </div>
-                <div class="form-group g-12 choice mt-5">
+                <div class="form-group g-12 choice mt-5 client_age_range_div">
                     <h1>Preferred age range for your clients?</h1>
                     <div>
                         @if ($Client_age_range)
@@ -85,6 +85,11 @@
                                     <label for="{{ 'p_age_range_' . $range->id }}">{{ $range->range }}</label>
                                 </div>
                             @endforeach
+                            <div class="form-group">
+                                <input type="checkbox" name="client_age_range_all" id="client_age_range_all"
+                                    value="">
+                                <label for="client_age_range_all">All</label>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -135,4 +140,23 @@
 
 @section('scripts')
     <script src="{{ asset('/js/doctor/get-information.js') }}?v={{ time() }}"></script>
+    <script>
+        const selectAllButton = document.getElementById('client_age_range_all');
+        const checkboxes = document.querySelectorAll('.client_age_range_div input');
+
+        selectAllButton.addEventListener('click', () => {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+        });
+
+        checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', (event) => {
+            if (!event.target.checked) {
+                selectAllButton.checked = false;
+            }
+        });
+        });
+
+    </script>
 @endsection

@@ -74,6 +74,9 @@ Route::group(["namespace" => "Doctor", "prefix" => "therapist"], function () {
         Route::get("/login", [TherapisRegisterController::class, "indexLogin"])->name('doctor.login');
         Route::post("/login", [TherapisRegisterController::class, "checkLogin"])->name('doctor.check.login');
 
+        Route::get("/change-password", [TherapisRegisterController::class, "changePassIndex"]);
+        Route::post("/show-change-password-view", [TherapisRegisterController::class, "showChangePassForm"]);
+
         Route::post('/check-registration-info', [TherapisRegisterController::class, "checkRegistrationInfo"]);
         Route::post("/send-code", [TherapisRegisterController::class, "sendVerfication"]);
     });

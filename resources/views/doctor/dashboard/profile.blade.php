@@ -209,7 +209,7 @@
                 $('#errors').fadeIn('slow')
                 setTimeout(() => {
                     $('#errors').fadeOut('slow')
-                }, 2500);
+                }, 8000);
             }
         })
     </script>
@@ -236,7 +236,7 @@
                         setTimeout(() => {
                             $('#errors').fadeOut('slow')
                             location.reload()
-                        }, 3500);
+                        }, 8000);
                     }
                 },
                 error: function(err) {
@@ -251,7 +251,7 @@
                     $('.loader').fadeOut()
                     setTimeout(() => {
                         $('#errors').fadeOut('slow')
-                    }, 3500);
+                    }, 8000);
                 },
             })
         });
@@ -271,7 +271,7 @@
                 $('#errors').fadeIn('slow')
                 setTimeout(() => {
                     $('#errors').fadeOut('slow')
-                }, 2000);
+                }, 8000);
 
                 $(this).val(null);
                 $("#preview").attr("src", "/imgs/doctor/uploads/therapist_profile/default.png");

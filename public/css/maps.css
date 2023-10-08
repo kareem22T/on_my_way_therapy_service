@@ -40,6 +40,7 @@
 .coming-soon-pop-up-2 p {
     color: rgb(39, 39, 39);
 }
+
 .coming-soon-pop-up-2 button {
     background-color: #FFC400;
     color: #132F75 !important;
@@ -52,7 +53,7 @@
     font-size: clamp(1.0625rem, calc(0.2031rem + 2.75vw), 1.75rem);
 }
 
-.pop-up >i {
+.pop-up>i {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -83,7 +84,9 @@
     display: none;
 }
 
-.pop-up .ways >div:not(.btns), .pop-up .ways input, .pop-up select {
+.pop-up .ways>div:not(.btns),
+.pop-up .ways input,
+.pop-up select {
     color: #484848;
     padding: 20px;
     border-radius: 15px;
@@ -94,9 +97,11 @@
     cursor: pointer;
     font-weight: 500;
 }
+
 .pop-up label {
     color: #484848;
 }
+
 .change-location {
     display: flex;
     justify-content: center;
@@ -113,11 +118,11 @@
     font-size: 40px !important;
 }
 
-.pop-up .ways >div:hover {
+.pop-up .ways>div:hover {
     color: #000;
 }
 
-.pop-up .ways >div i {
+.pop-up .ways>div i {
     font-size: 50px;
 }
 
@@ -131,7 +136,8 @@
     cursor: pointer;
     transition: all .3s ease-out;
 }
-#address-a:hover::placeholder{
+
+#address-a:hover::placeholder {
     opacity: 1;
     color: #000;
 }
@@ -241,4 +247,12 @@
 
 #strict-bounds-selector {
     display: none;
+}
+
+.pac-item {
+    font-size: 16px !important;
+}
+
+.pac-item-query {
+    font-size: 17px !important;
 }

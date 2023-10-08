@@ -71,7 +71,7 @@ class ClientRequest extends FormRequest
             'phone.regex' => 'Please enter a valid phone number without the country code',
             'phone.unique' => 'This number is already registered',
             'address.required' => 'please enter your address or enable location access',
-            'password.regex' => 'please enter a password from at least 8 char containing upper and lower case char mixed with number and special char (ex: Abcd123@@@)',
+            'password.regex' => 'please enter password containing at least 8 characters, one uppercase, number and special character',
             'password.confirmed' => 'the password you entered and its confirmation are not matching',
             'company_email.email' => 'Please enter a valid company email address',
             'session_type.required' => 'Please select a session type',

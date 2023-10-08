@@ -35,8 +35,8 @@ class TherapistPasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'password.required' => 'please enter a password containing upper and lower case char mixed with number and special char (ex: Abcd123@@@)',
-            'password.regex' => 'please enter a password from at least 8 char containing upper and lower case char mixed with number and special char (ex: Abcd123@@@)',
+            'password.required' => 'please enter password containing at least 8 characters, one uppercase, number and special character',
+            'password.regex' => 'please enter password containing at least 8 characters, one uppercase, number and special character',
             'password.confirmed' => 'the password you entered and its confirmation are not matching',
         ];
     }

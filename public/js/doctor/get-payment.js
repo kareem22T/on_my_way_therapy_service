@@ -2,14 +2,14 @@
 var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
 $.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': csrf_token
-}
+    headers: {
+        'X-CSRF-TOKEN': csrf_token
+    }
 });
 // end ...
 
 // on submit & click callback
-$('#step-3').on('submit', function(e) {
+$('#step-3').on('submit', function (e) {
     e.preventDefault();
     submitInformation();
 })
@@ -25,7 +25,7 @@ function submitInformation() {
         data: formData,
         processData: false,
         contentType: false,
-        success: function(data) {
+        success: function (data) {
             if (data.status == 200) {
                 document.getElementById('errors').innerHTML = ''
                 let error = document.createElement('div')
@@ -38,18 +38,18 @@ function submitInformation() {
                 }, 1200);
             }
         },
-        error: function(err) {
+        error: function (err) {
             document.getElementById('errors').innerHTML = ''
-			$.each(err.responseJSON.errors, function(key, value) {
-				let error = document.createElement('div')
-				error.classList = 'alert alert-danger'
-				error.innerHTML = value[0]
-				document.getElementById('errors').append(error)
-			});
-			$('#errors').fadeIn('slow')
-			setTimeout(() => {
-				$('#errors').fadeOut('slow')
-			}, 2000);
+            $.each(err.responseJSON.errors, function (key, value) {
+                let error = document.createElement('div')
+                error.classList = 'alert alert-danger'
+                error.innerHTML = value[0]
+                document.getElementById('errors').append(error)
+            });
+            $('#errors').fadeIn('slow')
+            setTimeout(() => {
+                $('#errors').fadeOut('slow')
+            }, 8000);
         }
     })
 }
