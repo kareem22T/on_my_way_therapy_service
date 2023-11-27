@@ -21,14 +21,14 @@ trait SendEmail
             $mail->isSMTP(); //Send using SMTP
             $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
             $mail->SMTPAuth = true; //Enable SMTP authentication
-            $mail->Username = 'info@onmywaytherapy.com.au'; //SMTP username
-            $mail->Password = 'gnvuxkgwibpgekrx'; //SMTP password
+            $mail->Username = 'onmywaytherapy@gmail.com'; //SMTP username
+            $mail->Password = 'tfrf pkxl odxt sxsj'; //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
             $mail->Port = 465;
             //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('info@onmywaytherapy.com.au', 'On MY Way Therapy Service');
+            $mail->setFrom('onmywaytherapy@gmail.com', 'On MY Way Therapy Service');
             $mail->addAddress($receiver_mail); //Add a recipient
 
             //Content

@@ -200,8 +200,8 @@ function convertTime(time) {
 }
 
 function getWeekNumber(date) {
-    var oneJan = new Date(date.getFullYear(), 0, 1);
-    return Math.ceil((((date - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
+  var oneJan = new Date(date.getFullYear(), 0, 1);
+  return Math.ceil((((date - oneJan) / 86400000) + oneJan.getDay() + 1) / 7);
 }
 
 var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -245,25 +245,25 @@ function getDayShort(date) {
 var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
 $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': csrf_token
-    }
+  headers: {
+    'X-CSRF-TOKEN': csrf_token
+  }
 });
 // end ...
 
 
 // calllbacks and submit actions
 $(function () {
-    $('.loader').fadeOut()
+  $('.loader').fadeOut()
 })
 $('.visit_type input:checked').next().addClass('selected');
 $('.visit_type label').on('click', function () {
-    $(this).addClass('selected')
-    $(this).parents('.visit_type').siblings().find('label').removeClass('selected')
+  $(this).addClass('selected')
+  $(this).parents('.visit_type').siblings().find('label').removeClass('selected')
 })
 
 $(document).on('click', '.slots ul li', function () {
-    $(this).addClass('selected').siblings().removeClass('selected')
+  $(this).addClass('selected').siblings().removeClass('selected')
 })
 
 $('.cancel').on('click', function () {
@@ -272,95 +272,96 @@ $('.cancel').on('click', function () {
 
 // on submit appointment
 $('#confirm_appointment').on('click', function (e) {
-    e.preventDefault();
-    $('.address-pop-up').removeAttr('wait');
-    $('.address-pop-up').removeAttr('date');
-    $('.address-pop-up').removeAttr('time');
-    $('.loader').fadeIn().css('display', 'flex');
-    $.ajax({
-      url: '/client/check/assessments',
-      method: 'GET',
-      success: function (data) {
-        if (data.status == 419) {
-          $('.assessment-pop-up').fadeIn().css('display', 'flex');
-          $('.hide-content').fadeIn()
-        } else {
-          if ($('.slots ul li.selected').length > 0) {
-              if ($('input[name=visit_type]:checked').val() == 0) {
-                  $('.address-pop-up').fadeIn().css('display', 'flex');
-                  $('.hide-content').fadeIn()
-              } else {
-                  let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
-                  $('.loader').fadeIn().css('display', 'flex')
-                  $.ajax({
-                      url: '/client/appointment',
-                      method: 'POST',
-                      data: {
-                          doctor_id: $('#confirm_appointment').attr('doctor_id'),
-                          date: selected_slot,
-                          visit_type: $('input[name=visit_type]:checked').val()
-                      },
-                      success: function (data) {
-                          if (data.status == 200) {
-                              document.getElementById('errors').innerHTML = ''
-                              let error = document.createElement('div')
-                              error.classList = 'alert alert-success'
-                              error.innerHTML = data.msg
-                              document.getElementById('errors').append(error)
-                              $('#errors').fadeIn('slow')
-                              setTimeout(() => {
-                                  location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
-                              }, 1200);
-                          }
-                      }, error: function (err) {
-                          document.getElementById('errors').innerHTML = ''
-                          $.each(err.responseJSON.errors, function (key, value) {
-                              let error = document.createElement('div')
-                              error.classList = 'alert alert-danger'
-                              error.innerHTML = value[0]
-                              document.getElementById('errors').append(error)
-                          });
-                          $('#errors').fadeIn('slow')
-                          setTimeout(() => {
-                              $('#errors').fadeOut('slow')
-                          }, 2000);
-                      }
-                  })
-              }
+  e.preventDefault();
+  $('.address-pop-up').removeAttr('wait');
+  $('.address-pop-up').removeAttr('date');
+  $('.address-pop-up').removeAttr('time');
+  $('.loader').fadeIn().css('display', 'flex');
+  $.ajax({
+    url: '/client/check/assessments',
+    method: 'GET',
+    success: function (data) {
+      if (data.status == 419) {
+        $('.assessment-pop-up').fadeIn().css('display', 'flex');
+        $('.hide-content').fadeIn()
+      } else {
+        if ($('.slots ul li.selected').length > 0) {
+          if ($('input[name=visit_type]:checked').val() == 0) {
+            $('.address-pop-up').fadeIn().css('display', 'flex');
+            $('.loader').fadeOut();
+            $('.hide-content').fadeIn()
           } else {
+            let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
+            $('.loader').fadeIn().css('display', 'flex')
+            $.ajax({
+              url: '/client/appointment',
+              method: 'POST',
+              data: {
+                doctor_id: $('#confirm_appointment').attr('doctor_id'),
+                date: selected_slot,
+                visit_type: $('input[name=visit_type]:checked').val()
+              },
+              success: function (data) {
+                if (data.status == 200) {
+                  document.getElementById('errors').innerHTML = ''
+                  let error = document.createElement('div')
+                  error.classList = 'alert alert-success'
+                  error.innerHTML = data.msg
+                  document.getElementById('errors').append(error)
+                  $('#errors').fadeIn('slow')
+                  setTimeout(() => {
+                    location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+                  }, 1200);
+                }
+              }, error: function (err) {
                 document.getElementById('errors').innerHTML = ''
-                let error = document.createElement('div')
-                error.classList = 'alert alert-danger'
-                error.innerHTML = 'Please select a slot or join wait list'
-                document.getElementById('errors').append(error)
+                $.each(err.responseJSON.errors, function (key, value) {
+                  let error = document.createElement('div')
+                  error.classList = 'alert alert-danger'
+                  error.innerHTML = value[0]
+                  document.getElementById('errors').append(error)
+                });
                 $('#errors').fadeIn('slow')
                 setTimeout(() => {
-                    $('#errors').fadeOut('slow')
-                    $('.loader').fadeOut()
+                  $('#errors').fadeOut('slow')
                 }, 2000);
+              }
+            })
           }
+        } else {
+          document.getElementById('errors').innerHTML = ''
+          let error = document.createElement('div')
+          error.classList = 'alert alert-danger'
+          error.innerHTML = 'Please select a slot or join wait list'
+          document.getElementById('errors').append(error)
+          $('#errors').fadeIn('slow')
+          setTimeout(() => {
+            $('#errors').fadeOut('slow')
+            $('.loader').fadeOut()
+          }, 2000);
         }
       }
-    })
+    }
+  })
 })
 
 $('#join_wait_list').on('click', function (e) {
-    e.preventDefault();
-    $('.loader').fadeIn().css('display', 'flex');
-    $.ajax({
-      url: '/client/check/assessments',
-      method: 'GET',
-      success: function (data) {
-        if (data.status == 419) {
-          $('.assessment-pop-up').fadeIn().css('display', 'flex');
-          $('.hide-content').fadeIn()
-          $('.loader').fadeOut()
-        } else {
-          $('.join-wait-list-pop-up, .hide-content').fadeIn().css('display', 'flex');
-          $('.loader').fadeOut()
-        }
+  e.preventDefault();
+  $('.loader').fadeIn().css('display', 'flex');
+  $.ajax({
+    url: '/client/check/assessments',
+    method: 'GET',
+    success: function (data) {
+      if (data.status == 419) {
+        $('.assessment-pop-up').fadeIn().css('display', 'flex');
+        $('.hide-content').fadeIn()
+        $('.loader').fadeOut()
+      } else {
+        $('.join-wait-list-pop-up, .hide-content').fadeIn().css('display', 'flex');
+        $('.loader').fadeOut()
       }
-    })
+    }
+  })
 })
 
 $('.confirm-join-wait-list').on('click', function (e) {
@@ -371,35 +372,35 @@ $('.confirm-join-wait-list').on('click', function (e) {
       url: '/client/appointment-wait',
       method: 'POST',
       data: {
-          doctor_id: $('#join_wait_list').attr('doctor_id'),
-          date: $('.join-wait-list-pop-up #date').val() + ' ' + $('.join-wait-list-pop-up #time').val(),
-          visit_type: $('input[name=visit_type]:checked').val()
+        doctor_id: $('#join_wait_list').attr('doctor_id'),
+        date: $('.join-wait-list-pop-up #date').val() + ' ' + $('.join-wait-list-pop-up #time').val(),
+        visit_type: $('input[name=visit_type]:checked').val()
       },
       success: function (data) {
-          if (data.status == 200) {
-              document.getElementById('errors').innerHTML = ''
-              let error = document.createElement('div')
-              error.classList = 'alert alert-success'
-              error.innerHTML = data.msg
-              document.getElementById('errors').append(error)
-              $('#errors').fadeIn('slow')
-              setTimeout(() => {
-                  $('#errors').fadeOut()
-                  $('.join-wait-list-pop-up, .hide-content').fadeOut()
-              }, 3000);
-          }
-      }, error: function (err) {
+        if (data.status == 200) {
           document.getElementById('errors').innerHTML = ''
-          $.each(err.responseJSON.errors, function (key, value) {
-              let error = document.createElement('div')
-              error.classList = 'alert alert-danger'
-              error.innerHTML = value[0]
-              document.getElementById('errors').append(error)
-          });
+          let error = document.createElement('div')
+          error.classList = 'alert alert-success'
+          error.innerHTML = data.msg
+          document.getElementById('errors').append(error)
           $('#errors').fadeIn('slow')
           setTimeout(() => {
-              $('#errors').fadeOut('slow')
-          }, 2000);
+            $('#errors').fadeOut()
+            $('.join-wait-list-pop-up, .hide-content').fadeOut()
+          }, 3000);
+        }
+      }, error: function (err) {
+        document.getElementById('errors').innerHTML = ''
+        $.each(err.responseJSON.errors, function (key, value) {
+          let error = document.createElement('div')
+          error.classList = 'alert alert-danger'
+          error.innerHTML = value[0]
+          document.getElementById('errors').append(error)
+        });
+        $('#errors').fadeIn('slow')
+        setTimeout(() => {
+          $('#errors').fadeOut('slow')
+        }, 2000);
       }
     })
   else {
@@ -413,162 +414,162 @@ $('.confirm-join-wait-list').on('click', function (e) {
 })
 
 $('.confirm-appointment-address').on('click', function (e) {
-    e.preventDefault()
-    if (addressLat && addressLng) {
-        $('.address-pop-up').fadeOut();
-        $('.hide-content').fadeOut()
-        $('#address_lat').val(addressLat)
-        $('#address_lng').val(addressLng)
-        $('#address').val($('#place-address').text())
-        $('#address-a').text($('#place-address').text())
-        $('.loader').fadeIn().css('display', 'flex')
-        let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
-        $.ajax({
-            url: $('.address-pop-up').attr('wait') ? '/client/appointment-wait' : '/client/appointment',
-            method: 'POST',
-            data: {
-                doctor_id: $('#confirm_appointment').attr('doctor_id'),
-                date: $('.address-pop-up').attr('wait') ? $('.address-pop-up').attr('date') + ' ' + $('.address-pop-up').attr('time'): selected_slot,
-                visit_type: $('input[name=visit_type]').val(),
-                address: $('#address').val(),
-                address_lat: $('#address_lat').val(),
-                address_lng: $('#address_lng').val(),
-            },
-            success: function (data) {
-                if (data.status == 200) {
-                    document.getElementById('errors').innerHTML = ''
-                    let error = document.createElement('div')
-                    error.classList = 'alert alert-success'
-                    error.innerHTML = data.msg
-                    document.getElementById('errors').append(error)
-                    $('#errors').fadeIn('slow')
-                    if ( !$('.address-pop-up').attr('wait') )
-                      setTimeout(() => {
-                          location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
-                      }, 1200);
-                    else 
-                      setTimeout(() => {
-                        $('#errors').fadeOut()
-                      }, 3000);
-                }
-            }, error: function (err) {
-                document.getElementById('errors').innerHTML = ''
-                $.each(err.responseJSON.errors, function (key, value) {
-                    let error = document.createElement('div')
-                    error.classList = 'alert alert-danger'
-                    error.innerHTML = value[0]
-                    document.getElementById('errors').append(error)
-                });
-                $('#errors').fadeIn('slow')
-                setTimeout(() => {
-                    $('#errors').fadeOut('slow')
-                    $('.loader').fadeOut()
-                }, 2000);
-            }
-        })
-
-    } else {
+  e.preventDefault()
+  if (addressLat && addressLng) {
+    $('.address-pop-up').fadeOut();
+    $('.hide-content').fadeOut()
+    $('#address_lat').val(addressLat)
+    $('#address_lng').val(addressLng)
+    $('#address').val($('#place-address').text())
+    $('#address-a').text($('#place-address').text())
+    $('.loader').fadeIn().css('display', 'flex')
+    let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
+    $.ajax({
+      url: $('.address-pop-up').attr('wait') ? '/client/appointment-wait' : '/client/appointment',
+      method: 'POST',
+      data: {
+        doctor_id: $('#confirm_appointment').attr('doctor_id'),
+        date: $('.address-pop-up').attr('wait') ? $('.address-pop-up').attr('date') + ' ' + $('.address-pop-up').attr('time') : selected_slot,
+        visit_type: $('input[name=visit_type]').val(),
+        address: $('#address').val(),
+        address_lat: $('#address_lat').val(),
+        address_lng: $('#address_lng').val(),
+      },
+      success: function (data) {
+        if (data.status == 200) {
+          document.getElementById('errors').innerHTML = ''
+          let error = document.createElement('div')
+          error.classList = 'alert alert-success'
+          error.innerHTML = data.msg
+          document.getElementById('errors').append(error)
+          $('#errors').fadeIn('slow')
+          if (!$('.address-pop-up').attr('wait'))
+            setTimeout(() => {
+              location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+            }, 1200);
+          else
+            setTimeout(() => {
+              $('#errors').fadeOut()
+            }, 3000);
+        }
+      }, error: function (err) {
         document.getElementById('errors').innerHTML = ''
-        let error = document.createElement('div')
-        error.classList = 'alert alert-danger'
-        error.innerHTML = 'Please pick your address !'
-        document.getElementById('errors').append(error)
+        $.each(err.responseJSON.errors, function (key, value) {
+          let error = document.createElement('div')
+          error.classList = 'alert alert-danger'
+          error.innerHTML = value[0]
+          document.getElementById('errors').append(error)
+        });
         $('#errors').fadeIn('slow')
         setTimeout(() => {
-            $('#errors').fadeOut('slow')
-        }, 2500);
-    }
+          $('#errors').fadeOut('slow')
+          $('.loader').fadeOut()
+        }, 2000);
+      }
+    })
+
+  } else {
+    document.getElementById('errors').innerHTML = ''
+    let error = document.createElement('div')
+    error.classList = 'alert alert-danger'
+    error.innerHTML = 'Please pick your address !'
+    document.getElementById('errors').append(error)
+    $('#errors').fadeIn('slow')
+    setTimeout(() => {
+      $('#errors').fadeOut('slow')
+    }, 2500);
+  }
 })
 $('.confirm-appointment-address-old').on('click', function (e) {
-    e.preventDefault()
-    if ($('.slots ul li.selected').length > 0 || $('.address-pop-up').attr('wait')) {
-        $('.address-pop-up').fadeOut();
-        $('.hide-content').fadeOut()
-        $('.loader').fadeIn().css('display', 'flex')
-        let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
-        $.ajax({
-            url: $('.address-pop-up').attr('wait') ? '/client/appointment-wait' : '/client/appointment',
-            method: 'POST',
-            data: {
-                doctor_id: $('#confirm_appointment').attr('doctor_id'),
-                date: $('.address-pop-up').attr('wait') ? $('.address-pop-up').attr('date') + ' ' + $('.address-pop-up').attr('time'): selected_slot,
-                visit_type: $('input[name=visit_type]').val(),
-                address: $('#address').val(),
-                address_lat: $('#address_lat').val(),
-                address_lng: $('#address_lng').val(),
-            },
-            success: function (data) {
-                if (data.status == 200) {
-                    document.getElementById('errors').innerHTML = ''
-                    let error = document.createElement('div')
-                    error.classList = 'alert alert-success'
-                    error.innerHTML = data.msg
-                    document.getElementById('errors').append(error)
-                    $('#errors').fadeIn('slow')
-                    if ( !$('.address-pop-up').attr('wait') )
-                      setTimeout(() => {
-                          location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
-                      }, 1200);
-                    else 
-                      setTimeout(() => {
-                        $('#errors').fadeOut()
-                        $('.loader').fadeOut()
-                    }, 3000);
-                }
-            }, error: function (err) {
-                document.getElementById('errors').innerHTML = ''
-                $.each(err.responseJSON.errors, function (key, value) {
-                    let error = document.createElement('div')
-                    error.classList = 'alert alert-danger'
-                    error.innerHTML = value[0]
-                    document.getElementById('errors').append(error)
-                });
-                $('#errors').fadeIn('slow')
-                setTimeout(() => {
-                    $('#errors').fadeOut('slow')
-                    $('.loader').fadeOut()
-                }, 2000);
-            }
-        })
-
-    } else {
+  e.preventDefault()
+  if ($('.slots ul li.selected').length > 0 || $('.address-pop-up').attr('wait')) {
+    $('.address-pop-up').fadeOut();
+    $('.hide-content').fadeOut()
+    $('.loader').fadeIn().css('display', 'flex')
+    let selected_slot = getDateInTimestapsFormat($(".event-date").text() + ', ' + $('.slots ul li.selected').text())
+    $.ajax({
+      url: $('.address-pop-up').attr('wait') ? '/client/appointment-wait' : '/client/appointment',
+      method: 'POST',
+      data: {
+        doctor_id: $('#confirm_appointment').attr('doctor_id'),
+        date: $('.address-pop-up').attr('wait') ? $('.address-pop-up').attr('date') + ' ' + $('.address-pop-up').attr('time') : selected_slot,
+        visit_type: $('input[name=visit_type]').val(),
+        address: $('#address').val(),
+        address_lat: $('#address_lat').val(),
+        address_lng: $('#address_lng').val(),
+      },
+      success: function (data) {
+        if (data.status == 200) {
+          document.getElementById('errors').innerHTML = ''
+          let error = document.createElement('div')
+          error.classList = 'alert alert-success'
+          error.innerHTML = data.msg
+          document.getElementById('errors').append(error)
+          $('#errors').fadeIn('slow')
+          if (!$('.address-pop-up').attr('wait'))
+            setTimeout(() => {
+              location.replace(`/client/chats/${$('#confirm_appointment').attr('doctor_id')}`)
+            }, 1200);
+          else
+            setTimeout(() => {
+              $('#errors').fadeOut()
+              $('.loader').fadeOut()
+            }, 3000);
+        }
+      }, error: function (err) {
         document.getElementById('errors').innerHTML = ''
-        let error = document.createElement('div')
-        error.classList = 'alert alert-danger'
-        error.innerHTML = 'Please choose your sutiable slot !'
-        document.getElementById('errors').append(error)
+        $.each(err.responseJSON.errors, function (key, value) {
+          let error = document.createElement('div')
+          error.classList = 'alert alert-danger'
+          error.innerHTML = value[0]
+          document.getElementById('errors').append(error)
+        });
         $('#errors').fadeIn('slow')
         setTimeout(() => {
-            $('#errors').fadeOut('slow')
-        }, 2500);
-    }
+          $('#errors').fadeOut('slow')
+          $('.loader').fadeOut()
+        }, 2000);
+      }
+    })
+
+  } else {
+    document.getElementById('errors').innerHTML = ''
+    let error = document.createElement('div')
+    error.classList = 'alert alert-danger'
+    error.innerHTML = 'Please choose your sutiable slot !'
+    document.getElementById('errors').append(error)
+    $('#errors').fadeIn('slow')
+    setTimeout(() => {
+      $('#errors').fadeOut('slow')
+    }, 2500);
+  }
 })
 
 getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
 
 $('.day:not(.today)').on('click', function () {
-    $('.right').css('opacity', 0)
-    const targetDate = new Date(getDateInTimestapsFormat($('.event-date').text()));
-    const currentDate = new Date();
+  $('.right').css('opacity', 0)
+  const targetDate = new Date(getDateInTimestapsFormat($('.event-date').text()));
+  const currentDate = new Date();
 
-    if (targetDate < currentDate) {
-        console.log('Not avilable');
-        $('.slots ul').html('Not avilable Slots')
-    } else {
-        getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
-    }
-    setTimeout(() => {
-        $('.right').css('opacity', 1)
-    }, 1000);
+  if (targetDate < currentDate) {
+    console.log('Not avilable');
+    $('.slots ul').html('Not avilable Slots')
+  } else {
+    getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
+  }
+  setTimeout(() => {
+    $('.right').css('opacity', 1)
+  }, 1000);
 
 })
 
 $('.today').on('click', function () {
-    $('.right').css('opacity', 0)
-    getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
-    setTimeout(() => {
-        $('.right').css('opacity', 1)
-    }, 1000);
+  $('.right').css('opacity', 0)
+  getAvilableSlotsByAjax(getDateInTimestapsFormat($('.event-date').text()))
+  setTimeout(() => {
+    $('.right').css('opacity', 1)
+  }, 1000);
 
 })
 
@@ -577,113 +578,113 @@ $('.today').on('click', function () {
 
 // methods ----------------------------------------------------------------
 function getDateInTimestapsFormat(dateString) {
-    let date = new Date(dateString);
-    let month = String(date.getMonth() + 1).padStart(2, '0');
-    let day = String(date.getDate()).padStart(2, '0');
-    let year = date.getFullYear();
-    let hours = String(date.getHours()).padStart(2, '0');
-    let minutes = String(date.getMinutes()).padStart(2, '0');
-    let seconds = String(date.getSeconds()).padStart(2, '0');
-    let convertedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    return convertedDate;
+  let date = new Date(dateString);
+  let month = String(date.getMonth() + 1).padStart(2, '0');
+  let day = String(date.getDate()).padStart(2, '0');
+  let year = date.getFullYear();
+  let hours = String(date.getHours()).padStart(2, '0');
+  let minutes = String(date.getMinutes()).padStart(2, '0');
+  let seconds = String(date.getSeconds()).padStart(2, '0');
+  let convertedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  return convertedDate;
 }
 
 function returnSlotTimeInNum(date) {
-    const slot_to_date = new Date(date);
-    const timeInHours = slot_to_date.getHours() + (slot_to_date.getMinutes() / 60);
-    return parseFloat(timeInHours);
+  const slot_to_date = new Date(date);
+  const timeInHours = slot_to_date.getHours() + (slot_to_date.getMinutes() / 60);
+  return parseFloat(timeInHours);
 }
 
 function getAvilableSlots(Hosted_slots_in_num, start_work, end_work) {
-    // Define the working time interval
-    let startTime;
-    let dayDate = new Date(getDateInTimestapsFormat($('.event-date').text()))
-    let formattedDayDate =
-        dayDate.getFullYear() + '-' + (dayDate.getMonth() + 1) + '-' + dayDate.getDate();
+  // Define the working time interval
+  let startTime;
+  let dayDate = new Date(getDateInTimestapsFormat($('.event-date').text()))
+  let formattedDayDate =
+    dayDate.getFullYear() + '-' + (dayDate.getMonth() + 1) + '-' + dayDate.getDate();
 
-    let todayDate = new Date()
-    let formattedTodayDate =
-        todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
+  let todayDate = new Date()
+  let formattedTodayDate =
+    todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
 
-    if (
-        formattedDayDate === formattedTodayDate &&
-        parseInt(start_work) < returnSlotTimeInNum(Date.now())
-    ) {
-        startTime =
-            Math.round(returnSlotTimeInNum(Date.now())) <= Math.floor(returnSlotTimeInNum(Date.now())) ?
-                (Math.round(returnSlotTimeInNum(Date.now())) + 0.5) * 60 :
-                Math.round(returnSlotTimeInNum(Date.now())) * 60; // Start time in minutes (9:00 am)
-    } else {
-        startTime = start_work * 60; // Start time in minutes (9:00 am)
+  if (
+    formattedDayDate === formattedTodayDate &&
+    parseInt(start_work) < returnSlotTimeInNum(Date.now())
+  ) {
+    startTime =
+      Math.round(returnSlotTimeInNum(Date.now())) <= Math.floor(returnSlotTimeInNum(Date.now())) ?
+        (Math.round(returnSlotTimeInNum(Date.now())) + 0.5) * 60 :
+        Math.round(returnSlotTimeInNum(Date.now())) * 60; // Start time in minutes (9:00 am)
+  } else {
+    startTime = start_work * 60; // Start time in minutes (9:00 am)
+  }
+  const endTime = end_work * 60; // End time in minutes (6:00 pm)
+  const periodLength = 90; // Period length in minutes (1.5 hours)
+
+  // Define the hosted periods to exclude
+  const exclusionPeriods = [
+    // { start: 10.5 * 60, end: 12 * 60 }, // 12:00 pm to 1:30 pm
+    // { start: 15.25 * 60, end: 16.75 * 60 } // 3:15 pm to 4:45 pm
+  ];
+
+  for (let index = 0; index < Hosted_slots_in_num.length; index++) {
+    const slot = Hosted_slots_in_num[index];
+    exclusionPeriods.push({ start: slot * 60, end: (slot + 1.5) * 60 })
+  }
+
+  // Define a function to check if a time period is excluded
+  function isExcluded(start, end) {
+    for (let i = 0; i < exclusionPeriods.length; i++) {
+      if (start < exclusionPeriods[i].end && end > exclusionPeriods[i].start) {
+        // There is overlap with an exclusion period
+        return true;
+      }
     }
-    const endTime = end_work * 60; // End time in minutes (6:00 pm)
-    const periodLength = 90; // Period length in minutes (1.5 hours)
+    // No overlap with any exclusion period
+    return false;
+  }
 
-    // Define the hosted periods to exclude
-    const exclusionPeriods = [
-        // { start: 10.5 * 60, end: 12 * 60 }, // 12:00 pm to 1:30 pm
-        // { start: 15.25 * 60, end: 16.75 * 60 } // 3:15 pm to 4:45 pm
-    ];
-
-    for (let index = 0; index < Hosted_slots_in_num.length; index++) {
-        const slot = Hosted_slots_in_num[index];
-        exclusionPeriods.push({ start: slot * 60, end: (slot + 1.5) * 60 })
+  // Calculate the available periods
+  const availablePeriods = [];
+  for (let start = startTime; start < endTime; start += periodLength) {
+    const end = start + periodLength;
+    if (!isExcluded(start, end)) {
+      availablePeriods.push({ start, end });
     }
+  }
 
-    // Define a function to check if a time period is excluded
-    function isExcluded(start, end) {
-        for (let i = 0; i < exclusionPeriods.length; i++) {
-            if (start < exclusionPeriods[i].end && end > exclusionPeriods[i].start) {
-                // There is overlap with an exclusion period
-                return true;
-            }
-        }
-        // No overlap with any exclusion period
-        return false;
-    }
-
-    // Calculate the available periods
-    const availablePeriods = [];
-    for (let start = startTime; start < endTime; start += periodLength) {
-        const end = start + periodLength;
-        if (!isExcluded(start, end)) {
-            availablePeriods.push({ start, end });
-        }
-    }
-
-    // Display the available periods
-    // console.log("Available periods:");
-    for (let i = 0; i < availablePeriods.length; i++) {
-        const { start, end } = availablePeriods[i];
-        const startTimeString = `${Math.floor(start / 60)}:${start % 60 < 10 ? '0' : ''}${start % 60}`;
-        const endTimeString = `${Math.floor(end / 60)}:${end % 60 < 10 ? '0' : ''}${end % 60}`;
-        // console.log(`${i + 1}. ${startTimeString} - ${endTimeString}`);
-        $('.slots ul').append(`<li>${startTimeString}</li>`);
-    }
+  // Display the available periods
+  // console.log("Available periods:");
+  for (let i = 0; i < availablePeriods.length; i++) {
+    const { start, end } = availablePeriods[i];
+    const startTimeString = `${Math.floor(start / 60)}:${start % 60 < 10 ? '0' : ''}${start % 60}`;
+    const endTimeString = `${Math.floor(end / 60)}:${end % 60 < 10 ? '0' : ''}${end % 60}`;
+    // console.log(`${i + 1}. ${startTimeString} - ${endTimeString}`);
+    $('.slots ul').append(`<li>${startTimeString}</li>`);
+  }
 }
 
 function getAvilableSlotsByAjax(date) {
-    $.ajax({
-        url: '/client/slots_approved',
+  $.ajax({
+    url: '/client/slots_approved',
+    method: 'POST',
+    data: { doctor_id: $('#confirm_appointment').attr('doctor_id'), date: date },
+    success: function (data) {
+      let hosted_slots = [];
+      for (let index = 0; index < data.length; index++) {
+        const slot_date = data[index];
+        hosted_slots.push(returnSlotTimeInNum(slot_date.date))
+      }
+      $('.slots ul').html(' ')
+      $.ajax({
+        url: '/client/get_slots',
         method: 'POST',
-        data: { doctor_id: $('#confirm_appointment').attr('doctor_id'), date: date },
+        data: { therapist_id: $('#confirm_appointment').attr('doctor_id'), date: date },
         success: function (data) {
-            let hosted_slots = [];
-            for (let index = 0; index < data.length; index++) {
-                const slot_date = data[index];
-                hosted_slots.push(returnSlotTimeInNum(slot_date.date))
-            }
-            $('.slots ul').html(' ')
-            $.ajax({
-              url: '/client/get_slots',
-              method: 'POST',
-              data: {therapist_id: $('#confirm_appointment').attr('doctor_id'), date: date },
-              success: function (data) {
-                getAvilableSlots(hosted_slots, parseInt(data.start_time), parseInt(data.end_time))
-              }
-            })
+          getAvilableSlots(hosted_slots, parseInt(data.start_time), parseInt(data.end_time))
         }
-    })
+      })
+    }
+  })
 }
 
 
